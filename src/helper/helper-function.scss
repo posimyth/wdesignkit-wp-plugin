@@ -1,0 +1,345 @@
+.popup-header {
+    background-image: url('../../assets/images/jpg/plugin-header-bg.png');
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 12px 12px 0px 0px;
+    padding: 25px;
+    color: #fff;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 25px;
+    text-align: left;
+}
+
+.popup-body {
+    padding: 20px;
+
+    .wkit-builder-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+
+        .wkit-builder-items {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            align-items: center;
+        }
+
+        .wkit-builder-items:not(:last-child) {
+            border-bottom: 1px solid rgba(207, 207, 234, 0.3);
+        }
+
+        .manage-builder-popup-item {
+            display: flex;
+            column-gap: 10px;
+            align-items: center;
+        }
+
+        img {
+            width: 30px;
+        }
+
+        .wkit-popup-plugin-name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #19191B;
+        }
+
+        .wkit-switch-setting-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            column-gap: 10px;
+
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 30px;
+            }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                width: 60px;
+                right: 0;
+                bottom: 0;
+                background-color: #87878766;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 22px;
+                width: 22px;
+                display: flex;
+                left: 4px;
+                top: 4px;
+                background-color: #fff;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked+.slider {
+                background-color: #040483;
+            }
+
+            input:checked+.slider:before {
+                -webkit-transform: translateX(28px);
+                -ms-transform: translateX(28px);
+                transform: translateX(28px);
+            }
+
+            .slider.round {
+                border-radius: 8px;
+            }
+
+            .slider.round:before {
+                border-radius: 6px;
+            }
+        }
+
+        .wkit-features-icon-bg {
+            background: rgba(4, 4, 131, 0.08);
+            border-radius: 50px;
+            display: flex;
+            height: 50px;
+            width: 50px;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .tooltip-text-hover {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .tooltip-text-hover span {
+            display: none;
+            font-size: 12px;
+            background-color: #333;
+            color: #ffffff;
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 255px;
+            text-align: center;
+            padding: 5px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .tooltip-text-hover span::before {
+            position: absolute;
+            content: "";
+            border-width: 9px;
+            border-color: #333 transparent transparent;
+            border-style: solid;
+            left: 50%;
+            bottom: -16px;
+            transform: translateX(-50%);
+        }
+
+        .tooltip-text-hover:hover {
+            overflow: visible;
+        }
+
+        .tooltip-text-hover:hover span,
+        .tooltip-text-hover:hover span::before {
+            display: block;
+        }
+    }
+
+    .wkit-popup-content-title {
+        color: #19191B;
+        font-size: 16px;
+        font-weight: 500;
+        width: 100%;
+    }
+
+    .wkit-popup-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 10px;
+        margin-top: 20px;
+
+        .wkit-popup-confirm {
+            padding: 10px 25px;
+            background: #fff;
+            color: #040483;
+            border: 1px solid #040483;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wkit-popup-cancel {
+            padding: 10px 25px;
+            background: #040483;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span{
+                color: #ffff;
+            }
+        }
+    }
+}
+
+.wkit-success-content {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+
+    .wkit-success-template-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 10px;
+    }
+
+    .wkit-success-template-count {
+        width: max-content;
+        font-size: 16px;
+        font-weight: 500;
+        margin: 5px 0px;
+    }
+
+    .wkit-fail-template-count {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        width: max-content;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 5px 0px;
+        color: #FC4032;
+    }
+}
+
+.wkit-import-kit-success-header {
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    .wkit-import-kit-loading-progress-content {
+        margin-top: 10px;
+
+        .wkit-import-kit-progress-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+
+    .wkit-import-kit-progressBar-content {
+        position: relative;
+        width: 80%;
+        padding: 4px;
+        background-color: #E6F6E8;
+        border-radius: 5px;
+        margin-top: 10px;
+
+        .wkit-import-kit-progressBar-thumb {
+            background-color: #00A31B;
+            padding: 4px;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    .wkit-import-kit-success-title-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        .wkit-import-kit-success-title {
+            color: #00A31B;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        // .wkit-import-kit-success-subTitle {}
+    }
+
+}
+
+.wdkit-card-tag {
+    position: absolute;
+    top: 25px;
+    left: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    background-color: #75D53C;
+    border-radius: 0px 5px 5px 0px;
+    box-shadow: 3px 4px 9px rgba(0, 0, 0, 0.15);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    width: max-content;
+    padding: 2px 5px;
+
+    span {
+        color: #fff !important;
+        margin-top: 2px;
+        margin-right: 3px;
+    }
+}
+
+.wdkit-star-rating {
+    display: flex;
+    gap: 5px;
+
+    span {
+        white-space: nowrap;
+    }
+}
+
+@media(max-width:576px) {
+    .popup-body {
+        padding: 10px;
+    }
+}

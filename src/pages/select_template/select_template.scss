@@ -1,0 +1,38 @@
+.wkit-select-main {
+    .wkit-save-heading {
+        font-size: 16px;
+        color: #2A2A96;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .wkit-select-template {
+        display: flex;
+        column-gap: 10px;
+    }
+
+    .wkit-input-filed {
+        padding: 10px 15px;
+        border: 1px solid #cfcfcf;
+        border-radius: 10px;
+        width: 30%;
+        font-size: 13px;
+    }
+
+    .wkit-select {
+        padding: 11px 15px;
+        border: 1px solid #cfcfcf;
+        border-radius: 10px;
+        width: 20%;
+    }
+
+    .wkit-save-btn {
+        padding: 15px 30px;
+        background: #C22076;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+}

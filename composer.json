@@ -1,0 +1,14 @@
+{
+    "name": "bhavesh/w-designkit",
+    "autoload": {
+        "psr-4": {
+            "Bhavesh\\WDesignkit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bhavesh"
+        }
+    ],
+    "require": {}
+}
