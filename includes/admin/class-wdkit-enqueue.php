@@ -90,6 +90,11 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 		 * @since   1.0.0
 		 */
 		protected function wdkit_use_editor() {
+
+			if( isset( $_POST['kit_nonce'] ) ){			
+				check_ajax_referer( 'wdkit_nonce', 'kit_nonce' );		
+			}
+
 			global $current_screen;
 
 			$editor = 'wdkit';
@@ -154,6 +159,7 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 		 * @since   1.0.0
 		 */
 		public function wdkit_enqueue_scripts( $hook ) {
+
 			wp_enqueue_script( 'wdkit-editor-js', WDKIT_URL . 'build/index.js', array( 'wp-i18n', 'wp-element', 'wp-components' ), WDKIT_VERSION, true );
 
 			wp_localize_script(
