@@ -3,11 +3,13 @@
  * Plugin Name: WDesignkit
  * Plugin URI: https://wdesignkit.com/
  * Description: Build WordPress websites in no time using wdesignkit's collection of website templates & Widgets, Widget Builder for Elementor, Block Builder for Gutenberg and many more feature to improve your web design process.
- * Version: 0.0.36
+ * Version: 0.0.37
  * Author: POSIMYTH
  * Author URI: https://posimyth.com/
  * Text Domain: wdesignkit
  * Domain Path: /languages
+ * License: GPLv2
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @package wdesignkit
  */
@@ -17,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WDKIT_VERSION', '0.0.36' );
+define( 'WDKIT_VERSION', '0.0.37' );
 define( 'WDKIT_FILE', __FILE__ );
 define( 'WDKIT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WDKIT_PBNAME', plugin_basename( __FILE__ ) );
@@ -27,7 +29,7 @@ define( 'WDKIT_HOSTURL', site_url() );
 define( 'WDKIT_INCLUDES', WDKIT_PATH . '/includes/' );
 define( 'WDKIT_ASSETS', WDKIT_URL . 'assets/' );
 define( 'WDKIT_TEXT_DOMAIN', 'wdesignkit' );
-define( 'WDKIT_SERVER_SITE_URL', 'https://staging.wdesignkit.com/' );
+define( 'WDKIT_SERVER_SITE_URL', 'https://wdesignkit.com/' );
 
 /** Widget Builder path*/
 define( 'WDKIT_SERVER_PATH', wp_upload_dir()['baseurl'] . DIRECTORY_SEPARATOR . '/wdesignkit' );

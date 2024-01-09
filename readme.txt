@@ -5,9 +5,9 @@ Tags: wdesignkit, elementor templates, gutenberg templates, widget builder, bloc
 Requires at least: 5.7.0
 Tested up to: 6.3
 Requires PHP: 5.6
-Stable tag: 0.0.25
-License: GPLv3
-License URI: https://opensource.org/licenses/GPL-3.0
+Stable tag: 0.0.37
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
@@ -51,8 +51,7 @@ Yes, You can save and use Elementor Free and Pro both templates.
 
 == Changelog ==
 
-= 0.0.1 =
-
-* New : Released Public beta on official website.
+= 0.0.37 =
+Initial Release
 
 == Upgrade Notice ==
