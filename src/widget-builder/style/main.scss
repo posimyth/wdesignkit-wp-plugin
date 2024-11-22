@@ -1,0 +1,2355 @@
+//elementor
+@import '/src/style/variable.scss';
+
+.wkit-wb-main-builder-page {
+    height: 100%;
+
+    .wb-add-widget-footer .wb-add-widget-cancelBtn button {
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0px;
+            bottom: 5px;
+            left: 0;
+            background-color: #011627;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        &:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        &:hover {
+            color: #011627;
+        }
+    }
+}
+
+.wkit-wb-main-builder-page.wkit-elementor-builder {
+    .wkit-wb-widget-builder .wb-droped {
+
+        &.wkit-drag-over {
+            border-color: #91003bdb;
+            color: $elementor_text_color;
+
+            svg {
+                fill: $elementor_bg_color;
+            }
+        }
+    }
+
+    .wkit-wb-parentClass-swicher .wb-slider {
+        background-color: #815f6d;
+    }
+
+    .wkit-wb-parentClass-swicher input:checked+.wb-slider {
+        background-color: $elementor_bg_color !important;
+    }
+
+    .wkit-widget-edit-setting-panel .wkit-widget-back-btn .wkit-back-btn-icon {
+        background-color: #94003b1a;
+
+        svg path {
+            stroke: $elementor_bg_color;
+        }
+    }
+
+    .wkit-wb-publish-btn {
+        background-color: $elementor_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $elementor_bg_hover_color;
+        }
+    }
+
+    .wkit-wb-publish-btn {
+        .wkit-wb-save-success-icon {
+            stroke: $elementor_bg_color;
+        }
+    }
+
+    .wkit-wb-popoverLable {
+        border: 1px solid $elementor_border_color;
+        background: $elementor_bg_color;
+    }
+
+    .wb-popover-options {
+        border: 1px solid $elementor_border_color;
+    }
+
+    .wb-repeater-field {
+        background: $elementor_bg_color;
+        border: 1px solid $elementor_border_color;
+    }
+
+    .wb-repeater-options {
+        border: 1px solid $elementor_border_color;
+    }
+
+    .wkit-wb-popoverInput {
+        color: #fff;
+    }
+
+    .wb_drag-over {
+        height: 14px !important;
+        background-color: $elementor_bg_color;
+        border: 1px dashed rgba(33, 37, 41, 0.25);
+    }
+
+    .wb-draggable-main-icon {
+        background-color: $elementor_bg_color;
+    }
+
+    .wkit-wb-popup-links .wkit-wb-links-popup .wb-external-links .wkit-wb-links-content {
+
+        .wkit-popup-link {
+            transition: $transition;
+
+            &:hover {
+                border-bottom: 2px solid $elementor_border_color;
+            }
+        }
+
+        .wkit-active-link {
+            border-bottom: 2px solid $elementor_border_color;
+            background-color: $Wdkit_primary_color;
+        }
+    }
+
+    .wkit-wb-popup-links .wkit-wb-links-popup .close-popup-btn .wkit-wb-close-popup-btn {
+        background-color: $elementor_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $elementor_bg_hover_color;
+        }
+    }
+
+    .wkit-version-popup-inside {
+        .wb-version-header {
+            background-color: $elementor_bg_color;
+        }
+
+        .wkit-add-log-btn {
+            border: 1px solid $elementor_border_color;
+            color: $elementor_text_color;
+            transition: $transition;
+
+            &:hover {
+                background-color: $elementor_outer_border_bg;
+            }
+
+            svg {
+                fill: $elementor_bg_color;
+            }
+        }
+
+        .wb-version-popup-btn {
+            background: $elementor_bg_color;
+            transition: $transition;
+            color: #fff;
+
+            &:hover {
+                background-color: $elementor_bg_hover_color;
+            }
+        }
+    }
+
+    .wb-repeater.wkit-wb-main-selected,
+    .wb-popover.wkit-wb-main-selected {
+        border: 1px solid $elementor_bg_color;
+    }
+
+    .wb-hover-main-component {
+        .wb-sec-edit {
+            background-color: $elementor_bg_color;
+        }
+    }
+
+    .wb-range-content {
+        .wb-range-bar {
+            .wb-range-inp::-webkit-slider-thumb {
+                background: $elementor_bg_color;
+            }
+        }
+    }
+
+    .wb-block-detail-content {
+        .wb-NHA-option-select {
+            .wb-select-component {
+                border: 1px solid $elementor_border_color;
+            }
+        }
+
+        .wb-option-select,
+        .wb-NHA-option-select {
+
+            .wb-select-component-inp {
+                border: 1px solid $elementor_border_color;
+            }
+
+            .wb-select-component-inp:checked {
+                background-color: $elementor_bg_color;
+            }
+
+            .wb-select-component-inp:focus {
+                border-color: $elementor_border_color;
+            }
+        }
+    }
+
+    .wb-dimension-unit {
+        .wb-dimension-unit {
+            .wb-units {
+                input {
+                    border: 1px solid $elementor_border_color !important;
+
+                    &:checked {
+                        background-color: $elementor_bg_color;
+                    }
+                }
+            }
+        }
+    }
+
+    .wb-select-unit-inp {
+        border: 1px solid $elementor_border_color;
+
+        &:focus {
+            border-color: $elementor_border_color;
+            box-shadow: 0 0 0 0px $elementor_border_color;
+        }
+
+        &:checked {
+            background-color: $elementor_bg_color;
+        }
+    }
+
+    .wb-option {
+        .wkit-wb-choose-popup {
+            &::before {
+                background-color: $elementor_bg_color;
+            }
+
+            .wkit-wb-choose-popup-header {
+                background-color: $elementor_bg_color;
+            }
+
+            .wkit-wb-save-btn {
+                background-color: $elementor_bg_color;
+            }
+        }
+    }
+
+    .wb-eicons-content .wb-eicons-links .wb-eicons-links-content {
+        .wb-eicons-lable {
+            color: $elementor_text_color;
+        }
+
+        .wb-eicons-hr {
+            border: 1px solid $elementor_bg_color;
+        }
+    }
+
+
+    .wb-block-detail-content .wb-options-main {
+        .wb-add-option {
+            border: 1px solid $elementor_bg_color;
+            transition: $transition;
+
+            &:hover {
+                background-color: $elementor_outer_border_bg !important;
+            }
+
+            .wb-addOption-lable {
+                color: $elementor_text_color;
+            }
+
+            .wb-addOption-icon {
+                fill: $elementor_bg_color;
+            }
+        }
+    }
+
+    .wkit-wb-custom-category-btns {
+        background-color: $elementor_bg_color;
+    }
+
+    .wkit-wb-custom-category-add-more {
+        border: 1px solid $elementor_border_color;
+        color: $elementor_text_color;
+    }
+
+    .wkit-wb-custom-category {
+        border: 1px solid $elementor_border_color;
+
+        &:before {
+            border-top: 1px solid $elementor_border_color;
+            border-left: 1px solid $elementor_border_color;
+            background-color: $elementor_bg_color;
+        }
+
+        .wkit-wb-custom-category-header {
+            background-color: $elementor_bg_color;
+        }
+    }
+
+    .wkit-wb-publish-btn.wdkit-saved {
+        background-color: #91003B1A;
+        color: $elementor_text_color !important;
+    }
+
+    .wkit-wb-publish-btn.wdkit-disable {
+        background-color: #87878780;
+        color: #fff !important;
+    }
+
+    .wkit-wb-editor-html-btn.active-editor,
+    .wkit-wb-editor-css-btn.active-editor,
+    .wkit-wb-editor-js-btn.active-editor,
+    .wkit-wb-editor-php-btn.active-editor {
+        background-color: $elementor_bg_color;
+        border-right: 1px solid transparent;
+
+        &:hover {
+            background-color: $elementor_bg_color;
+            border-right: 1px solid transparent;
+        }
+    }
+
+    .wkit-wb-editor-html-btn:hover,
+    .wkit-wb-editor-css-btn:hover,
+    .wkit-wb-editor-js-btn:hover {
+        background-color: #91003b80;
+        color: #fff;
+        border-right: 1px solid transparent;
+    }
+
+    .wkit-wb-components .wkit-wb-search-bar .wkit-wb-search-input:focus {
+        border: 1px solid $elementor_border_color;
+        box-shadow: none;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate,
+    .wkit-wb-widget-builder .wkit-wb-third .wb-third-header .wkit-wkit-wb-third-header-text:hover {
+        background-color: $Wdkit_secondary_color;
+        color: $elementor_border_color;
+        border-radius: $radius_small;
+    }
+
+    .wkit-wb-components .wkit-wb-all-widgets .wkit-wb-widget:hover svg path {
+        fill: $elementor_bg_color;
+    }
+
+    .wkit-widget-detail .wb-block-detail-content .wb-block-name input:checked+.wb-slider {
+        background-color: $elementor_bg_color;
+    }
+
+
+    .wkit-wb-widget-builder .active,
+    .wkit-wb-widget-builder .wkit-wb-second .wb-second-header svg {
+        height: 18px;
+        width: 18px;
+        stroke: black;
+    }
+
+
+    .wb-toggle .wb-toggle-content input:checked+.wb-slider {
+        background-color: $elementor_bg_color;
+    }
+
+    .wkit-wb-widget-builder .active,
+    .wkit-wb-widget-builder .wkit-wb-second .wb-second-header .active svg {
+        color: $elementor_text_color;
+        stroke: $elementor_text_color;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate svg {
+        stroke: $elementor_bg_color;
+    }
+
+    .wkit-wb-widget:hover {
+        background-color: #F9FAFA;
+        border: 1px solid $elementor_text_color;
+        color: $elementor_text_color;
+    }
+
+    .wb-typography:hover {
+        border: 1px solid $elementor_border_color;
+    }
+
+    .wp-head-wrapper .wb-right-head-side .wb-setting-panel-link {
+        color: $elementor_text_color;
+    }
+
+    .wb-hover-component .wb-sec-edit,
+    .wb-draggable-icon {
+        background-color: $elementor_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $elementor_bg_hover_color;
+        }
+    }
+
+    .wb-main-component.wkit-wb-selected {
+        border: 1px solid $elementor_border_color;
+    }
+
+    .wb-main-component {
+        border: 1px solid transparent;
+    }
+
+    .wb-main-component:hover {
+        border: 1px solid $elementor_border_color;
+    }
+
+    .wkit-wb-popup .wkit-wb-header-popup,
+    .wkit-wb-block-btn-save,
+    .wb-block-detail-content.wb-options-main.wb-add-option {
+        background-color: $elementor_bg_color;
+        transition: $transition;
+    }
+
+    .wkit-wb-popup .wkit-wb-block-btn-save:hover {
+        background: $elementor_bg_hover_color;
+    }
+
+    .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-help-link .wkit-wb-input-content:focus,
+    .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-block-name .wkit-wb-block-text-inp:focus,
+    .wkit-wb-block-detail .wkit-wb-block-dec .wkit-wb-block-textarea:focus,
+    .wkit-wb-block-detail .wkit-wb-category-option:focus {
+        box-shadow: none;
+    }
+
+    .wkit-elementor-icon {
+        display: block;
+    }
+
+    .wkit-wb-editor .wkit-wb-editor-content {
+
+        .wb-editor-popup-add-btn {
+            background-color: $elementor_bg_color;
+            color: #fff;
+            transition: $transition;
+
+            &:hover {
+                background-color: $elementor_bg_hover_color;
+            }
+
+            svg path {
+                fill: #fff;
+            }
+        }
+    }
+}
+
+.wkit-wb-first-second-drag {
+    margin-left: 1px;
+    border-radius: 6px;
+    min-width: 2px;
+    background-color: transparent;
+    transition: all 0.3s linear;
+    cursor: col-resize;
+}
+
+.wkit-wb-active {
+    display: none !important;
+}
+
+
+
+.wkit-wb-main-builder-page.wkit-gutenberg-builder {
+
+    .wkit-wb-widget-builder .wb-droped {
+
+        &.wkit-drag-over {
+            border-color: #3E58E1;
+            color: $gutenberg_text_color;
+
+            svg {
+                fill: $gutenberg_border_color;
+            }
+        }
+    }
+
+    .wkit-wb-parentClass-swicher .wb-slider {
+        background-color: #6f769b;
+    }
+
+    .wkit-wb-parentClass-swicher input:checked+.wb-slider {
+        background-color: $gutenberg_bg_color;
+    }
+
+    .wkit-widget-edit-setting-panel .wkit-widget-back-btn .wkit-back-btn-icon {
+        background-color: #287cb21a;
+
+        svg path {
+            stroke: $gutenberg_bg_color;
+        }
+    }
+
+    .wkit-wb-publish-btn {
+        background-color: $gutenberg_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $gutenberg_bg_hover_color;
+        }
+    }
+
+    .wkit-wb-publish-btn {
+        .wkit-wb-save-success-icon {
+            stroke: $gutenberg_bg_color;
+        }
+    }
+
+    .wkit-wb-popoverLable {
+        border: 1px solid $gutenberg_border_color;
+        background: $gutenberg_bg_color;
+    }
+
+    .wb-popover-options {
+        border: 1px solid $gutenberg_border_color;
+    }
+
+    .wb-repeater-field {
+        border: 1px solid $gutenberg_border_color;
+        background: $gutenberg_bg_color;
+    }
+
+    .wb-repeater-options {
+        border: 1px solid $gutenberg_border_color;
+    }
+
+    .wkit-wb-popoverInput {
+        color: #fff;
+    }
+
+    .wb-eicons-content .wb-eicons-links .wb-eicons-links-content {
+        .wb-eicons-lable {
+            color: $gutenberg_text_color;
+        }
+
+        .wb-eicons-hr {
+            border: 1px solid $gutenberg_border_color;
+        }
+    }
+
+    .wb_drag-over {
+        height: 14px !important;
+        background-color: $gutenberg_bg_color;
+        border: 1px dashed rgba(33, 37, 41, 0.25);
+    }
+
+    .wb-draggable-main-icon {
+        background-color: $gutenberg_bg_color;
+    }
+
+    .wkit-wb-popup-links .wkit-wb-links-popup .wb-external-links .wkit-wb-links-content {
+        .wkit-popup-link {
+            transition: $transition;
+
+            &:hover {
+                border-bottom: 2px solid $gutenberg_border_color;
+            }
+        }
+
+        .wkit-active-link {
+            border-bottom: 2px solid $gutenberg_border_color;
+            background-color: $Wdkit_primary_color;
+        }
+    }
+
+
+    .wkit-wb-popup-links .wkit-wb-links-popup .close-popup-btn .wkit-wb-close-popup-btn {
+        background-color: $gutenberg_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $gutenberg_bg_hover_color;
+        }
+    }
+
+    .wb-hover-main-component {
+        .wb-sec-edit {
+            background-color: $gutenberg_bg_color;
+        }
+    }
+
+    .wb-range-content {
+        .wb-range-bar {
+            .wb-range-inp::-webkit-slider-thumb {
+                background: $gutenberg_bg_color;
+            }
+        }
+    }
+
+    .wb-block-detail-content {
+        .wb-NHA-option-select {
+            .wb-select-component {
+                border: 1px solid $gutenberg_border_color;
+            }
+        }
+
+        .wb-option-select,
+        .wb-NHA-option-select {
+
+            .wb-select-component-inp {
+                border: 1px solid $gutenberg_border_color;
+            }
+
+            .wb-select-component-inp:checked {
+                background-color: $gutenberg_bg_color;
+            }
+
+            .wb-select-component-inp:focus {
+                border-color: $gutenberg_border_color;
+            }
+        }
+    }
+
+
+    .wkit-version-popup-inside {
+        .wb-version-header {
+            background-color: $gutenberg_bg_color;
+        }
+
+        .wkit-add-log-btn {
+            border: 1px solid $gutenberg_border_color;
+            color: $gutenberg_bg_color;
+            transition: $transition;
+
+            &:hover {
+                background-color: $gutenberg_outer_border_bg;
+            }
+
+            svg {
+                fill: $gutenberg_border_color;
+            }
+        }
+
+        .wb-version-popup-btn {
+            background: $gutenberg_bg_color;
+            transition: $transition;
+            color: #fff;
+
+            &:hover {
+                background-color: $gutenberg_bg_hover_color;
+            }
+        }
+    }
+
+    .wb-option {
+        .wkit-wb-choose-popup {
+            &::before {
+                background-color: $gutenberg_bg_color;
+            }
+
+            .wkit-wb-choose-popup-header {
+                background-color: $gutenberg_bg_color;
+            }
+
+            .wkit-wb-save-btn {
+                background-color: $gutenberg_bg_color;
+            }
+        }
+    }
+
+    .wkit-wb-custom-category {
+        border: 1px solid $gutenberg_border_color;
+
+        &:before {
+            border-top: 1px solid $gutenberg_border_color;
+            border-left: 1px solid $gutenberg_border_color;
+            background-color: $gutenberg_bg_color;
+        }
+
+        .wkit-wb-custom-category-header {
+            background-color: $gutenberg_bg_color;
+        }
+    }
+
+    .wkit-wb-publish-btn.wdkit-saved {
+        background-color: #3e58e11a;
+        color: $gutenberg_text_color;
+    }
+
+    .wkit-wb-publish-btn.wdkit-disable {
+        background-color: #87878780;
+        color: #fff !important;
+    }
+
+    .wkit-wb-custom-category-btns {
+        background-color: $gutenberg_bg_color;
+    }
+
+    .wkit-wb-custom-category-add-more {
+        border: 1px solid $gutenberg_border_color;
+        color: $gutenberg_text_color;
+    }
+
+    .wb-block-detail-content .wb-options-main {
+        .wb-add-option {
+            border: 1px solid $gutenberg_bg_color;
+            transition: $transition;
+
+            &:hover {
+                background-color: $gutenberg_outer_border_bg !important;
+            }
+
+            .wb-addOption-lable {
+                color: $gutenberg_text_color;
+            }
+
+            .wb-addOption-icon {
+                fill: $gutenberg_border_color;
+            }
+        }
+    }
+
+    .wb-select-unit-inp {
+        border: 1px solid $gutenberg_border_color;
+
+        &:focus {
+            border-color: $gutenberg_border_color;
+            box-shadow: 0 0 0 0px $gutenberg_border_color;
+        }
+
+        &:checked {
+            background-color: $gutenberg_bg_color;
+        }
+    }
+
+    .wb-repeater.wkit-wb-main-selected,
+    .wb-popover.wkit-wb-main-selected {
+        border: 1px solid $gutenberg_bg_color;
+    }
+
+    .wkit-wb-editor-html-btn.active-editor,
+    .wkit-wb-editor-css-btn.active-editor,
+    .wkit-wb-editor-js-btn.active-editor,
+    .wkit-wb-editor-php-btn.active-editor {
+        background-color: $gutenberg_bg_color;
+        border-right: 1px solid transparent;
+
+        &:hover {
+            background-color: $gutenberg_bg_color;
+            border-right: 1px solid transparent;
+        }
+    }
+
+    .wkit-wb-editor-html-btn:hover,
+    .wkit-wb-editor-css-btn:hover,
+    .wkit-wb-editor-js-btn:hover {
+        background-color: #287cb280;
+        color: #fff;
+        border-right: 1px solid transparent;
+    }
+
+    .wb-append-content:hover {
+        border: 1px solid $gutenberg_border_color;
+    }
+
+    .wkit-wb-components .wkit-wb-search-bar .wkit-wb-search-input:focus {
+        border: 1px solid $gutenberg_border_color;
+        box-shadow: none;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate,
+    .wkit-wb-widget-builder .wkit-wb-third .wb-third-header .wkit-wb-third-header-text:hover {
+        background-color: #ffffff;
+        color: $gutenberg_text_color;
+        border-radius: 6px;
+    }
+
+
+    .wkit-wb-components .wkit-wb-all-widgets .wkit-wb-widget:hover svg path {
+        fill: $gutenberg_bg_color;
+    }
+
+
+    .wkit-widget-detail .wb-block-detail-content .wb-block-name input:checked+.wb-slider {
+        background-color: $gutenberg_bg_color;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate svg {
+        stroke: $gutenberg_text_color;
+    }
+
+
+    .wkit-wb-widget-builder .active,
+    .wkit-wb-widget-builder .wkit-wb-second .wb-second-header svg {
+        height: 18px;
+        width: 18px;
+        stroke: black;
+    }
+
+
+
+    .wb-toggle .wb-toggle-content input:checked+.wb-slider {
+        background-color: $gutenberg_bg_color;
+    }
+
+    .wkit-wb-widget-builder .active,
+    .wkit-wb-widget-builder .wkit-wb-second .wb-second-header .active svg {
+        color: $gutenberg_text_color;
+        stroke: $gutenberg_text_color;
+    }
+
+    .wkit-wb-widget:hover {
+        background-color: #F9FAFA;
+        border: 1px solid $gutenberg_text_color;
+        color: $gutenberg_text_color;
+    }
+
+    .wb-typography:hover {
+        border: 1px solid $gutenberg_border_color;
+    }
+
+    .wb-hover-component .wb-sec-edit,
+    .wb-draggable-icon {
+        background-color: $gutenberg_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $gutenberg_bg_hover_color;
+        }
+    }
+
+    .wb-main-component {
+        border: 1px solid #ffffff;
+    }
+
+    .wb-main-component.wkit-wb-selected {
+        border: 1px solid $gutenberg_border_color;
+    }
+
+    .wb-main-component:hover {
+        border: 1px solid $gutenberg_border_color;
+    }
+
+    .wkit-wb-popup .wkit-wb-header-popup,
+    .wkit-wb-block-btn-save,
+    .wb-add-option {
+        background-color: $gutenberg_bg_color;
+        transition: $transition;
+    }
+
+    .wb-block-detail-content .wb-options-main {
+        .wb-add-option {
+            border: 1px solid $gutenberg_border_color;
+        }
+
+        .wb-addOption-icon {
+            fill: $gutenberg_border_color;
+        }
+    }
+
+    .wb-dimension-unit {
+        .wb-dimension-unit {
+            .wb-units {
+                input {
+                    border: 1px solid $gutenberg_border_color !important;
+
+                    &:checked {
+                        background-color: $gutenberg_bg_color;
+                    }
+                }
+            }
+        }
+    }
+
+    .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-help-link .wkit-wb-input-content:focus,
+    .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-block-name .wkit-wb-block-text-inp:focus,
+    .wkit-wb-block-detail .wkit-wb-block-dec .wkit-wb-block-textarea:focus,
+    .wkit-wb-block-detail .wkit-wb-category-option:focus {
+        border: 1px solid $gutenberg_border_color;
+        box-shadow: none;
+    }
+
+    .wkit-wb-popup .wkit-wb-block-btn-save:hover {
+        background: $gutenberg_bg_hover_color;
+    }
+
+    .wkit-gutenberg-icon {
+        display: block;
+    }
+
+    .wkit-wb-editor .wkit-wb-editor-content .wb-editor-popup-add-btn {
+        background-color: $gutenberg_bg_color;
+        color: #fff;
+        transition: $transition;
+
+        &:hover {
+            background-color: $gutenberg_bg_hover_color;
+        }
+    }
+
+    .wkit-wb-editor .wkit-wb-editor-content .wb-editor-popup-add-btn svg path {
+        fill: #fff;
+    }
+
+    .wb-loader {
+        .wb-loader-circle {
+            border-top: 8px solid $gutenberg_border_color;
+        }
+    }
+}
+
+.wkit-wb-main-builder-page.wkit-bricks-builder {
+
+    .wkit-wb-widget-builder .wb-droped {
+
+        &.wkit-drag-over {
+            border-color: #FFD64F;
+            color: $bricks_text_color;
+
+            svg {
+                fill: $bricks_border_color;
+            }
+        }
+    }
+
+    .wkit-wb-parentClass-swicher .wb-slider {
+        background-color: #9d9372;
+    }
+
+    .wkit-wb-parentClass-swicher input:checked+.wb-slider {
+        background-color: $bricks_bg_color;
+    }
+
+    .wb-eicons-content .wb-eicons-links .wb-eicons-links-content {
+        .wb-eicons-lable {
+            color: $bricks_text_color;
+        }
+
+        .wb-eicons-hr {
+            border: 1px solid $bricks_border_color;
+        }
+    }
+
+    .wkit-widget-edit-setting-panel .wkit-widget-back-btn .wkit-back-btn-icon {
+        background-color: #ffd53e80;
+
+        svg path {
+            stroke: $bricks_inner_color;
+        }
+    }
+
+    .wkit-wb-publish-btn {
+        background-color: $bricks_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $bricks_bg_hover_color;
+        }
+
+        span {
+            color: $bricks_inner_color;
+        }
+    }
+
+    .add-section-btn {
+        svg {
+            path {
+                fill: black;
+            }
+        }
+    }
+
+    .wkit-wb-publish-btn {
+        color: #000;
+
+        svg.wkit-wb-save-icon {
+            path {
+                stroke: #000;
+            }
+        }
+
+        .wkit-wb-save-success-icon {
+            stroke: $bricks_bg_color;
+        }
+    }
+
+    .wkit-wb-popoverLable {
+        border: 1px solid $bricks_border_color;
+        background: $bricks_bg_color;
+    }
+
+    .wb-popover-options {
+        border: 1px solid $bricks_border_color;
+    }
+
+    .wb-repeater-field {
+        background: $bricks_bg_color;
+        border: 1px solid $bricks_border_color;
+    }
+
+    .wb-repeater-options {
+        border: 1px solid $bricks_border_color;
+    }
+
+    .wkit-wb-popoverInput {
+        color: #fff;
+    }
+
+    .wb_drag-over {
+        height: 14px !important;
+        background-color: $bricks_bg_color;
+        border: 1px dashed rgba(33, 37, 41, 0.25);
+    }
+
+    .wb-draggable-main-icon {
+        background-color: $bricks_bg_color;
+    }
+
+
+    .wkit-wb-popup-links .wkit-wb-links-popup .wb-external-links .wkit-wb-links-content {
+        .wkit-popup-link {
+            transition: $transition;
+
+            &:hover {
+                border-bottom: 2px solid $bricks_border_color;
+            }
+        }
+
+        .wkit-active-link {
+            border-bottom: 2px solid $bricks_border_color;
+            background-color: $Wdkit_primary_color;
+        }
+    }
+
+
+
+    .wkit-wb-popup-links .wkit-wb-links-popup .close-popup-btn .wkit-wb-close-popup-btn {
+        background-color: $bricks_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $bricks_bg_hover_color;
+        }
+    }
+
+    .wkit-version-popup-inside {
+        .wb-version-header {
+            background-color: $bricks_bg_color;
+
+            label {
+                color: $bricks_inner_color;
+            }
+        }
+
+
+        .wkit-add-log-btn {
+            border: 1px solid $bricks_border_color;
+            color: $bricks_text_color;
+            transition: $transition;
+
+            &:hover {
+                background-color: $bricks_outer_border_bg;
+            }
+
+            svg {
+                fill: $bricks_border_color;
+            }
+        }
+
+        .wb-version-popup-btn {
+            background: $bricks_bg_color;
+            transition: $transition;
+            color: $bricks_inner_color;
+
+            &:hover {
+                background-color: $bricks_bg_hover_color;
+            }
+
+            span {
+                color: #000;
+            }
+        }
+    }
+
+    .wb-repeater.wkit-wb-main-selected,
+    .wb-cpt-inner.wkit-wb-main-selected,
+    .wb-popover.wkit-wb-main-selected {
+        border: 1px solid $bricks_bg_color;
+    }
+
+    .wb-hover-main-component {
+        .wb-sec-edit {
+            background-color: $bricks_bg_color;
+        }
+    }
+
+    .wb-range-content {
+        .wb-range-bar {
+            .wb-range-inp::-webkit-slider-thumb {
+                background: $bricks_bg_color;
+            }
+        }
+    }
+
+    .wb-block-detail-content {
+
+        .wb-NHA-option-select {
+            .wb-select-component {
+                border: 1px solid $bricks_border_color;
+            }
+        }
+
+        .wb-option-select,
+        .wb-NHA-option-select {
+            .wb-select-component-inp {
+                border: 1px solid $bricks_border_color;
+            }
+
+            .wb-select-component-inp:checked {
+                background-color: $bricks_bg_color;
+            }
+
+            .wb-select-component-inp:focus {
+                border-color: $bricks_border_color;
+            }
+        }
+    }
+
+    .wb-dimension-unit {
+        .wb-dimension-unit {
+            .wb-units {
+                input {
+                    border: 1px solid $bricks_border_color !important;
+
+                    &:checked {
+                        background-color: $bricks_bg_color;
+                    }
+                }
+            }
+        }
+    }
+
+    .wb-select-unit-inp {
+        border: 1px solid $bricks_border_color;
+
+        &:focus {
+            border-color: $bricks_border_color;
+            box-shadow: 0 0 0 0px $bricks_border_color;
+        }
+
+        &:checked {
+            background-color: $bricks_bg_color;
+        }
+    }
+
+    .wb-option {
+        .wkit-wb-choose-popup {
+            &::before {
+                background-color: $bricks_bg_color;
+            }
+
+            .wkit-wb-choose-popup-header {
+                background-color: $bricks_bg_color;
+            }
+
+            .wkit-wb-save-btn {
+                background-color: $bricks_bg_color;
+            }
+        }
+    }
+
+    .wb-block-detail-content .wb-options-main {
+        .wb-add-option {
+            border: 1px solid $bricks_bg_color;
+            transition: $transition;
+
+            &:hover {
+                background-color: $bricks_outer_border_bg !important;
+            }
+
+            .wb-addOption-lable {
+                color: $bricks_text_color;
+            }
+
+            .wb-addOption-icon {
+                fill: $bricks_bg_color;
+            }
+        }
+    }
+
+    .wkit-wb-custom-category-btns {
+        background-color: $bricks_bg_color;
+    }
+
+    .wkit-wb-custom-category-add-more {
+        border: 1px solid $bricks_border_color;
+        color: $bricks_text_color;
+    }
+
+    .wkit-wb-custom-category {
+        border: 1px solid $bricks_border_color;
+        ;
+
+        &:before {
+            border-top: 1px solid $bricks_border_color;
+            border-left: 1px solid $bricks_border_color;
+            background-color: $bricks_bg_color;
+        }
+
+        .wkit-wb-custom-category-header {
+            background-color: $bricks_bg_color;
+        }
+    }
+
+    .wkit-wb-publish-btn.wdkit-saved {
+        background-color: #011627;
+        color: $bricks_text_color !important;
+    }
+
+    .wkit-wb-publish-btn.wdkit-disable {
+        background-color: #87878780;
+        color: #fff !important;
+    }
+
+    .wkit-wb-editor-html-btn.active-editor,
+    .wkit-wb-editor-css-btn.active-editor,
+    .wkit-wb-editor-js-btn.active-editor,
+    .wkit-wb-editor-php-btn.active-editor {
+        background-color: $bricks_bg_color;
+        color: $bricks_inner_color;
+
+        &:hover {
+            background-color: $bricks_bg_color;
+            color: $bricks_inner_color;
+        }
+
+        svg {
+            transition: $transition;
+            fill: #444;
+
+            &:hover {
+                fill: $bricks_inner_color;
+            }
+
+        }
+    }
+
+    .wkit-wb-editor-html-btn:hover,
+    .wkit-wb-editor-css-btn:hover,
+    .wkit-wb-editor-js-btn:hover {
+        background-color: #ffd53e80;
+        color: #fff;
+        border-right: 1px solid transparent;
+    }
+
+    .wkit-wb-components .wkit-wb-search-bar .wkit-wb-search-input:focus {
+        border: 1px solid $bricks_border_color;
+        box-shadow: none;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate,
+    .wkit-wb-widget-builder .wkit-wb-third .wb-third-header .wkit-wkit-wb-third-header-text:hover {
+        background-color: #ffffff;
+        color: $bricks_text_color;
+        border-radius: 6px;
+    }
+
+    .wkit-wb-components .wkit-wb-all-widgets .wkit-wb-widget:hover svg path {
+        fill: $bricks_bg_color;
+    }
+
+    .wkit-widget-detail .wb-block-detail-content .wb-block-name input:checked+.wb-slider {
+        background-color: $bricks_bg_color;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate svg {
+        stroke: $bricks_text_color;
+    }
+
+
+
+    .wkit-wb-widget-builder .active,
+    .wkit-wb-widget-builder .wkit-wb-second .wb-second-header svg {
+        height: 18px;
+        width: 18px;
+        stroke: black;
+    }
+
+
+    .wb-toggle .wb-toggle-content input:checked+.wb-slider {
+        background-color: $bricks_bg_color;
+    }
+
+    .wkit-wb-widget-builder .active,
+    .wkit-wb-widget-builder .wkit-wb-second .wb-second-header .active svg {
+        color: $bricks_text_color;
+        stroke: $bricks_text_color;
+    }
+
+
+    .wkit-wb-widget:hover {
+        background-color: #F9FAFA;
+        border: 1px solid $bricks_text_color;
+        color: $bricks_text_color;
+    }
+
+    .wb-typography:hover {
+        border: 1px solid $bricks_border_color;
+    }
+
+    .wp-head-wrapper .wb-right-head-side .wb-setting-panel-link {
+        color: $bricks_text_color;
+    }
+
+    .wb-hover-component .wb-sec-edit,
+    .wb-draggable-icon {
+        background-color: $bricks_bg_color;
+        transition: $transition;
+
+        &:hover {
+            background-color: $bricks_bg_hover_color;
+        }
+    }
+
+    .wb-main-component {
+        border: 1px solid #ffffff;
+    }
+
+    .wb-main-component.wkit-wb-selected {
+        border: 1px solid $bricks_border_color;
+    }
+
+    .wb-main-component:hover {
+        border: 1px solid $bricks_border_color;
+    }
+
+    .wkit-wb-popup .wkit-wb-header-popup,
+    .wkit-wb-block-btn-save,
+    .wb-block-detail-content.wb-options-main.wb-add-option {
+        background-color: $bricks_bg_color;
+        transition: $transition;
+    }
+
+    .wkit-wb-popup .wkit-wb-header-popup .wkit-wb-popup-hreader,
+    .close {
+        color: #000;
+    }
+
+    .wkit-wb-popup .wkit-wb-header-popup,
+    .wkit-wb-block-btn-save {
+        svg {
+            path {
+                stroke: black;
+            }
+        }
+
+        .wkit-wb-save-btn {
+            color: #000 !important;
+        }
+    }
+
+    .wkit-wb-popup .wkit-wb-block-btn-save:hover {
+        background: $bricks_bg_hover_color;
+    }
+
+    .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-help-link .wkit-wb-input-content:focus,
+    .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-block-name .wkit-wb-block-text-inp:focus,
+    .wkit-wb-block-detail .wkit-wb-block-dec .wkit-wb-block-textarea:focus,
+    .wkit-wb-block-detail .wkit-wb-category-option:focus {
+        box-shadow: none;
+    }
+
+    .wkit-bricks-icon {
+        display: block;
+    }
+
+    .wkit-wb-editor .wkit-wb-editor-content {
+
+        .wb-editor-popup-add-btn {
+            background-color: $bricks_bg_color;
+            color: $bricks_inner_color;
+            transition: $transition;
+
+            &:hover {
+                background-color: $bricks_bg_hover_color;
+            }
+
+            svg path {
+                fill: $bricks_inner_color;
+            }
+        }
+
+        .wb-editor-img-js-icon {
+            fill: black;
+        }
+
+        .wb-editor-img-css-icon {
+            fill: black;
+        }
+
+    }
+
+}
+
+// Widget design third column
+.wkit-wb-components {
+    background: $Wdkit_secondary_color;
+    border-radius: 0px 0px 6px 6px;
+    height: 100%;
+    overflow: hidden;
+
+    .wkit-wb-all-widgets {
+        display: none;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        grid-template-columns: 50% 50%;
+
+        &.wkit-wb-show {
+            display: grid !important;
+        }
+
+        .wkit-wb-widget {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-basis: 25%;
+            flex-wrap: wrap;
+            cursor: grab;
+            background: #01162703;
+            padding: 10px;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.3s;
+            border: 1px solid #e6e8ea;
+            border-radius: 6px;
+        }
+    }
+}
+
+#wpbody-content {
+    padding-bottom: 0px !important;
+}
+
+#wpfooter {
+    display: none;
+}
+
+.wb-loader {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    opacity: 1;
+    z-index: 10;
+    margin-top: -20px;
+    display: flex;
+    margin-left: -20px;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+
+    .wb-loader-circle {
+        border: 8px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 8px solid $Wdkit_blue_normal;
+        width: 50px;
+        height: 50px;
+        margin-right: 10%;
+        margin-bottom: 4%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+.wkit-wb-widget-builder {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    height: calc(100% - 90px);
+    width: 100%;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #e0e0e0;
+        border-radius: 25px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f8f8f8;
+        border-radius: 25px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #cdcdce;
+    }
+
+    .wkit-wb-first-part {
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        min-width: 35%;
+    }
+
+    .wkit-wb-first-part-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .wkit-wb-second {
+        min-width: 17%;
+        width: 20%;
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px solid #F1F1F4;
+        box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+        // margin-bottom: 15px;
+        overflow-y: hidden;
+        height: max-content;
+
+        .wb-second-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #F3F3F3;
+            border-radius: 6px;
+            height: 50px;
+            margin: 12px;
+            padding: 8px;
+
+
+            .wb-second-header-layout {
+                display: flex;
+                border-radius: 6px;
+                width: 50%;
+                padding: 10px;
+                cursor: pointer;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+                gap: 9px;
+                transition: $transition;
+
+                &:hover {
+                    background-color: #ffffffbf;
+                }
+
+                .wb-layout-icon {
+                    width: 20px;
+                    margin: 7px 0px;
+
+                    .wb-layout-path {
+                        fill: #888888;
+                    }
+                }
+
+                .wb-layout-text {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+
+            .wb-second-header-style {
+                display: flex;
+                align-items: center;
+                border-radius: 6px;
+                width: 50%;
+                padding: 10px;
+                cursor: pointer;
+                justify-content: center;
+                height: 100%;
+                gap: 9px;
+                transition: $transition;
+
+                &:hover {
+                    background-color: #ffffffbf;
+                }
+
+                .wb-style-icon {
+                    width: 20px;
+                    margin: 7px 0px;
+
+                    .wb-style-path {
+                        fill: #888888;
+                    }
+                }
+
+                .wb-style-text {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+
+        }
+
+        .wb-second-layout-container {
+            max-height: calc(100vh - 228px);
+            overflow-y: auto;
+            height: max-content;
+        }
+
+        .wb-second-layout-content {
+            padding: 4px 12px 12px 12px;
+            max-height: 100%;
+
+            .add-section-btn svg {
+                height: 12px;
+                margin-right: 5px;
+            }
+
+            .wb-add-section {
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                border: 1px dashed rgba(33, 37, 41, 0.25);
+                border-radius: 6px;
+                align-items: center;
+                height: 60px;
+                transition: $transition;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #f2f3f487;
+                }
+
+                .add-section-btn {
+                    display: flex;
+                    color: black;
+                    margin: 15px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    border-radius: 6px;
+                    padding: 15px 15px;
+                    text-decoration: none;
+                    align-items: center;
+
+                    .wb-add-sec-icon {
+                        margin-right: 5px;
+                        height: 12px;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .wb-second-layout-container::-webkit-scrollbar {
+        width: 5px;
+        background: transparent;
+    }
+
+    .wb-second-layout-container::-webkit-scrollbar-thumb {
+        background-color: #8787875c;
+        border-radius: 6px;
+    }
+
+    .wb-second-layout-container::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    .wkit-wb-third {
+        border-radius: 10px;
+        min-width: 320px;
+        width: 20%;
+        background-color: #fff;
+        // height: 100%;
+        border: 1px solid #f1f1f4;
+        box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+        // margin-bottom: 15px;
+        overflow-y: hidden;
+
+        .wkit-wb-third-header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 5px;
+            height: 50px;
+            background-color: #F3F3F3;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 12px;
+            padding: 8px;
+
+            .wkit-wb-third-header-text {
+                font-size: 15px;
+                font-weight: 600;
+                border-bottom: 1px solid transparent;
+                cursor: pointer;
+                width: 50%;
+                display: flex;
+                gap: 9px;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                color: black;
+                transition: $transition;
+                border-radius: 6px;
+
+                &:hover {
+                    color: #011627;
+                    background-color: #ffffffbf;
+                }
+
+                &.activate {
+                    color: #011627;
+                }
+
+                svg {
+                    stroke: black;
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+
+            .wkit-wb-third-header-text-edit {
+                font-size: 15px;
+                font-weight: 600;
+                color: #878787;
+                border-bottom: 1px solid transparent;
+                cursor: not-allowed;
+                width: 50%;
+                display: flex;
+                gap: 9px;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+                padding: 15px;
+                opacity: 0.2;
+
+                svg {
+                    stroke: black;
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+
+        .wkit-wb-component-hr {
+            margin: 0;
+        }
+    }
+
+    .wkit-wb-third-part-content {
+        overflow-y: scroll;
+    }
+
+    .wkit-wb-third-part-content::-webkit-scrollbar {
+        width: 5px;
+        background: transparent;
+    }
+
+    .wkit-wb-third-part-content::-webkit-scrollbar-thumb {
+        background-color: #8787875c;
+        border-radius: 6px;
+    }
+
+    .wkit-wb-third-part-content::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+
+    .wb-show {
+        display: block !important;
+    }
+
+    .wkit-wb-sec-drag-icon {
+        width: max-content;
+        cursor: pointer;
+        margin-bottom: -32px;
+        margin-left: 5px;
+    }
+
+    .wb-section {
+        border-radius: 5px;
+        border: 1px solid rgba(33, 37, 41, 0.1);
+        margin-bottom: 10px;
+
+
+        .wb-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            background-color: #01162705;
+
+            .wb-section-title {
+                display: flex;
+                align-items: center;
+
+                .wb-section-title-icon {
+                    cursor: grab;
+                    display: flex;
+                    fill: #B9B9B9;
+                    transition: 0.3s linear;
+
+                    &:hover {
+                        fill: #6a6a6a;
+                    }
+                }
+
+                .wb-section-title-text {
+                    display: flex;
+                    border: none;
+                    font-size: 12px;
+                    font-weight: 600;
+                    width: 100%;
+                    margin-left: 10px;
+                    background: transparent;
+                    font-family: $Wdkit_font_family;
+
+                    &:focus {
+                        display: flex;
+                        border: none !important;
+                    }
+
+                    &:focus-visible {
+                        outline: 0;
+                    }
+                }
+            }
+
+            .wb-section-btns {
+                display: flex;
+                column-gap: 9px;
+
+                .wb-sec-btn {
+                    width: 18px;
+                    height: 18px;
+                    transition: $transition;
+                    opacity: 0.75;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+                cursor: pointer;
+
+            }
+        }
+
+        .wb-components-settings {
+            display: none;
+        }
+
+        .wb-last-controller-drop {
+            height: 4px;
+        }
+    }
+
+    .wb-droped {
+        display: flex;
+        justify-content: center;
+        border: 1px dashed rgba(33, 37, 41, 0.25);
+        margin: 5px;
+        padding: 5px;
+        border-radius: 6px;
+        transition: $transition;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f2f3f487;
+        }
+
+        &.wkit-drag-over {
+            transition: 0.15s linear;
+            transform: scale(1.02, 1.15);
+        }
+    }
+
+    .wb-row {
+        display: flex;
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .wkit-wb-hide {
+        display: none !important;
+    }
+
+    .active {
+        background-color: #fff;
+
+    }
+
+    .active-path {
+        fill: black !important;
+    }
+}
+
+.wb-edit-widget-popup {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: center;
+
+    .wb-edit-popup {
+        width: 80%;
+        height: 80%;
+    }
+}
+
+.wkit-block-btn {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.wkit-wb-sync-btn {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #fff;
+    border: 0px;
+    background: #011627;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: 400;
+    font-size: 14px;
+    gap: 10px;
+    justify-content: center;
+    transition: $transition;
+
+    &:hover {
+        background: #00070e;
+    }
+
+    svg {
+        width: 18px;
+        height: 18px;
+        margin-bottom: -3px;
+    }
+}
+
+.wb-add-widget-name-title,
+.wb-add-widget-inputs-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+//Tool-tip event
+.wkit-wb-toolTip {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s linear;
+    width: max-content;
+
+    &.wkit-popup-first-toolTip {
+        .wkit-wb-toolTip-text.wkit-wb-name-Tooltip {
+            bottom: -60px;
+
+            &::before {
+                bottom: 60px;
+            }
+        }
+    }
+
+    &:hover .wkit-wb-toolTip-text {
+        display: flex;
+        transition: 0.3s linear;
+    }
+}
+
+.wkit-wb-toolTip-text {
+    position: absolute;
+    background-color: #000;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
+    transition: 0.3s linear;
+    left: -2px;
+    bottom: 15px;
+    width: 250px;
+    z-index: 9;
+
+    &.wb-wkit-widgetCategory-toolTip {
+        left: -236px;
+        bottom: 20px;
+
+        &::before {
+            bottom: -3px;
+            right: 5px;
+        }
+    }
+
+    &.wb-wkit-center-toolTip {
+        left: unset;
+
+        &::before {
+            left: 49%;
+        }
+    }
+
+    a {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    &::before {
+        content: "";
+        background-color: #000;
+        padding: 3px;
+        position: absolute;
+        bottom: -3px;
+        transform: rotate(45deg);
+    }
+
+    &.wkit-wb-name-Tooltip {
+        left: 17px;
+        bottom: -35px;
+
+
+        &::before {
+            content: "";
+            left: -2px;
+            bottom: 35px;
+        }
+    }
+}
+
+// Custome drop-down
+.wkit-wb-custom-dropDown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    position: relative;
+
+    .wkit-wb-custom-dropDown-header {
+        border: none;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5px 0px;
+        border-radius: 4px;
+        background-color: $Wdkit_primary_color;
+
+        .wkit-wb-multi-selected {
+            background-color: #d5dadf;
+            padding: 2px 5px;
+            border-radius: 2px;
+            margin: 5px;
+            line-height: 15px;
+            font-size: 12px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .wkit-wb-remove-value {
+                cursor: pointer;
+            }
+        }
+
+        label {
+            margin-left: 5px;
+            text-transform: capitalize;
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        img {
+            margin: 0px 6px 0px 5px;
+            width: 12px;
+        }
+    }
+
+    .wkit-wb-custom-dropDown-header.wkit-multi-select-dropDown {
+        background: $Wdkit_primary_color;
+        border: 0.5px solid #e4e4e4;
+        border-radius: 2px;
+        width: 100%;
+        line-height: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: center;
+        border-radius: 4px;
+
+        img {
+            opacity: 0.5;
+            width: 17px;
+            height: 17px;
+            background-color: #d5dadf;
+            padding: 2px 3px;
+            border-radius: 2px;
+        }
+    }
+
+    .wkit-wb-custom-dropDown-content {
+        display: none;
+        box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.1);
+        width: max-content;
+        min-width: 100%;
+        padding: 2px;
+        z-index: 2;
+        background-color: white;
+        position: absolute;
+        margin-top: 30px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        option {
+            margin: 3px;
+            padding: 5px 10px;
+
+            &:hover {
+                background: #F1F1F1;
+                border-radius: 1px;
+            }
+        }
+    }
+
+    .wkit-wb-custom-dropDown-content.wkit-multi-select-dropDown {
+        display: none;
+        box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        padding: 2px;
+        z-index: 2;
+        background-color: white;
+        position: relative;
+        margin-top: 0px;
+        border-radius: 4px;
+
+        .wkit-wb-multiSelect-value {
+            width: 100%;
+            display: flex;
+
+            label {
+                margin: 3px;
+                padding: 5px 10px;
+                width: 100%;
+
+                &:hover {
+                    background: #F1F1F1;
+                    border-radius: 1px;
+                }
+            }
+        }
+
+    }
+}
+
+@media(max-width:1440px) {
+    .wkit-wb-widget-builder {
+        white-space: break-spaces;
+
+        .wkit-wb-second .wb-second-layout-content .wb-add-section {
+            padding: 16px;
+        }
+
+        .wkit-wb-first-part {
+            width: 100%;
+            min-width: 600px;
+        }
+
+        .wkit-wb-second,
+        .wkit-wb-third {
+            min-width: 350px;
+            max-height: 100%;
+        }
+    }
+}
+
+@media(max-width:1280px) {}
+
+@media(max-width:1200px) {
+
+    .wkit-wb-widget-builder .wkit-wb-first-part {
+        width: 50%;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-second {
+        width: 25% !important;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third {
+        width: 25% !important;
+    }
+
+    .wkit-wb-editor .wb-editor-content {
+        width: 75%;
+    }
+
+    .wkit-wb-editor .wkit-wb-editor-right-content {
+        width: 25%;
+    }
+}
+
+@media(max-width:991px) {
+    .wkit-wb-widget-builder {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        justify-content: center;
+    }
+
+    .wkit-wb-widget-builder {
+        overflow: unset;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-second .wb-second-layout-container {
+        padding: 2px;
+        max-height: calc(100vh - 230px);
+        overflow-y: scroll;
+        height: max-content;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-first-part {
+        order: 1;
+        width: 100% !important;
+        height: calc(100vh - 141px);
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-second,
+    .wkit-wb-widget-builder .wkit-wb-third {
+        min-width: 0vw;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-second {
+        order: 2;
+        width: calc(50% - 7.5px) !important;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-third {
+        order: 3;
+        width: calc(50% - 7.5px) !important;
+    }
+}
+
+@media(max-width:600px) {
+    .wkit-wb-widget-builder {
+        display: flex;
+        flex-direction: row;
+    }
+
+
+    .wkit-wb-toolTip-text {
+        max-width: 170px;
+
+        &.wb-wkit-widgetCategory-toolTip {
+            left: -156px;
+            bottom: 20px;
+        }
+    }
+
+    .wkit-wb-name-Tooltip {
+        max-width: unset;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-second,
+    .wkit-wb-widget-builder .wkit-wb-third {
+        width: calc(100% - 7.5px) !important;
+    }
+
+    .wkit-wb-widget-builder .wkit-wb-first-part {
+        min-width: auto
+    }
+}
+
+@media(max-width:576px) {
+    .wkit-wb-toolTip-text {
+
+        &.wkit-wb-name-Tooltip {
+            left: -100px;
+            bottom: -52px;
+
+
+            &::before {
+                content: "";
+                bottom: 40px;
+                left: 103px;
+            }
+        }
+    }
+}
+
+// scrollbar
+.wkit-wb-editor-value-tab::-webkit-scrollbar,
+.ace_scrollbar-v::-webkit-scrollbar,
+.ace_scrollbar-h::-webkit-scrollbar,
+.wkit-wb-live-preview-ifram::-webkit-scrollbar,
+.wkit-wb-popup .wkit-wb-content::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+.ace_scrollbar-v::-webkit-scrollbar-track,
+.ace_scrollbar-h::-webkit-scrollbar-track,
+.wkit-wb-popup .wkit-wb-content::-webkit-scrollbar-track {
+    background: #1a2d3d;
+}
+
+/* Handle */
+.ace_scrollbar-v::-webkit-scrollbar-thumb,
+.ace_scrollbar-h::-webkit-scrollbar-thumb,
+.wkit-wb-popup .wkit-wb-content::-webkit-scrollbar-thumb {
+    border: 0.5px solid #B2C8DF;
+    border-radius: 50px;
+}
+
+//moz availble
+.wkit-wb-editor-value-tab:-webkit-scrollbar,
+.ace_scrollbar-v:-webkit-scrollbar,
+.ace_scrollbar-h:-webkit-scrollbar,
+.wkit-wb-live-preview-ifram:-webkit-scrollbar,
+.wkit-wb-popup .wkit-wb-content:-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+.wkit-wb-editor-value-tab:-webkit-scrollbar-track,
+.ace_scrollbar-v:-webkit-scrollbar-track,
+.ace_scrollbar-h:-webkit-scrollbar-track,
+.wkit-wb-popup .wkit-wb-content:-webkit-scrollbar-track {
+    background: #1a2d3d;
+}
+
+/* Handle */
+.wkit-wb-editor-value-tab:-webkit-scrollbar-thumb,
+.ace_scrollbar-v:-webkit-scrollbar-thumb,
+.ace_scrollbar-h:-webkit-scrollbar-thumb,
+.wkit-wb-popup .wkit-wb-content:-webkit-scrollbar-thumb {
+    border: 0.5px solid #B2C8DF;
+    border-radius: 50px;
+}

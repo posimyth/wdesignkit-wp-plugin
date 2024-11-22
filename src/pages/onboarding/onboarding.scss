@@ -1,0 +1,1130 @@
+@import '/src/style/variable.scss';
+
+.wdkit-onboarding-main {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6901960784);
+  justify-content: center;
+
+
+  .wkit-confirm-terms-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    .wkit-confirm-terms-inp {
+      margin: 0;
+      min-width: 20px;
+      min-height: 20px;
+      border-radius: 4px;
+      border: 1px solid #DADAF0;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+
+      &:checked {
+        background-color: $Wdkit_pink_normal;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+
+        &::before {
+          content: "";
+          border: 2px solid white;
+          border-left: 0px;
+          border-top: 0px;
+          transform: rotate(40deg);
+          width: 4px;
+          height: 9px;
+          margin-bottom: 0px;
+          margin-left: 0px;
+        }
+      }
+
+      &:focus {
+        border-color: #DADAF0;
+        box-shadow: none;
+      }
+    }
+
+    .wkit-confirm-terms-text {
+      color: #999999;
+    }
+
+    .wkit-confirm-terms-link-text {
+      color: #000;
+      font-weight: 500;
+      position: relative;
+      cursor: pointer;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        top: 16px;
+        transition: transform 0.25s ease-out;
+        left: 0;
+        transform-origin: bottom right;
+        transform: scaleX(0);
+        background-color: #000;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+    }
+  }
+
+
+
+  .wkit-disable-next-btn {
+    background-color: #c0c0c0;
+    border-radius: 6px;
+    border: 1px solid #c0c0c0;
+    color: #ffff;
+    padding: 12px 32px;
+    text-align: center;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: 0.3s linear;
+    min-width: 100px;
+  }
+
+  .wkit-tooltip-onboarding {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .wkit-tooltip-onboarding span {
+    display: none;
+    font-size: 12px;
+    background-color: #333;
+    color: #ffffff;
+    position: absolute;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    text-align: center;
+    padding: 5px;
+    transition: 0.3s;
+    border-radius: 6px;
+  }
+
+  .wkit-tooltip-onboarding span::before {
+    position: absolute;
+    content: "";
+    border-width: 9px;
+    border-color: #333 transparent transparent;
+    border-style: solid;
+    left: 50%;
+    bottom: -16px;
+    transform: translateX(-50%);
+  }
+
+  .wkit-tooltip-onboarding:hover {
+    overflow: visible;
+  }
+
+  .wkit-tooltip-onboarding:hover span,
+  .wkit-tooltip-onboarding:hover span::before {
+    display: block;
+  }
+
+  .wdkit-onboarding-popup {
+    width: 60%;
+    height: 80%;
+    margin-left: 160px;
+    background: $common_background;
+    padding: 15px;
+    border-radius: 10px;
+
+    .wdkit-onboarding-popup-body {
+      overflow-y: auto;
+      z-index: 999;
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      /** Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #e0e0e0;
+        border-radius: 25px;
+      }
+
+      /** Track */
+      &::-webkit-scrollbar-track {
+        background: #f8f8f8;
+        border-radius: 25px;
+      }
+
+      /** Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #cdcdce;
+      }
+    }
+
+    .wdkit-onboarding-image {
+      min-height: 200px;
+      background-color: $Wdkit_blue_normal;
+      border-radius: $radius_small;
+
+      img {
+        display: flex;
+        width: 100%;
+        object-fit: cover;
+        object-position: center center;
+        min-height: 200px;
+        border-radius: $radius_small;
+      }
+    }
+
+    .wdkit-onboarding-image-content {
+      display: flex;
+      max-height: 40%;
+
+      img {
+        display: flex;
+        width: 100%;
+        object-fit: cover;
+        object-position: center center;
+        min-height: 200px;
+
+      }
+    }
+
+    .wkit-onboarding-bg-image {
+      width: 100%;
+      background-repeat: no-repeat;
+      object-fit: cover;
+      background-size: cover;
+      background-position: center center;
+      position: relative;
+
+      .wkit-inner-bricks {
+        background: #FFD53E;
+        color: #000000;
+        bottom: 5%;
+        left: 24%;
+      }
+
+      .wkit-inner-elementor {
+        background: #92003B;
+        color: #fff;
+        top: 7%;
+        right: 29%;
+      }
+
+      .wkit-inner-gutenberg {
+        background: #287CB2;
+        color: #fff;
+        right: 23%;
+        bottom: 10%;
+      }
+
+      .wkit-inner-image-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        min-width: 95px;
+        width: 10%;
+        padding: 7px 5px;
+        border: 2px solid white;
+        border-radius: 6px;
+        position: absolute;
+
+        span {
+          font-size: 10px;
+          font-weight: 600;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    }
+
+    .wdkit-onboarding-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 25px;
+
+      .wdkit-onboarding-header {
+        display: flex;
+        justify-content: center;
+
+        span {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+
+      .wdkit-onboarding-box-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+
+        .wdkit-select-pageBuilder {
+          width: 35%;
+          height: 100%;
+          background-color: #fff;
+          padding: 5px 20px;
+          margin: 0 10px;
+          box-sizing: border-box;
+          border: 1px solid $common_border_color;
+          border-radius: $radius_small;
+          box-shadow: $common_boxshadow;
+
+          .wdkit-select-pageBuilder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+
+            span {
+              font-size: 16px;
+              font-weight: 600;
+            }
+
+            .wkit-switch-setting-wrap {
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              column-gap: 10px;
+
+              .wkit-switch {
+                position: relative;
+                display: inline-block;
+                width: 52px;
+                height: 28px;
+              }
+
+              .wkit-switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+              }
+
+              .wkit-slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(135, 135, 135, 0.4);
+                transition: 0.4s;
+              }
+
+              .wkit-slider:before {
+                position: absolute;
+                content: "";
+                height: 20px;
+                width: 20px;
+                display: flex;
+                left: 4px;
+                top: 4px;
+                background-color: #fff;
+                transition: 0.4s;
+              }
+
+              input:checked+.wkit-slider {
+                background-color: #040483;
+              }
+
+              input:checked+.wkit-slider:before {
+                -webkit-transform: translateX(24px);
+                -ms-transform: translateX(24px);
+                transform: translateX(24px);
+              }
+
+              .wkit-slider.round {
+                border-radius: 6px;
+              }
+
+              .wkit-slider.round:before {
+                border-radius: 6px;
+              }
+            }
+          }
+
+          .wdkit-select-pageBuilder-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin-bottom: 15px;
+
+            .wdkit-pageBuilder-meta {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+
+              span {
+                font-size: 14px;
+              }
+            }
+
+            .wkit-commign-soon-tag {
+              margin-left: 10px;
+              border-radius: 6px;
+              padding: 10px 7px;
+              font-size: 12px;
+              background-color: #00A31B;
+              color: #fff;
+              white-space: nowrap;
+              cursor: default;
+            }
+
+            .wdkit-select-builder-checkbox {
+              margin: 0;
+              padding: 0;
+              line-height: 0;
+              cursor: pointer;
+
+              input {
+                display: none;
+              }
+
+              svg {
+                transition: 0.2s linear;
+                border: 2px solid #999;
+                border-radius: 50%;
+                width: 23px;
+                height: 23px;
+                fill: transparent;
+
+                &:hover {
+                  border-color: $Wdkit_blue_normal;
+                }
+              }
+
+              input:checked+svg {
+                fill: #040483;
+                border-color: $Wdkit_blue_normal;
+              }
+            }
+          }
+        }
+      }
+
+      .wdkit-onboarding-basic {
+        display: flex;
+        justify-content: center;
+        column-gap: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        row-gap: 20px;
+
+        .wdkit-onboarding-basic-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: space-between;
+          width: 30%;
+          background-color: #fff;
+          padding: 10px;
+          gap: 10px;
+          border: 1px solid $common_border_color;
+          border-radius: $radius_small;
+          box-shadow: $common_boxshadow;
+        }
+
+        .wdkit-onboarding-basic-content-header {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          width: 100%;
+          justify-content: space-between;
+          flex-direction: row;
+
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+          }
+
+          span {
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+
+        .wdkit-onboarding-install-manually {
+          .wkit-redirect-link {
+            padding: 8px 12px 8px 0px;
+            display: flex;
+
+            span {
+              position: relative;
+              color: $Wdkit_pink_normal;
+              font-size: 14px;
+              font-weight: 600;
+
+              &:after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: $Wdkit_pink_normal;
+                transform-origin: bottom right;
+                transition: transform 0.25s ease-out;
+              }
+
+              &:hover:after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+              }
+            }
+          }
+        }
+
+        .wdkit-onboarding-basic-content-status {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 3px 10px 3px 5px;
+          gap: 3px;
+          color: white;
+          border-radius: 6px;
+          margin-top: -23px;
+          text-transform: capitalize;
+
+          &.wkit-unavailable-plugin,
+          &.wkit-manually-plugin {
+            background: #FF3D31;
+          }
+
+          &.wkit-active-plugin {
+            background: #03BA21;
+          }
+
+          &.wkit-inactive-plugin {
+            background: #FFB931;
+          }
+
+          &.wkit-inactive-plugin {
+            background: #FFB931;
+          }
+
+          &.wkit-loading-plugin {
+            background: #f9e9f1;
+            color: #c22076;
+
+            svg {
+              fill: #c22076;
+            }
+          }
+
+          svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        .wdkit-onboarding-basic-content-body {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 25px;
+        }
+
+        .wdkit-onboarding-basic-content-installed {
+          display: flex;
+          background: #E8E8E8;
+          border-radius: 6px;
+          padding: 8px 12px;
+          gap: 5px;
+          color: #999999;
+          font-weight: 600;
+          width: max-content;
+        }
+
+        .wdkit-onboarding-basic-content-notInstalled {
+          display: flex;
+          justify-content: center;
+          background: #F9E9F1;
+          border: 1px solid $Wdkit_pink_normal;
+          border-radius: 6px;
+          padding: 7px 12px;
+          gap: 5px;
+          color: $Wdkit_pink_normal;
+          flex-direction: row;
+          align-items: center;
+          cursor: pointer;
+          font-weight: 600;
+          min-width: 50%;
+          width: fit-content;
+
+          .wkit-content-loader {
+            .wb-contentLoader-circle {
+              border: 4px solid $Wdkit_pink_normal;
+              border-top: 4px solid rgb(194 32 118 / 10%);
+            }
+          }
+        }
+      }
+
+      .wdkit-onboarding-allfeatures {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        row-gap: 10px;
+        column-gap: 10px;
+
+        .wdkit-onboarding-boxallfeatures {
+          display: flex;
+          flex-direction: column;
+          background-color: #fff;
+          border: 1px solid $common_border_color;
+          border-radius: $radius_small;
+          box-shadow: $common_boxshadow;
+          gap: 5px;
+          padding: 20px;
+          width: 30%;
+          color: #040483;
+
+          &:hover {
+            box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+            transition: 0.3s linear;
+          }
+
+          .wdkit-onboarding-allfeatures-svg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #040483;
+            border-radius: 50%;
+            height: 32px;
+            width: 32px;
+          }
+
+          .wdkit-onboarding-allfeatures-name {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+
+            span {
+              font-size: 16px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .wdkit-onboarding-doubt {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+
+        span {
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .wdkit-onboarding-links {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+
+          a {
+            position: relative;
+            font-size: 14px;
+            font-weight: 400;
+            color: #040483;
+
+            &::after {
+              content: "";
+              position: absolute;
+              width: 100%;
+              height: 2px;
+              top: 20px;
+              transition: transform 0.25s ease-out;
+              left: 0;
+              transform-origin: bottom right;
+              transform: scaleX(0);
+              background-color: #040483;
+            }
+
+            &:hover::after {
+              transform: scaleX(1);
+              transform-origin: bottom left;
+            }
+          }
+
+          .wdkit-onboarding-dot {
+            border-radius: 50%;
+            border: 3px solid #999999;
+            height: 6px;
+            width: 6px;
+          }
+        }
+      }
+
+      .wdkit-onboarding-ourproducts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        span {
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .wdkit-onboarding-ourproducts-logo {
+          display: flex;
+          margin-top: 10px;
+          gap: 20px;
+
+          .wdkit-onboarding-border {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid $common_border_color;
+            box-shadow: $common_boxshadow;
+            border-radius: 50%;
+            height: 70px;
+            width: 70px;
+
+            &:hover {
+              box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+              transition: 0.3s linear;
+            }
+          }
+        }
+      }
+    }
+
+    .wdkit-onboarding-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 15%;
+      width: 100%;
+      padding: 0px 40px;
+
+      .wdkit-onboarding-footer-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        width: 30%;
+      }
+
+      .wdkit-onboarding-footer-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        width: 30%;
+      }
+
+      .wdkit-onboarding-skip-button {
+        background: #ffffff;
+        border-radius: 6px;
+        border: 1px solid #e8e8e8;
+        color: #999999;
+        padding: 12px 32px;
+        text-align: center;
+        margin: 4px 2px;
+        border: 1px solid $Wdkit_pink_normal;
+        color: $Wdkit_pink_normal;
+        cursor: pointer;
+        transition: 0.3s linear;
+
+        &:hover {
+          background: #c11f7608;
+        }
+      }
+
+      .wdkit-onboarding-pagination {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #999999;
+        width: 10%;
+      }
+
+      .wdkit-onboarding-back-button {
+        background: transparent;
+        border: none;
+        color: #999999;
+        padding: 12px 32px;
+        text-align: center;
+        margin: 4px 2px;
+        cursor: pointer;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 50%;
+          height: 2px;
+          top: 30px;
+          transition: transform 0.25s ease-out;
+          left: 25px;
+          transform-origin: bottom right;
+          transform: scaleX(0);
+          background-color: #000000;
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+          transform-origin: bottom left;
+        }
+
+        &:hover {
+          color: #000000;
+        }
+
+        &:disabled {
+          color: #999999;
+          opacity: 0.6;
+          cursor: not-allowed;
+
+          &:hover::after {
+            transform: scaleX(0);
+            transform-origin: unset;
+          }
+        }
+      }
+
+      .wdkit-onboarding-next-button {
+        background-color: $Wdkit_pink_normal;
+        border-radius: 6px;
+        border: 1px solid $Wdkit_pink_normal;
+        color: #ffff;
+        padding: 12px 32px;
+        text-align: center;
+        margin: 4px 2px;
+        cursor: pointer;
+        transition: 0.3s linear;
+        min-width: 100px;
+
+        &:hover {
+          background-color: #9B1A5E;
+        }
+
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+          background-color: $Wdkit_pink_normal;
+        }
+      }
+    }
+  }
+
+  .wkit-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+
+@media(max-width:1440px) {
+  .wdkit-onboarding-main .wdkit-onboarding-popup {
+    .wkit-onboarding-bg-image {
+      .wkit-inner-bricks {
+        left: 17%;
+      }
+
+      .wkit-inner-elementor {
+        right: 23%;
+      }
+
+      .wkit-inner-gutenberg {
+        right: 16%;
+      }
+    }
+  }
+
+}
+
+@media(max-width:1200px) {
+  .wdkit-onboarding-main {
+    .wdkit-onboarding-popup {
+
+      .wkit-onboarding-bg-image {
+        .wkit-inner-image-content {
+          min-width: 80px;
+
+          span {
+            font-size: 8px;
+          }
+        }
+      }
+
+      .wdkit-onboarding-box {
+
+        .wdkit-onboarding-header {
+          span {
+            font-size: 18px;
+            text-align: center;
+          }
+        }
+
+        .wdkit-onboarding-box-content {
+          gap: 5px;
+
+          .wdkit-select-pageBuilder {
+            width: 100%;
+            padding: 15px;
+
+            .wdkit-select-pageBuilder-header {
+
+              .wkit-switch-setting-wrap {
+                .wkit-switch {
+                  width: 46px;
+                  height: 26px;
+                }
+
+                .wkit-slider:before {
+                  height: 18px;
+                  width: 18px;
+                }
+
+                input:checked+.wkit-slider:before {
+                  -webkit-transform: translateX(20px);
+                  -ms-transform: translateX(20px);
+                  transform: translateX(20px);
+                }
+              }
+            }
+          }
+        }
+
+        .wdkit-onboarding-basic {
+          .wdkit-onboarding-basic-content {
+            width: 70%;
+            padding: 8px;
+          }
+        }
+
+        .wdkit-onboarding-allfeatures {
+          .wdkit-onboarding-boxallfeatures {
+            width: 40%;
+          }
+        }
+
+        .wdkit-onboarding-ourproducts {
+          .wdkit-onboarding-ourproducts-logo {
+            .wdkit-onboarding-border {
+              height: 50px;
+              width: 50px;
+            }
+          }
+        }
+      }
+
+      .wdkit-onboarding-footer {
+        justify-content: space-between;
+
+        .wdkit-onboarding-skip-button {
+          padding: 10px 30px;
+        }
+
+        .wdkit-onboarding-pagination {
+          font-size: 12px;
+        }
+
+        .wdkit-onboarding-back-button {
+          padding: 10px 30px;
+        }
+
+        .wdkit-onboarding-next-button {
+          padding: 10px 30px;
+        }
+      }
+    }
+  }
+
+}
+
+@media(max-width:1024px) {
+  .wdkit-onboarding-main {
+    .wdkit-onboarding-popup {
+      .wdkit-onboarding-footer {
+        padding: 0px 10px;
+      }
+
+      .wdkit-onboarding-box .wdkit-onboarding-box-content {
+        flex-direction: column;
+
+        .wdkit-select-pageBuilder {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width:960px) {
+  .wdkit-onboarding-main .wdkit-onboarding-popup {
+    margin-left: 36px;
+  }
+}
+
+@media(max-width:782px) {
+  .wdkit-onboarding-main .wdkit-onboarding-popup {
+    margin-left: 0px;
+  }
+}
+
+@media(max-width:768px) {
+  .wdkit-onboarding-main {
+    .wdkit-onboarding-popup {
+      width: 80%;
+      margin: 0;
+
+      .wdkit-onboarding-box {
+        .wdkit-onboarding-box-content {
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+
+          .wdkit-select-pageBuilder {
+            width: 80%;
+
+            .wdkit-select-pageBuilder-header {
+              .wkit-switch-setting-wrap {
+                .wkit-switch {
+                  width: 46px;
+                  height: 26px;
+                }
+
+                .wkit-slider:before {
+                  height: 18px;
+                  width: 18px;
+                }
+
+                input:checked+.wkit-slider:before {
+                  -webkit-transform: translateX(20px);
+                  -ms-transform: translateX(20px);
+                  transform: translateX(20px);
+                }
+              }
+            }
+          }
+        }
+
+        .wdkit-onboarding-basic {
+          .wdkit-onboarding-basic-content {
+            width: 90%;
+          }
+
+          .wdkit-onboarding-basic-content-installed {
+            padding: 6px 6px;
+          }
+
+          .wdkit-onboarding-basic-content-notInstalled {
+            padding: 6px 6px;
+          }
+        }
+
+        .wdkit-onboarding-allfeatures {
+          .wdkit-onboarding-boxallfeatures {
+            width: 75%;
+          }
+        }
+
+        .wdkit-onboarding-ourproducts {
+          .wdkit-onboarding-ourproducts-logo {
+            span {
+              svg {
+                width: 60px;
+                height: 60px;
+              }
+            }
+          }
+        }
+      }
+
+      .wdkit-onboarding-footer {
+        height: 20%;
+        padding: 0px;
+
+        .wdkit-onboarding-skip-button {
+          padding: 10px 15px;
+          font-size: 12px;
+        }
+
+        .wdkit-onboarding-back-button {
+          padding: 10px 15px;
+          font-size: 12px;
+
+
+          &::after {
+            width: 75%;
+            left: 15px;
+          }
+        }
+
+
+        .wdkit-onboarding-next-button {
+          padding: 10px 15px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+}
+
+@media(max-width:576px) {
+  .wdkit-onboarding-main .wdkit-onboarding-popup .wdkit-onboarding-footer {
+
+    .wdkit-onboarding-footer-right {
+      width: 100%;
+    }
+
+    .wdkit-onboarding-footer-left {
+      width: 5%;
+    }
+  }
+
+
+}

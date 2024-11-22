@@ -1,0 +1,1752 @@
+@import '/src/style/variable.scss';
+
+// --------------- Text ---------------
+.wb-append-content {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #6200ff00;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-append-input-field {
+        display: flex;
+        justify-content: space-between;
+
+        .wb-append-inp {
+            background-color: #0116270d;
+            border: none;
+            border-radius: 2px;
+            display: block;
+            width: 100%;
+            box-shadow: none;
+        }
+    }
+}
+
+// --------------- Date-time ---------------
+.wb-date-time {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #6200ff00;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+
+    .wb-append-input-field {
+        display: flex;
+        justify-content: space-between;
+
+        .wb-append-inp.wb-date-time-w {
+            background-color: $Wdkit_primary_color;
+            border: 0.5px solid rgba(0, 0, 0, 0.08);
+            border-radius: 2px;
+            display: block;
+            width: 100%;
+            box-shadow: none;
+        }
+
+    }
+}
+
+// --------------- Alignment ---------------
+.wb-alignment {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-alignment-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 3px 0px;
+
+        .wkit-wb-alignIcon-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            width: 23px;
+
+            &:hover {
+                .wkit-wb-align-icon-lable {
+                    display: flex;
+                }
+            }
+
+            .wkit-wb-align-icon-lable {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background-color: #011627;
+                margin-bottom: 29px;
+                color: white;
+                font-size: 12px;
+                border-radius: 2px;
+                padding: 2px 4px 2px 4px;
+                position: absolute;
+
+                .wkit-wb-align-icon-tooltip {
+                    width: 5px;
+                    height: 5px;
+                    background-color: #011627;
+                    transform: rotate(45deg);
+                    margin-bottom: -4px;
+                }
+            }
+
+            .wkit-wb-align-icon {
+                width: 24px;
+                height: 24px;
+                border: 1px solid #e4e4e4;
+                padding: 3px 4px;
+                background-color: #f7f7f7;
+                border-radius: 2px;
+            }
+
+            .wkit-wb-align-icon.wb-icon-selected {
+                background-color: #d5d8dc;
+            }
+        }
+
+        .wb-right-align {
+            width: 12px;
+            height: 21px;
+            padding: 0px 6px;
+            border: 1px solid;
+            border-radius: 0px 2px 2px 0px;
+            cursor: pointer;
+        }
+
+        .wb-center-align {
+            width: 12px;
+            height: 21px;
+            padding: 0px 6px;
+            border: 1px solid;
+            cursor: pointer;
+        }
+
+        .wb-left-align {
+            width: 12px;
+            height: 21px;
+            padding: 0px 6px;
+            border: 1px solid;
+            border-radius: 2px 0px 0px 2px;
+            cursor: pointer;
+        }
+
+
+        .wb-align-path {
+            fill: black;
+        }
+
+        .active-align {
+            background-color: #8d96a0 !important;
+
+            .wb-align-path {
+                fill: white;
+            }
+        }
+    }
+}
+
+// --------------- Background ---------------
+.wb-background {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-background-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 3px 0px;
+
+        .wb-background-icon {
+            height: 28px;
+            padding: 7px;
+            width: 100%;
+            cursor: pointer;
+            background-color: #f7f7f7;
+            border: 1px solid #e4e4e4;
+            border-radius: 4px;
+            margin: 0px 1px;
+        }
+
+        // .right {
+        //     border-radius: 0px 2px 2px 0px;
+        // }
+
+        // .left {
+        //     border-radius: 2px 0px 0px 2px;
+        // }
+
+        .active-bg {
+            background-color: rgb(230 230 230);
+        }
+    }
+}
+
+// --------------- border ---------------
+.wb-border {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-border-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 3px 0px;
+
+        .wb-border-icon {
+            width: 25%;
+            height: 25px;
+            padding: 0px 4px;
+            border: 1px solid;
+            background-color: $Wdkit_primary_color;
+            border: 0.5px solid rgba(0, 0, 0, 0.08);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .active-border {
+            background-color: rgb(230 230 230);
+        }
+    }
+
+    .wb-border-color {
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+        justify-content: space-between;
+
+        .wb-color-icon {
+            width: 25px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+    }
+}
+
+// --------------- Box-shadow ---------------
+.wb-box-shadow {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-box-shadow-header {
+        display: flex;
+    }
+
+    .wb-box-shadow-content {
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+
+        .wb-color-icon {
+            width: 30px;
+            border-radius: 4px;
+            background: #e4e4e4;
+            cursor: pointer;
+        }
+    }
+
+    .wb-box-shadow-content .content-1,
+    .content-2,
+    .content-3,
+    .content-4,
+    .content-5 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 20%;
+        margin: 2px;
+    }
+
+    .wb-box-shadow-content .shadow-inp {
+        display: flex;
+        width: 100%;
+        position: relative;
+        padding: 0px 0px 0px 2px !important;
+        border-radius: 2px;
+        background-color: #e1e1e140;
+        border: 0.5px solid #00000014;
+
+        &:focus {
+            border: 0.5px solid rgba(0, 0, 0, 0.08);
+        }
+    }
+
+    .wb-shadow-switcher {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 15px 4px 0px 3px;
+
+        .shadow-btn {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            color: gray;
+            background-color: #fff;
+            padding: 3px 5px;
+            font-size: 12px;
+            margin: -1px;
+            cursor: pointer;
+        }
+
+        .active-shadow {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background-color: rgba(225, 225, 225, 0.25);
+            color: #000 !important;
+        }
+    }
+}
+
+// --------------- Color ---------------
+.wb-color {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-border-color {
+        display: flex;
+        margin-top: 10px;
+        align-items: center;
+        justify-content: space-between;
+
+        .wb-append-inner-color {
+            display: flex;
+            -moz-column-gap: 5px;
+            column-gap: 5px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .wb-color-icon {
+            cursor: pointer;
+
+            .wb-color-picker {
+                height: 35px;
+                width: 35px;
+                border: 1px solid #e4e4e4;
+                background-color: #f7f7f7;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+// --------------- Css-Filter ---------------
+.wb-css-filter {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-css-filter-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .wb-css-filter-icon {
+            border: 1px solid;
+            padding: 7px 5px 5px 7px;
+            width: 30px;
+            cursor: pointer;
+            background-color: #f7f7f7;
+            border: 1px solid #e4e4e4;
+            border-radius: 3px;
+        }
+    }
+}
+
+// --------------- Dimension ---------------
+.wb-dimension {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ffffff;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-dimension-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+
+        .wb-dimension-inp {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
+            margin: 5px 1px;
+            cursor: pointer;
+
+            .wb-dimension-lable {
+                font-size: 8px;
+                color: #9aa0a5;
+            }
+
+            .dimension-inp {
+                width: 100%;
+                border-radius: 4px;
+                padding: 0px 0px 0px 4px;
+                border: 1px solid #e4e4e4;
+                min-height: 30px;
+                line-height: 0;
+                font-size: 12px;
+                background-color: #f7f7f7;
+            }
+
+            .top-inp {
+                border-radius: 4px;
+                min-height: 30px;
+                box-shadow: none;
+                font-size: 12px;
+            }
+        }
+
+        .wb-dimension-icon {
+            cursor: pointer;
+            width: 20%;
+            margin: 0px 1px;
+
+            .dimension-icon {
+                width: 100%;
+                padding: 5px 7px;
+                margin-top: 5px;
+                background-color: #f7f7f7;
+                border-radius: 4px;
+                border: 1px solid #d5d8dc;
+                height: 30px;
+            }
+
+            .wkit-wb-dark {
+                background-color: #d5d8dc;
+            }
+        }
+
+
+    }
+}
+
+// --------------- border-radius dimension for bricks ---------------
+.wb-header-content .wb-append-inner .wkit-wb-heading-textarea {
+    width: 100%;
+    border-radius: 2px;
+    padding: 2px 0px 2px 4px;
+    margin: 0;
+    background-color: #f7f7f7;
+    border: 1px solid #e4e4e4;
+}
+
+
+.wb-header-content .wb-append-inner .wkit-wb-heading-textarea:focus {
+    box-shadow: 0 0 0 0px #000;
+}
+
+.wkit-wb-heading-textarea::-webkit-scrollbar {
+    width: 3px;
+}
+
+.wkit-wb-heading-textarea::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.wkit-wb-heading-textarea::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.wkit-wb-heading-textarea::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+// --------------- Typography ---------------
+.wb-typography {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid transparent;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-typography-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .wb-typography-icon {
+            border: 1px solid;
+            padding: 7px 5px 5px 7px;
+            width: 30px;
+            cursor: pointer;
+            background-color: #f7f7f7;
+            border: 1px solid #e4e4e4;
+            border-radius: 3px;
+        }
+    }
+}
+
+// --------------- Grediant-Color ---------------
+.wb-grediant-color {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-grediant-color-content {
+        display: flex;
+        flex-direction: column;
+
+        .wb-grediant-color-bar {
+            padding: 20px 2px;
+            border-radius: 2px;
+            border: 1px solid #E4E4E4;
+        }
+
+        .wb-grediant-color-selector {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+
+            .gradiant-color-dropDown {
+                border: 1px solid #e4e4e4;
+                border-radius: 2px;
+                background: #f7f7f7;
+            }
+
+            .grediant-color-inp {
+                width: 50px;
+                border: 1px solid #e4e4e4;
+                border-radius: 2px;
+                background: #f7f7f7;
+            }
+        }
+    }
+}
+
+// --------------- Heading ---------------
+
+.wkit-divider-controller {
+
+    .wb-draggable-icon {
+        width: max-content;
+        right: 10px;
+        position: absolute;
+    }
+
+    .wb-header-content {
+        hr {
+            background-color: #dcdcde;
+            width: 100%;
+            height: 3px;
+        }
+    }
+}
+
+.wb-heading {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-header-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .heading-dropdown {
+            font-size: 12px;
+            padding: 0px 22px 0px 8px;
+            min-height: 25px;
+        }
+
+        .wb-append-inp.wkit-text-area-w {
+            width: 100%;
+        }
+    }
+}
+
+// --------------- Icon-List ---------------
+.wb-icon-list {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-icon-list-content {
+        display: flex;
+        // align-items: center;
+        justify-content: space-between;
+
+        .wb-icon-list-icon {
+            border: 1px solid #e4e4e4;
+            padding: 5px 3px 3px 5px;
+            width: 30px;
+            cursor: pointer;
+            border-radius: 4px;
+            background-color: #f7f7f7;
+        }
+    }
+}
+
+// --------------- Media ---------------
+.wb-media {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-media-content {
+        display: flex;
+        // align-items: center;
+        justify-content: space-between;
+
+        .wb-media-icon {
+            border: 1px solid #c2cbd2;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    }
+}
+
+// --------------- Gallery ---------------
+.wb-gallery {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-gallery-content {
+        display: flex;
+        // align-items: center;
+        justify-content: space-between;
+
+        .wb-gallery-icon {
+            border: 1px solid;
+            padding: 5px 3px 3px 5px;
+            width: 16px;
+            cursor: pointer;
+        }
+
+        .wb-gallery-image {
+            border: 1px solid #e4e4e4;
+            width: 100%;
+            border-radius: 2px;
+            background-color: $Wdkit_primary_color;
+
+            .wb-gallery-image-header {
+                border-bottom: 1px solid #d5dadf;
+
+                label {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .wb-gallery-image-content {
+            .wb-gallery-image-backgorund {
+                width: 4%;
+                padding: 19px 24px;
+                background-color: #d5dadf;
+                margin: 7px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px;
+
+                img {
+                    background-color: #a4afb7;
+                    border-radius: 50%;
+                    width: 13px;
+                    padding: 3px;
+                }
+            }
+        }
+    }
+}
+
+// --------------- link search ---------------
+.wb-link-search {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-link-search-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .wb-link-search-icon {
+            border: 1px solid;
+            padding: 5px 3px 3px 5px;
+            width: 16px;
+            cursor: pointer;
+        }
+    }
+}
+
+// --------------- link search ---------------
+.wb-multi-range {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-multi-range-content {
+        .middle {
+            position: relative;
+
+        }
+
+        .slider {
+            position: relative;
+            z-index: 1;
+            height: 5px;
+            margin: 0 15px;
+        }
+
+        .slider>.track {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 5px;
+            background-color: #c6aee7;
+        }
+
+        .slider>.range {
+            position: absolute;
+            z-index: 2;
+            left: 25%;
+            right: 25%;
+            top: 0;
+            bottom: 0;
+            border-radius: 5px;
+            background-color: #6200ee;
+        }
+
+        .slider>.thumb {
+            position: absolute;
+            z-index: 3;
+            width: 20px;
+            height: 20px;
+            background-color: #6200ee;
+            border-radius: 50%;
+        }
+
+        .slider>.thumb.left {
+            left: 25%;
+            transform: translate(-15px, -7px);
+        }
+
+        .slider>.thumb.right {
+            right: 25%;
+            transform: translate(15px, -7px);
+        }
+
+        input[type="range"] {
+            position: absolute;
+            pointer-events: none;
+            appearance: none;
+            -webkit-appearance: none;
+            z-index: 2;
+            height: 5px;
+            width: 100%;
+            opacity: 0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            pointer-events: all;
+            width: 30px;
+            height: 30px;
+            border-radius: 0;
+            border: 0 none;
+            background-color: red;
+            cursor: pointer;
+
+            -webkit-appearance: none;
+        }
+    }
+}
+
+// --------------- Note ---------------
+.wb-note {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-note-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: 3px;
+
+        .wb-notice-svg {
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+
+        .wb-notice-content {
+            .wb-note-inp {
+                width: 100%;
+                margin-top: 3px;
+                font-size: 12px;
+                border: none;
+
+                &:focus-visible {
+                    outline: -webkit-focus-ring-color auto 0px;
+                    box-shadow: none;
+                    border-color: #000;
+                }
+            }
+        }
+
+        .wb-notice-close {
+            margin-top: 5px;
+            padding: 4px;
+            margin-right: 5px;
+        }
+    }
+}
+
+// --------------- Radio Advanced ---------------
+.wb-radio-advanced {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-radio-advanced-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .wb-radio-color {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .radio-btn {
+                padding: 5px;
+                margin: 0px -1px;
+                border: 1px solid;
+                font-size: 12px;
+                color: white;
+                background-color: #8d96a0;
+                cursor: pointer;
+            }
+
+            .active-ra {
+                color: #8d96a0;
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+// --------------- Range ---------------
+.wb-range {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-range-content {
+        .wb-range-bar {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            width: 100%;
+            gap: 5px;
+
+            .wb-range-inp {
+                width: 100%;
+                height: 3px;
+                border-radius: 8px;
+                outline: none;
+                transition: background 450ms ease-in;
+                appearance: none;
+                -webkit-appearance: none;
+            }
+
+            .wb-range-inp::-webkit-slider-thumb {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                -webkit-appearance: none;
+                cursor: grab;
+            }
+
+            .range-inp-val {
+                width: 50px;
+                padding: 0px 0px 0px 5px;
+                background-color: #f7f7f7;
+                border: 1px solid #e4e4e4;
+                border-radius: 2px;
+            }
+        }
+    }
+}
+
+// --------------- select ---------------
+.wb-select {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-select-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .wkit-wb-custom-dropDown {
+            width: 100%;
+        }
+
+        .select-dropdown {
+            font-size: 12px;
+            padding: 0px 22px 0px 8px;
+            min-height: 25px;
+        }
+
+    }
+}
+
+// --------------- cpt ---------------
+.wb-cpt-inner {
+    padding: 10px 0px;
+    margin: 5px;
+
+    .wb-cpt-select .wkit-wb-custom-dropDown {
+        margin-right: 18px;
+    }
+
+    &:hover {
+
+        .wb-hover-main-component,
+        .wb-draggable-main-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-hover-main-component {
+        visibility: hidden;
+        display: flex;
+        margin-bottom: -19px;
+        justify-content: center;
+        flex-direction: row;
+        -moz-column-gap: 5px;
+        column-gap: 5px;
+
+        .wb-sec-edit {
+            background-color: #A73362;
+            border-radius: 100%;
+            padding: 5px;
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 11px !important;
+            }
+        }
+    }
+
+    .wb-draggable-main-icon {
+        position: absolute;
+        right: 10px;
+        transform: translate(10px, -11px);
+        float: right;
+        visibility: hidden;
+        transition: all 0.2s linear;
+        cursor: pointer;
+        padding: 3px;
+        display: flex;
+        border-radius: 0px 5px 0px 0px;
+    }
+
+    .wb-repeater-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+
+        .wb-repeater-field {
+            display: flex;
+            border: 1px solid;
+            flex: 1;
+            flex-direction: row;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .wb-repeater-field-title {
+            border: none;
+            color: #fff;
+            border-radius: 0px;
+            flex: 1;
+            background: transparent;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+
+        .wb-repeater-copy-icon {
+            padding: 0px 5px;
+        }
+
+        .wb-repeater-options {
+            border-radius: 0px 0px 5px 5px;
+            border-top: none;
+        }
+
+
+        .wb-repeater-droped {
+            display: flex;
+            justify-content: center;
+            border: 1px dashed rgba(33, 37, 41, 0.25);
+            border-radius: 2px;
+            background-color: #fbfbfb;
+            margin: 5px;
+            align-items: center;
+            gap: 5px;
+            color: #888888;
+            font-size: 12px;
+            padding: 3px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f2f3f487;
+            }
+        }
+    }
+}
+
+
+// --------------- repeater ---------------
+.wb-repeater {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-main-component,
+        .wb-draggable-main-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-hover-main-component {
+        visibility: hidden;
+        display: flex;
+        margin-bottom: -19px;
+        justify-content: center;
+        flex-direction: row;
+        -moz-column-gap: 5px;
+        column-gap: 5px;
+
+        .wb-sec-edit {
+            background-color: #A73362;
+            border-radius: 100%;
+            padding: 5px;
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 11px !important;
+            }
+        }
+    }
+
+    .wb-draggable-main-icon {
+        position: absolute;
+        right: 10px;
+        transform: translate(10px, -11px);
+        float: right;
+        visibility: hidden;
+        transition: all 0.2s linear;
+        cursor: pointer;
+        padding: 3px;
+        display: flex;
+        border-radius: 0px 5px 0px 0px;
+    }
+
+    .wb-repeater-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+
+        .wb-repeater-field {
+            display: flex;
+            border: 1px solid;
+            flex: 1;
+            flex-direction: row;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .wb-repeater-field-title {
+            border: none;
+            color: #fff;
+            border-radius: 0px;
+            flex: 1;
+            background: transparent;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+
+        .wb-repeater-copy-icon {
+            padding: 0px 5px;
+        }
+
+        .wb-repeater-options {
+            border-radius: 0px 0px 5px 5px;
+            border-top: none;
+        }
+
+
+        .wb-repeater-droped {
+            display: flex;
+            justify-content: center;
+            border: 1px dashed rgba(33, 37, 41, 0.25);
+            border-radius: 2px;
+            background-color: #fbfbfb;
+            margin: 5px;
+            align-items: center;
+            gap: 5px;
+            color: #888888;
+            font-size: 12px;
+            padding: 3px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f2f3f487;
+            }
+        }
+    }
+}
+
+// --------------- popover ---------------
+.wb-popover {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-main-component,
+        .wb-draggable-main-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-hover-main-component {
+        visibility: hidden;
+        display: flex;
+        margin-bottom: -19px;
+        justify-content: center;
+        flex-direction: row;
+        -moz-column-gap: 5px;
+        column-gap: 5px;
+
+        .wb-sec-edit {
+            border-radius: 100%;
+            padding: 5px;
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 11px !important;
+            }
+        }
+    }
+
+    .wb-draggable-main-icon {
+        transform: translate(10px, -11px);
+        float: right;
+        background-color: #A73362;
+        visibility: hidden;
+        transition: all 0.2s linear;
+        cursor: pointer;
+        padding: 3px;
+        display: flex;
+        border-radius: 0px 5px 0px 4px;
+    }
+
+    .wb-popover-content {
+        flex-direction: column;
+        justify-content: space-between;
+
+        .wb-popover-options {
+            border-top: none;
+            border-radius: 0px 0px 5px 5px;
+        }
+
+        .wb-normalHover-options {
+            border-top: none;
+            border-radius: 5px;
+        }
+
+        .wb-popover-droped {
+            display: flex;
+            justify-content: center;
+            border: 1px dashed rgba(33, 37, 41, 0.25);
+            border-radius: 2px;
+            background-color: #fbfbfb;
+            margin: 10px 5px 5px 5px;
+            margin-top: 10px;
+            align-items: center;
+            gap: 5px;
+            padding: 3px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f2f3f487;
+            }
+        }
+
+        .wkit-wb-popoverLable {
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .wkit-wb-popoverInput {
+            color: #fff;
+            background: transparent;
+            height: 20px;
+        }
+
+        .wkit-wb-normalHover {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            border-bottom: 1px solid #e8e9e9;
+            border-radius: 4px 4px 0px 0px;
+            overflow: hidden;
+        }
+
+        .wkit-wb-normalHoverList {
+            display: flex;
+            padding: 7px;
+            flex-direction: row;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            border-right: 1px solid #e8e9e9;
+        }
+    }
+}
+
+// --------------- select-2 ---------------
+.wb-select2 {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-select2-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .wkit-wb-custom-dropDown {
+            width: 100%;
+        }
+
+        .select2-dropdown {
+            font-size: 12px;
+            padding: 0px 22px 0px 8px;
+            min-height: 25px;
+        }
+
+    }
+}
+
+// --------------- tab ---------------
+.wb-tab {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-tab-content {
+        display: flex;
+        justify-content: center;
+
+        .wb-tab-normal {
+            border: 1px solid gray;
+            padding: 2px 18px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .selected {
+            background-color: gray;
+            color: white;
+        }
+    }
+}
+
+// --------------- Textarea ---------------
+.wb-textarea {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-textarea-content {
+        display: flex;
+        flex-direction: column;
+
+        .wb-textarea-inp {
+            width: 100%;
+            margin-top: 3px;
+            font-size: 12px;
+            border-radius: 2px;
+            padding: 2px 0px 2px 4px;
+            margin: 0;
+            background-color: #0116270d;
+            border: none;
+        }
+    }
+}
+
+// --------------- Toggle ---------------
+.wb-toggle {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-toggle-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .wb-switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 21px;
+        }
+
+        .wb-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .wb-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #E0E0E0;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .wb-slider:before {
+            position: absolute;
+            content: "";
+            height: 15px;
+            width: 15px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.wb-slider {
+            background-color: #76C758;
+        }
+
+        input:focus+.wb-slider {
+            box-shadow: 0 0 1px #76C758;
+        }
+
+        input:checked+.wb-slider:before {
+            transform: translateX(15px);
+        }
+    }
+}
+
+// --------------- Url ---------------
+.wb-url {
+    padding: 10px;
+    margin: 5px;
+
+    &:hover {
+
+        .wb-hover-component,
+        .wb-draggable-icon {
+            visibility: visible;
+        }
+    }
+
+    .wb-url-content {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        gap: 1px;
+
+        input.wb-url-inp {
+            // width: calc(8vw - 10px);
+            width: 80%;
+            background-color: #f7f7f7;
+            border: 1px solid #e4e4e4;
+        }
+
+        .inp-url-icon {
+            background-color: #f7f7f7;
+            border: 1px solid #e4e4e4;
+            width: 20%;
+            height: 30px;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    }
+
+    .wb-url-options {
+        display: none;
+        margin-top: 10px;
+
+        .url-opt {
+            display: flex;
+            margin: 5px;
+            align-items: center;
+
+            input {
+                margin: 0;
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
+// --------------- Url over ---------------
+.wb-hover-component {
+    visibility: hidden;
+    display: flex;
+    margin-bottom: -19px;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 5px;
+
+    .wb-sec-edit {
+        border-radius: 100%;
+        padding: 5px;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 11px !important;
+        }
+    }
+}
+
+.wb-append-input-field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wb-append-inp {
+    padding: 0px 4px;
+    margin: 0;
+    background-color: #f7f7f7;
+    border: 1px solid #e4e4e4;
+    border-radius: 2px;
+}
+
+.wb-draggable-icon {
+    transform: translate(10px, -11px);
+    float: right;
+    visibility: hidden;
+    padding: 3px;
+    display: flex;
+    cursor: pointer;
+    border-radius: 0px 5px 0px 4px;
+}
+
+.wb-show {
+    display: block;
+}
+
+.wb-drop {
+    height: 4px;
+}
+
+.wb_drag-over {
+    height: 14px !important;
+}
+
+.wb-append-inner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.wb-right-append {
+    width: 100%;
+}
+
+.wb-append-label {
+    font-size: 12px;
+    font-weight: 400;
+    width: 80%;
+    color: #212529;
+    height: 29px;
+    border: none;
+
+    &:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px;
+    }
+}
+
+.wb-append-dec {
+    color: #888888;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 400;
+    width: 92%;
+    border: none;
+    overflow: hidden;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    &:focus-visible {
+        outline: -webkit-focus-ring-color auto 0px;
+    }
+}
+
+.wb-icons {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 100%;
+    align-items: center;
+    flex-direction: row;
+    gap: 2px;
+}
+
+.wb-main-component {
+    border-radius: 5px;
+    position: relative;
+}
+
+.wb-main-component.wkit-wb-selected {
+    .wb-draggable-icon {
+        visibility: visible !important;
+    }
+}
+
+.wb-repeater.wkit-wb-main-selected,
+.wb-popover.wkit-wb-main-selected {
+    .wb-draggable-main-icon {
+        visibility: visible !important;
+    }
+}
+
+@media(max-width:991px) {
+    .wb-url .wb-url-content input.wb-url-inp {
+        width: fit-content;
+        padding: 4px 5px !important;
+        line-height: 0;
+        min-height: 5px;
+    }
+
+    .wb-box-shadow .wb-box-shadow-content .shadow-inp {
+        width: 30px;
+    }
+}

@@ -1,0 +1,56 @@
+/** WDesign-Kit */
+$Wdkit_blue_normal: #040483;
+$Wdkit_blue_hover: #030369;
+$Wdkit_outer_border_bg: #03036808;
+$Wdkit_pink_normal: #C22076;
+$Wdkit_pink_hover: #9B1A5E;
+$Wdkit_font_family: 'Plus Jakarta Sans', sans-serif;
+$Wdkit_primary_color: #0116270D;
+$Wdkit_secondary_color: #ffffff;
+
+/** button color for normal and hover effect */
+$btn_outer_red_hover: #c11f7608;
+
+/** All colors for elementor */
+$elementor_text_color: #91003B;
+$elementor_bg_color : #91003B;
+$elementor_bg_hover_color : #830035;
+$elementor_outer_border_bg: #8f003908;
+$elementor_border_color: #91003B;
+
+$transition: 0.3s linear;
+
+/** All Colors for gutenberg  */
+
+$gutenberg_bg_color: #287CB2;
+$gutenberg_bg_hover_color: #2470A0;
+$gutenberg_border_color: #287CB2;
+$gutenberg_outer_border_bg: #297eb308;
+$gutenberg_text_color: #287CB2;
+
+/** All colors for bricks */
+$bricks_text_color: #ffc800;
+$bricks_bg_color : #ffc800;
+$bricks_bg_hover_color : #E6C038;
+$bricks_outer_border_bg: #ffd53d08;
+$bricks_border_color: #ffc800;
+$bricks_inner_color: #000;
+
+/** Radius parameters */
+$radius_big: 10px;
+$radius_small: 6px;
+
+/** Colors */
+$sivercr_normal: #C4C4C4;
+$font_cr_black : #19191B;
+$cr_white: #fff;
+$color_white: #ffffff;
+
+/** Wdkit common group */
+$common_border_color: #f1f1f4;
+$common_boxshadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+$common_background: #f8f8f8;
+
+/** wkit-Skeleton */
+$animation: wdkit-skeleton 1.5s infinite ease-in-out;
+$skeleton_bg: #e0e0e0;

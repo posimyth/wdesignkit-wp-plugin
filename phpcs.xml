@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress">
+    <description>WordPress Coding Standards</description>
+    <arg name="colors"/>
+    <arg name="parallel"/>
+    <file>./</file>
+</ruleset>
+
+
+
+
+

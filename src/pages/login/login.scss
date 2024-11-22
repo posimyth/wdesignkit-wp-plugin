@@ -1,0 +1,1181 @@
+@import '../../style/variable.scss';
+
+.wkit-login {
+    display: flex;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+
+    .wkit-login-left-side {
+        padding: 36px 36px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        row-gap: 10px;
+        width: 40%;
+        background: #fff;
+        border-radius: $radius_big;
+        box-shadow: $common_boxshadow;
+        height: 100%;
+
+        .wkit-login-page-link {
+            position: relative;
+            color: $Wdkit_pink_normal !important;
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 2px;
+                bottom: -4px;
+                left: 0;
+                background-color: #C22076;
+                transform-origin: bottom right;
+                transition: transform 0.25s ease-out;
+            }
+
+            &:hover:after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+        }
+
+        .wkit-login-google-fb {
+            display: flex;
+            align-items: center;
+            column-gap: 8px;
+            border: 1px solid $sivercr_normal;
+            border-radius: $radius_small;
+            padding: 8px 10px;
+            justify-content: center;
+            width: auto;
+            cursor: pointer;
+
+            .wkit-login-link {
+                display: flex;
+                column-gap: 5px;
+                align-items: center;
+                color: $sivercr_normal;
+                font-size: 12px;
+
+                img.wkit-logo {
+                    max-width: 30px;
+                }
+            }
+        }
+
+        .wkit-login-heading {
+            display: flex;
+            flex-direction: column;
+            font-weight: 600;
+            font-size: 30px;
+            color: $Wdkit_blue_normal;
+            margin-bottom: 10px;
+
+            span {
+                display: flex;
+                line-height: 36px;
+                color: $Wdkit_blue_normal;
+            }
+
+        }
+
+        .wkit-login-desc {
+            font-weight: 400;
+            font-size: 15px;
+            color: $Wdkit_blue_normal;
+            margin: 15px 0px 0px 0px;
+        }
+
+        .wkit-or-sign-main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 10px;
+
+            .wkit-bottom-border {
+                border-top: 1px solid $sivercr_normal;
+                width: 80px;
+            }
+        }
+
+        .wkit-form-group {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            gap: 5px;
+
+            .wkit-login-label {
+                font-weight: 500;
+                font-size: 14px;
+                color: $font_cr_black;
+            }
+
+            .wkit-label {
+                display: flex;
+                font-weight: bold;
+                cursor: unset;
+            }
+
+            &.wkit-form-password {
+
+                .wkit-login-password-inp {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    border: 1px solid #e8f0fe;
+                    border-radius: $radius_small;
+
+                    input {
+                        width: 92%;
+                        border: none;
+                        border-radius: 5px 0px 0px 5px;
+                    }
+
+                    .wkit-password-eye {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        width: 8%;
+
+                        svg {
+                            display: flex;
+                            min-width: 18px;
+                            min-height: 18px;
+                            margin: 10px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        input.wkit-input-field {
+            padding: 9px 10px;
+            background: rgba(126, 126, 193, 0.05);
+            color: #212121;
+            font-weight: 400;
+            font-size: 13px;
+            margin-left: 0px;
+            border: 1px solid #e8f0fe;
+
+            &:focus {
+                border: none;
+                box-shadow: none;
+            }
+
+            &::placeholder {
+                color: $sivercr_normal;
+            }
+
+        }
+
+        .wkit-remember-wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 10px;
+
+            .wkit-styled-checkbox {
+                width: 18px;
+                height: 18px;
+                border-radius: $radius_small;
+                margin-top: 1px;
+                margin-bottom: 1px;
+
+                &+label {
+                    position: relative;
+                    cursor: pointer;
+                    flex-direction: row;
+                    display: flex;
+                    padding: 0;
+                    color: $font_cr_black;
+                    overflow-wrap: break-word;
+                    word-wrap: break-word;
+                    word-break: break-word;
+                }
+            }
+        }
+
+        .wkit-check-box:focus {
+            border-color: #DADAF0;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+            outline: 0px solid transparent;
+        }
+
+        .wkit-check-box:checked {
+            background-color: $Wdkit_blue_normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wkit-check-box:checked::before {
+            content: "";
+            border: 2px solid white;
+            border-left: 0px;
+            border-top: 0px;
+            transform: rotate(40deg);
+            width: 4px;
+            height: 9px;
+            margin: 0;
+            margin-bottom: 2px;
+        }
+
+        .wkit-remember-text {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            cursor: pointer;
+
+            .wkit-login-remember-text {
+                font-size: 14px;
+                color: $font_cr_black;
+                font-weight: 400;
+                color: #5e5873;
+                margin-left: 5px;
+            }
+        }
+
+        .wkit-login-btn {
+            display: flex;
+            padding: 15px 10px;
+            background: $Wdkit_pink_normal;
+            border: none;
+            border-radius: $radius_small;
+            color: $cr_white;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s linear;
+
+            i.fa-file-word {
+                padding-right: .5em;
+            }
+
+            &:hover {
+                background-color: $Wdkit_pink_hover;
+            }
+        }
+
+        .wkit-login-desc-text {
+            font-weight: 400;
+            font-size: 14px;
+            color: $font_cr_black;
+            text-align: center;
+
+            &::after {
+                bottom: -2px;
+            }
+        }
+
+        .wkit-check-box:active {
+            background: #2A2A96;
+            font-size: 12px;
+            color: $font_cr_black;
+        }
+    }
+
+    .wkit-wb-form {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .wkit-login-right-side {
+        display: flex;
+        position: relative;
+        padding: 25px 25px;
+        border-radius: $radius_big;
+        align-items: center;
+        background: $Wdkit_blue_normal;
+        flex: 1;
+        width: 60%;
+
+        .login-right-heading {
+            font-size: 32px;
+            color: $cr_white;
+            display: flex;
+            line-height: 1.5em;
+            font-weight: 600;
+            flex-direction: column;
+            align-items: center;
+            justify-content: 'center';
+            width: 100%;
+            flex: 1 1 auto;
+
+            .login-right-h2 {
+                color: white;
+                font-size: 30px;
+                font-weight: 600;
+                line-height: 45px;
+                width: 440px;
+                text-align: center;
+
+                .wkit-logo-img-login {
+                    width: 175px;
+                }
+
+                span {
+                    img {
+                        margin-bottom: -5px;
+                    }
+                }
+            }
+
+            .login-right-p {
+                display: flex;
+                font-size: 14px;
+                font-weight: 400;
+                align-items: center;
+                line-height: 21px;
+                color: $cr_white;
+                opacity: 80%;
+                width: 440px;
+                text-align: center;
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .wkit-wb-btns {
+        display: flex;
+        flex-direction: row !important;
+        gap: 10px 10px;
+        width: 100%;
+
+        .wkit-wb-btn {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 50%;
+            color: $font_cr_black !important;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid $sivercr_normal;
+            border-radius: $radius_small;
+            transition: $transition;
+            font-size: 14px;
+
+            cursor: pointer;
+
+            img {
+                width: 24px;
+                height: 24px;
+                margin-right: 5px;
+            }
+
+            span {
+                display: flex;
+                width: max-content;
+                color: #0b0b0b;
+            }
+
+            &:hover {
+                border: 1px solid #0b0b0b;
+            }
+        }
+
+    }
+
+    .wkit-wb-btn-api {
+        display: flex;
+        flex-direction: row;
+
+        .wkit-wb-login-api-link {
+            display: contents;
+        }
+
+        .wkit-wb-apiKey {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            color: $sivercr_normal;
+            padding: 10px 18px 10px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 0.784615px solid $sivercr_normal;
+            border-radius: $radius_small;
+            align-items: center;
+            cursor: pointer;
+            flex: 1;
+            justify-content: center;
+            font-size: 14px;
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+
+            span {
+                width: max-content;
+                color: #0b0b0b;
+            }
+
+            &:hover {
+                transition: 0.3s linear;
+                color: #0b0b0b;
+                border: 0.784615px solid #0b0b0b;
+            }
+        }
+    }
+
+    .wkit-wb-main-line {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: $sivercr_normal;
+        justify-content: center;
+        padding: 20px 0px 10px 0px;
+
+        .wkit-wb-sign-email {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .wkit-wb-line-text {
+            color: $sivercr_normal;
+        }
+
+        .wkit-wb-line {
+            color: $sivercr_normal;
+            width: 20%;
+            border: 0;
+            border-top: 1px solid #dcdcde;
+            border-bottom: 1px solid #f6f7f7;
+        }
+    }
+
+    /**Social Login Loading*/
+    .wkit-loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 10px;
+        width: 40px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .wkit-loader:before {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $Wdkit_blue_normal;
+        animation: loaderAnimation 1.2s infinite ease-in-out;
+    }
+
+    @keyframes loaderAnimation {
+        0% {
+            transform: scale(0);
+        }
+
+        50% {
+            background-color: $Wdkit_blue_normal;
+            transform: scale(1);
+        }
+
+        100% {
+            transform: scale(0);
+        }
+    }
+
+    .login-api-right-img {
+        width: 650px;
+    }
+
+    .wkit-in-login-popup {
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 999;
+
+        .wkit-in-login-popup-outer {
+            position: fixed;
+            height: 100vh;
+            width: 100%;
+            background: #000000b3;
+            z-index: 99;
+        }
+
+        .wkit-lg-text-normal {
+            color: #737373;
+        }
+
+        .wkit-lg-text-color {
+            color: $Wdkit_blue_normal;
+        }
+
+        .wkit-lg-text-link {
+            position: relative;
+            color: $Wdkit_blue_normal;
+            cursor: pointer;
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 1px;
+                bottom: -2px;
+                left: 0;
+                background-color: $Wdkit_blue_normal;
+                transform-origin: bottom right;
+                transition: transform 0.25s ease-out;
+            }
+
+            &:hover:after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+        }
+
+        .wkit-in-login-popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            border-radius: $radius_big;
+            width: 30%;
+            padding: 20px;
+            margin-left: 160px;
+            gap: 40px;
+            z-index: 999;
+
+            &.wkit-large-popup {
+                width: 650px;
+                padding: 35px;
+
+                .wkit-lg-popup-footer .wkit-lg-popup-footer-btns {
+                    width: 85%;
+                }
+            }
+
+            &.wkit-small-popup {
+                width: 530px;
+            }
+        }
+
+        .wkit-lg-popup-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+
+            .wkit-lg-popup-heading {
+                font-size: 24px;
+                font-weight: 500;
+                line-height: 25px;
+                text-align: center;
+            }
+
+            .wkit-lg-sub-heading {
+                text-align: center;
+                line-height: 15px;
+            }
+
+            .wkit-lg-popup-text {
+                font-size: 14px;
+                font-weight: 400;
+                text-align: center;
+            }
+
+            .wkit-lg-upper-part {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+
+        .wkit-lg-middle-part {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .wkit-lg-note-content {
+                border-left: 3px solid #FFCD38;
+                padding: 3px 5px;
+            }
+
+            .wkit-lg-note-head {
+                color: black;
+            }
+
+        }
+
+        .wkit-lg-checkbox-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 15px;
+            background: #F5F5FA;
+            border-radius: $radius_small;
+            max-width: max-content;
+
+            .wkit-checkbox-inp {
+                width: 20px;
+                height: 20px;
+                min-width: 20px;
+                min-height: 20px;
+                margin-bottom: -4px;
+                border: 1px solid #DADAF0;
+                border-radius: 6px;
+
+                &:focus {
+                    border-color: #DADAF0;
+                    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+                    outline: 0px solid transparent;
+                }
+
+                &:checked {
+                    background-color: #040483;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 1;
+
+                    &::before {
+                        content: "";
+                        border: 2px solid white;
+                        border-left: 0px;
+                        border-top: 0px;
+                        transform: rotate(40deg);
+                        width: 4px;
+                        height: 9px;
+                        margin-bottom: 0px;
+                        margin-left: 0px;
+                        opacity: 1;
+                    }
+                }
+
+            }
+
+            .wkit-checkbox-text {
+                color: #040483;
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+        }
+
+        .wkit-lg-popup-icon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 11px 12px 11px;
+            background: #FFE9E9;
+            border-radius: 50px;
+        }
+
+        .wkit-lg-popup-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 30px;
+
+            .wkit-lg-popup-footer-btns {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                width: 90%;
+                gap: 10px;
+            }
+
+            .wkit-btn-class {
+                padding: 12px;
+                font-size: 16px;
+                width: 45%;
+                color: #fff;
+                text-transform: unset;
+            }
+
+            .wkit-outer-btn-class {
+                white-space: nowrap;
+                padding: 12px;
+                font-size: 16px;
+                color: $Wdkit_blue_normal;
+                width: 55%;
+
+                &:hover {
+                    color: $Wdkit_blue_normal;
+                }
+            }
+
+            .wkit-footer-link-txt {
+                position: relative;
+                font-size: 16px;
+                font-weight: 400;
+                color: $Wdkit_blue_normal;
+                cursor: pointer;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    transform: scaleX(0);
+                    height: 2px;
+                    bottom: -4px;
+                    left: 0;
+                    background-color: $Wdkit_blue_normal;
+                    transform-origin: bottom right;
+                    transition: transform 0.25s ease-out;
+                }
+
+                &:hover:after {
+                    transform: scaleX(1);
+                    transform-origin: bottom left;
+                }
+            }
+        }
+    }
+}
+
+/***Media Query Started***/
+@media (max-width:1440px) {
+    .wkit-login {
+        .login-api-right-img {
+            width: 400px;
+        }
+    }
+}
+
+@media (min-width:1025px) and (max-width:1700px) {
+    .wkit-wb-btns {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .wkit-wb-btn {
+        width: 100% !important;
+        justify-content: center;
+    }
+}
+
+@media(max-width:1024px) {
+    .wkit-login .wkit-login-right-side .login-right-heading {
+        font-size: 20px;
+    }
+
+    .wkit-login .wkit-login-right-side {
+        width: 100%;
+    }
+
+    .wkit-login {
+        width: 100%;
+    }
+
+    .wkit-wb-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 10px 10px;
+        width: max-content;
+        flex-wrap: wrap;
+    }
+
+    .wkit-login .wkit-wb-btns .wkit-wb-btn {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        color: $sivercr_normal;
+        padding: 10px 7px 10px 7px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 0.784615px solid $sivercr_normal;
+        border-radius: $radius_small;
+        align-items: center;
+        cursor: pointer;
+        font-size: 14px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .wkit-login .wkit-login-left-side {
+        padding: 24px 24px;
+    }
+}
+
+@media (max-width:1024px) {
+    .wkit-login {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        max-width: 100% !important;
+    }
+
+    .wkit-login-left-side {
+        width: 100% !important;
+    }
+
+    .wkit-login .wkit-wb-btns {
+        width: 100%;
+    }
+
+    .wkit-login .wkit-wb-btns .wkit-wb-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .wkit-login .wkit-login-right-side {
+        justify-content: center;
+    }
+
+    .wkit-login .wkit-login-right-side .login-right-heading {
+        height: 100%;
+        min-height: 300px;
+    }
+
+    .wkit-main-menu-dashbord {
+        row-gap: 45px !important;
+    }
+}
+
+@media (max-width:991px) {
+    .wkit-login .wkit-wb-main-line {
+        padding: 10px 0px 0px 0px;
+    }
+}
+
+@media (max-width:960px) {
+    .wkit-login .wkit-in-login-popup .wkit-in-login-popup-content {
+        margin-left: 36px;
+    }
+}
+
+@media (max-width:782px) {
+    .wkit-login .wkit-in-login-popup .wkit-in-login-popup-content {
+        margin-left: 0px;
+
+        .wkit-lg-checkbox-content .wkit-checkbox-inp:checked::before {
+            margin-left: -5px;
+        }
+    }
+
+}
+
+@media (max-width:768px) {
+    .wkit-login .wkit-in-login-popup {
+        .wkit-in-login-popup-content {
+            &.wkit-small-popup {
+                width: 450px;
+            }
+
+            &.wkit-large-popup {
+                width: 500px;
+                padding: 25px;
+
+                .wkit-lg-popup-footer .wkit-lg-popup-footer-btns {
+                    width: 100%;
+                }
+            }
+
+            .wkit-lg-popup-footer .wkit-lg-popup-footer-btns {
+                width: 100%;
+            }
+        }
+
+        .wkit-lg-popup-body {
+            .wkit-lg-popup-heading {
+                font-size: 20px;
+            }
+
+            .wkit-lg-upper-part {
+                gap: 10px;
+            }
+        }
+    }
+}
+
+@media (max-width:576px) {
+    .wkit-main-menu-dashbord {
+        display: flex;
+        row-gap: 15px;
+
+        .wkit-left-side {
+            display: flex;
+            flex-direction: column;
+            width: 13%;
+        }
+
+        .wkit-right-side {
+            width: 100%;
+
+            .wkit-user-details-wrapper {
+                column-gap: 0px;
+            }
+
+            .wkit-img img {
+                width: 45px;
+            }
+
+            .login-right-heading {
+                .login-right-h2 {
+                    font-size: 20px;
+                    width: auto;
+                    line-height: 30px;
+                }
+
+                .login-right-p {
+                    font-size: 12px;
+                    line-height: 16px;
+                    width: auto;
+                }
+
+                .login-right-h2 .wkit-logo-img-login {
+                    height: 25px;
+                    width: 140px;
+                }
+
+                .login-right-img {
+                    height: 250px;
+                    width: 300px;
+                }
+            }
+        }
+
+        .wkit-login-heading {
+
+            span {
+                font-size: 25px;
+            }
+
+            .wkit-login-desc {
+                font-size: 12px;
+            }
+        }
+
+        .wkit-login-right-side {
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        .login-right-heading {
+            width: 100% !important;
+        }
+
+        .wkit-remember-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .wkit-remember-text {
+            label {
+                width: max-content;
+                gap: 8px;
+            }
+        }
+
+        .wkit-login .wkit-wb-btns {
+            display: flex;
+            flex-direction: column !important;
+
+            .wkit-wb-btn {
+                width: 100%;
+            }
+        }
+
+        .wkit-form-group {
+            gap: 10px;
+        }
+
+        .wkit-login-btn {
+            padding: 16px 10px !important;
+        }
+
+        .wkit-form-group {
+            margin-bottom: 14px !important;
+        }
+
+        .wkit-wb-line-text {
+            font-size: 12px;
+        }
+    }
+
+    .wkit-success {
+        width: 35%;
+    }
+
+    .wkit-failed {
+        width: 35%;
+        top: 4%
+    }
+
+    .wkit-pagination-main {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+    }
+
+    .wkit-login .wkit-in-login-popup {
+
+        .wkit-in-login-popup-content {
+            gap: 20px;
+
+            &.wkit-small-popup,
+            &.wkit-large-popup {
+                width: 330px;
+            }
+        }
+
+        .wkit-lg-popup-footer {
+            gap: 20px;
+
+            .wkit-lg-popup-footer-btns {
+                flex-direction: column;
+            }
+
+            .wkit-btn-class,
+            .wkit-outer-btn-class {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .wkit-footer-link-txt {
+                font-size: 14px;
+            }
+        }
+
+        .wkit-lg-popup-body .wkit-lg-popup-text {
+            font-size: 12px;
+        }
+
+        .wkit-lg-middle-part .wkit-lg-note-content {
+            font-size: 12px;
+        }
+
+        .wkit-lg-checkbox-content .wkit-checkbox-text {
+            font-size: 12px;
+        }
+
+        .wkit-lg-checkbox-content {
+            padding: 6px;
+        }
+    }
+}
+
+@media (max-width:425px) {
+
+    .wkit-login .login-api-right-img {
+        width: 300px;
+    }
+
+    .wkit-right-side {
+        width: 100%;
+
+        .login-right-heading {
+            .login-right-h2 {
+                font-size: 24px;
+                width: 380px;
+            }
+
+            .login-right-p {
+                font-size: 12px;
+                width: 380px;
+            }
+        }
+    }
+
+    .wkit-wb-btn {
+        width: 100%;
+    }
+
+}
+
+// Login Api Screen css
+.wkit-login-back-btn {
+    padding: 15px 10px;
+    background: $cr_white;
+    border: 1px solid $Wdkit_pink_normal;
+    border-radius: $radius_small;
+    color: $Wdkit_pink_normal;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    transition: 0.3s linear;
+
+    img {
+        width: 20px;
+    }
+
+    &:hover {
+        background-color: $btn_outer_red_hover;
+    }
+}
+
+// Login Loader
+.wkit-wb-loginloader {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+/************************  POPUP  ************************/
+
+
+.wkit-contentbox-modal {
+    .dialog-content.dialog-lightbox-content {
+        .wkit-login .wkit-login-left-side .wkit-remember-wrapper .wkit-styled-checkbox {
+            width: 17px;
+            height: 17px
+        }
+
+        .wkit-login .wkit-login-left-side {
+            .wkit-check-box:checked::before {
+                width: 6px;
+                height: 11px;
+                margin-left: 1px;
+            }
+
+            input.wkit-input-field {
+                padding: 15px 10px;
+            }
+        }
+
+        .wkit-login-back-btn span {
+            color: $Wdkit_pink_normal;
+        }
+
+    }
+}
+
+.wkit-background-modal {
+    .wkit-contentbox-modal .wkit-login .wkit-login-left-side .wkit-check-box:checked::before {
+        width: 4px;
+        height: 9px;
+        margin-bottom: 2px;
+    }
+}
+
+.wkit-gutenberg .wkit-login-back-btn span {
+    color: $Wdkit_pink_normal;
+}

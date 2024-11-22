@@ -1,0 +1,90 @@
+.wkit-single-workspace-header {
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+    .wkit-skeleton-line {
+        width: 150px;
+        height: 12px;
+        margin-bottom: 6px;
+        border-radius: 2px;
+        background: rgba(130, 130, 130, 0.2);
+        background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+        background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+        background-size: 800px 100px;
+        animation: wkit-wave-lines-anim 2s infinite ease-out;
+    }
+
+    .wkit-single-skeleton-left-side {
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+    }
+
+    .wkit-skeleton-profile-img.wkit-main-profile-skeleton {
+        border-radius: 6px;
+        height: 75px;
+        width: 75px;
+    }
+
+    .wkit-skeleton-profile-img {
+        height: fit-content;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        background: rgba(130, 130, 130, 0.2);
+        background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+        background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+        background-size: 800px 100px;
+        animation: wkit-squares-anim 2s infinite ease-out;
+    }
+
+    .wkit-btn {
+        padding: 15px 50px;
+        background: rgba(130, 130, 130, 0.2);
+        background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
+        background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+        background-size: 800px 100px;
+        animation: wkit-squares-anim 2s infinite ease-out;
+    }
+
+    .wkit-workspace-skeleton-btn-wrapper {
+        display: flex;
+        column-gap: 10px;
+
+    }
+
+    .wkit-small-img-wrapper {
+        display: flex;
+        column-gap: 10px;
+        justify-content: flex-end;
+    }
+
+    .wkit-single-skeleton-right-side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
+@media(max-width: 1024px) {
+    .wkit-skeleton-line {
+        width: 90px;
+    }
+}
+
+@media(max-width: 768px) {
+    .wkit-single-workspace-header{
+        padding: 30px;
+    }
+}
+
+@media(max-width: 576px) {
+    .wkit-single-workspace-header{
+        flex-direction: column;
+        gap: 30px;
+    }
+}
