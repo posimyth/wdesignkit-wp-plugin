@@ -464,6 +464,9 @@ export const Temp_component = (item, type, loop, nha, switcher_array, cpt_loop, 
             ${item.separator ? `separator:"${item.separator}",` : ''}
             ${item?.description ? `help: \`${item.description}\`,` : ''}
             ${item.lableBlock ? `inlineblock:${!item.lableBlock},` : ''}
+            responsive: true,
+            device: device,
+            onDeviceChange: (value) => setDevice( value ),
             ${loop ?
                 `onChange: v => { value.${item.name} = v; onChange(value); },`
                 :
@@ -708,6 +711,7 @@ export const Temp_component = (item, type, loop, nha, switcher_array, cpt_loop, 
             ${item?.description ? `help: \`${item.description}\`,` : ''}
             ${item.dynamic ? `dynamic: [true, '${item.name}'],` : ''}
             multiple: true,
+            type: ['image'],
             ${item.separator ? `separator:'${item.separator}',` : ''}
             value: ${loop ? "value." + item.name : item.name + (nha ? nha : "")},
             panel: true,
@@ -1212,6 +1216,7 @@ export const Elementer_data = (item, repeater, select_opt) => {
             ${name}
             ${item.lable ? `'label' => esc_html__( '${Replaceinpvalue(item.lable)}', '${textdomain}' ),` : ''}
             'type' => Controls_Manager::TEXT,
+            ${item?.ai_support != true ? `'ai'   => [ 'active' => false ],` : ''}
             ${item.defaultValue ? `'default' => esc_html__( '${Replaceinpvalue(item.defaultValue)}', '${textdomain}' ),` : ''}
             ${item.placeHolder ? `'placeholder' => esc_html__( '${Replaceinpvalue(item.placeHolder)}', '${textdomain}' ),` : ''}
             ${item?.description ? `'description' => esc_html__( '${Replaceinpvalue(item.description)}', '${textdomain}' ),` : ''}
@@ -1225,6 +1230,38 @@ export const Elementer_data = (item, repeater, select_opt) => {
             ),` : ''}
             ${Condition_function(item)}
         )`;
+
+        if (repeater != undefined && repeater == "") {
+            layout += layout_array
+        } else if (repeater && repeater != undefined) {
+            layout += `$${repeater}->${item.responsive == true ? "add_responsive_control" : "add_control"}('${item.name}',
+                ${layout_array}
+            );\n`
+        } else {
+            layout += `$this->${item.responsive == true ? "add_responsive_control" : "add_control"}('${item.name}',
+                ${layout_array}
+            );\n`
+        }
+
+    } else if (item.type == "preview") {
+        let name = ``;
+
+        if (repeater == "" && repeater != undefined) {
+            name = `'name' => '${item.name}',`
+        }
+
+        let layout_array = `
+               array(
+                    'label' => '<div class="elementor-update-preview" style="margin: 0;">
+                                        <div class="elementor-update-preview-title">Update changes to page</div>
+                                            <div class="elementor-update-preview-button-wrapper">
+                                                <button class="elementor-update-preview-button elementor-button"">
+                                                    Apply
+                                                </button>
+                                            </div>
+                                        </div>',
+                    'type'  => Controls_Manager::RAW_HTML,
+                )`;
 
         if (repeater != undefined && repeater == "") {
             layout += layout_array
@@ -1534,6 +1571,7 @@ export const Elementer_data = (item, repeater, select_opt) => {
                 ${name}
                 ${item.lable ? `'label' => esc_html__( '${Replaceinpvalue(item.lable)}', '${textdomain}' ),` : ''}
 				'type' => Controls_Manager::WYSIWYG,
+                ${item?.ai_support != true ? `'ai'   => [ 'active' => false ],` : ''}
                 ${item.defaultValue ? `'default' => esc_html__( '${Replaceinpvalue(item.defaultValue)}', '${textdomain}' ),` : ''}
                 ${item.placeHolder ? `'placeholder' => esc_html__( '${Replaceinpvalue(item.placeHolder)}', '${textdomain}' ),` : ''}
                 ${item?.description ? `'description' => esc_html__( '${Replaceinpvalue(item.description)}', '${textdomain}' ),` : ''}
@@ -1567,6 +1605,7 @@ export const Elementer_data = (item, repeater, select_opt) => {
         let layout_array = `array(
             ${name}
             'type' => Controls_Manager::CODE,
+            ${item?.ai_support != true ? `'ai'   => [ 'active' => false ],` : ''}
             ${item.lable ? `'label' => esc_html__( '${Replaceinpvalue(item.lable)}', '${textdomain}' ),` : ''}
             ${item?.description ? `'description' => esc_html__( '${Replaceinpvalue(item.description)}', '${textdomain}' ),` : ''}
             ${item.showLable === true ? '' : `'show_label' => ${item.showLable},`}
@@ -1997,6 +2036,7 @@ export const Elementer_data = (item, repeater, select_opt) => {
             ${name}
             ${item.lable ? `'label' => esc_html__( '${Replaceinpvalue(item.lable)}', '${textdomain}' ),` : ''}
             'type' => Controls_Manager::MEDIA,
+            ${item?.ai_support != true ? `'ai'   => [ 'active' => false ],` : ''}
             ${item?.description ? `'description' => esc_html__( '${Replaceinpvalue(item.description)}', '${textdomain}' ),` : ''}
             'default' => array(
                 'url' => ${item.defaultValue ? `'${item.defaultValue}'` : '\\Elementor\\Utils::get_placeholder_image_src()'},
@@ -2108,7 +2148,7 @@ export const Elementer_data = (item, repeater, select_opt) => {
             ${item.lable ? `'label' => esc_html__( '${Replaceinpvalue(item.lable)}', '${textdomain}' ),` : ''}
             'type' => Controls_Manager::RAW_HTML,
             ${item?.description ? `'description' => esc_html__( '${Replaceinpvalue(item.description)}', '${textdomain}' ),` : ''}
-            ${item.defaultValue ? `'raw' => esc_html__( '${Replaceinpvalue(item.defaultValue)}', '${textdomain}' ),` : ''}
+            ${item.defaultValue ? `'raw' => wp_kses_post( '${Replaceinpvalue(item.defaultValue)}', '${textdomain}' ),` : ''}
             ${item.showLable === true ? '' : `'show_label' => ${item.showLable},`}
             ${item.lableBlock === false ? '' : `'label_block' => ${item.lableBlock},`}
             ${item.separator !== 'default' ? `'separator' => '${item.separator}',` : ''}
@@ -2378,6 +2418,7 @@ export const Elementer_data = (item, repeater, select_opt) => {
         let layout_array = `array(
             ${name}
             'type' => Controls_Manager::TEXTAREA,
+            ${item?.ai_support != true ? `'ai'   => [ 'active' => false ],` : ''}
             ${item.lable ? `'label' => esc_html__( '${Replaceinpvalue(item.lable)}', '${textdomain}' ),` : ''}
             ${item?.description ? `'description' => esc_html__( '${Replaceinpvalue(item.description)}', '${textdomain}' ),` : ''}
             ${item.showLable === true ? '' : `'show_label' => ${item.showLable},`}

@@ -1,10 +1,10 @@
-@import '../../style/variable.scss';
+@use '../../style/variable';
 
 .wkit-settings-heading {
     padding: 20px;
     display: flex;
-    background: $color_white;
-    border-radius: $radius_big;
+    background: variable.$color_white;
+    border-radius: variable.$radius_big;
     align-items: center;
     column-gap: 8px;
     margin-bottom: 30px;
@@ -17,7 +17,49 @@
     .title {
         font-size: 14px;
         font-weight: 500;
-        color: $Wdkit_blue_normal;
+        color: variable.$Wdkit_blue_normal;
+    }
+}
+
+.popup-body {
+
+    // Checkbox start
+    .wkit-check-box {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+        border: 1px solid #DADAF0;
+        border-radius: variable.$radius_small;
+        margin: 0;
+
+        &:checked {
+            background-color: #040483;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::before {
+                content: "";
+                border: 2px solid white;
+                border-left: 0px;
+                border-top: 0px;
+                transform: rotate(40deg);
+                width: 4px;
+                height: 9px;
+                margin-right: unset;
+                margin-bottom: 0px;
+                margin-left: 0px;
+            }
+
+        }
+
+        &:focus {
+            border: 1px solid #DADAF0;
+            box-shadow: none;
+            outline: none;
+        }
+
     }
 }
 
@@ -36,11 +78,11 @@
             padding: 15px;
             font-size: 14px;
 
-            img{
-                transition: $transition;
+            img {
+                transition: variable.$transition;
             }
 
-            .wkit-rotate-icon{
+            .wkit-rotate-icon {
                 transform: rotate(-180deg);
             }
 
@@ -52,7 +94,7 @@
             overflow: auto;
 
             option {
-                transition: $transition;
+                transition: variable.$transition;
                 font-size: 14px;
             }
 
@@ -87,11 +129,11 @@
         min-width: 75px;
         max-height: 45px;
         white-space: nowrap;
-        
-        .wkit-loading{
+
+        .wkit-loading {
             height: 20px;
             width: 20px;
-            border-color: $color_white;
+            border-color: variable.$color_white;
             border-bottom-color: #ffffff24;
         }
 
@@ -106,7 +148,7 @@
     }
 
     .wkit-loading {
-        border: 4px solid $Wdkit_blue_normal;
+        border: 4px solid variable.$Wdkit_blue_normal;
         border-bottom-color: #04048333;
         border-radius: 50%;
         height: 40px;
@@ -115,15 +157,61 @@
     }
 }
 
+.wkit-plugin-popup-body .wkit-plugin-uninstall-container {
+    padding: 30px;
+
+    .wkit-builder-wrapper {
+        width: 100%;
+
+        .wkit-remove-entry-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .wkit-remove-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .wkit-remove-widgets-text {
+            font-weight: 400;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .wkit-remove-plugin-notice {
+            display: flex;
+            gap: 5px;
+            border-left: 3px solid #FFCD38;
+            padding: 15px;
+            font-size: 14px;
+
+            .wkit-bold-text {
+                font-weight: 500;
+                color: #020202;
+            }
+
+            .wkit-notice-text {
+                color: #737373;
+            }
+
+        }
+
+    }
+
+}
+
 .wkit-settings-boxed {
-    background: $color_white;
-    border-radius: $radius_big;
+    background: variable.$color_white;
+    border-radius: variable.$radius_big;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
     row-gap: 12px;
-    background-color: $color_white;
+    background-color: variable.$color_white;
     border: 1px solid rgba(207, 207, 234, 0.3);
     height: 100%;
     box-shadow: 2px 3px 4px 0px rgba(0, 0, 0, 0.03);
@@ -142,14 +230,14 @@ h3.settings-boxed-heading {
     font-weight: 500;
     font-size: 18px;
     line-height: 30px;
-    color: $Wdkit_blue_normal;
+    color: variable.$Wdkit_blue_normal;
     margin: 0px;
 }
 
 .wkit-comming-soon-pin {
     color: #fff;
     background: #00A31B;
-    border-radius: $radius_small;
+    border-radius: variable.$radius_small;
     padding: 5px 8px;
     font-weight: 500;
     font-size: 12px;
@@ -157,7 +245,7 @@ h3.settings-boxed-heading {
 
 .wkit-icon-bg {
     background: rgba(4, 4, 131, 0.08);
-    border-radius: $radius_small;
+    border-radius: variable.$radius_small;
     width: fit-content;
     padding: 5px;
     margin-bottom: 10px;
@@ -170,6 +258,126 @@ h3.settings-boxed-heading {
     svg {
         height: 30px;
         width: 30px;
+    }
+}
+
+.wkit-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+
+    .wkit-wl-tolltip {
+        position: relative;
+        display: flex;
+
+        .wkit-wl-user-msg {
+            position: absolute;
+            bottom: 26px;
+            left: -80px;
+            visibility: hidden;
+            width: 180px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 8px;
+            z-index: 1;
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: black transparent transparent transparent;
+            }
+        }
+
+        &:hover .wkit-wl-user-msg {
+            opacity: 1;
+            visibility: visible;
+        }
+
+    }
+
+    .wkit-card-detail {
+        position: relative;
+
+        &:hover {
+            .wkit-label-tooltip {
+                visibility: visible;
+            }
+        }
+    }
+
+    .wkit-wl-doc-link {
+        position: relative;
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -1px;
+            left: 0;
+            background-color: white;
+            transform-origin: bottom right;
+            transition: transform variable.$transition;
+        }
+
+        &:hover {
+            &::after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+        }
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .wkit-wl-doc {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+
+        &:focus {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    .wkit-label-tooltip {
+        position: absolute;
+        left: 110px;
+        visibility: hidden;
+        width: max-content;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 8px;
+        z-index: 1;
+
+        &:after {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: -7px;
+            margin-left: -5px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent black transparent transparent;
+        }
     }
 }
 
@@ -189,9 +397,9 @@ h3.settings-boxed-heading {
 button.wkit-setting-btn-enable-disble {
     background: transparent;
     padding: 10px 30px;
-    border: 1px solid $Wdkit_blue_normal;
-    color: $Wdkit_blue_normal;
-    border-radius: $radius_small;
+    border: 1px solid variable.$Wdkit_blue_normal;
+    color: variable.$Wdkit_blue_normal;
+    border-radius: variable.$radius_small;
     font-style: normal;
     font-weight: 500;
     cursor: pointer;
@@ -200,9 +408,153 @@ button.wkit-setting-btn-enable-disble {
 
 .wkit-setting-btn-enable-disble.btn-opacity {
     opacity: 0.5;
-    background: $Wdkit_blue_normal;
-    color: $color_white;
+    background: variable.$Wdkit_blue_normal;
+    color: variable.$color_white;
     cursor: not-allowed;
+}
+
+
+/**White label popup*/
+.wkit-whiteLabel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 60vh;
+    overflow: auto;
+    padding: 20px 10px 10px;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #e0e0e0;
+        border-radius: 25px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f8f8f8;
+        border-radius: 25px;
+    }
+
+    .wdkit_field_card_cover {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .wkit_wl_checkbox_list {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        .wkit_check_box_list {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+
+            .wkit_checkbox_label {
+                cursor: pointer;
+
+                span {
+                    color: #8072fc;
+                }
+
+            }
+
+        }
+    }
+
+    .wkit-data-container {
+        position: relative;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+
+        .wkit-wl-tooltip {
+            color: red;
+        }
+
+        .wkit-whiteLabel-label {
+            font-weight: 500;
+            font-size: 14px;
+            color: variable.$font_cr_black;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .wkit-wl-logo-content {
+            width: 100%;
+        }
+
+        .wkit-whiteLabel-input {
+            width: 100%;
+            height: 40px;
+            background: variable.$color_white;
+            border: 1px solid #EBEBEB;
+            border-radius: 2px;
+
+            &::placeholder {
+                color: #cfcfcf;
+            }
+
+            &:focus {
+                box-shadow: none;
+                border: 1px solid variable.$Wdkit_blue_normal;
+            }
+        }
+
+        .wkit-error-border {
+            border-color: red;
+        }
+
+        .wkit-whiteLabel-textarea {
+            height: 100px;
+            max-height: 130px;
+            min-height: 50px;
+        }
+
+        .wkit-plugin-icon-upload {
+            position: relative;
+            display: flex;
+            height: 160px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 1px solid #EBEBEB;
+            border-radius: 2px;
+            cursor: pointer;
+            padding: 10px;
+
+            .wkit_wl_remove_img {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: #ececec;
+                padding: 3px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            img {
+                max-height: 130px;
+                width: auto;
+                object-fit: contain;
+            }
+
+        }
+
+        .wkit-wl-img-uploaded {
+            cursor: default;
+        }
+
+    }
+
 }
 
 
@@ -265,6 +617,16 @@ button.wkit-setting-btn-enable-disble {
 @media(max-width:767px) {
     .wkit-settings-boxed-wrapper {
         grid-template-columns: repeat(1, 1fr);
-        ;
     }
+
+    .wkit-whiteLabel-container {
+        .wdkit_field_card_cover {
+            flex-wrap: wrap;
+        }
+
+        .wkit-data-container .wkit-whiteLabel-input {
+            font-size: 12px;
+        }
+    }
+
 }

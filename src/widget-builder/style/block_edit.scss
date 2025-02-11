@@ -1,4 +1,4 @@
-@import '/src/style/variable.scss';
+@use '/src/style/variable';
 
 .wkit-widget-detail {
     max-height: calc(100vh - 227px);
@@ -54,7 +54,7 @@
             }
 
             .wb-block-text-inp {
-                background-color: $Wdkit_primary_color;
+                background-color: variable.$Wdkit_primary_color;
                 border: none;
                 width: 50%;
 
@@ -75,7 +75,7 @@
                 flex-direction: column;
 
                 .wb-block-text-inp {
-                    background-color: $Wdkit_primary_color;
+                    background-color: variable.$Wdkit_primary_color;
                     border: none;
                     width: 100%;
                     padding: 5px 5px;
@@ -690,7 +690,7 @@
 
             .wb-options-inp {
                 width: 50%;
-                background-color: $Wdkit_primary_color;
+                background-color: variable.$Wdkit_primary_color;
                 border: none;
                 border-radius: 2px;
                 display: flex;
@@ -707,7 +707,7 @@
             }
 
             .wkit-wb-options-inp {
-                background-color: $Wdkit_primary_color;
+                background-color: variable.$Wdkit_primary_color;
                 border: none;
                 border-radius: 2px;
                 width: 100%;
@@ -1048,6 +1048,21 @@
                 left: 31px;
                 transform: rotate(45deg);
             }
+
+            .wkit-ct-doc-link {
+                display: block;
+                width: max-content;
+                color: #fff;
+                font-size: 12px;
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:focus {
+                    box-shadow: none;
+                    outline: none;
+                }
+
+            }
         }
 
         .wkit-wb-tooltip:hover .wkit-wb-tooltiptext {
@@ -1125,7 +1140,6 @@
     font-size: 14px;
     color: #19191B;
     display: flex;
-    -moz-column-gap: 5px;
     column-gap: 5px;
     align-items: center;
     text-decoration: none;

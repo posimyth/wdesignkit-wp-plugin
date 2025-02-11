@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { Get_site_url } from '../../helper/helper-function';
 import Incorrect_login from './incorrect_login';
-
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const {
     form_data,
@@ -17,18 +16,19 @@ const Wdkit_Login = (props) => {
 
     var ImgPath = wdkitData.WDKIT_ASSETS;
     let site_url = Get_site_url();
+    let plugin_name = wdkitData?.wdkit_white_label?.plugin_name ? wdkitData?.wdkit_white_label?.plugin_name : "WDesignKit";
 
     let login_popup1 = {
         icon: true,
-        heading: 'Incorrect Login Details',
-        sub_heading: 'Are you first time trying to login at WDesignKit?',
-        sub_heading: [{ type: 'normal', text: 'Are you first time trying to login at WDesignKit?' }],
+        heading: __('Incorrect Login Details', 'wdesignkit'),
+        sub_heading: __(`Are you first time trying to login at ${plugin_name} ?`, 'wdesignkit'),
+        sub_heading: [{ type: 'normal', text: __(`Are you first time trying to login at ${plugin_name} ?`, 'wdesignkit') }],
         checkbox_text: '',
         note: '',
-        ft_btn1_text: 'Yes, I am',
+        ft_btn1_text: __('Yes, I am', 'wdesignkit'),
         ft_btn1_link: '',
         ft_btn1_fun: true,
-        ft_btn2_text: 'No, I forgot password',
+        ft_btn2_text: __('No, I forgot password', 'wdesignkit'),
         ft_btn2_link: `${wdkitData.wdkit_server_url}password/forgot`,
         ft_btn2_fun: false,
         size: 'small'
@@ -36,20 +36,20 @@ const Wdkit_Login = (props) => {
 
     let login_popup2 = {
         icon: false,
-        heading: 'Have you signed up for WDesignKit Account?',
+        heading: __(`Have you signed up for ${plugin_name} Account?`, 'wdesignkit'),
         sub_heading: '  ',
         sub_heading: [
-            { type: 'normal', text: 'You need to signup for ' },
-            { type: 'color', text: 'WDesignKit account separately ' },
-            { type: 'normal', text: 'as it\'s different from our POSIMYTH Store login. Make sure you signup first and then try to login in WDesignKit.' }
+            { type: 'normal', text: __('You need to signup for ', 'wdesignkit') },
+            { type: 'color', text: __(`${plugin_name} account separately`, 'wdesignkit') },
+            { type: 'normal', text: __(`as it\'s different from our POSIMYTH Store login. Make sure you signup first and then try to login in ${plugin_name}.`, 'wdesignkit') }
         ],
-        checkbox_text: 'I got it, WDesignKit & POSIMYTH Store account is Different.',
+        checkbox_text: __(`I got it, ${plugin_name} & POSIMYTH Store account is Different.`, 'wdesignkit'),
         note: '',
-        ft_btn1_text: 'Signup for WDesignKit',
+        ft_btn1_text: __(`Signup for ${plugin_name}`, 'wdesignkit'),
         ft_btn1_link: `${wdkitData.wdkit_server_url}signup`,
-        ft_btn2_text: 'Forgot Password',
+        ft_btn2_text: __('Forgot Password', 'wdesignkit'),
         ft_btn2_link: `${wdkitData.wdkit_server_url}password/forgot`,
-        ex_link_text: 'Want to know more?',
+        ex_link_text: __('Want to know more?', 'wdesignkit'),
         ex_link_url: `${wdkitData.WDKIT_DOC_URL}docs/difference-between-wdesignkit-account-and-posimyth-store-account/`,
         size: 'large'
     }
@@ -92,17 +92,17 @@ const Wdkit_Login = (props) => {
 
         e.preventDefault();
         if (!username) {
-            props.wdkit_set_toast(["Please fill all fields", 'Missing information! Complete all fields.', '', 'danger'])
+            props.wdkit_set_toast([__("Please fill all fields", 'wdesignkit'), __('Missing information! Complete all fields.', 'wdesignkit'), '', 'danger'])
 
             return;
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(username)) {
-            props.wdkit_set_toast(["Invalid Login Details", 'Login Error: Check your details and try again.', '', 'danger'])
+            props.wdkit_set_toast([__("Invalid Login Details", 'wdesignkit'), __('Login Error: Check your details and try again.', 'wdesignkit'), '', 'danger'])
 
             return;
         }
 
         if (!password) {
-            props.wdkit_set_toast(["Please fill all fields", 'Missing information! Complete all fields.', '', 'danger'])
+            props.wdkit_set_toast([__("Please fill all fields", 'wdesignkit'), __('Missing information! Complete all fields.', 'wdesignkit'), '', 'danger'])
             return;
         }
 
@@ -148,8 +148,11 @@ const Wdkit_Login = (props) => {
 
             return;
         } else {
-            setpopup_data(login_popup1);
-
+            if (wdkitData?.wdkit_white_label?.help_link) {
+                props.wdkit_set_toast([__("Invalid Login Details", 'wdesignkit'), __('The login Details you entered is not correct. Please verify and try again', 'wdesignkit'), '', 'danger'])
+            } else {
+                setpopup_data(login_popup1);
+            }
             setIsLoading(false)
             return;
         }
@@ -210,7 +213,7 @@ const Wdkit_Login = (props) => {
                         navigation(`/my_uploaded`)
                     }
                 } else {
-                    props.wdkit_set_toast(["Invalid Login Details", 'Login Error: Check your details and try again.', '', 'danger'])
+                    props.wdkit_set_toast([__("Invalid Login Details", 'wdesignkit'), __('Login Error: Check your details and try again.', 'wdesignkit'), '', 'danger'])
                 }
 
                 setsocialLoading(false)
@@ -278,7 +281,7 @@ const Wdkit_Login = (props) => {
                         navigation(`/my_uploaded`)
                     }
                 } else {
-                    props.wdkit_set_toast(["Invalid Login Details", 'Login Error: Check your details and try again.', '', 'danger'])
+                    props.wdkit_set_toast([__("Invalid Login Details", 'wdesignkit'), __('Login Error: Check your details and try again.', 'wdesignkit'), '', 'danger'])
                 }
 
                 setsocialLoading(false)
@@ -306,7 +309,7 @@ const Wdkit_Login = (props) => {
             );
         }
 
-        return <span>{__('Continue with')} {__(text)}</span>
+        return <span>{__('Continue with', 'wdesignkit')} {__(text)}</span>
 
     }
 
@@ -314,52 +317,58 @@ const Wdkit_Login = (props) => {
         <div className={"wkit-login"}>
             <div className="wkit-login-right-side">
                 <div className='login-right-heading'>
-                    <div className='login-right-h2'>{__('Extend Your Design Capacity with')}
-                        <span style={{ marginLeft: '7px' }}>
-                            <img className='wkit-logo-img-login' src={ImgPath + "images/jpg/Wdesignkit-full-logo-original.png"} alt="Wdesignkit" draggable="false" />
-                        </span>
+                    <div className='login-right-h2'>{__('Extend Your Design Capacity with ', 'wdesignkit')}
+                        {(wdkitData?.wdkit_white_label?.plugin_name) ?
+                            wdkitData?.wdkit_white_label?.plugin_name
+                            :
+                            <span style={{ marginLeft: '7px' }}>
+                                <img className='wkit-logo-img-login' src={ImgPath + "images/jpg/Wdesignkit-full-logo-original.png"} alt="Wdesignkit" draggable="false" />
+                            </span>
+                        }
                     </div>
-                    <div className='login-right-p'>{__('No time to design? Get Wdesignkit today and jump-start your WordPress websites with Elementor, Gutenberg and Bricks.')}</div>
+                    <div className='login-right-p'>{__(`No time to design? Get ${wdkitData?.wdkit_white_label?.plugin_name ? wdkitData?.wdkit_white_label?.plugin_name : 'Wdesignkit'} today and jump-start your WordPress websites with Elementor, Gutenberg and Bricks.`, 'wdesignkit')}</div>
                     <img src={ImgPath + "images/jpg/carousel-slider.png"} alt="Login" className='login-right-img' draggable={false} />
                 </div>
             </div>
             <div className={"wkit-login-left-side"}>
                 <div className={"wkit-login-heading"}>
-                    <span>{__('Login to WDesignKit')}</span>
-                    <div className={"wkit-login-desc"}>{__('Explore, Download, or Manage Your Designs and Widgets.')}</div>
+                    <span>{__('Login to ', 'wdesignkit')}
+                        {wdkitData?.wdkit_white_label?.plugin_name ? wdkitData?.wdkit_white_label?.plugin_name : __('WDesignKit', 'wdesignkit')}
+                    </span>
+                    <div className={"wkit-login-desc"}>{__('Explore, Download, or Manage Your Designs and Widgets.', 'wdesignkit')}</div>
                 </div>
                 <div className="wkit-wb-btns">
                     <button className='wkit-wb-btn' onClick={(e) => GoogleLogin()} >
                         <img src={ImgPath + "images/svg/google.svg"} alt="google" draggable={false} />
-                        {SocialLoading('Google')}
+                        {SocialLoading(__('Google', 'wdesignkit'))}
                     </button>
                     <button className='wkit-wb-btn' onClick={(e) => FacebookLogin()} >
                         <img src={ImgPath + "images/svg/facebook.svg"} alt="facebook" draggable={false} />
-                        {SocialLoading('Facebook')}
+                        {SocialLoading(__('Facebook', 'wdesignkit'))}
                     </button>
                 </div>
                 <div className="wkit-wb-btn-api">
                     <Link to='/login-api' className='wkit-wb-login-api-link'>
                         <button className='wkit-wb-apiKey'>
                             <img src={ImgPath + "images/svg/login-api.svg"} alt="login-api" draggable={false} />
-                            <span>{__('Connect via Login Key')}</span>
+                            <span>{__('Connect via Login Key', 'wdesignkit')}</span>
                         </button>
                     </Link>
                 </div>
                 <div className='wkit-wb-main-line'>
                     <div className='wkit-wb-sign-email'>
                         <hr className='wkit-wb-line' />
-                        <a className='wkit-wb-line-text'>{__('Or Sign Up with Email')}</a>
+                        <a className='wkit-wb-line-text'>{__('Or Sign Up with Email', 'wdesignkit')}</a>
                         <hr className='wkit-wb-line' />
                     </div>
                 </div>
                 <form autoComplete="off" className='wkit-wb-form' onSubmit={handleSubmit}>
                     <div className='wkit-form-group'>
-                        <label className='wkit-label'>{__('Email')}</label>
+                        <label className='wkit-label'>{__('Email', 'wdesignkit')}</label>
                         <input type="text" name="email" placeholder='Enter Email Address' className='wkit-input-field' autoComplete="off" required onChange={e => setUserName(e.target.value)} />
                     </div>
                     <div className='wkit-form-group wkit-form-password'>
-                        <label className='wkit-label'>{__('Password')}</label>
+                        <label className='wkit-label'>{__('Password', 'wdesignkit')}</label>
                         <div className='wkit-login-password-inp'>
                             <input type={showPassword ? "text" : "password"} name="password" placeholder='Enter Your Password' className='wkit-input-field' autoComplete="off" required onChange={e => setPassword(e.target.value)} />
                             <div className='wkit-password-eye'>
@@ -380,9 +389,11 @@ const Wdkit_Login = (props) => {
                     <div className='wkit-remember-wrapper'>
                         <label htmlFor='select-1' className='wkit-remember-text'>
                             <input type="checkbox" id='select-1' className='wkit-check-box wkit-styled-checkbox' checked={rememberMe} onChange={(e) => { setrememberMe(e.target.checked) }} />
-                            <span className='wkit-login-remember-text'>{__('Remember Me')}</span>
+                            <span className='wkit-login-remember-text'>{__('Remember Me', 'wdesignkit')}</span>
                         </label>
-                        <a className='wkit-login-desc-text wkit-login-page-link' href={`${wdkitData.wdkit_server_url}password/forgot`} target="_blank" rel="noopener noreferrer" >{__('Forgot Password?')}</a>
+                        {!(wdkitData?.wdkit_white_label?.help_link) &&
+                            <a className='wkit-login-desc-text wkit-login-page-link' href={`${wdkitData.wdkit_server_url}password/forgot`} target="_blank" rel="noopener noreferrer" >{__('Forgot Password?', 'wdesignkit')}</a>
+                        }
                     </div>
                     {isLoading == true ? (
                         <div className={"wkit-login-btn"}>
@@ -394,16 +405,15 @@ const Wdkit_Login = (props) => {
                         </div>
                     ) : (
                         <button className={"wkit-login-btn"}>
-                            {isLoading == "logged" ?
-                                __("Logged in")
-                                :
-                                __("Log in")}
+                            {isLoading == "logged" ? __("Logged in", 'wdesignkit') : __("Log in", 'wdesignkit')}
                         </button>)}
-                    <div className='wkit-login-desc-text'>{__("Don't have an account?")}
-                        <a className='wkit-login-page-link' href={`${wdkitData.wdkit_server_url}signup`} target="_blank" style={{ color: "#C22076" }}>
-                            {__(' Sign Up')}
-                        </a>
-                    </div>
+                    {!(wdkitData?.wdkit_white_label?.help_link) &&
+                        <div className='wkit-login-desc-text'>{__("Don't have an account? ", 'wdesignkit')}
+                            <a className='wkit-login-page-link' href={`${wdkitData.wdkit_server_url}signup`} target="_blank" style={{ color: "#C22076" }}>
+                                {__('Sign Up', 'wdesignkit')}
+                            </a>
+                        </div>
+                    }
                 </form>
             </div>
             {popup_data &&

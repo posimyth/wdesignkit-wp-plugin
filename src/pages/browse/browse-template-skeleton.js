@@ -1,6 +1,6 @@
 import '../widget_brows/widget_brows.scss';
 import { useEffect } from 'react';
-
+import { __ } from '@wordpress/i18n';
 
 const Browse_template_skeleton = (props) => {
     var img_path = wdkitData.WDKIT_URL;
@@ -20,7 +20,7 @@ const Browse_template_skeleton = (props) => {
                     <div className="wkit-widget-card-bottom-part">
                         <div className="wkit-widget-title-content">
                             <p className="wkit-widget-title-heading">
-                                <span>Modern Hover Post</span>
+                                <span>{__('Modern Hover Post','wdesignkit')}</span>
                             </p>
                             <div className="wkit-widget-download-activity">
                                 <div className="plugin-download-icon">
@@ -31,8 +31,8 @@ const Browse_template_skeleton = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="wdkit-star-rating">
-                            <span>1 Review</span>
+                        <div className="wdkit-star-rating" style={{ width: '50%' }}>
+                            <span>{__('1 Review','wdesignkit')}</span>
                         </div>
                         <div className="wkit-widget-info-content">
                             <div className="wkit-widget-info-icons-content">
@@ -48,7 +48,7 @@ const Browse_template_skeleton = (props) => {
                             </div>
                             <div className="wkit-widget-builder-icon">
                                 <img src="https://wdesignkit.com/images/uploads/wpdk-admin/widgets-builder/builder-63a02503.svg" draggable="false" />
-                                <span className="wkit-widget-builder-tooltip">Elementor</span>
+                                <span className="wkit-widget-builder-tooltip">{__('Elementor','wdesignkit')}</span>
                             </div>
                         </div>
                     </div>

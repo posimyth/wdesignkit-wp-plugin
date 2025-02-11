@@ -1,4 +1,4 @@
-@import '/src/style/variable.scss';
+@use '/src/style/variable';
 
 .wdkit-widget-type {
     padding: 6px;
@@ -12,6 +12,67 @@
     position: relative;
     height: 30px;
     color: white;
+}
+
+.wkit-wb-main-builder-page .wkit-wb-yt-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
+    .wkit-wb-video {
+        height: 75vh;
+        width: 75vw;
+        border-radius: variable.$radius_big;
+    }
+}
+
+.wkit-wb-widget-builder {
+    .wkit-yt-slider {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 15px;
+
+        .wkit-yt-image {
+            position: relative;
+            height: 185px;
+        }
+
+
+        .wkit-yt-content-img {
+            position: absolute;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: variable.$radius_small;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .wkit-yt-placeholder-img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .wkit-slider-dot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+            .wkit-current-slide {
+                background-color: #ccc;
+                height: 7px;
+                width: 7px;
+                transition: variable.$transition;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .wb-widget-main-container {
@@ -78,7 +139,7 @@
             display: flex;
 
             .wb-eicons-lable {
-                color: $Wdkit_blue_normal;
+                color: variable.$Wdkit_blue_normal;
                 font-size: 14px;
                 font-weight: 400;
                 margin: 0px;
@@ -87,7 +148,7 @@
             }
 
             .wb-eicons-hr {
-                border: 1px solid $Wdkit_blue_normal;
+                border: 1px solid variable.$Wdkit_blue_normal;
                 height: 15px;
                 margin: 0px 6px;
                 top: 2px;
@@ -127,7 +188,7 @@
 
         .wkit-wb-download-btn {
             position: relative;
-            background-color: $Wdkit_blue_normal;
+            background-color: variable.$Wdkit_blue_normal;
             border: 1px solid #2A2A96;
             border-radius: 10px;
             display: flex;
@@ -163,7 +224,7 @@
         .wkit-wb-download-icon {
             position: absolute;
             border-radius: 6px;
-            background: $Wdkit_blue_normal;
+            background: variable.$Wdkit_blue_normal;
             z-index: 1;
             width: 29px;
             height: 29px;
@@ -173,7 +234,7 @@
             justify-content: center;
 
             &:hover {
-                background: $Wdkit_blue_hover;
+                background: variable.$Wdkit_blue_hover;
             }
         }
     }
@@ -505,7 +566,7 @@
 
             .wb-version-header {
                 padding: 25px 20px;
-                background-color: $Wdkit_blue_normal;
+                background-color: variable.$Wdkit_blue_normal;
                 color: white;
                 border-radius: 10px 10px 0px 0px;
 
@@ -727,11 +788,11 @@
                             font-family: 'Plus Jakarta Sans';
                             font-size: 14px;
                             font-weight: 400;
-                            color: $Wdkit_blue_normal;
+                            color: variable.$Wdkit_blue_normal;
                         }
 
                         .wkit-browse-link {
-                            color: $Wdkit_pink_normal;
+                            color: variable.$Wdkit_pink_normal;
                             font-family: 'Plus Jakarta Sans';
                             font-size: 14px;
                             font-style: normal;
@@ -825,7 +886,7 @@
 
                     span {
                         font-size: 16px;
-                        color: $Wdkit_blue_normal;
+                        color: variable.$Wdkit_blue_normal;
                         font-weight: 400;
                     }
                 }
@@ -851,7 +912,7 @@
                         padding: 8px 16px;
                         align-items: center;
                         gap: 10px;
-                        border: 1px solid $Wdkit_blue_normal;
+                        border: 1px solid variable.$Wdkit_blue_normal;
                         border-radius: 6px;
                     }
                 }
@@ -896,7 +957,7 @@
                 gap: 5px;
 
                 .wkit-convert-input {
-                    border: 1px solid $Wdkit_blue_normal;
+                    border: 1px solid variable.$Wdkit_blue_normal;
                     height: 18px;
                     width: 18px;
                     box-shadow: none;
@@ -913,7 +974,7 @@
                     position: absolute;
                     top: 4px;
                     left: 9px;
-                    border: 2px solid $Wdkit_blue_normal;
+                    border: 2px solid variable.$Wdkit_blue_normal;
                     background: white;
                     border-left: 0px;
                     border-top: 0px;
@@ -961,8 +1022,8 @@
             }
 
             .wkit-add-log-btn {
-                border: 1px solid $Wdkit_blue_normal;
-                color: $Wdkit_blue_normal;
+                border: 1px solid variable.$Wdkit_blue_normal;
+                color: variable.$Wdkit_blue_normal;
                 background-color: transparent;
                 border-radius: 6px;
                 min-height: 30px;
@@ -973,10 +1034,10 @@
                 gap: 5px;
                 margin-top: 15px;
                 cursor: pointer;
-                transition: $transition;
+                transition: variable.$transition;
 
                 &:hover {
-                    background-color: $Wdkit_outer_border_bg;
+                    background-color: variable.$Wdkit_outer_border_bg;
                 }
             }
 
@@ -1098,7 +1159,7 @@
     z-index: 2;
 
     svg {
-        background: $Wdkit_blue_normal;
+        background: variable.$Wdkit_blue_normal;
         height: 35px;
         width: 35px;
         border-radius: 10px;
@@ -1344,7 +1405,7 @@
             border: 1px solid #DADAF0;
             background-color: #fff;
             border-radius: 6px;
-            box-shadow: $common_boxshadow;
+            box-shadow: variable.$common_boxshadow;
 
             span {
                 padding: 6px;
@@ -1477,7 +1538,7 @@
             }
 
             .wkit-plugin-link {
-                color: $Wdkit_blue_normal;
+                color: variable.$Wdkit_blue_normal;
                 font-size: 13px;
                 font-weight: 600;
                 cursor: pointer;
@@ -1487,7 +1548,7 @@
                 transition: 0.3s linear;
 
                 .wkit-favourites-icon {
-                    fill: $Wdkit_blue_normal;
+                    fill: variable.$Wdkit_blue_normal;
                     opacity: 0.8;
                 }
 
@@ -1498,7 +1559,7 @@
                 }
 
                 .wkit-sync-icon {
-                    stroke: $Wdkit_blue_normal;
+                    stroke: variable.$Wdkit_blue_normal;
                 }
 
                 &:hover {
@@ -2033,6 +2094,7 @@
 }
 
 .wb-drop-file {
+    position: relative;
     height: 150px;
     width: 100%;
     display: flex;
@@ -2068,6 +2130,22 @@
             width: 50%;
         }
     }
+
+    .wkit-remove-widget-img {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        top: 5px;
+        right: 5px;
+        margin-top: 0;
+        padding: 5px;
+        border-radius: 50%;
+        background-color: #000000b0;
+        cursor: pointer;
+    }
+
 }
 
 .wb-add-widget {
@@ -2134,8 +2212,8 @@
     }
 
     .wb-add-widget-radioinput:checked {
-        border: 1px solid $Wdkit_blue_normal !important;
-        box-shadow: 0 0 0 1px $Wdkit_blue_normal !important;
+        border: 1px solid variable.$Wdkit_blue_normal !important;
+        box-shadow: 0 0 0 1px variable.$Wdkit_blue_normal !important;
     }
 
     .wb-add-widget-radio {
@@ -2149,7 +2227,7 @@
         padding: 8px 15px;
         border: 1px solid #ebebeb;
         cursor: pointer;
-        transition: $transition;
+        transition: variable.$transition;
 
         img {
             position: relative;
@@ -2170,7 +2248,7 @@
             width: 12px;
             margin-left: -6px;
             margin-top: -6px;
-            background: $Wdkit_blue_normal;
+            background: variable.$Wdkit_blue_normal;
         }
 
         span {
@@ -2201,7 +2279,7 @@
 
     .wb-addss-widget-updateBtn {
         width: 50%;
-        background-color: $Wdkit_blue_normal;
+        background-color: variable.$Wdkit_blue_normal;
         display: flex;
         text-decoration: none;
         border-radius: 6px;
@@ -2252,7 +2330,7 @@
                 bottom: 0px;
                 bottom: 5px;
                 left: 0;
-                background-color: $Wdkit_blue_normal;
+                background-color: variable.$Wdkit_blue_normal;
                 transform-origin: bottom right;
                 transition: transform 0.25s ease-out;
             }
@@ -2263,7 +2341,7 @@
             }
 
             &:hover {
-                color: $Wdkit_blue_normal;
+                color: variable.$Wdkit_blue_normal;
             }
         }
     }
@@ -2312,7 +2390,7 @@
 
 .wkit-imports-widget-updateBtn {
     width: 50%;
-    background-color: $Wdkit_blue_normal;
+    background-color: variable.$Wdkit_blue_normal;
     display: flex;
     padding: 8px 22px;
     text-decoration: none;
@@ -2806,11 +2884,11 @@
 }
 
 .radio-border {
-    border: 1px solid $Wdkit_blue_normal !important;
+    border: 1px solid variable.$Wdkit_blue_normal !important;
 }
 
 .radio-color {
-    color: $Wdkit_blue_normal !important;
+    color: variable.$Wdkit_blue_normal !important;
 }
 
 .paginationActive {
@@ -2973,7 +3051,7 @@
         width: 70%;
         height: 70%;
         border-radius: 50%;
-        background-color: $Wdkit_blue_normal;
+        background-color: variable.$Wdkit_blue_normal;
     }
 
     input[type=radio]::before {
@@ -2981,14 +3059,14 @@
     }
 
     input[type=radio]:checked {
-        border: 1px solid $Wdkit_blue_normal;
+        border: 1px solid variable.$Wdkit_blue_normal;
         box-shadow: none;
     }
 }
 
 .wkit-popup-header {
     padding: 20px 25px;
-    background: $Wdkit_blue_normal;
+    background: variable.$Wdkit_blue_normal;
     border-radius: 12px 12px 0px 0px;
     color: #fff;
     font-weight: 600;

@@ -531,7 +531,7 @@ const Bricks_file_create = async (call, all_files, html, css, js, old_folder, im
                                 var r_html = `$${loopData.name + "_" + uniqueID} = '';
                                 if(!empty($r_item['${loopData.name}']) ${loopData?.condition ? loopData.condition : ''}){
                                     foreach ( ${loopData?.repeater ? '$r_item' : '$this->settings'}['${loopData.name}']['images'] as $image ) {
-                                        $${loopData.name} = $image['url'];
+                                        $${loopData.name} = esc_url($image['url']);
                                         $${loopData.name + "_" + uniqueID} .= '${new_html[0]}';
                                     }
                                 }`
@@ -544,7 +544,7 @@ const Bricks_file_create = async (call, all_files, html, css, js, old_folder, im
                                 php_variable_validation += `$${loopData.name + "_" + uniqueID} = '';
                                 if( !empty ($this->settings['${loopData.name}']) ${loopData?.condition ? loopData.condition : ''}){
                                     foreach ( ${loopData?.repeater ? '$r_item' : '$this->settings'}['${loopData.name}']['images'] as $image ) {
-                                        $${loopData.name} = $image['url'];
+                                        $${loopData.name} = esc_url($image['url']);
                                         $${loopData.name + "_" + uniqueID} .= '${new_html[0]}';
                                     }
                                 }`
@@ -709,7 +709,7 @@ const Bricks_file_create = async (call, all_files, html, css, js, old_folder, im
 
             if (repeater) {
                 let r_html = `$${compo.name}_is_external = isset($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['newTab']) ${Condition_controller(compo, repeater)} ? '_blank' : '';\n`
-                r_html += `$${compo.name}_url = isset($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['url']) ${Condition_controller(compo, repeater)} ? $r_item['${compo.name}']['url'] : '';\n`
+                r_html += `$${compo.name}_url = isset($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['url']) ${Condition_controller(compo, repeater)} ? esc_url($r_item['${compo.name}']['url']) : '';\n`
                 r_html += `$${compo.name}_nofollow = isset($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['rel']) ${Condition_controller(compo, repeater)} ? $r_item['${compo.name}']['rel'] : '';\n`
                 r_html += `$${compo.name}_arialabel = isset( $r_item['${compo.name}']) && !empty( $r_item['${compo.name}']['ariaLabel']) ${Condition_controller(compo, repeater)} ?  'ariaLabel="'.$r_item['${compo.name}']['ariaLabel'].'"' : '';\n`
                 r_html += `$${compo.name}_title = isset( $r_item['${compo.name}']) && !empty( $r_item['${compo.name}']['title']) ${Condition_controller(compo, repeater)} ?  'title="'.$r_item['${compo.name}']['title'].'"' : '';\n`
@@ -719,11 +719,10 @@ const Bricks_file_create = async (call, all_files, html, css, js, old_folder, im
                 }
 
                 repeater_variable = Object.assign({}, repeater_variable, { [repeater]: r_html })
-            }
-            else {
+            } else {
                 php_variable_validation += `$${compo.name}_is_external = isset( $this->settings['${compo.name}']) && !empty( $this->settings['${compo.name}']['newTab']) ${Condition_controller(compo)} ?  '_blank' : '';\n`
 
-                php_variable_validation += `$${compo.name}_url = isset( $this->settings['${compo.name}']) && !empty( $this->settings['${compo.name}']['url']) ${Condition_controller(compo)} ?  $this->settings['${compo.name}']['url'] : '';\n`
+                php_variable_validation += `$${compo.name}_url = isset( $this->settings['${compo.name}']) && !empty( $this->settings['${compo.name}']['url']) ${Condition_controller(compo)} ?  esc_url($this->settings['${compo.name}']['url']) : '';\n`
 
                 php_variable_validation += `$${compo.name}_nofollow = isset( $this->settings['${compo.name}']) && !empty( $this->settings['${compo.name}']['rel']) ${Condition_controller(compo)}?  $this->settings['${compo.name}']['rel'] : '';\n`
 
@@ -742,7 +741,7 @@ const Bricks_file_create = async (call, all_files, html, css, js, old_folder, im
         } else if (compo.type == 'media') {
             if (widgetHtml.search(compo.name) >= 1) {
                 if (repeater) {
-                    let r_html = `$${compo.name} = isset($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['url']) ${Condition_controller(compo, repeater)} ?  $r_item['${compo.name}']['url'] : '';\n`
+                    let r_html = `$${compo.name} = isset($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['url']) ${Condition_controller(compo, repeater)} ?  esc_url($r_item['${compo.name}']['url']) : '';\n`
 
                     if (repeater_variable?.[repeater]) {
                         r_html = repeater_variable?.[repeater] + r_html;
@@ -750,7 +749,7 @@ const Bricks_file_create = async (call, all_files, html, css, js, old_folder, im
                     repeater_variable = Object.assign({}, repeater_variable, { [repeater]: r_html })
 
                 } else {
-                    php_variable_validation += `$${compo.name} = isset($this->settings['${compo.name}']) && !empty($this->settings['${compo.name}']['url']) ${Condition_controller(compo)} ? $this->settings['${compo.name}']['url'] : '';\n`
+                    php_variable_validation += `$${compo.name} = isset($this->settings['${compo.name}']) && !empty($this->settings['${compo.name}']['url']) ${Condition_controller(compo)} ? esc_url($this->settings['${compo.name}']['url']) : '';\n`
                 }
                 widgetHtml = widgetHtml.replaceAll(`{{${compo.name}}}`, `'.$${compo.name}.'`)
             }
@@ -1493,7 +1492,7 @@ new MyClass_${unique_class}();` : '';
     };
 
     var formData = new FormData();
-    formData.append('action', 'wdkit_widget_ajax');
+    formData.append('action', 'get_wdesignkit');
     formData.append('kit_nonce', wdkitData.kit_nonce);
     formData.append('image', image_file);
     formData.append('type', 'wkit_create_widget');

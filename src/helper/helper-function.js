@@ -1,10 +1,8 @@
-const {
-	__,
-} = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const { Fragment } = wp.element;
 
-import axios from 'axios'
+import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import Elementor_file_create from '../widget-builder/file-creation/elementor_file';
@@ -15,7 +13,8 @@ var img_path = wdkitData.WDKIT_URL;
 
 const GetCount = (count) => {
 	let counts = Number(count);
-	let array = []
+	let array = [];
+
 	for (let x = 0; x < counts; x++) {
 		array.push(x);
 	}
@@ -357,20 +356,20 @@ export const DeletePopup = (props) => {
 					</span>
 				</a>
 				<div className="popup-missing">
-					<div className="popup-header">{__('Please Confirm')}</div>
+					<div className="popup-header">{__('Please Confirm', 'wdesignkit')}</div>
 					<div className="popup-body">
 						<div className="wkit-popup-content-title">
-							{__('Are you sure want to permanently delete')}
+							{__('Are you sure want to permanently delete', 'wdesignkit')}
 						</div>
 						<div className="wkit-popup-buttons">
 							<button className="wkit-popup-confirm wkit-outer-btn-class" onClick={() => { props.setdeleteWsID(-1) }}>
-								{__('No')}
+								{__('No', 'wdesignkit')}
 							</button>
 							<button className="wkit-popup-cancel wkit-btn-class" onClick={() => props.removeFunction()}>
 								{props.isLoading ?
 									<WkitLoader />
 									:
-									<span>{__('Yes')}</span>
+									<span>{__('Yes', 'wdesignkit')}</span>
 								}
 							</button>
 						</div>
@@ -633,13 +632,13 @@ export const Template_loop = (props) => {
 			}
 
 			if (props.data.free_pro == "pro" && !download_access) {
-				props.wdkit_set_toast("Get Pro Version to Download", '', '', 'danger')
+				props.wdkit_set_toast(__("Get Pro Version to Download", 'wdesignkit'), '', '', 'danger')
 				return false;
 			}
 
 			props.handlerTempID(id)
 		} else {
-			props.wdkit_set_toast('Template Deactivate', 'This Template is Deactivated', '', 'danger');
+			props.wdkit_set_toast(__('Template Deactivate', 'wdesignkit'), __('This Template is Deactivated', 'wdesignkit'), '', 'danger');
 		}
 	}
 
@@ -674,7 +673,7 @@ export const Template_loop = (props) => {
 		}
 
 		if (data.data.free_pro == "pro" && !download_access) {
-			props.wdkit_set_toast("Get Pro Version to Download", '', '', 'danger')
+			props.wdkit_set_toast(__("Get Pro Version to Download", 'wdesignkit'), '', '', 'danger')
 			return false;
 		} else {
 			navigation(`/${GetFirstpathName()}/kit/${id}?page=${data.currentPage}${data.wsID ? `&wsID=${data.wsID}` : ''}`)
@@ -686,10 +685,10 @@ export const Template_loop = (props) => {
 			{template.is_activated != 'active' &&
 				<Fragment>
 					<div className='wdkit-inner-boxed-deActivate'>
-						<div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!')}</div>
-						<div className='wdkit-inner-boxed-deActivate-p'>{__('This Template got disabled until you have more credits to make it active.')}</div>
+						<div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!', 'wdesignkit')}</div>
+						<div className='wdkit-inner-boxed-deActivate-p'>{__('This Template got disabled until you have more credits to make it active.', 'wdesignkit')}</div>
 						<a href={`${wdkitData.wdkit_server_url}pricing`} target="_blank" rel="noopener noreferrer">
-							<button>{__('Buy Credits')}</button>
+							<button>{__('Buy Credits', 'wdesignkit')}</button>
 						</a>
 					</div>
 					{(!props.filter || (props.filter && props.filter != 'browse')) && !(window.location.hash.search('#/share_with_me') > -1) && !(window.location.hash.search('/kit/') > -1) &&
@@ -727,7 +726,7 @@ export const Template_loop = (props) => {
 										</svg>
 									)
 								)}
-								<span className="kit-hint-tooltip">{!dataFavorite ? __('Favourite') : __('UnFavourite')}</span>
+								<span className="kit-hint-tooltip">{!dataFavorite ? __('Favourite', 'wdesignkit') : __('UnFavourite', 'wdesignkit')}</span>
 							</div>
 						}
 						<div className="kit-pin-icon pin-section-pages">
@@ -739,7 +738,7 @@ export const Template_loop = (props) => {
 									:
 									<img className={"wkit-pin-img-temp"} src={img_path + "assets/images/svg/websitekit.svg"} alt="kit" />)}
 							<span className="kit-hint-tooltip">
-								{props.data.type == 'section' ? __('Section') : (props.data.type == 'pagetemplate' ? __('Full Page') : __('Page Kit'))}
+								{props.data.type == 'section' ? __('Section', 'wdesignkit') : (props.data.type == 'pagetemplate' ? __('Full Page', 'wdesignkit') : __('Page Kit', 'wdesignkit'))}
 							</span>
 						</div>
 
@@ -750,14 +749,14 @@ export const Template_loop = (props) => {
 									:
 									<img className={"wkit-pin-img-temp"} src={img_path + "assets/images/svg/private.svg"} alt="private" />
 								}
-								<span className="kit-hint-tooltip">{template.post_status == "publish" ? __('Public') : __('Private')}</span>
+								<span className="kit-hint-tooltip">{template.post_status == "publish" ? __('Public', 'wdesignkit') : __('Private', 'wdesignkit')}</span>
 							</div>
 						}
 					</div>
 					{props.data.free_pro == 'pro' &&
 						<div className="wdkit-card-tag">
 							<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.75 16.5H5.25C4.9425 16.5 4.6875 16.245 4.6875 15.9375C4.6875 15.63 4.9425 15.375 5.25 15.375H12.75C13.0575 15.375 13.3125 15.63 13.3125 15.9375C13.3125 16.245 13.0575 16.5 12.75 16.5Z" fill="white" /><path d="M15.2622 4.14003L12.2622 6.28503C11.8647 6.57003 11.2947 6.39753 11.1222 5.94003L9.70468 2.16003C9.46468 1.50753 8.54218 1.50753 8.30218 2.16003L6.87718 5.93253C6.70468 6.39753 6.14218 6.57003 5.74468 6.27753L2.74468 4.13253C2.14468 3.71253 1.34968 4.30503 1.59718 5.00253L4.71718 13.74C4.82218 14.04 5.10718 14.235 5.42218 14.235H12.5697C12.8847 14.235 13.1697 14.0325 13.2747 13.74L16.3947 5.00253C16.6497 4.30503 15.8547 3.71253 15.2622 4.14003ZM10.8747 11.0625H7.12468C6.81718 11.0625 6.56218 10.8075 6.56218 10.5C6.56218 10.1925 6.81718 9.93753 7.12468 9.93753H10.8747C11.1822 9.93753 11.4372 10.1925 11.4372 10.5C11.4372 10.8075 11.1822 11.0625 10.8747 11.0625Z" fill="white" /></svg>
-							<span>{__('Pro')}</span>
+							<span>{__('Pro', 'wdesignkit')}</span>
 						</div>
 					}
 					<div className={`wdkit-temp-feature-img ${params.kit_id ? 'wkit-webkit-hover' : ''}`} >
@@ -843,7 +842,7 @@ export const Template_loop = (props) => {
 																	</circle>
 																</svg>
 															}
-															{__('Add Favorite')}
+															{__('Add Favorite', 'wdesignkit')}
 														</button>
 														:
 														<button className={"wkit-design-item"} onClick={() => manageFavorite(template.id)}>
@@ -856,7 +855,7 @@ export const Template_loop = (props) => {
 																	</circle>
 																</svg>
 															}
-															{__('Remove Favorite')}
+															{__('Remove Favorite', 'wdesignkit')}
 														</button>
 													}
 												</Fragment>
@@ -867,29 +866,29 @@ export const Template_loop = (props) => {
 														<a href={`${wdkitData.wdkit_server_url}admin/packs/view/${props.data.id}`} target="_blank" rel="noopener noreferrer">
 															<button className={"wkit-design-item"}>
 																<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.9531 2.66989C12.1378 2.48521 12.357 2.33873 12.5983 2.23878C12.8396 2.13884 13.0983 2.0874 13.3594 2.0874C13.6205 2.0874 13.8791 2.13884 14.1204 2.23878C14.3618 2.33873 14.5809 2.48521 14.7656 2.66989C14.9503 2.85456 15.0968 3.0738 15.1967 3.31508C15.2966 3.55637 15.3482 3.81497 15.3482 4.07614C15.3482 4.3373 15.2966 4.59592 15.1967 4.83719C15.0968 5.07848 14.9503 5.29771 14.7656 5.48239L5.27344 14.9745L1.40625 16.0292L2.46094 12.162L11.9531 2.66989Z" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-																{__('Edit')}
+																{__('Edit', 'wdesignkit')}
 															</button>
 														</a>
 													}
 													<button className={"wkit-design-item"} onClick={() => { setIsCopyWs(template.id), (props.wsRoles ? setAction('copy') : setAction('t-copy')) }}>
 														<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#clip0_6220_28330)"><path d="M15 6.75H8.25C7.42157 6.75 6.75 7.42157 6.75 8.25V15C6.75 15.8284 7.42157 16.5 8.25 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V8.25C16.5 7.42157 15.8284 6.75 15 6.75Z" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M3.75 11.25H3C2.60218 11.25 2.22064 11.092 1.93934 10.8107C1.65804 10.5294 1.5 10.1478 1.5 9.75V3C1.5 2.60218 1.65804 2.22064 1.93934 1.93934C2.22064 1.65804 2.60218 1.5 3 1.5H9.75C10.1478 1.5 10.5294 1.65804 10.8107 1.93934C11.092 2.22064 11.25 2.60218 11.25 3V3.75" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></g><defs><clipPath id="clip0_6220_28330"><rect width="18" height="18" fill="white" /></clipPath></defs></svg>
-														{__('Copy to Workspace')}
+														{__('Copy to Workspace', 'wdesignkit')}
 													</button>
 													{!(window.location.hash.search('/kit/') > -1) && !(window.location.hash.search('#/manage_workspace') > -1) &&
 														<button className={"wkit-design-item"} onClick={() => { setDeleteTempId(template.id), setClickType('delete') }}>
 															<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 5.50006H4.91667M4.91667 5.50006H14.25M4.91667 5.50006L4.91638 13.666C4.91638 13.9754 5.0393 14.2722 5.25809 14.491C5.47688 14.7098 5.77363 14.8327 6.08305 14.8327H11.9164C12.2258 14.8327 12.5225 14.7098 12.7413 14.491C12.9601 14.2722 13.083 13.9754 13.083 13.666V5.49935M6.66638 5.49935V4.33268C6.66638 4.02326 6.7893 3.72652 7.00809 3.50772C7.22688 3.28893 7.52363 3.16602 7.83305 3.16602H10.1664C10.4758 3.16602 10.7725 3.28893 10.9913 3.50772C11.2101 3.72652 11.333 4.02326 11.333 4.33268V5.49935" stroke="#737373" strokeWidth="1.3125" strokeLinecap="round" strokeLinejoin="round" /></svg>
-															{__('Delete')}
+															{__('Delete', 'wdesignkit')}
 														</button>
 													}
 													{(props.wsRoles == 'admin' || props.wsRoles == 'editor') &&
 														<Fragment>
 															<button className={"wkit-design-item"} onClick={() => { setIsCopyWs(template.id), (props.wsRoles && setAction('move')) }}>
 																<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.625 6.75L2.375 9M2.375 9L4.625 11.25M2.375 9H17.3746M7.62482 3.75L9.87482 1.5M9.87482 1.5L12.1248 3.75M9.87482 1.5V16.5M12.1248 14.25L9.87482 16.5M9.87482 16.5L7.62482 14.25M15.1246 6.75L17.3746 9M17.3746 9L15.1246 11.25" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-																{__('Move to Workspace')}
+																{__('Move to Workspace', 'wdesignkit')}
 															</button>
 															<button className={"wkit-design-item"} onClick={() => { setDeleteTempId(template.id), setClickType('remove') }}>
 																<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 5.50006H4.91667M4.91667 5.50006H14.25M4.91667 5.50006L4.91638 13.666C4.91638 13.9754 5.0393 14.2722 5.25809 14.491C5.47688 14.7098 5.77363 14.8327 6.08305 14.8327H11.9164C12.2258 14.8327 12.5225 14.7098 12.7413 14.491C12.9601 14.2722 13.083 13.9754 13.083 13.666V5.49935M6.66638 5.49935V4.33268C6.66638 4.02326 6.7893 3.72652 7.00809 3.50772C7.22688 3.28893 7.52363 3.16602 7.83305 3.16602H10.1664C10.4758 3.16602 10.7725 3.28893 10.9913 3.50772C11.2101 3.72652 11.333 4.02326 11.333 4.33268V5.49935" stroke="#737373" strokeWidth="1.3125" strokeLinecap="round" strokeLinejoin="round" /></svg>
-																{__('Remove')}
+																{__('Remove', 'wdesignkit')}
 															</button>
 														</Fragment>
 													}
@@ -913,14 +912,14 @@ export const Template_loop = (props) => {
 					/>
 					<div className={"btn-reviews"}>
 						<div className={"btn-img"}>
-							<a><img src={img_path + "assets/images/svg/eye.svg"} alt={__("post views")} />{props.data.post_views}</a>
+							<a><img src={img_path + "assets/images/svg/eye.svg"} alt={__('post views', 'wdesignkit')} />{props.data.post_views}</a>
 							<hr className="wkit-icon-divider-hr" />
-							<a><img src={img_path + "assets/images/svg/download-template.svg"} alt={__("post download")} />{props.data.post_download}</a>
+							<a><img src={img_path + "assets/images/svg/download-template.svg"} alt={__('post download', 'wdesignkit')} />{props.data.post_download}</a>
 						</div>
 						<div className='kit-pin-icon'>
 							{props.data.post_builder && builder_icon &&
 								<div className="elementor-right-part kit-pin-icon">
-									<img src={builder_icon} alt={__("builder icon")} draggable={false} />
+									<img src={builder_icon} alt={__('builder icon', 'wdesignkit')} draggable={false} />
 								</div>
 							}
 							<span className="kit-hint-tooltip">{!plugin_name ? __('') : __(plugin_name)}</span>
@@ -988,9 +987,9 @@ export const Kits_loop = (props) => {
 					{template.post_status &&
 						<div className={"template-status-pin-green"}>
 							{template.post_status == "publish" ?
-								<img className={"wkit-public-private-temp"} src={img_path + "assets/images/svg/public.svg"} alt="public" />
+								<img className={"wkit-public-private-temp"} src={img_path + "assets/images/svg/public.svg"} alt={__('public', 'wdesignkit')} />
 								:
-								<img className={"wkit-public-private-temp"} src={img_path + "assets/images/svg/private.svg"} alt="private" />
+								<img className={"wkit-public-private-temp"} src={img_path + "assets/images/svg/private.svg"} alt={__('private', 'wdesignkit')} />
 							}
 						</div>
 					}
@@ -1001,7 +1000,7 @@ export const Kits_loop = (props) => {
 								<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M19.8791 9.49273C17.9962 5.81877 14.2684 3.33301 9.99998 3.33301C5.73158 3.33301 2.00276 5.82051 0.120814 9.49308C0.0413845 9.6502 0 9.82379 0 9.99985C0 10.1759 0.0413845 10.3495 0.120814 10.5066C2.0038 14.1806 5.73158 16.6663 9.99998 16.6663C14.2684 16.6663 17.9972 14.1788 19.8791 10.5063C19.9586 10.3491 20 10.1756 20 9.9995C20 9.82344 19.9586 9.64985 19.8791 9.49273ZM9.99998 14.9997C9.01108 14.9997 8.04438 14.7064 7.22213 14.157C6.39988 13.6076 5.75902 12.8267 5.38058 11.9131C5.00215 10.9995 4.90313 9.99413 5.09606 9.02422C5.28898 8.05432 5.76518 7.1634 6.46445 6.46414C7.16371 5.76488 8.05462 5.28867 9.02453 5.09575C9.99443 4.90282 10.9998 5.00184 11.9134 5.38028C12.827 5.75871 13.6079 6.39958 14.1573 7.22182C14.7067 8.04407 15 9.01077 15 9.99967C15.0003 10.6564 14.8712 11.3067 14.62 11.9135C14.3689 12.5202 14.0006 13.0716 13.5362 13.5359C13.0719 14.0003 12.5205 14.3686 11.9138 14.6197C11.307 14.8709 10.6567 15 9.99998 14.9997ZM9.99998 6.66634C9.70246 6.6705 9.40685 6.71476 9.12116 6.79794C9.35666 7.11796 9.46966 7.51179 9.43969 7.90799C9.40972 8.30419 9.23875 8.67653 8.95779 8.95749C8.67684 9.23844 8.3045 9.40941 7.9083 9.43938C7.51209 9.46935 7.11827 9.35635 6.79824 9.12085C6.61601 9.79224 6.64891 10.5039 6.8923 11.1556C7.1357 11.8073 7.57733 12.3663 8.15505 12.7538C8.73277 13.1414 9.41749 13.338 10.1128 13.3161C10.8081 13.2941 11.4791 13.0546 12.0312 12.6314C12.5833 12.2081 12.9888 11.6224 13.1905 10.9566C13.3923 10.2908 13.3802 9.57856 13.156 8.92001C12.9317 8.26147 12.5066 7.68983 11.9405 7.28555C11.3743 6.88127 10.6957 6.6647 9.99998 6.66634Z" className={"popup-eye"} />
 								</svg>
-								{__('View All')}</Link>
+								{__('View All', 'wdesignkit')}</Link>
 						}
 					</div>
 				</div>
@@ -1023,66 +1022,66 @@ export const Wpopup_body_data = () => {
 		<div className="popup_option_main">
 
 			<div className="wdesignkit-dropdown">
-				<div className="wdesign_heading">{__('Page Builder')}</div>
+				<div className="wdesign_heading">{__('Page Builder', 'wdesignkit')}</div>
 				<button className="wdesignkit-openbtn">
-					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}
+					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}
 					<img src={img_path + "assets/images/svg/filter_expand_more.svg"} alt="dashborad img" className="open-icon-drop" />
 				</button>
 				<div className="wdesignkit-dropdown-content">
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3', 'wdesignkit')}</a>
 				</div>
 			</div>
 
 			<div className="wdesignkit-dropdown">
-				<div className="wdesign_heading">{__('Section')}</div>
+				<div className="wdesign_heading">{__('Section', 'wdesignkit')}</div>
 				<button className="wdesignkit-openbtn">
-					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}
+					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}
 					<img src={img_path + "assets/images/svg/filter_expand_more.svg"} alt="dashborad img" className="open-icon-drop" />
 				</button>
 				<div className="wdesignkit-dropdown-content">
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3', 'wdesignkit')}</a>
 				</div>
 			</div>
 
 			<div className="wdesignkit-dropdown">
-				<div className="wdesign_heading">{__('Page')}</div>
+				<div className="wdesign_heading">{__('Page', 'wdesignkit')}</div>
 				<button className="wdesignkit-openbtn">
-					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}
+					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}
 					<img src={img_path + "assets/images/svg/filter_expand_more.svg"} alt="dashborad img" className="open-icon-drop" />
 				</button>
 				<div className="wdesignkit-dropdown-content">
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3', 'wdesignkit')}</a>
 				</div>
 			</div>
 			<div className="wdesignkit-dropdown">
-				<div className="wdesign_heading">{__('Kits')}</div>
+				<div className="wdesign_heading">{__('Kits', 'wdesignkit')}</div>
 				<button className="wdesignkit-openbtn">
-					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}
+					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}
 					<img src={img_path + "assets/images/svg/filter_expand_more.svg"} alt="dashborad img" className="open-icon-drop" />
 				</button>
 				<div className="wdesignkit-dropdown-content">
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3', 'wdesignkit')}</a>
 				</div>
 			</div>
 
 			<div className="wdesignkit-dropdown">
-				<div className="wdesign_heading">{__('Plugin Required')}</div>
+				<div className="wdesign_heading">{__('Plugin Required', 'wdesignkit')}</div>
 				<button className="wdesignkit-openbtn">
-					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}
+					<img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}
 					<img src={img_path + "assets/images/svg/filter_expand_more.svg"} alt="dashborad img" className="open-icon-drop" />
 				</button>
 				<div className="wdesignkit-dropdown-content">
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2')}</a>
-					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 1', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 2', 'wdesignkit')}</a>
+					<a href="#"><img src={img_path + "assets/images/svg/elementor.svg"} alt="dashborad img" />{__('Option 3', 'wdesignkit')}</a>
 				</div>
 			</div>
 		</div>
@@ -1093,8 +1092,8 @@ export const Maintenance_mode = () => {
 	return (
 		<div className='wkit-maintenance-mode-content'>
 			<div className='wkit-maintenance-mode-text'>
-				<span className='wkit-maintenance-mode-header'>Website Upgrade in Progress.</span>
-				<span className='wkit-maintenance-mode-description'>Our  website is undergoing a transformation to serve you better.</span>
+				<span className='wkit-maintenance-mode-header'>{__('Website Upgrade in Progress.', 'wdesignkit')}</span>
+				<span className='wkit-maintenance-mode-description'>{__('Our  website is undergoing a transformation to serve you better.', 'wdesignkit')}</span>
 			</div>
 			<img className='wkit-maintenance-mode-image' src={img_path + "assets/images/jpg/maintenance_mode.png"} />
 		</div>
@@ -1105,10 +1104,10 @@ export const Update_notification = () => {
 	return (
 		<div className='wkit-update-notification'>
 			<div className='wkit-notification-text'>
-				<span className='wkit-update-notification-header'>Upgrade now for the best experience WDesignKit v1.0.15</span>
+				<span className='wkit-update-notification-header'>{__('Upgrade now for the best experience WDesignKit v1.0.15', 'wdesignkit')}</span>
 			</div>
 			<div className='wkit-update-btn-container'>
-				<button className='wkit-update-version-btn wkit-pink-btn-class'>Upgrade</button>
+				<button className='wkit-update-version-btn wkit-pink-btn-class'>{__('Upgrade', 'wdesignkit')}</button>
 			</div>
 		</div>
 	);
@@ -1122,7 +1121,7 @@ export const Deactivate_account = () => {
 				<path d="M20.152 14.5078H19.8482C19.1004 14.5078 18.4941 15.114 18.4941 15.8619V22.3341C18.4941 23.0819 19.1004 23.6881 19.8482 23.6881H20.152C20.8998 23.6881 21.506 23.0819 21.506 22.3341V15.8619C21.506 15.114 20.8998 14.5078 20.152 14.5078Z" fill="#FFF7ED" />
 				<path d="M20.0001 28.8244C20.8318 28.8244 21.506 28.1501 21.506 27.3184C21.506 26.4867 20.8318 25.8125 20.0001 25.8125C19.1684 25.8125 18.4941 26.4867 18.4941 27.3184C18.4941 28.1501 19.1684 28.8244 20.0001 28.8244Z" fill="#FFF7ED" />
 			</svg>
-			<span>You can't access Pro feature,  limit reached with two active sites. To unlock, deactivate one site or upgrade plan for more</span>
+			<span>{__('You can\'t access Pro feature,  limit reached with two active sites. To unlock, deactivate one site or upgrade plan for more', 'wdesignkit')}</span>
 		</div>
 	);
 }
@@ -1138,7 +1137,7 @@ export const Wkit_user_details = (props) => {
 
 	const wkit_logout_User = async () => {
 		await wkit_logout(navigation);
-		props.wdkit_set_toast(['Logged out successfully!', "You're logged out! Remember your login details and sign in again.", '', 'success']);
+		props.wdkit_set_toast([__('Logged out successfully!', 'wdesignkit'), __("You're logged out! Remember your login details and sign in again.", 'wdesignkit'), '', 'success']);
 
 		let form_array = {
 			'type': 'wkit_meta_data',
@@ -1238,7 +1237,7 @@ export const Wkit_user_details = (props) => {
 									:
 									<div className='wdkit-login-signUp-btn' onClick={() => { props.wdkit_Login_Route(location.pathname); }}>
 										<Link to={'/login'} >
-											<button> {__('Login / SignUp')} </button>
+											<button> {__('Login / SignUp', 'wdesignkit')} </button>
 										</Link>
 									</div>
 							}
@@ -1265,7 +1264,7 @@ export const Wkit_user_details = (props) => {
 													<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<path d="M15.875 15.75V14.25C15.875 13.4544 15.5589 12.6913 14.9963 12.1287C14.4337 11.5661 13.6706 11.25 12.875 11.25H6.875C6.07935 11.25 5.31629 11.5661 4.75368 12.1287C4.19107 12.6913 3.875 13.4544 3.875 14.25V15.75M12.8754 5.25C12.8754 6.90685 11.5322 8.25 9.87537 8.25C8.21851 8.25 6.87537 6.90685 6.87537 5.25C6.87537 3.59315 8.21851 2.25 9.87537 2.25C11.5322 2.25 12.8754 3.59315 12.8754 5.25Z" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
 													</svg>
-													{__('Profile')}
+													{__('Profile', 'wdesignkit')}
 												</a>
 											</li>
 											<hr />
@@ -1274,7 +1273,7 @@ export const Wkit_user_details = (props) => {
 													<svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 														<path d="M7.625 15.75H4.625C4.22718 15.75 3.84564 15.592 3.56434 15.3107C3.28304 15.0294 3.125 14.6478 3.125 14.25V3.75C3.125 3.35218 3.28304 2.97064 3.56434 2.68934C3.84564 2.40804 4.22718 2.25 4.625 2.25H7.625M12.8748 12.7501L16.6248 9.00009M16.6248 9.00009L12.8748 5.25009M16.6248 9.00009L7.625 9" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
 													</svg>
-													{__('Logout')}
+													{__('Logout', 'wdesignkit')}
 												</a>
 											</li>
 										</div>
@@ -1457,7 +1456,7 @@ export const Wkit_plugin_missing = (props) => {
 				);
 			} else if (status == 'warning') {
 				return (<div className="wkit-icon-white-bg">
-					<span className="wkit-tooltip">{__('Something wen\'t wrong')} <a href="#" style={{ color: "white", textDecoration: "underline" }}>{__('Try Again')}</a></span>
+					<span className="wkit-tooltip">{__('Something wen\'t wrong', 'wdesignkit')} <a href="#" style={{ color: "white", textDecoration: "underline" }}>{__('Try Again', 'wdesignkit')}</a></span>
 					<a>
 						<svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M8 0C3.58125 0 0 3.58125 0 8C0 12.4187 3.58125 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58125 12.4187 0 8 0ZM8 15C4.14062 15 1 11.8594 1 8C1 4.14062 4.14062 1 8 1C11.8594 1 15 4.14062 15 8C15 11.8594 11.8594 15 8 15ZM8 5.75C8.41406 5.75 8.75 5.41437 8.75 5C8.75 4.58594 8.41406 4.25 8 4.25C7.58594 4.25 7.25 4.58437 7.25 5C7.25 5.41563 7.58437 5.75 8 5.75ZM9.5 11H8.5V7.5C8.5 7.225 8.275 7 8 7H7C6.725 7 6.5 7.225 6.5 7.5C6.5 7.775 6.725 8 7 8H7.5V11H6.5C6.225 11 6 11.225 6 11.5C6 11.775 6.225 12 6.5 12H9.5C9.77612 12 10 11.7761 10 11.5C10 11.225 9.775 11 9.5 11Z" className="wkit-icon-white" />
@@ -1467,8 +1466,8 @@ export const Wkit_plugin_missing = (props) => {
 			} else if (status == 'manually') {
 				return (
 					<div className="wkit-icon-orange-bg">
-						<span className="wkit-tooltip wkit-pro-manually">{__('Install Manually.')}
-							<a href={pro_plugin_link?.[data?.original_slug] ? pro_plugin_link[data.original_slug] : '#'} style={{ color: "white", textDecoration: "underline" }}>{__('Learn How?')}</a>
+						<span className="wkit-tooltip wkit-pro-manually">{__('Install Manually.', 'wdesignkit')}
+							<a href={pro_plugin_link?.[data?.original_slug] ? pro_plugin_link[data.original_slug] : '#'} style={{ color: "white", textDecoration: "underline" }}>{__('Learn How?', 'wdesignkit')}</a>
 						</span>
 						<svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M8 0C3.58125 0 0 3.58125 0 8C0 12.4187 3.58125 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58125 12.4187 0 8 0ZM8 15C4.14062 15 1 11.8594 1 8C1 4.14062 4.14062 1 8 1C11.8594 1 15 4.14062 15 8C15 11.8594 11.8594 15 8 15ZM8 5.75C8.41406 5.75 8.75 5.41437 8.75 5C8.75 4.58594 8.41406 4.25 8 4.25C7.58594 4.25 7.25 4.58437 7.25 5C7.25 5.41563 7.58437 5.75 8 5.75ZM9.5 11H8.5V7.5C8.5 7.225 8.275 7 8 7H7C6.725 7 6.5 7.225 6.5 7.5C6.5 7.775 6.725 8 7 8H7.5V11H6.5C6.225 11 6 11.225 6 11.5C6 11.775 6.225 12 6.5 12H9.5C9.77612 12 10 11.7761 10 11.5C10 11.225 9.775 11 9.5 11Z" className="wkit-icon-white" />
@@ -1553,78 +1552,6 @@ export const Wkit_plugin_missing = (props) => {
 						await setInstallCompleted(installCompleted)
 						allEqual();
 					}
-
-					const checkPlugin_widget = async () => {
-
-						const Oa = (e) => {
-							return new Promise((resolve, reject) => {
-								const r = document.createElement(e.nodeName);
-
-								// Set attributes like id, rel, src, href, type
-								["id", "rel", "src", "href", "type"].forEach(attr => {
-									if (e[attr]) {
-										r[attr] = e[attr];
-									}
-								});
-
-								// Append inner HTML content if present
-								if (e.innerHTML) {
-									r.appendChild(document.createTextNode(e.innerHTML));
-								}
-
-								// Resolve on load, reject on error
-								r.onload = () => {
-									resolve(true);
-								};
-
-								r.onerror = () => {
-									reject(new Error("Error loading asset."));
-								};
-
-								// Append to document body
-								document.body.appendChild(r);
-
-								// Resolve immediately for <link> or <script> without src
-								if ((r.nodeName.toLowerCase() === "link" || (r.nodeName.toLowerCase() === "script" && !r.src))) {
-									resolve();
-								}
-							});
-						}
-
-						const fetchAndProcessData = async () => {
-
-							await fetch(document.location.href, { parse: false })
-								.then(response => response.text())
-								.then(text => {
-									// Step 2: Parse the HTML response
-									const parser = new DOMParser();
-									const doc = parser.parseFromString(text, 'text/html');
-
-									// Step 3: Define IDs to filter
-									const idsToInclude = ['wp-blocks-js-after', 'plus-editor-css-css', 'plus-editor-js-js', 'elementor-editor-js-before'];
-
-									// Step 4: Select and filter elements
-									const elements = Array.from(doc.querySelectorAll('link[rel="stylesheet"],script')).filter(element => {
-										return element.id && (idsToInclude.includes(element.id) || !document.getElementById(element.id));
-									});
-
-									// Step 5: Process each element (assuming Oa is a defined function)
-									return elements.reduce((promise, element) => {
-										return promise.then(() => Oa(element));
-									}, Promise.resolve());
-								})
-								.catch(error => {
-									console.error('Error fetching or processing data:', error);
-								});
-						}
-
-						await fetchAndProcessData();
-
-						if (typeof elementor !== 'undefined') {
-							elementor.addWidgetsCache(elementor.getConfig().initial_document.widgets);
-						}
-					}
-					checkPlugin_widget();
 				}
 
 				count_check.current.splice(0, 1);
@@ -1698,6 +1625,9 @@ export const Wkit_plugin_missing = (props) => {
 					post_type_val = 'page';
 					props.template_id.pages[key_index].wp_post_type = post_type_val
 					props.template_id.pages[key_index].change = true;
+				} else {
+					props.template_id.pages[key_index].wp_post_type = post_type_val
+					props.template_id.pages[key_index].change = true;
 				}
 
 				return (
@@ -1717,7 +1647,7 @@ export const Wkit_plugin_missing = (props) => {
 				<Fragment>
 					{wdkitData.use_editor != 'wdkit' &&
 						<div className="kit-type-heading">
-							{__('List of Pages ') + "(" + props.template_id.pages.length + ")"}
+							{__('List of Pages ', 'wdesignkit') + "(" + props.template_id.pages.length + ")"}
 						</div>
 					}
 
@@ -1753,6 +1683,9 @@ export const Wkit_plugin_missing = (props) => {
 					props.template_id.sections[index_key].wp_post_type = post_type_val
 					props.template_id.sections[index_key].change = true;
 
+				} else {
+					props.template_id.sections[index_key].wp_post_type = post_type_val
+					props.template_id.sections[index_key].change = true;
 				}
 
 				return (
@@ -1771,7 +1704,7 @@ export const Wkit_plugin_missing = (props) => {
 			return (<Fragment>
 				{wdkitData.use_editor != 'wdkit' &&
 					<div className="kit-type-heading">
-						{__('List of Sections ') + "(" + props.template_id.sections.length + ")"}
+						{__('List of Sections ', 'wdesignkit') + "(" + props.template_id.sections.length + ")"}
 					</div>
 				}
 
@@ -1894,8 +1827,8 @@ export const Wkit_plugin_missing = (props) => {
 				return (
 					<div className='wkit-no-install-plugin'>
 						<img src={img_path + "assets/images/jpg/no-plugin.png"} className='no-plugin-img' alt='no-plugin' />
-						<h6 className='no-plugin-title'>{__('No need to install any Plugin.')}</h6>
-						<p className='no-plugin-desc'>{__('You have selected design which doesn\'t need any plugin to install. Press Next.')}</p>
+						<h6 className='no-plugin-title'>{__('No need to install any Plugin.', 'wdesignkit')}</h6>
+						<p className='no-plugin-desc'>{__('You have selected design which doesn\'t need any plugin to install. Press Next.', 'wdesignkit')}</p>
 					</div>
 				);
 			}
@@ -1906,30 +1839,30 @@ export const Wkit_plugin_missing = (props) => {
 				return (
 					<Fragment>
 						<button className="wkit-download-select" onClick={(e) => nextSteps()}>
-							<span>{__('Continue Anyway')}</span>
+							<span>{__('Continue Anyway', 'wdesignkit')}</span>
 							<div className='wkit-continue-toot-tip'>
 								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58125 0 0 3.58125 0 8C0 12.4187 3.58125 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58125 12.4187 0 8 0ZM8 15C4.14062 15 1 11.8594 1 8C1 4.14062 4.14062 1 8 1C11.8594 1 15 4.14062 15 8C15 11.8594 11.8594 15 8 15ZM8 5.75C8.41406 5.75 8.75 5.41437 8.75 5C8.75 4.58594 8.41406 4.25 8 4.25C7.58594 4.25 7.25 4.58437 7.25 5C7.25 5.41563 7.58437 5.75 8 5.75ZM9.5 11H8.5V7.5C8.5 7.225 8.275 7 8 7H7C6.725 7 6.5 7.225 6.5 7.5C6.5 7.775 6.725 8 7 8H7.5V11H6.5C6.225 11 6 11.225 6 11.5C6 11.775 6.225 12 6.5 12H9.5C9.77612 12 10 11.7761 10 11.5C10 11.225 9.775 11 9.5 11Z" className="wkit-info-svg" /></svg>
-								<span className='wkit-continue-toot-tip-text'>{__('It will skip plugin installation and your imported page might not look as expected')}</span>
+								<span className='wkit-continue-toot-tip-text'>{__('It will skip plugin installation and your imported page might not look as expected', 'wdesignkit')}</span>
 							</div>
 						</button>
 						<button key={Math.random().toString()}
 							className={"wkit-download-all wkit-btn-class"}
 							disabled={loadingInstall ? true : false}
 							onClick={() => installPluginData('all')}>
-							{!loadingInstall ? __('Install All') : __('Installing')}
+							{!loadingInstall ? __('Install All', 'wdesignkit') : __('Installing', 'wdesignkit')}
 						</button>
 					</Fragment>
 				);
 			} else {
 				return (
-					<button className={"wkit-next-step wkit-btn-class"} onClick={(e) => { nextSteps() }}>{__('Next')}</button>
+					<button className={"wkit-next-step wkit-btn-class"} onClick={(e) => { nextSteps() }}>{__('Next', 'wdesignkit')}</button>
 				);
 			}
 		}
 
 		return <div className="popup-body">
 			<div className="wkit-pluginMissing-text">
-				{__('To download this template, you will need to install below listed plugins')}
+				{__('To download this template, you will need to install below listed plugins', 'wdesignkit')}
 			</div>
 
 			<div className={(dataPlugin.length > 0 && props.pluginData) ? 'plugin-wrapper' : 'plugin-wrapper no-plugin'}>
@@ -1942,28 +1875,45 @@ export const Wkit_plugin_missing = (props) => {
 	}
 
 	const Popup_PluginMissing_Skeleton = () => {
+
+		let PluginSkeleton = () => {
+			return (
+				Array.from({ length: 2 }).map((__, indx) => (
+					<div className="wkit-plugin-list-item" key={indx}>
+						<div className="wkit-plugin-img-title-wrapper">
+							<div className="wkit-plugin-image">
+								<img src={img_path + 'assets/images/jpg/wdkit-logo.png'} alt="plugin-icon" />
+							</div>
+							<div className="wkit-plugin-name">The plus addons for elementor</div>
+						</div>
+						<span className='wkit-download-skeleton-img'>
+							<img className="wkit-download-template" src={img_path + "assets/images/svg/popup-download.svg"} alt="popup-logo-img" draggable="false" />
+						</span>
+					</div>
+				))
+			)
+		}
+
 		return (
 			<Fragment>
-				<div className="wkit-select-main">
-					<div className={"wkit-skeleton-label"} style={{ width: '50%', marginTop: '20px', marginBottom: '40px' }}></div>
-					<div className='wkit-save-plugin-wrapper'>
-						{[1, 2, 3, 4].map((index, key) => (
-							<div className="wkit-plugin-list" key={key} >
-								<div className='kit-field-wrap1'>
-									<div className='wkit-plugin-skeleton'>
-										<div className="wkit-small-img-box"></div>
-										<div className="wkit-skeleton-line"></div>
-										<div className="wkit-small-check-box"></div>
-									</div>
-								</div>
-							</div>
-						))}
+				<div className="popup-body wkit-skeleton">
+					<div className="wkit-pluginMissing-text">To download this template, you will need to install below listed plugins</div>
+					<div className="plugin-wrapper">
+						{PluginSkeleton()}
 					</div>
-					<div className='wkit-btn-right'>
-						<div className="wkit-skeleton-label"></div>
-						<button className={"wkit-btn-skeleton"} style={{ width: '120px', height: '50px' }}></button>
+					<div className="wkit-button-popup">
+						<button className="wkit-download-select">
+							<span>Continue Anyway</span>
+							<div className="wkit-continue-toot-tip">
+								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M8 0C3.58125 0 0 3.58125 0 8C0 12.4187 3.58125 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58125 12.4187 0 8 0ZM8 15C4.14062 15 1 11.8594 1 8C1 4.14062 4.14062 1 8 1C11.8594 1 15 4.14062 15 8C15 11.8594 11.8594 15 8 15ZM8 5.75C8.41406 5.75 8.75 5.41437 8.75 5C8.75 4.58594 8.41406 4.25 8 4.25C7.58594 4.25 7.25 4.58437 7.25 5C7.25 5.41563 7.58437 5.75 8 5.75ZM9.5 11H8.5V7.5C8.5 7.225 8.275 7 8 7H7C6.725 7 6.5 7.225 6.5 7.5C6.5 7.775 6.725 8 7 8H7.5V11H6.5C6.225 11 6 11.225 6 11.5C6 11.775 6.225 12 6.5 12H9.5C9.77612 12 10 11.7761 10 11.5C10 11.225 9.775 11 9.5 11Z" className="wkit-info-svg"></path>
+								</svg>
+							</div>
+						</button>
+						<button className="wkit-download-all wkit-btn-class">Install All</button>
 					</div>
 				</div>
+
 			</Fragment>
 		)
 	}
@@ -1981,7 +1931,7 @@ export const Wkit_plugin_missing = (props) => {
 					<div className="popup-header">{install_header}</div>
 
 					{isLoading &&
-						<div className={'import-data-loading'}><Popup_PluginMissing_Skeleton /></div>
+						<Popup_PluginMissing_Skeleton />
 					}
 
 					{!isLoading &&
@@ -1991,7 +1941,7 @@ export const Wkit_plugin_missing = (props) => {
 			}
 			{((props.type == 'kit_page' || props.type == 'wdkit') && stepsPlugin == 'step-2') &&
 				<Fragment>
-					<div className="popup-header">{__('Import Templates')}</div>
+					<div className="popup-header">{__('Import Templates', 'wdesignkit')}</div>
 					<div className="popup-body">
 						<div className="kit-type-flex">
 							{props.template_id?.pages?.length != 0 &&
@@ -2008,13 +1958,83 @@ export const Wkit_plugin_missing = (props) => {
 							}
 						</div>
 						<div className='wkit-next-step-second'>
-							<button className={'wkit-next-step wkit-btn-class'} onClick={(e) => { nextSteps() }}>{__('Import')}</button>
+							<button className={'wkit-next-step wkit-btn-class'} onClick={(e) => { nextSteps() }}>{__('Import', 'wdesignkit')}</button>
 						</div>
 					</div>
 				</Fragment>
 			}
 		</div>
 	);
+}
+
+const checkPlugin_widget = async () => {
+	const Oa = (e) => {
+		return new Promise((resolve, reject) => {
+			const r = document.createElement(e.nodeName);
+
+			// Set attributes like id, rel, src, href, type
+			["id", "rel", "src", "href", "type"].forEach(attr => {
+				if (e[attr]) {
+					r[attr] = e[attr];
+				}
+			});
+
+			// Append inner HTML content if present
+			if (e.innerHTML) {
+				r.appendChild(document.createTextNode(e.innerHTML));
+			}
+
+			// Resolve on load, reject on error
+			r.onload = () => {
+				resolve(true);
+			};
+
+			r.onerror = () => {
+				reject(new Error("Error loading asset."));
+			};
+
+			// Append to document body
+			document.body.appendChild(r);
+
+			// Resolve immediately for <link> or <script> without src
+			if ((r.nodeName.toLowerCase() === "link" || (r.nodeName.toLowerCase() === "script" && !r.src))) {
+				resolve();
+			}
+		});
+	}
+
+	const fetchAndProcessData = async () => {
+
+		await fetch(document.location.href, { parse: false })
+			.then(response => response.text())
+			.then(text => {
+				// Step 2: Parse the HTML response
+				const parser = new DOMParser();
+				const doc = parser.parseFromString(text, 'text/html');
+
+				// Step 3: Define IDs to filter
+				const idsToInclude = ['wp-blocks-js-after', 'plus-editor-css-css', 'plus-editor-js-js', 'elementor-editor-js-before'];
+
+				// Step 4: Select and filter elements
+				const elements = Array.from(doc.querySelectorAll('link[rel="stylesheet"],script')).filter(element => {
+					return element.id && (idsToInclude.includes(element.id) || !document.getElementById(element.id));
+				});
+
+				// Step 5: Process each element (assuming Oa is a defined function)
+				return elements.reduce((promise, element) => {
+					return promise.then(() => Oa(element));
+				}, Promise.resolve());
+			})
+			.catch(error => {
+				console.error('Error fetching or processing data:', error);
+			});
+	}
+
+	await fetchAndProcessData();
+
+	if (typeof elementor !== 'undefined') {
+		elementor.addWidgetsCache(elementor.getConfig().initial_document.widgets);
+	}
 }
 
 export const WKit_successfully_import_template = (props) => {
@@ -2068,6 +2088,7 @@ export const WKit_successfully_import_template = (props) => {
 					'email': userEmail,
 					'template_ids': JSON.stringify(props.template_id.pages),
 					'editor': (wdkitData.use_editor == 'wdkit' && props.template_id.builder ? props.template_id.builder : wdkitData.use_editor),
+					'builder': props.template_id.builder,
 					'page_section': 'pages',
 					'custom_meta': props.custom_meta_import || false
 				}
@@ -2093,6 +2114,7 @@ export const WKit_successfully_import_template = (props) => {
 					'email': userEmail,
 					'template_ids': JSON.stringify(props.template_id.sections),
 					'editor': (wdkitData.use_editor == 'wdkit' && props.template_id.builder ? props.template_id.builder : wdkitData.use_editor),
+					'builder': props.template_id.builder,
 					'page_section': 'sections',
 					'custom_meta': props.custom_meta_import || false
 				}
@@ -2121,9 +2143,15 @@ export const WKit_successfully_import_template = (props) => {
 				'email': userEmail,
 				'template_id': props.template_id,
 				'editor': wdkitData.use_editor,
+				'builder': wdkitData.use_editor,
 				'custom_meta': props.custom_meta_import || false
 			}
 			let res = await wdKit_Form_data(form_arr);
+
+			if (wdkitData.use_editor == 'elementor') {
+				await checkPlugin_widget();
+			}
+
 			if (res?.success) {
 				seterrormsg({ 'message': res?.message, 'description': res?.description });
 				// props.wdkit_set_toast(res?.data?.message, 'subtitle', '', res?.data?.success);
@@ -2144,8 +2172,18 @@ export const WKit_successfully_import_template = (props) => {
 					} else {
 						wp.data.dispatch('core/block-editor').insertBlocks(blocks);
 					}
+
+					setTimeout(() => {
+						wdKit_Form_data({ 'type': 'scan_nexter_widgets' });
+					}, 3000);
+
 					setIsLoading(false);
 					setsuccessmsg(true);
+
+					await setTimeout(async () => {
+						await wp.data.dispatch('core/editor').savePost();
+						await window.location.reload();
+					}, 1000);
 
 					return () => {
 						clearTimeout(timeId)
@@ -2153,7 +2191,6 @@ export const WKit_successfully_import_template = (props) => {
 				} else if (tempContent && tempContent.content && tempContent.file_type == 'elementor' && wdkitData.use_editor == 'elementor') {
 					setsuccessmsg(true);
 					seterrormsg({ 'message': res?.message, 'description': res?.description });
-
 
 					let content_str = JSON.stringify(tempContent.content);
 					if (/\.(jpg|png|jpeg|gif|svg|webp)/gi.test(content_str)) {
@@ -2201,6 +2238,15 @@ export const WKit_successfully_import_template = (props) => {
 						}
 						setIsLoading(false);
 
+						if (wdkitData.use_editor == 'elementor') {
+							let form = new FormData();
+							form.append('action', 'get_wdesignkit');
+							form.append('kit_nonce', wdkitData.kit_nonce);
+							form.append('type', 'scan_tpae_widgets');
+
+							axios.post(ajaxurl, form)
+						}
+
 						return () => {
 							clearTimeout(timeId)
 						}
@@ -2214,6 +2260,7 @@ export const WKit_successfully_import_template = (props) => {
 				// props.wdkit_set_toast(res?.data?.message, 'subtitle', '', res?.data?.success);
 				setIsLoading(false);
 			}
+
 		} else {
 			setIsLoading(false);
 		}
@@ -2241,7 +2288,7 @@ export const WKit_successfully_import_template = (props) => {
 					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0.666016 8.00033C0.666016 8.00033 3.33268 2.66699 7.99935 2.66699C12.666 2.66699 15.3327 8.00033 15.3327 8.00033C15.3327 8.00033 12.666 13.3337 7.99935 13.3337C3.33268 13.3337 0.666016 8.00033 0.666016 8.00033Z" stroke="#2A2A96" strokeLinecap="round" strokeLinejoin="round" /><path d="M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z" stroke="#2A2A96" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
-					{__('View')}
+					{__('View', 'wdesignkit')}
 				</a>
 			</div>
 		)
@@ -2265,12 +2312,12 @@ export const WKit_successfully_import_template = (props) => {
 
 	return (
 		<Fragment>
-			<div className="popup-header">{__('Importing Templates')}</div>
+			<div className="popup-header">{__('Importing Templates', 'wdesignkit')}</div>
 			<div className="success-body">
 
 				{isLoading ?
 					<div className={'import-data-loading'}>
-						<span>{template_name} Importing...</span>
+						<span>{template_name} {__('Importing...', 'wdesignkit')}</span>
 						<div className='wkit-import-progressBar-loader'>
 							<div className='wkit-import-data-progressBar-thumb'></div>
 						</div>
@@ -2366,6 +2413,16 @@ export const WKit_successfully_import_kit = (props) => {
 		checkPlugin()
 	}, [props.template_id]);
 
+	const Get_temp_builer = (id) => {
+		let post_builder = props?.meta_data?.builder ? props.meta_data.builder : [];
+		let index = post_builder.findIndex((data) => data.p_id == id);
+		if (index > -1 && post_builder[index].original_slug) {
+			return post_builder[index].original_slug;
+		} else {
+			return '';
+		}
+	}
+
 	var img_path = wdkitData.WDKIT_URL;
 
 	const checkPlugin = () => {
@@ -2392,6 +2449,7 @@ export const WKit_successfully_import_kit = (props) => {
 						'email': userEmail,
 						'template_ids': JSON.stringify(self),
 						'editor': (wdkitData.use_editor == 'wdkit' && props.template_id.builder ? props.template_id.builder : wdkitData.use_editor),
+						'builder': Get_temp_builer(self.post_builder),
 						'page_section': 'pages',
 						'custom_meta': props.custom_meta_import || false
 					}
@@ -2426,6 +2484,7 @@ export const WKit_successfully_import_kit = (props) => {
 						'email': userEmail,
 						'template_ids': JSON.stringify(self),
 						'editor': (wdkitData.use_editor == 'wdkit' && props.template_id.builder ? props.template_id.builder : wdkitData.use_editor),
+						'builder': Get_temp_builer(self.post_builder),
 						'page_section': 'sections',
 						'custom_meta': props.custom_meta_import || false
 					}
@@ -2456,7 +2515,7 @@ export const WKit_successfully_import_kit = (props) => {
 
 	return (
 		<Fragment>
-			<div className="popup-header">{__('Importing Templates')}</div>
+			<div className="popup-header">{__('Importing Templates', 'wdesignkit')}</div>
 			<div className="success-body">
 				{(resSections.length + resPages.length) == totaltemplates ?
 					<div className="wkit-import-kit-success-header">
@@ -2471,7 +2530,7 @@ export const WKit_successfully_import_kit = (props) => {
 									</svg>
 									<span className="wkit-import-kit-success-title">{__(`${Number(TempSuccessCount + SectionSuccessCount) > 0 ? Number(TempSuccessCount + SectionSuccessCount) : 0}/${totaltemplates} Successfully Imported`)}</span>
 								</div>
-								<div className="wkit-import-kit-success-subTitle">{__('Yay! Your kit has been successfully imported')}</div>
+								<div className="wkit-import-kit-success-subTitle">{__('Yay! Your kit has been successfully imported', 'wdesignkit')}</div>
 							</Fragment>
 						}
 						{(TempSuccessCount + SectionSuccessCount) === 0 &&
@@ -2482,10 +2541,10 @@ export const WKit_successfully_import_kit = (props) => {
 										<path d="M20.152 14.5977H19.8482C19.1004 14.5977 18.4941 15.2039 18.4941 15.9517V22.4239C18.4941 23.1717 19.1004 23.778 19.8482 23.778H20.152C20.8998 23.778 21.506 23.1717 21.506 22.4239V15.9517C21.506 15.2039 20.8998 14.5977 20.152 14.5977Z" fill="#FFF7ED" />
 										<path d="M20.0001 28.9142C20.8318 28.9142 21.506 28.24 21.506 27.4083C21.506 26.5766 20.8318 25.9023 20.0001 25.9023C19.1684 25.9023 18.4941 26.5766 18.4941 27.4083C18.4941 28.24 19.1684 28.9142 20.0001 28.9142Z" fill="#FFF7ED" />
 									</svg>
-									<div className="wkit-import-kit-fail-title">{__(`${Number(TempSuccessCount + SectionSuccessCount) > 0 ? Number(TempSuccessCount + SectionSuccessCount) : 0}/${totaltemplates} Import Failed!`)}</div>
+									<div className="wkit-import-kit-fail-title">{__(`${Number(TempSuccessCount + SectionSuccessCount) > 0 ? Number(TempSuccessCount + SectionSuccessCount) : 0}/${totaltemplates} Import Failed!`, 'wdesignkit')}</div>
 								</div>
-								<div className="wkit-import-kit-fail-subTitle">{__('Ops! Your templates are failed to import. Please Try Again.')}
-									<a href={wdkitData.WDKIT_DOC_URL + '/documents/how-to-manage-licence-in-wdesignkit/#Manage-Licence'} style={{ color: "#040483", fontWeight: "500" }} target="_blank" rel="noopener noreferrer">Why Failed?</a>
+								<div className="wkit-import-kit-fail-subTitle">{__('Ops! Your templates are failed to import. Please Try Again.', 'wdesignkit')}
+									<a href={wdkitData.WDKIT_DOC_URL + '/documents/how-to-manage-licence-in-wdesignkit/#Manage-Licence'} style={{ color: "#040483", fontWeight: "500" }} target="_blank" rel="noopener noreferrer">{__('Why Failed?', 'wdesignkit')}</a>
 								</div>
 							</Fragment>
 						}
@@ -2499,8 +2558,8 @@ export const WKit_successfully_import_kit = (props) => {
 									</svg>
 									<div className="wkit-import-kit-partial-title">{__(`${Number(TempSuccessCount + SectionSuccessCount) > 0 ? Number(TempSuccessCount + SectionSuccessCount) : 0}/${totaltemplates}  Partially Imported!`)}</div>
 								</div>
-								<div className="wkit-import-kit-partial-subTitle">{__(`Happy to say your ${Number(TempSuccessCount + SectionSuccessCount)} Templates Imported but sorry to know ${totaltemplates - (TempSuccessCount + SectionSuccessCount)} Failed to Import.`)}
-									<a href={wdkitData.WDKIT_DOC_URL + 'documents/how-to-manage-licence-in-wdesignkit/#Manage-Licence'} style={{ color: "#040483", fontWeight: "500" }} target="_blank" rel="noopener noreferrer">Why Failed?</a>
+								<div className="wkit-import-kit-partial-subTitle">{__(`Happy to say your ${Number(TempSuccessCount + SectionSuccessCount)} Templates Imported but sorry to know ${totaltemplates - (TempSuccessCount + SectionSuccessCount)} Failed to Import.`, 'wdesignkit')}
+									<a href={wdkitData.WDKIT_DOC_URL + 'documents/how-to-manage-licence-in-wdesignkit/#Manage-Licence'} style={{ color: "#040483", fontWeight: "500" }} target="_blank" rel="noopener noreferrer">{__('Why Failed?', 'wdesignkit')}</a>
 								</div>
 							</Fragment>
 						}
@@ -2519,16 +2578,16 @@ export const WKit_successfully_import_kit = (props) => {
 					{props.template_id.pages.length > 0 &&
 						<div className='wkit-success-content'>
 							<div className='wkit-success-template-content'>
-								<span className='wkit-success-template-count'>{__('Pages :')} {TempSuccessCount}</span>
+								<span className='wkit-success-template-count'>{__('Pages :', 'wdesignkit')} {TempSuccessCount}</span>
 								{TempFailCount > 0 &&
 									<div className='wkit-fail-template-count'>
 										<span className='wkit-success-temp-container'>
 											<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 10C18 14.4183 14.4183 18 10 18C5.58171 18 2 14.4183 2 10C2 5.58171 5.58171 2 10 2C14.4183 2 18 5.58171 18 10ZM9.07464 14.236L15.0102 8.30045C15.2117 8.0989 15.2117 7.7721 15.0102 7.57055L14.2802 6.84065C14.0787 6.63907 13.7519 6.63907 13.5503 6.84065L8.70968 11.6813L6.44971 9.42126C6.24816 9.21971 5.92136 9.21971 5.71977 9.42126L4.98987 10.1511C4.78832 10.3527 4.78832 10.6796 4.98987 10.8811L8.34471 14.2359C8.54629 14.4375 8.87306 14.4375 9.07464 14.236Z" fill="#00A31B" /></svg>
-											<span style={{ color: '#00A31B' }}>{TempSuccessCount} {__('Success.')}</span>
+											<span style={{ color: '#00A31B' }}>{TempSuccessCount} {__('Success.', 'wdesignkit')}</span>
 										</span>
 										<span className='wkit-fail-temp-container'>
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8.96322 4.14666L3.14104 14.2302C3.03587 14.4123 2.98049 14.6189 2.98047 14.8292C2.98045 15.0395 3.03579 15.2461 3.14092 15.4282C3.24606 15.6103 3.39729 15.7615 3.5794 15.8667C3.76151 15.9718 3.9681 16.0271 4.17838 16.0271H15.8218C16.0321 16.0271 16.2387 15.9718 16.4208 15.8667C16.6029 15.7615 16.7541 15.6103 16.8593 15.4282C16.9644 15.2461 17.0197 15.0395 17.0197 14.8292C17.0197 14.6189 16.9643 14.4123 16.8592 14.2302L11.0376 4.14666C10.9325 3.9646 10.7813 3.81341 10.5992 3.7083C10.4172 3.60319 10.2106 3.54785 10.0004 3.54785C9.79018 3.54785 9.58366 3.60319 9.40159 3.7083C9.21953 3.81341 9.06834 3.9646 8.96322 4.14666Z" fill="#EE404C" /><path d="M10.077 7.25684H9.92508C9.55116 7.25684 9.24805 7.55995 9.24805 7.93387V11.17C9.24805 11.5439 9.55116 11.847 9.92508 11.847H10.077C10.4509 11.847 10.754 11.5439 10.754 11.17V7.93387C10.754 7.55995 10.4509 7.25684 10.077 7.25684Z" fill="#FFF7ED" /><path d="M10.001 14.4132C10.4169 14.4132 10.754 14.076 10.754 13.6602C10.754 13.2443 10.4169 12.9072 10.001 12.9072C9.58516 12.9072 9.24805 13.2443 9.24805 13.6602C9.24805 14.076 9.58516 14.4132 10.001 14.4132Z" fill="#FFF7ED" /></svg>
-											<span>{TempFailCount} {__('Failed.')}</span>
+											<span>{TempFailCount} {__('Failed.', 'wdesignkit')}</span>
 										</span>
 									</div>
 								}
@@ -2590,16 +2649,16 @@ export const WKit_successfully_import_kit = (props) => {
 					{props.template_id.sections.length > 0 &&
 						<div className='wkit-success-content'>
 							<div className='wkit-success-template-content'>
-								<span className='wkit-success-template-count'>{__('Sections :')} {SectionSuccessCount}</span>
+								<span className='wkit-success-template-count'>{__('Sections :', 'wdesignkit')} {SectionSuccessCount}</span>
 								{SectionFailCount > 0 &&
 									<div className='wkit-fail-template-count'>
 										<span className='wkit-success-temp-container'>
 											<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 10C18 14.4183 14.4183 18 10 18C5.58171 18 2 14.4183 2 10C2 5.58171 5.58171 2 10 2C14.4183 2 18 5.58171 18 10ZM9.07464 14.236L15.0102 8.30045C15.2117 8.0989 15.2117 7.7721 15.0102 7.57055L14.2802 6.84065C14.0787 6.63907 13.7519 6.63907 13.5503 6.84065L8.70968 11.6813L6.44971 9.42126C6.24816 9.21971 5.92136 9.21971 5.71977 9.42126L4.98987 10.1511C4.78832 10.3527 4.78832 10.6796 4.98987 10.8811L8.34471 14.2359C8.54629 14.4375 8.87306 14.4375 9.07464 14.236Z" fill="#00A31B" /></svg>
-											<span style={{ color: '#00A31B' }}>{SectionSuccessCount}{__('Success.')}</span>
+											<span style={{ color: '#00A31B' }}>{SectionSuccessCount}{__('Success.', 'wdesignkit')}</span>
 										</span>
 										<span className='wkit-fail-temp-container'>
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8.96322 4.14666L3.14104 14.2302C3.03587 14.4123 2.98049 14.6189 2.98047 14.8292C2.98045 15.0395 3.03579 15.2461 3.14092 15.4282C3.24606 15.6103 3.39729 15.7615 3.5794 15.8667C3.76151 15.9718 3.9681 16.0271 4.17838 16.0271H15.8218C16.0321 16.0271 16.2387 15.9718 16.4208 15.8667C16.6029 15.7615 16.7541 15.6103 16.8593 15.4282C16.9644 15.2461 17.0197 15.0395 17.0197 14.8292C17.0197 14.6189 16.9643 14.4123 16.8592 14.2302L11.0376 4.14666C10.9325 3.9646 10.7813 3.81341 10.5992 3.7083C10.4172 3.60319 10.2106 3.54785 10.0004 3.54785C9.79018 3.54785 9.58366 3.60319 9.40159 3.7083C9.21953 3.81341 9.06834 3.9646 8.96322 4.14666Z" fill="#EE404C" /><path d="M10.077 7.25684H9.92508C9.55116 7.25684 9.24805 7.55995 9.24805 7.93387V11.17C9.24805 11.5439 9.55116 11.847 9.92508 11.847H10.077C10.4509 11.847 10.754 11.5439 10.754 11.17V7.93387C10.754 7.55995 10.4509 7.25684 10.077 7.25684Z" fill="#FFF7ED" /><path d="M10.001 14.4132C10.4169 14.4132 10.754 14.076 10.754 13.6602C10.754 13.2443 10.4169 12.9072 10.001 12.9072C9.58516 12.9072 9.24805 13.2443 9.24805 13.6602C9.24805 14.076 9.58516 14.4132 10.001 14.4132Z" fill="#FFF7ED" /></svg>
-											<span>{SectionFailCount} {__('Failed.')}</span>
+											<span>{SectionFailCount} {__('Failed.', 'wdesignkit')}</span>
 										</span>
 									</div>
 								}
@@ -2674,7 +2733,7 @@ export const Wkit_success_message = () => {
 					<path d="M1.49554 5.97363L3.98608 8.46417L10.4615 1.98877" stroke="white" strokeWidth="1.99243" strokeLinecap="round" strokeLinejoin="round" />
 				</svg>
 			</div>
-			<div className="wkit-text">{__('Successfully')} </div>
+			<div className="wkit-text">{__('Successfully', 'wdesignkit')} </div>
 		</div>
 	);
 }
@@ -2689,7 +2748,7 @@ export const Wkit_failed_message = () => {
 						<path d="M8 0C3.58125 0 0 3.58125 0 8C0 12.4187 3.58125 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58125 12.4187 0 8 0ZM8 15C4.14062 15 1 11.8594 1 8C1 4.14062 4.14062 1 8 1C11.8594 1 15 4.14062 15 8C15 11.8594 11.8594 15 8 15ZM8 5.75C8.41406 5.75 8.75 5.41437 8.75 5C8.75 4.58594 8.41406 4.25 8 4.25C7.58594 4.25 7.25 4.58437 7.25 5C7.25 5.41563 7.58437 5.75 8 5.75ZM9.5 11H8.5V7.5C8.5 7.225 8.275 7 8 7H7C6.725 7 6.5 7.225 6.5 7.5C6.5 7.775 6.725 8 7 8H7.5V11H6.5C6.225 11 6 11.225 6 11.5C6 11.775 6.225 12 6.5 12H9.5C9.77612 12 10 11.7761 10 11.5C10 11.225 9.775 11 9.5 11Z" className="wkit-icon-white" />
 					</svg>
 				</div>
-				<div className="wkit-text">{__('Failed')} </div>
+				<div className="wkit-text">{__('Failed', 'wdesignkit')} </div>
 			</div>
 		</div>
 	);
@@ -2765,14 +2824,14 @@ export const Wkit_add_workspace = (props) => {
 					</span>
 				</a>
 				<div className={"wdesignkit-model-content"}>
-					<div className='popup-header'>{__("Add New Workspace")}</div>
+					<div className='popup-header'>{__('Add New Workspace', 'wdesignkit')}</div>
 					<div className='popup-body wkit-AddWp-popup-body'>
-						<label className="wkit-popup-content-title">{__("Workspace Name")}</label>
+						<label className="wkit-popup-content-title">{__('Workspace Name', 'wdesignkit')}</label>
 						<input
 							type={"text"}
 							name={"workspace-name"}
 							className={"wkit-search-share " + errorTextMsg}
-							placeholder={__('Enter Workspace Name')}
+							placeholder={__('Enter Workspace Name', 'wdesignkit')}
 							value={ws_name}
 							onChange={(ev) => {
 								if (Condition_check(ev.target.value)) {
@@ -2781,7 +2840,7 @@ export const Wkit_add_workspace = (props) => {
 							}}
 						/>
 						{!isSaving ?
-							<button className={"wkit-add-workspace-btn wkit-btn-class"} onClick={() => saveData()}>{__('Next')}</button>
+							<button className={"wkit-add-workspace-btn wkit-btn-class"} onClick={() => saveData()}>{__('Next', 'wdesignkit')}</button>
 							:
 							<button className={"wkit-add-workspace-btn wkit-btn-class"}>{WkitLoader()}</button>
 						}
@@ -2836,15 +2895,17 @@ export const Wkit_template_Skeleton = (props) => {
 export const Wkit_availble_not = (props) => {
 	var type = props?.page ? props?.page : '';
 	var img_path = wdkitData.WDKIT_URL;
-	var link = props?.link ? props.link : wdkitData.WDKIT_DOC_URL + 'docs/';
+	var link = props?.link ? props.link : '';
 
 	return (
 		<div className='wkit-content-not-availble'>
 			<img className={"wkit-pin-img-temp"} src={img_path + "assets/images/jpg/empty-dog.png"} alt="section" />
-			<h5 className='wkit-common-desc'>{__(`Nothing related found!`)}</h5>
-			<a href={link} target="_blank" rel="noopener noreferrer">
-				<button type='submit' className='wkit-common-btn wkit-pink-btn-class' >{__(`How to Add ${type}`)}</button>
-			</a>
+			<h5 className='wkit-common-desc'>{__('Nothing related found!', 'wdesignkit')}</h5>
+			{link && !(wdkitData?.wdkit_white_label?.help_link) &&
+				<a href={link} target="_blank" rel="noopener noreferrer">
+					<button type='submit' className='wkit-common-btn wkit-pink-btn-class' >{__(`How to Add ${type}`, 'wdesignkit')}</button>
+				</a>
+			}
 		</div>
 	);
 }
@@ -2897,101 +2958,111 @@ export const Wkit_mobile_header = (props) => {
 		document.querySelector(".wkit-hamburger-menu-content.wkit-hamburger-content-show").classList.remove("wkit-hamburger-content-show");
 		document.querySelector(".wkit-opp").style.visibility = "hidden";
 	}
-	if (!(pathname.includes('builder') && pathname.includes('widget-listing'))) {
+	if (!(pathname.includes('builder') && pathname.includes('widget-listing')) && !pathname.includes('theplus_popup') && !pathname.includes('download')) {
+
+		let site_link = wdkitData?.wdkit_white_label?.website_url || wdkitData?.wdkit_server_url,
+			site_image = wdkitData?.wdkit_white_label?.plugin_logo || img_path + "assets/images/jpg/Wdesignkit-logo.png",
+			site_logo = wdkitData?.wdkit_white_label?.plugin_logo || img_path + "assets/images/jpg/Wdesignkit-full-logo-original.png";
 		return (
 			<div className='wkit-mobile-header-main'>
-				<a href={wdkitData.wdkit_server_url} target="_blank" rel="noopener noreferrer">
-					<img className='wdkit-main-logo' src={img_path + "/assets/images/jpg/Wdesignkit-logo.png"} alt="wdesignkit-logo" />
+				<a href={site_link} target="_blank" rel="noopener noreferrer">
+					<img className='wdkit-main-logo' src={site_image} alt="wdesignkit-logo" />
 				</a>
-				<div className='wkit-mobile-hamburger-dot'>
 
-					<div className='wkit-hamburger-icon' onClick={() => { wkit_humber_open() }}></div>
-					<div className='wkit-opp' onClick={() => { wkit_humber_close() }}>
-						<ul className="wkit-hamburger-menu-content">
-							<div className="wkit-menu-site-logo">
-								<img src={img_path + "assets/images/jpg/Wdesignkit-full-logo-original.png"} alt="wdesignlogo" draggable="false" />
-							</div>
-							{temp_validation &&
-								<li className={pathname.includes("browse") ? 'wkit-mobileMenu-active' : ''}>
-									<Link to='/browse'>
-										<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M19 5H5V8H19V5ZM3 8V9.5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V9.5V8V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V8ZM19 19V9.5H5L5 19H19ZM16.3819 12.5H7.61805H6.5C6.22386 12.5 6 12.2761 6 12V11.5C6 11.2239 6.22386 11 6.5 11H7.61805H16.3819H17.5C17.7761 11 18 11.2239 18 11.5V12C18 12.2761 17.7761 12.5 17.5 12.5H16.3819ZM7.86622 15.5C7.7784 15.3482 7.65181 15.2216 7.5 15.1338C7.34819 15.2216 7.2216 15.3482 7.13378 15.5C7.2216 15.6518 7.34819 15.7784 7.5 15.8662C7.65181 15.7784 7.7784 15.6518 7.86622 15.5ZM7 14C6.44772 14 6 14.4477 6 15V16C6 16.5523 6.44772 17 7 17H8C8.55228 17 9 16.5523 9 16V15C9 14.4477 8.55228 14 8 14H7ZM12 15.1338C12.1518 15.2216 12.2784 15.3482 12.3662 15.5C12.2784 15.6518 12.1518 15.7784 12 15.8662C11.8482 15.7784 11.7216 15.6518 11.6338 15.5C11.7216 15.3482 11.8482 15.2216 12 15.1338ZM10.5 15C10.5 14.4477 10.9477 14 11.5 14H12.5C13.0523 14 13.5 14.4477 13.5 15V16C13.5 16.5523 13.0523 17 12.5 17H11.5C10.9477 17 10.5 16.5523 10.5 16V15ZM16.8662 15.5C16.7784 15.3482 16.6518 15.2216 16.5 15.1338C16.3482 15.2216 16.2216 15.3482 16.1338 15.5C16.2216 15.6518 16.3482 15.7784 16.5 15.8662C16.6518 15.7784 16.7784 15.6518 16.8662 15.5ZM16 14C15.4477 14 15 14.4477 15 15V16C15 16.5523 15.4477 17 16 17H17C17.5523 17 18 16.5523 18 16V15C18 14.4477 17.5523 14 17 14H16ZM6.5 7C6.77614 7 7 6.77614 7 6.5C7 6.22386 6.77614 6 6.5 6C6.22386 6 6 6.22386 6 6.5C6 6.77614 6.22386 7 6.5 7ZM9 6.5C9 6.77614 8.77614 7 8.5 7C8.22386 7 8 6.77614 8 6.5C8 6.22386 8.22386 6 8.5 6C8.77614 6 9 6.22386 9 6.5ZM10.5 7C10.7761 7 11 6.77614 11 6.5C11 6.22386 10.7761 6 10.5 6C10.2239 6 10 6.22386 10 6.5C10 6.77614 10.2239 7 10.5 7Z" fill="white"></path></svg>
-										{__('Browse Templates')}
-									</Link>
-								</li>
-							}
-							{window.wdkit_editor != "wdkit" &&
-								<li className={pathname.includes("save_template") ? 'wkit-mobileMenu-active' : ''}>
-									<Link to='/save_template'>
-										<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M20.625 5.375H4.375V8.625H20.625V5.375ZM4.375 21.625V10.25H12.5V14.8214C12.5 15.6001 13.3679 16.0646 14.0158 15.6327L15.75 14.4765L17.4842 15.6327C18.1321 16.0646 19 15.6001 19 14.8214V10.25H20.625V21.625H4.375ZM17.375 10.25H14.125V13.6068L15.2542 12.854C15.5544 12.6539 15.9456 12.6539 16.2458 12.854L17.375 13.6068V10.25ZM4.375 3.75C3.47754 3.75 2.75 4.47754 2.75 5.375V21.625C2.75 22.5225 3.47754 23.25 4.375 23.25H20.625C21.5225 23.25 22.25 22.5225 22.25 21.625V5.375C22.25 4.47754 21.5225 3.75 20.625 3.75H4.375ZM7.625 7C7.625 7.44873 7.26123 7.8125 6.8125 7.8125C6.36377 7.8125 6 7.44873 6 7C6 6.55127 6.36377 6.1875 6.8125 6.1875C7.26123 6.1875 7.625 6.55127 7.625 7ZM10.0625 7.8125C10.5112 7.8125 10.875 7.44873 10.875 7C10.875 6.55127 10.5112 6.1875 10.0625 6.1875C9.61376 6.1875 9.25 6.55127 9.25 7C9.25 7.44873 9.61376 7.8125 10.0625 7.8125ZM6 14.3125C6 13.8638 6.36377 13.5 6.8125 13.5H8.4375C8.88623 13.5 9.25 13.8638 9.25 14.3125C9.25 14.7612 8.88623 15.125 8.4375 15.125H6.8125C6.36377 15.125 6 14.7612 6 14.3125ZM6.8125 17.5625C6.36377 17.5625 6 17.9263 6 18.375C6 18.8237 6.36377 19.1875 6.8125 19.1875H15.75C16.1987 19.1875 16.5625 18.8237 16.5625 18.375C16.5625 17.9263 16.1987 17.5625 15.75 17.5625H6.8125Z" fill="white" /></svg>										{__('Save Template')}
-									</Link></li>
-							}
-							{window.wdkit_editor == "wdkit" && builder_validation &&
-								<li className={pathname.includes("widget-browse") ? 'wkit-mobileMenu-active' : ''}>
-									<Link to="/widget-browse">
-										<svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M9.85305 0.582239C10.5417 0.10019 11.4583 0.100192 12.1469 0.582239L11 2.2207L2.66749 8.05344L1.52057 6.41497L9.85305 0.582239ZM1.83245 13.6967L1.4181 13.3652C0.375944 12.5314 0.427213 10.9303 1.52057 10.165L1.83245 9.94666L1.4181 9.61518C0.375943 8.78145 0.427214 7.18032 1.52057 6.41497L2.66749 8.05344L6.62467 11.2192L9.75058 13.7199C10.481 14.3043 11.5189 14.3043 12.2494 13.7199L15.3753 11.2192L19.3325 8.05344L11 2.2207L12.1469 0.582239L20.4794 6.41497C21.5727 7.18033 21.624 8.78145 20.5818 9.61518L20.1675 9.94666L20.4794 10.165C21.5727 10.9303 21.624 12.5315 20.5818 13.3652L20.1675 13.6967L20.4794 13.915C21.5727 14.6803 21.624 16.2815 20.5818 17.1152L16.6247 20.2809L13.4988 22.7816C12.0379 23.9503 9.96207 23.9503 8.50119 22.7816L5.37528 20.2809L1.4181 17.1152C0.375944 16.2815 0.427213 14.6803 1.52057 13.915L1.83245 13.6967ZM3.45999 14.9987L2.66749 15.5534L6.62467 18.7192L9.75058 21.2199C10.481 21.8043 11.5189 21.8043 12.2494 21.2199L15.3753 18.7192L19.3325 15.5534L18.54 14.9987L16.6247 16.5309L13.4988 19.0316C12.0379 20.2003 9.96207 20.2003 8.50119 19.0316L5.37528 16.5309L3.45999 14.9987ZM16.6247 12.7809L18.54 11.2487L19.3325 11.8034L15.3753 14.9692L12.2494 17.4699C11.5189 18.0543 10.481 18.0543 9.75058 17.4699L6.62467 14.9692L2.66749 11.8034L3.45999 11.2487L5.37528 12.7809L8.50119 15.2816C9.96207 16.4503 12.0379 16.4503 13.4988 15.2816L16.6247 12.7809Z" fill="white"></path></svg>
-										{__('Browse Widgets')}
-									</Link></li>
-							}
-							{temp_validation &&
-								<li className={pathname.includes("my_uploaded") ? 'wkit-mobileMenu-active' : ''}>
-									<Link to="/my_uploaded">
-										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 16H15V10H19L12 3L5 10H9V16ZM12 5.83L14.17 8H13V14H11V8H9.83L12 5.83ZM5 18H19V20H5V18Z" fill="white" /></svg>
-										{__('My Templates')}
-									</Link>
-								</li>
-							}
-							{(temp_validation == true || builder_validation == true) &&
-								<>
-									<li className={pathname.includes("share_with_me") ? 'wkit-mobileMenu-active' : ''}>
-										<Link to='/share_with_me'>
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.35C15.11 18.56 15.08 18.78 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08ZM18 4C18.55 4 19 4.45 19 5C19 5.55 18.55 6 18 6C17.45 6 17 5.55 17 5C17 4.45 17.45 4 18 4ZM6 13C5.45 13 5 12.55 5 12C5 11.45 5.45 11 6 11C6.55 11 7 11.45 7 12C7 12.55 6.55 13 6 13ZM18 20.02C17.45 20.02 17 19.57 17 19.02C17 18.47 17.45 18.02 18 18.02C18.55 18.02 19 18.47 19 19.02C19 19.57 18.55 20.02 18 20.02Z" fill="white" /></svg>
-											{__('Shared with Me')}
+				{!window.location?.hash?.includes("#/preset") &&
+					<div className='wkit-mobile-hamburger-dot'>
+
+						<div className='wkit-hamburger-icon' onClick={() => { wkit_humber_open() }}></div>
+						<div className='wkit-opp' onClick={() => { wkit_humber_close() }}>
+							<ul className="wkit-hamburger-menu-content">
+								<div className="wkit-menu-site-logo">
+									<img src={site_logo} alt="wdesignkitlogo" draggable="false" />
+								</div>
+								{temp_validation &&
+									<li className={pathname.includes("browse") ? 'wkit-mobileMenu-active' : ''}>
+										<Link to='/browse'>
+											<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M19 5H5V8H19V5ZM3 8V9.5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V9.5V8V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V8ZM19 19V9.5H5L5 19H19ZM16.3819 12.5H7.61805H6.5C6.22386 12.5 6 12.2761 6 12V11.5C6 11.2239 6.22386 11 6.5 11H7.61805H16.3819H17.5C17.7761 11 18 11.2239 18 11.5V12C18 12.2761 17.7761 12.5 17.5 12.5H16.3819ZM7.86622 15.5C7.7784 15.3482 7.65181 15.2216 7.5 15.1338C7.34819 15.2216 7.2216 15.3482 7.13378 15.5C7.2216 15.6518 7.34819 15.7784 7.5 15.8662C7.65181 15.7784 7.7784 15.6518 7.86622 15.5ZM7 14C6.44772 14 6 14.4477 6 15V16C6 16.5523 6.44772 17 7 17H8C8.55228 17 9 16.5523 9 16V15C9 14.4477 8.55228 14 8 14H7ZM12 15.1338C12.1518 15.2216 12.2784 15.3482 12.3662 15.5C12.2784 15.6518 12.1518 15.7784 12 15.8662C11.8482 15.7784 11.7216 15.6518 11.6338 15.5C11.7216 15.3482 11.8482 15.2216 12 15.1338ZM10.5 15C10.5 14.4477 10.9477 14 11.5 14H12.5C13.0523 14 13.5 14.4477 13.5 15V16C13.5 16.5523 13.0523 17 12.5 17H11.5C10.9477 17 10.5 16.5523 10.5 16V15ZM16.8662 15.5C16.7784 15.3482 16.6518 15.2216 16.5 15.1338C16.3482 15.2216 16.2216 15.3482 16.1338 15.5C16.2216 15.6518 16.3482 15.7784 16.5 15.8662C16.6518 15.7784 16.7784 15.6518 16.8662 15.5ZM16 14C15.4477 14 15 14.4477 15 15V16C15 16.5523 15.4477 17 16 17H17C17.5523 17 18 16.5523 18 16V15C18 14.4477 17.5523 14 17 14H16ZM6.5 7C6.77614 7 7 6.77614 7 6.5C7 6.22386 6.77614 6 6.5 6C6.22386 6 6 6.22386 6 6.5C6 6.77614 6.22386 7 6.5 7ZM9 6.5C9 6.77614 8.77614 7 8.5 7C8.22386 7 8 6.77614 8 6.5C8 6.22386 8.22386 6 8.5 6C8.77614 6 9 6.22386 9 6.5ZM10.5 7C10.7761 7 11 6.77614 11 6.5C11 6.22386 10.7761 6 10.5 6C10.2239 6 10 6.22386 10 6.5C10 6.77614 10.2239 7 10.5 7Z" fill="white"></path></svg>
+											{__('Browse Templates', 'wdesignkit')}
 										</Link>
 									</li>
-									<li className={pathname.includes("manage_workspace") ? 'wkit-mobileMenu-active' : ''}><Link to='/manage_workspace' ><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 15C7.1 15 8 15.9 8 17C8 18.1 7.1 19 6 19C4.9 19 4 18.1 4 17C4 15.9 4.9 15 6 15ZM6 13C3.8 13 2 14.8 2 17C2 19.2 3.8 21 6 21C8.2 21 10 19.2 10 17C10 14.8 8.2 13 6 13ZM12 5C13.1 5 14 5.9 14 7C14 8.1 13.1 9 12 9C10.9 9 10 8.1 10 7C10 5.9 10.9 5 12 5ZM12 3C9.8 3 8 4.8 8 7C8 9.2 9.8 11 12 11C14.2 11 16 9.2 16 7C16 4.8 14.2 3 12 3ZM18 15C19.1 15 20 15.9 20 17C20 18.1 19.1 19 18 19C16.9 19 16 18.1 16 17C16 15.9 16.9 15 18 15ZM18 13C15.8 13 14 14.8 14 17C14 19.2 15.8 21 18 21C20.2 21 22 19.2 22 17C22 14.8 20.2 13 18 13Z" fill="white" /></svg>Manage Workspace</Link></li>
-								</>
-							}
-							{window.wdkit_editor == "wdkit" &&
-								<Fragment>
-									<li className={pathname.includes("activate") ? 'wkit-mobileMenu-active' : ''}>
-										<Link to="/activate">
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M12 8C13.1046 8 14 7.10457 14 6C14 4.89543 13.1046 4 12 4C10.8954 4 10 4.89543 10 6C10 7.10457 10.8954 8 12 8ZM12 10C12.3453 10 12.6804 9.95625 13 9.87398V11.2192L12.291 11.042C12.1 10.9942 11.9 10.9942 11.709 11.042L11 11.2192V9.87398C11.3196 9.95625 11.6547 10 12 10ZM16 6C16 6.3453 15.9562 6.68038 15.874 7H20C21.1046 7 22 7.89543 22 9V20C22 21.1046 21.1046 22 20 22H4C2.89543 22 2 21.1046 2 20V9C2 7.89543 2.89543 7 4 7H8.12602C8.04375 6.68038 8 6.3453 8 6C8 3.79086 9.79086 2 12 2C14.2091 2 16 3.79086 16 6ZM9 9H4V20H20V9H15V12.2438C15 13.0245 14.2663 13.5974 13.509 13.408L12 13.0308L10.491 13.408C9.73366 13.5974 9 13.0245 9 12.2438V9ZM7 16C6.44772 16 6 16.4477 6 17C6 17.5523 6.44771 18 7 18H17C17.5523 18 18 17.5523 18 17C18 16.4477 17.5523 16 17 16H7Z" fill="white" /></svg>
-											{__('Manage Licence')}
+								}
+								{window.wdkit_editor != "wdkit" &&
+									<li className={pathname.includes("save_template") ? 'wkit-mobileMenu-active' : ''}>
+										<Link to='/save_template'>
+											<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M20.625 5.375H4.375V8.625H20.625V5.375ZM4.375 21.625V10.25H12.5V14.8214C12.5 15.6001 13.3679 16.0646 14.0158 15.6327L15.75 14.4765L17.4842 15.6327C18.1321 16.0646 19 15.6001 19 14.8214V10.25H20.625V21.625H4.375ZM17.375 10.25H14.125V13.6068L15.2542 12.854C15.5544 12.6539 15.9456 12.6539 16.2458 12.854L17.375 13.6068V10.25ZM4.375 3.75C3.47754 3.75 2.75 4.47754 2.75 5.375V21.625C2.75 22.5225 3.47754 23.25 4.375 23.25H20.625C21.5225 23.25 22.25 22.5225 22.25 21.625V5.375C22.25 4.47754 21.5225 3.75 20.625 3.75H4.375ZM7.625 7C7.625 7.44873 7.26123 7.8125 6.8125 7.8125C6.36377 7.8125 6 7.44873 6 7C6 6.55127 6.36377 6.1875 6.8125 6.1875C7.26123 6.1875 7.625 6.55127 7.625 7ZM10.0625 7.8125C10.5112 7.8125 10.875 7.44873 10.875 7C10.875 6.55127 10.5112 6.1875 10.0625 6.1875C9.61376 6.1875 9.25 6.55127 9.25 7C9.25 7.44873 9.61376 7.8125 10.0625 7.8125ZM6 14.3125C6 13.8638 6.36377 13.5 6.8125 13.5H8.4375C8.88623 13.5 9.25 13.8638 9.25 14.3125C9.25 14.7612 8.88623 15.125 8.4375 15.125H6.8125C6.36377 15.125 6 14.7612 6 14.3125ZM6.8125 17.5625C6.36377 17.5625 6 17.9263 6 18.375C6 18.8237 6.36377 19.1875 6.8125 19.1875H15.75C16.1987 19.1875 16.5625 18.8237 16.5625 18.375C16.5625 17.9263 16.1987 17.5625 15.75 17.5625H6.8125Z" fill="white" /></svg>										{__('Save Template', 'wdesignkit')}
 										</Link></li>
-									{builder_validation == true &&
-										<li className={pathname.includes("widget-listing") ? 'wkit-mobileMenu-active' : ''}>
-											<Link to="/widget-listing">
-												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M14 2V6H18V2H14ZM13 0C12.4477 0 12 0.447715 12 1V7C12 7.55228 12.4477 8 13 8H19C19.5523 8 20 7.55228 20 7V1C20 0.447715 19.5523 0 19 0H13ZM2 14V18H6V14H2ZM1 12C0.447715 12 0 12.4477 0 13V19C0 19.5523 0.447715 20 1 20H7C7.55228 20 8 19.5523 8 19V13C8 12.4477 7.55228 12 7 12H1ZM14 18V14H18V18H14ZM12 13C12 12.4477 12.4477 12 13 12H19C19.5523 12 20 12.4477 20 13V19C20 19.5523 19.5523 20 19 20H13C12.4477 20 12 19.5523 12 19V13ZM2 5C2 6.65685 3.34315 8 5 8C6.65685 8 8 6.65685 8 5C8 3.34315 6.65685 2 5 2C3.34315 2 2 3.34315 2 5ZM5 0C2.23858 0 0 2.23858 0 5C0 7.76142 2.23858 10 5 10C5.9441 10 6.82709 9.73834 7.5804 9.28357L9.25232 11.1645C9.61924 11.5772 10.2513 11.6144 10.6641 11.2475C11.0769 10.8806 11.1141 10.2485 10.7471 9.83573L9.05251 7.9293C9.6486 7.10608 10 6.09408 10 5C10 2.23858 7.76142 0 5 0Z" fill="white"></path></svg>
-												{__('My Widgets')}
+								}
+								{window.wdkit_editor == "wdkit" && builder_validation &&
+									<li className={pathname.includes("widget-browse") ? 'wkit-mobileMenu-active' : ''}>
+										<Link to="/widget-browse">
+											<svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M9.85305 0.582239C10.5417 0.10019 11.4583 0.100192 12.1469 0.582239L11 2.2207L2.66749 8.05344L1.52057 6.41497L9.85305 0.582239ZM1.83245 13.6967L1.4181 13.3652C0.375944 12.5314 0.427213 10.9303 1.52057 10.165L1.83245 9.94666L1.4181 9.61518C0.375943 8.78145 0.427214 7.18032 1.52057 6.41497L2.66749 8.05344L6.62467 11.2192L9.75058 13.7199C10.481 14.3043 11.5189 14.3043 12.2494 13.7199L15.3753 11.2192L19.3325 8.05344L11 2.2207L12.1469 0.582239L20.4794 6.41497C21.5727 7.18033 21.624 8.78145 20.5818 9.61518L20.1675 9.94666L20.4794 10.165C21.5727 10.9303 21.624 12.5315 20.5818 13.3652L20.1675 13.6967L20.4794 13.915C21.5727 14.6803 21.624 16.2815 20.5818 17.1152L16.6247 20.2809L13.4988 22.7816C12.0379 23.9503 9.96207 23.9503 8.50119 22.7816L5.37528 20.2809L1.4181 17.1152C0.375944 16.2815 0.427213 14.6803 1.52057 13.915L1.83245 13.6967ZM3.45999 14.9987L2.66749 15.5534L6.62467 18.7192L9.75058 21.2199C10.481 21.8043 11.5189 21.8043 12.2494 21.2199L15.3753 18.7192L19.3325 15.5534L18.54 14.9987L16.6247 16.5309L13.4988 19.0316C12.0379 20.2003 9.96207 20.2003 8.50119 19.0316L5.37528 16.5309L3.45999 14.9987ZM16.6247 12.7809L18.54 11.2487L19.3325 11.8034L15.3753 14.9692L12.2494 17.4699C11.5189 18.0543 10.481 18.0543 9.75058 17.4699L6.62467 14.9692L2.66749 11.8034L3.45999 11.2487L5.37528 12.7809L8.50119 15.2816C9.96207 16.4503 12.0379 16.4503 13.4988 15.2816L16.6247 12.7809Z" fill="white"></path></svg>
+											{__('Browse Widgets', 'wdesignkit')}
+										</Link></li>
+								}
+								{temp_validation &&
+									<li className={pathname.includes("my_uploaded") ? 'wkit-mobileMenu-active' : ''}>
+										<Link to="/my_uploaded">
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 16H15V10H19L12 3L5 10H9V16ZM12 5.83L14.17 8H13V14H11V8H9.83L12 5.83ZM5 18H19V20H5V18Z" fill="white" /></svg>
+											{__('My Templates', 'wdesignkit')}
+										</Link>
+									</li>
+								}
+								{(temp_validation == true || builder_validation == true) &&
+									<>
+										<li className={pathname.includes("share_with_me") ? 'wkit-mobileMenu-active' : ''}>
+											<Link to='/share_with_me'>
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.35C15.11 18.56 15.08 18.78 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08ZM18 4C18.55 4 19 4.45 19 5C19 5.55 18.55 6 18 6C17.45 6 17 5.55 17 5C17 4.45 17.45 4 18 4ZM6 13C5.45 13 5 12.55 5 12C5 11.45 5.45 11 6 11C6.55 11 7 11.45 7 12C7 12.55 6.55 13 6 13ZM18 20.02C17.45 20.02 17 19.57 17 19.02C17 18.47 17.45 18.02 18 18.02C18.55 18.02 19 18.47 19 19.02C19 19.57 18.55 20.02 18 20.02Z" fill="white" /></svg>
+												{__('Shared with Me', 'wdesignkit')}
 											</Link>
 										</li>
-									}
-									<li className={pathname.includes("settings") ? 'wkit-mobileMenu-active' : ''}>
-										<Link to="/settings">
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M4 2C4.55228 2 5 2.44772 5 3V10C5 10.5523 4.55228 11 4 11C3.44772 11 3 10.5523 3 10V3C3 2.44772 3.44772 2 4 2ZM5 15H7C7.55228 15 8 14.5523 8 14C8 13.4477 7.55228 13 7 13H4H1C0.447715 13 0 13.4477 0 14C0 14.5523 0.447715 15 1 15H3V21C3 21.5523 3.44772 22 4 22C4.55228 22 5 21.5523 5 21V15ZM13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12V21C11 21.5523 11.4477 22 12 22C12.5523 22 13 21.5523 13 21V12ZM12 2C12.5523 2 13 2.44772 13 3V7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H12H9C8.44771 9 8 8.55228 8 8C8 7.44772 8.44771 7 9 7H11V3C11 2.44772 11.4477 2 12 2ZM20 15H23C23.5523 15 24 15.4477 24 16C24 16.5523 23.5523 17 23 17H21V21C21 21.5523 20.5523 22 20 22C19.4477 22 19 21.5523 19 21V17H17C16.4477 17 16 16.5523 16 16C16 15.4477 16.4477 15 17 15H20ZM20 2C20.5523 2 21 2.44772 21 3V12C21 12.5523 20.5523 13 20 13C19.4477 13 19 12.5523 19 12V3C19 2.44772 19.4477 2 20 2Z" fill="white" /></svg>
-											{__('Settings')}
-										</Link>
-									</li>
-									{/* <li>
+										<li className={pathname.includes("manage_workspace") ? 'wkit-mobileMenu-active' : ''}><Link to='/manage_workspace' ><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 15C7.1 15 8 15.9 8 17C8 18.1 7.1 19 6 19C4.9 19 4 18.1 4 17C4 15.9 4.9 15 6 15ZM6 13C3.8 13 2 14.8 2 17C2 19.2 3.8 21 6 21C8.2 21 10 19.2 10 17C10 14.8 8.2 13 6 13ZM12 5C13.1 5 14 5.9 14 7C14 8.1 13.1 9 12 9C10.9 9 10 8.1 10 7C10 5.9 10.9 5 12 5ZM12 3C9.8 3 8 4.8 8 7C8 9.2 9.8 11 12 11C14.2 11 16 9.2 16 7C16 4.8 14.2 3 12 3ZM18 15C19.1 15 20 15.9 20 17C20 18.1 19.1 19 18 19C16.9 19 16 18.1 16 17C16 15.9 16.9 15 18 15ZM18 13C15.8 13 14 14.8 14 17C14 19.2 15.8 21 18 21C20.2 21 22 19.2 22 17C22 14.8 20.2 13 18 13Z" fill="white" /></svg>{__('Manage Workspace', 'wdesignkit')}</Link></li>
+									</>
+								}
+								{window.wdkit_editor == "wdkit" &&
+									<Fragment>
+										{!(wdkitData?.wdkit_white_label?.licence_tab) &&
+											<li className={pathname.includes("activate") ? 'wkit-mobileMenu-active' : ''}>
+												<Link to="/activate">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M12 8C13.1046 8 14 7.10457 14 6C14 4.89543 13.1046 4 12 4C10.8954 4 10 4.89543 10 6C10 7.10457 10.8954 8 12 8ZM12 10C12.3453 10 12.6804 9.95625 13 9.87398V11.2192L12.291 11.042C12.1 10.9942 11.9 10.9942 11.709 11.042L11 11.2192V9.87398C11.3196 9.95625 11.6547 10 12 10ZM16 6C16 6.3453 15.9562 6.68038 15.874 7H20C21.1046 7 22 7.89543 22 9V20C22 21.1046 21.1046 22 20 22H4C2.89543 22 2 21.1046 2 20V9C2 7.89543 2.89543 7 4 7H8.12602C8.04375 6.68038 8 6.3453 8 6C8 3.79086 9.79086 2 12 2C14.2091 2 16 3.79086 16 6ZM9 9H4V20H20V9H15V12.2438C15 13.0245 14.2663 13.5974 13.509 13.408L12 13.0308L10.491 13.408C9.73366 13.5974 9 13.0245 9 12.2438V9ZM7 16C6.44772 16 6 16.4477 6 17C6 17.5523 6.44771 18 7 18H17C17.5523 18 18 17.5523 18 17C18 16.4477 17.5523 16 17 16H7Z" fill="white" /></svg>
+													{__('Manage Licence', 'wdesignkit')}
+												</Link>
+											</li>
+										}
+										{builder_validation == true &&
+											<li className={pathname.includes("widget-listing") ? 'wkit-mobileMenu-active' : ''}>
+												<Link to="/widget-listing">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M14 2V6H18V2H14ZM13 0C12.4477 0 12 0.447715 12 1V7C12 7.55228 12.4477 8 13 8H19C19.5523 8 20 7.55228 20 7V1C20 0.447715 19.5523 0 19 0H13ZM2 14V18H6V14H2ZM1 12C0.447715 12 0 12.4477 0 13V19C0 19.5523 0.447715 20 1 20H7C7.55228 20 8 19.5523 8 19V13C8 12.4477 7.55228 12 7 12H1ZM14 18V14H18V18H14ZM12 13C12 12.4477 12.4477 12 13 12H19C19.5523 12 20 12.4477 20 13V19C20 19.5523 19.5523 20 19 20H13C12.4477 20 12 19.5523 12 19V13ZM2 5C2 6.65685 3.34315 8 5 8C6.65685 8 8 6.65685 8 5C8 3.34315 6.65685 2 5 2C3.34315 2 2 3.34315 2 5ZM5 0C2.23858 0 0 2.23858 0 5C0 7.76142 2.23858 10 5 10C5.9441 10 6.82709 9.73834 7.5804 9.28357L9.25232 11.1645C9.61924 11.5772 10.2513 11.6144 10.6641 11.2475C11.0769 10.8806 11.1141 10.2485 10.7471 9.83573L9.05251 7.9293C9.6486 7.10608 10 6.09408 10 5C10 2.23858 7.76142 0 5 0Z" fill="white"></path></svg>
+													{__('My Widgets', 'wdesignkit')}
+												</Link>
+											</li>
+										}
+										<li className={pathname.includes("settings") ? 'wkit-mobileMenu-active' : ''}>
+											<Link to="/settings">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M4 2C4.55228 2 5 2.44772 5 3V10C5 10.5523 4.55228 11 4 11C3.44772 11 3 10.5523 3 10V3C3 2.44772 3.44772 2 4 2ZM5 15H7C7.55228 15 8 14.5523 8 14C8 13.4477 7.55228 13 7 13H4H1C0.447715 13 0 13.4477 0 14C0 14.5523 0.447715 15 1 15H3V21C3 21.5523 3.44772 22 4 22C4.55228 22 5 21.5523 5 21V15ZM13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12V21C11 21.5523 11.4477 22 12 22C12.5523 22 13 21.5523 13 21V12ZM12 2C12.5523 2 13 2.44772 13 3V7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H12H9C8.44771 9 8 8.55228 8 8C8 7.44772 8.44771 7 9 7H11V3C11 2.44772 11.4477 2 12 2ZM20 15H23C23.5523 15 24 15.4477 24 16C24 16.5523 23.5523 17 23 17H21V21C21 21.5523 20.5523 22 20 22C19.4477 22 19 21.5523 19 21V17H17C16.4477 17 16 16.5523 16 16C16 15.4477 16.4477 15 17 15H20ZM20 2C20.5523 2 21 2.44772 21 3V12C21 12.5523 20.5523 13 20 13C19.4477 13 19 12.5523 19 12V3C19 2.44772 19.4477 2 20 2Z" fill="white" /></svg>
+												{__('Settings', 'wdesignkit')}
+											</Link>
+										</li>
+										{/* <li>
 										<a href='https://wordpress.org/support/plugin/wdesignkit/' target="_blank" rel="noopener noreferrer" >
 											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.3863 8.61417C23.0767 8.30314 22.6769 8.09771 22.2437 8.0271C21.8106 7.95649 21.3662 8.02431 20.9738 8.2209C19.6025 4.59199 16.1029 2 12 2C7.89711 2 4.39639 4.59308 3.02512 8.22253C2.70593 8.06205 2.35089 7.98618 1.99398 8.00217C1.63707 8.01817 1.29024 8.1255 0.986686 8.3139C0.68313 8.50229 0.433007 8.76545 0.260255 9.07817C0.0875037 9.39089 -0.00209398 9.74272 3.71478e-05 10.1V13.7C0.000105947 14.0759 0.101086 14.4448 0.292434 14.7683C0.483782 15.0919 0.758479 15.3581 1.08784 15.5392C1.41721 15.7203 1.78915 15.8097 2.16485 15.798C2.54055 15.7863 2.90621 15.674 3.22367 15.4727C3.79284 16.7558 4.63552 17.899 5.69274 18.8223C6.74996 19.7457 7.99618 20.4268 9.3442 20.8181C9.38754 20.9304 9.46381 21.0269 9.563 21.0951C9.6622 21.1632 9.77967 21.1998 9.90001 21.2H14.1C14.2591 21.2 14.4117 21.1367 14.5243 21.0242C14.6368 20.9117 14.7 20.7591 14.7 20.6V19.4C14.7 19.2408 14.6368 19.0882 14.5243 18.9757C14.4117 18.8632 14.2591 18.8 14.1 18.8H9.90001C9.74089 18.8 9.58827 18.8632 9.47575 18.9757C9.36323 19.0882 9.30002 19.2408 9.30002 19.4V19.5467C5.99021 18.4181 3.60003 15.2867 3.60003 11.6C3.60003 6.96853 7.36802 3.2 12 3.2C16.632 3.2 20.4 6.96853 20.4 11.6C20.4007 12.4739 20.2649 13.3425 19.9974 14.1745C19.9696 14.2532 19.9586 14.3368 19.9653 14.42C19.9727 14.5128 20.0016 14.6026 20.0498 14.6823C20.2685 15.0968 20.6197 15.4261 21.0474 15.6175C21.4751 15.809 21.9547 15.8516 22.4094 15.7385C22.8642 15.6255 23.268 15.3633 23.5563 14.9939C23.8446 14.6245 24.0008 14.1691 24 13.7005V10.1005C24.001 9.82451 23.9474 9.55102 23.842 9.29589C23.7367 9.04075 23.5818 8.80904 23.3863 8.61417ZM2.10003 14.6C1.86143 14.5997 1.63268 14.5048 1.46396 14.336C1.29524 14.1673 1.20032 13.9386 1.20003 13.7V10.1C1.19955 9.93007 1.24732 9.76352 1.33779 9.61969C1.42826 9.47587 1.5577 9.36069 1.71107 9.28755C1.86443 9.21441 2.03541 9.18632 2.20411 9.20655C2.37281 9.22677 2.5323 9.29448 2.66403 9.4018C2.27442 11.0078 2.31658 12.6883 2.78621 14.2727C2.70322 14.3747 2.59861 14.4569 2.47994 14.5135C2.36127 14.5701 2.23151 14.5997 2.10003 14.6ZM22.8 13.7C22.7997 13.9386 22.7048 14.1673 22.5361 14.336C22.3673 14.5048 22.1386 14.5997 21.9 14.6C21.7692 14.5992 21.6402 14.5695 21.5223 14.5129C21.4044 14.4563 21.3005 14.3743 21.2182 14.2727C21.6855 12.6894 21.7277 11.0109 21.3404 9.40617C21.684 9.13671 22.2229 9.1438 22.5403 9.46071C22.6238 9.54479 22.6897 9.64459 22.7342 9.75432C22.7788 9.86406 22.8012 9.98155 22.8 10.1V13.7Z" fill="white"></path><path d="M17.694 14.785C17.8944 14.386 17.9992 13.9459 18 13.4994V9.70138C17.9991 8.93227 17.6932 8.19491 17.1495 7.65102C16.6057 7.10713 15.8684 6.80112 15.0993 6.80011H8.90073C8.13163 6.80112 7.39433 7.10713 6.85054 7.65102C6.30675 8.19491 6.00088 8.93227 6.00001 9.70138V13.4994C6.00088 14.2684 6.30677 15.0057 6.85057 15.5495C7.39437 16.0933 8.13168 16.3992 8.90073 16.4001H14.9454L17.6798 18.109C17.7846 18.1746 17.907 18.2062 18.0305 18.1996C18.1539 18.1929 18.2722 18.1483 18.3694 18.0719C18.4665 17.9954 18.5376 17.8908 18.573 17.7724C18.6084 17.654 18.6064 17.5275 18.5673 17.4103L17.694 14.785ZM15.4364 15.2895C15.341 15.23 15.2308 15.1984 15.1184 15.1985H8.90073C8.45013 15.1979 8.01813 15.0187 7.69936 14.7003C7.38058 14.3818 7.20102 13.95 7.20001 13.4994V9.70138C7.20059 9.25044 7.37994 8.81814 7.69875 8.49923C8.01755 8.18032 8.4498 8.00083 8.90073 8.00011H15.0993C15.5502 8.00083 15.9824 8.18032 16.3013 8.49923C16.6201 8.81814 16.7994 9.25044 16.8 9.70138V13.4994C16.7984 13.8197 16.7061 14.1331 16.5338 14.4032C16.4863 14.4783 16.4561 14.563 16.4454 14.6512C16.4346 14.7394 16.4436 14.8289 16.4716 14.9132L16.9031 16.207L15.4364 15.2895Z" fill="white"></path><path d="M9.60001 12.2001C9.93138 12.2001 10.2 11.9315 10.2 11.6001C10.2 11.2687 9.93138 11.0001 9.60001 11.0001C9.26864 11.0001 9.00001 11.2687 9.00001 11.6001C9.00001 11.9315 9.26864 12.2001 9.60001 12.2001Z" fill="white"></path><path d="M14.4 12.2001C14.7314 12.2001 15 11.9315 15 11.6001C15 11.2687 14.7314 11.0001 14.4 11.0001C14.0686 11.0001 13.8 11.2687 13.8 11.6001C13.8 11.9315 14.0686 12.2001 14.4 12.2001Z" fill="white"></path><path d="M12 12.2001C12.3314 12.2001 12.6 11.9315 12.6 11.6001C12.6 11.2687 12.3314 11.0001 12 11.0001C11.6686 11.0001 11.4 11.2687 11.4 11.6001C11.4 11.9315 11.6686 12.2001 12 12.2001Z" fill="white"></path></svg>
-											<span className="wkit-menu-text">{__('Support')}</span>
+											<span className="wkit-menu-text">{__('Support', 'wdesignkit')}</span>
 											</a>
 											</li> */}
 
-								</Fragment>
-							}
-							<div className='wkit-mobile-menu-logout'>
-								{login_detail ?
-									<span className="wkit-menu-text wkit-menu-logout-text" onClick={() => wkit_logout()}>{__('Logout')}</span>
-									:
-									<Link className="wkit-menu-text wkit-menu-logout-text" to='/login' onClick={() => wkit_logout()}>{__('Login')}</Link>
+									</Fragment>
 								}
-							</div>
+								<div className='wkit-mobile-menu-logout'>
+									{login_detail ?
+										<span className="wkit-menu-text wkit-menu-logout-text" onClick={() => wkit_logout()}>{__('Logout', 'wdesignkit')}</span>
+										:
+										<Link className="wkit-menu-text wkit-menu-logout-text" to='/login' onClick={() => wkit_logout()}>{__('Login', 'wdesignkit')}</Link>
+									}
+								</div>
 
-						</ul>
+							</ul>
+						</div>
 					</div>
-				</div>
+				}
 			</div>
 		)
 	}
@@ -3163,10 +3234,10 @@ export const Wdkit_Copy_Temp_to_Ws = (props) => {
 
 	return (
 		<div className="wkit-copy-move-ws-wrap">
-			<div className={"wkit-ws-label-heading"}>{__('Copy to Workspace')}</div>
+			<div className={"wkit-ws-label-heading"}>{__('Copy to Workspace', 'wdesignkit')}</div>
 			<div className={"wkit-ws-content dropdown-custom-width"}>
 				<select className={"wkit-select-workspace " + errorSelectMsg} onChange={(ev) => setSelectType(ev.target.value)}>
-					<option value={''}>{__('Select Workspace')}</option>
+					<option value={''}>{__('Select Workspace', 'wdesignkit')}</option>
 					{selectWork &&
 						selectWork.map((item, index) => {
 							return <option value={item.w_id} key={index}>{item.title}</option>
@@ -3179,7 +3250,7 @@ export const Wdkit_Copy_Temp_to_Ws = (props) => {
 							type="button"
 							className='btn-workspace-add wkit-pink-btn-class'
 							onClick={() => clickData()}>
-							{props.action == 'move' ? __('Move') : __('Copy')}
+							{props.action == 'move' ? __('Move', 'wdesignkit') : __('Copy', 'wdesignkit')}
 						</button>
 						:
 						<button className='btn-workspace-add wkit-pink-btn-class'>{WkitLoader()}</button>
@@ -3300,7 +3371,7 @@ export const Widget_card = (props) => {
 		}
 
 		if (w_data.free_pro == "pro" && !download_access) {
-			await props.wdkit_set_toast("Get Pro Version to Download", '', '', 'danger')
+			await props.wdkit_set_toast(__("Get Pro Version to Download", 'wdesignkit'), '', '', 'danger')
 			return false;
 		}
 
@@ -3356,7 +3427,7 @@ export const Widget_card = (props) => {
 					props.wdkit_set_meta(new_data?.data);
 				}
 				props.setexistingwidget(old_array)
-				props.wdkit_set_toast('Downloaded Successfully!', 'Start using or editing it further.', '', 'success');
+				props.wdkit_set_toast(__('Downloaded Successfully!', 'wdesignkit'), __('Start using or editing it further.', 'wdesignkit'), '', 'success');
 			}
 
 			setdownloading(false);
@@ -3405,10 +3476,10 @@ export const Widget_card = (props) => {
 			{data.is_activated != 'active' &&
 				<Fragment>
 					<div className='wdkit-inner-boxed-deActivate'>
-						<div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!')}</div>
-						<div className='wdkit-inner-boxed-deActivate-p'>{__('This Template got disabled until you have more credits to make it active.')}</div>
+						<div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!', 'wdesignkit')}</div>
+						<div className='wdkit-inner-boxed-deActivate-p'>{__('This Template got disabled until you have more credits to make it active.', 'wdesignkit')}</div>
 						<a href={`${wdkitData.wdkit_server_url}pricing`} target="_blank" rel="noopener noreferrer">
-							<button>{__('Buy Credits')}</button>
+							<button>{__('Buy Credits', 'wdesignkit')}</button>
 						</a>
 					</div>
 					{(!props.filter || (props.filter && props.filter != 'browse')) && !(window.location.hash.search('#/share_with_me') > -1) && !(window.location.hash.search('/kit/') > -1) &&
@@ -3426,20 +3497,20 @@ export const Widget_card = (props) => {
 						{data.status == "private" &&
 							<div className="wkit-widget-public-icon">
 								<img className="wkit-pin-img-temp" src={img_path + "/assets/images/svg/private.svg"} alt="private" draggable={false} />
-								<span className="wkit-widget-icon-tooltip">{__('Private')}</span>
+								<span className="wkit-widget-icon-tooltip">{__('Private', 'wdesignkit')}</span>
 							</div>
 						}
 						{data.status == "public" &&
 							<div className="wkit-widget-public-icon">
 								<img className="wkit-pin-img-temp" src={img_path + "/assets/images/svg/public.svg"} alt="public" draggable={false} />
-								<span className="wkit-widget-icon-tooltip">{__('Public')}</span>
+								<span className="wkit-widget-icon-tooltip">{__('Public', 'wdesignkit')}</span>
 							</div>
 						}
 					</div>
 					{data.free_pro == 'pro' &&
 						<div className="wdkit-card-tag">
 							<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.75 16.5H5.25C4.9425 16.5 4.6875 16.245 4.6875 15.9375C4.6875 15.63 4.9425 15.375 5.25 15.375H12.75C13.0575 15.375 13.3125 15.63 13.3125 15.9375C13.3125 16.245 13.0575 16.5 12.75 16.5Z" fill="white" /><path d="M15.2622 4.14003L12.2622 6.28503C11.8647 6.57003 11.2947 6.39753 11.1222 5.94003L9.70468 2.16003C9.46468 1.50753 8.54218 1.50753 8.30218 2.16003L6.87718 5.93253C6.70468 6.39753 6.14218 6.57003 5.74468 6.27753L2.74468 4.13253C2.14468 3.71253 1.34968 4.30503 1.59718 5.00253L4.71718 13.74C4.82218 14.04 5.10718 14.235 5.42218 14.235H12.5697C12.8847 14.235 13.1697 14.0325 13.2747 13.74L16.3947 5.00253C16.6497 4.30503 15.8547 3.71253 15.2622 4.14003ZM10.8747 11.0625H7.12468C6.81718 11.0625 6.56218 10.8075 6.56218 10.5C6.56218 10.1925 6.81718 9.93753 7.12468 9.93753H10.8747C11.1822 9.93753 11.4372 10.1925 11.4372 10.5C11.4372 10.8075 11.1822 11.0625 10.8747 11.0625Z" fill="white" /></svg>
-							<span>{__('Pro')}</span>
+							<span>{__('Pro', 'wdesignkit')}</span>
 						</div>
 					}
 					<div>
@@ -3461,16 +3532,19 @@ export const Widget_card = (props) => {
 							</>
 						}
 						{!login_array.includes('widget-browse') &&
-							<picture>
-								{data.responsive_image.map((image_data, index) => {
-									return (
-										<Fragment key={index}>
-											<source media={`(min-width: ${image_data.size}px)`} srcSet={SetImageUrl(image_data.url)} />
-										</Fragment>
-									);
-								})}
-								<img className="wkit-widget-image-content" src={data.image} alt={"featured-img"} draggable={false} />
-							</picture>
+							<>
+								<img className="wkit-widget-placeholder-img" src={img_path + 'assets/images/wkit-dummy-bg.png'} draggable={false} />
+								<picture>
+									{data.responsive_image.map((image_data, index) => {
+										return (
+											<Fragment key={index}>
+												<source media={`(min-width: ${image_data.size}px)`} srcSet={SetImageUrl(image_data.url)} />
+											</Fragment>
+										);
+									})}
+									<img className="wkit-widget-image-content" src={data.image} alt={"featured-img"} draggable={false} />
+								</picture>
+							</>
 						}
 					</div>
 				</div>
@@ -3536,7 +3610,7 @@ export const Widget_card = (props) => {
 						</div>
 						<div className="wkit-widget-builder-icon">
 							<img src={widget_builder(data)} draggable={false} />
-							<span className="wkit-widget-builder-tooltip">{!widget_builder_tooltip(data) ? __('') : __(widget_builder_tooltip(data))}</span>
+							<span className="wkit-widget-builder-tooltip">{!widget_builder_tooltip(data) ? __('', 'wdesignkit') : __(widget_builder_tooltip(data))}</span>
 						</div>
 					</div>
 				</div>

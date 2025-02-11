@@ -7,6 +7,7 @@ export const component_array = {
         "description": "",
         "placeHolder": "",
         "defaultValue": "",
+        "ai_support" : false,
         "showLable": true,
         "lableBlock": false,
         "separator": "default",
@@ -16,6 +17,12 @@ export const component_array = {
         "conditions": false,
         "condition_value": { "relation": "or", "values": [{ "name": "", "operator": "==", "value": "" },] },
         "class": "",
+    },
+    
+    "preview": {
+        "type": "preview",
+        "lable": "Preview",
+        "name": "preview",
     },
 
     "number": {
@@ -43,6 +50,7 @@ export const component_array = {
         "name": "wysiwyg",
         "description": "",
         "defaultValue": "",
+        "ai_support" : false,
         "showLable": true,
         "lableBlock": true,
         "controlClass": "",
@@ -58,6 +66,7 @@ export const component_array = {
         "name": "code",
         "description": "",
         "defaultValue": "",
+        "ai_support" : false,
         "showLable": true,
         "lableBlock": true,
         "separator": "default",
@@ -133,6 +142,7 @@ export const component_array = {
         "description": "",
         "defaultValue": wdkitData.WDKIT_URL + "assets/images/jpg/placeholder.png",
         "media_types": [],
+        "ai_support" : false,
         "showLable": true,
         "lableBlock": true,
         "separator": "default",
@@ -708,6 +718,7 @@ export const component_array = {
         "placeHolder": "",
         "defaultValue": "",
         "controlClass": "",
+        "ai_support" : false,
         "showLable": true,
         "lableBlock": false,
         "dynamic": false,

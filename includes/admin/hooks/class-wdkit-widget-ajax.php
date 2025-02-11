@@ -30,7 +30,7 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 	 */
 	class Wdkit_Widget_Ajax {
 
-        /**
+		/**
 		 * Member Variable
 		 *
 		 * @var instance
@@ -55,19 +55,19 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 			return self::$instance;
 		}
 
-        /**
+		/**
 		 * Define the core functionality of the plugin.
 		 */
 		public function __construct() {
-			add_action( 'wp_ajax_wdkit_widget_ajax', array( $this, 'wdkit_widget_ajax_call' ) );
+			add_filter( 'wp_wdkit_widget_ajax', array( $this, 'wdkit_widget_ajax_call' ) );
 		}
 
 		/**
 		 * Get Wdkit Api Call Ajax.
-		 * 
+		 *
 		 * @since 1.1.1
 		 */
-		public function wdkit_widget_ajax_call() {
+		public function wdkit_widget_ajax_call( $type ) {
 
 			check_ajax_referer( 'wdkit_nonce', 'kit_nonce' );
 
@@ -75,15 +75,16 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 				wp_send_json_error( array( 'content' => __( 'Insufficient permissions.', 'wdesignkit' ) ) );
 			}
 
-			$type = isset( $_POST['type'] ) ? strtolower( sanitize_text_field( wp_unslash( $_POST['type'] ) ) ) : false;
-
 			if ( ! $type ) {
-				$this->wdkit_error_msg( __( 'Something went wrong.', 'wdesignkit' ) );
+				$this->wdkit_error_msg( 'Something went wrong.' );
 			}
 
 			switch ( $type ) {
 				case 'widget_browse_page':
-					$response = $this->widget_browse_page();
+					$response = $this->wdkit_widget_browse_page();
+					break;
+				case 'wkit_public_download_widget':
+					$response = $this->wdkit_public_download_widget();
 					break;
 				case 'wkit_create_widget':
 					$response = $this->wkit_create_widget();
@@ -103,19 +104,13 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 			wp_die();
 		}
 
-
-		/**
-		 * Browse Page Filter
-		 *
-		 * @since 1.1.1
-		 */
 		/**
 		 *
 		 * It is Use to get data for widget browse page
 		 *
-		 * @since 1.0.0
+		 * @since 1.0.4
 		 */
-		public function widget_browse_page() {
+		public function wdkit_widget_browse_page() {
 			$array_data = array(
 				'CurrentPage' => isset( $_POST['page'] ) ? (int) $_POST['page'] : 1,
 				'builder'     => isset( $_POST['buildertype'] ) ? wp_unslash( $_POST['buildertype'] ) : '',
@@ -149,11 +144,90 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		}
 
 		/**
+		 *
+		 * It is Use for download widget from browse page.
+		 *
+		 * @since 1.1.4
+		 */
+		public function wdkit_public_download_widget() {
+			$data = ! empty( $_POST['widget_info'] ) ? $this->wdkit_sanitizer_bypass( $_POST, 'widget_info', 'none' ) : '';
+			$data = json_decode( stripslashes( $data ) );
+
+			$api_type = isset( $data->api_type ) ? sanitize_text_field( $data->api_type ) : 'widget/download';
+
+			$array_data = array(
+				'id'   => isset( $data->w_uniq ) ? sanitize_text_field( $data->w_uniq ) : '',
+				'u_id' => isset( $data->u_id ) ? sanitize_text_field( $data->u_id ) : '',
+				'type' => isset( $data->d_type ) ? sanitize_text_field( $data->d_type ) : '',
+			);
+
+			$response = $this->wkit_api_call( $array_data, $api_type );
+			$success  = ! empty( $response['success'] ) ? $response['success'] : false;
+
+			if ( empty( $success ) ) {
+				$massage = ! empty( $response['massage'] ) ? $response['massage'] : esc_html__( 'server error', 'wdesignkit' );
+
+				$result = (object) array(
+					'success'     => false,
+					'message'     => $massage,
+					'description' => esc_html__( 'Widget not Downloaded', 'wdesignkit' ),
+				);
+
+				wp_send_json( $result );
+				wp_die();
+			}
+
+			$response = json_decode( wp_json_encode( $response['data'] ), true );
+			if ( ! empty( $response ) && ! empty( $response['data'] ) ) {
+				$img_url = ! empty( $response['data']['image'] ) ? esc_url_raw( $response['data']['image'] ) : '';
+				$json    = ! empty( $response['data']['json'] ) ? wp_json_encode( $response['data']['json'] ) : '';
+
+				if ( ! empty( $json ) ) {
+					include_once ABSPATH . 'wp-admin/includes/file.php';
+					\WP_Filesystem();
+					global $wp_filesystem;
+
+					$json_data = json_decode( $json );
+					$json_data = json_decode( $json_data );
+					$title     = ! empty( $json_data->widget_data->widgetdata->name ) ? sanitize_text_field( $json_data->widget_data->widgetdata->name ) : '';
+					$builder   = ! empty( $json_data->widget_data->widgetdata->type ) ? sanitize_text_field( $json_data->widget_data->widgetdata->type ) : '';
+					$widget_id = ! empty( $json_data->widget_data->widgetdata->widget_id ) ? sanitize_text_field( $json_data->widget_data->widgetdata->widget_id ) : '';
+
+					$folder_name = str_replace( ' ', '-', $title ) . '_' . $widget_id;
+					$file_name   = str_replace( ' ', '_', $title ) . '_' . $widget_id;
+
+					$builder_type_path = WDKIT_BUILDER_PATH . "/{$builder}/";
+
+					if ( ! is_dir( $builder_type_path . $folder_name ) ) {
+						wp_mkdir_p( $builder_type_path . $folder_name );
+					}
+
+					if ( ! empty( $img_url ) ) {
+						$img_body = wp_remote_get( $img_url );
+						$img_ext  = pathinfo( $img_url )['extension'];
+						$wp_filesystem->put_contents( WDKIT_BUILDER_PATH . "/$builder/$folder_name/$file_name.$img_ext", $img_body['body'] );
+
+						$json_data->widget_data->widgetdata->w_image = WDKIT_SERVER_PATH . "/$builder/$folder_name/$file_name.$img_ext";
+					}
+
+					$response = (object) array(
+						'message'     => ! empty( $response['message'] ) ? $response['message'] : '',
+						'description' => ! empty( $response['description'] ) ? $response['description'] : '',
+						'success'     => ! empty( $response['success'] ) ? $response['success'] : false,
+						'r_id'        => ! empty( $response['data']['rid'] ) ? $response['data']['rid'] : 0,
+						'json'        => wp_json_encode( $json_data ),
+					);
+				}
+			}
+
+			wp_send_json( $response );
+			wp_die();
+		}
+
+		/**
 		 * Create a new widget
 		 *
-		 * @since 1.1.1 in this file
-		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 */
 		public function wkit_create_widget() {
 			$image = '';
@@ -384,10 +458,9 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		}
 
 		/**
-		 *
 		 * It is Use for delete widget from server
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 */
 		public function wkit_import_widget() {
 			$filename = '';
@@ -506,7 +579,7 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		 *
 		 * It is Use for delete widget from server
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 */
 		public function wkit_export_widget() {
 			$data = isset( $_POST['info'] ) ? wp_unslash( $_POST['info'] ) : '';
@@ -517,7 +590,7 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 
 			$widget_name    = str_replace( ' ', '_', $widget_name_temp );
 			$folder         = str_replace( ' ', '-', $widget_name_temp );
-			$unique_version = $this->generate_unique_id();
+			$unique_version = $this->wdkit_generate_unique_id();
 
 			if ( empty( $widget_type ) ) {
 				$result = (object) array(
@@ -566,7 +639,7 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 					'description' => esc_html__( 'something went wrong! please try again later.', 'wdesignkit' ),
 				);
 
-			return $result;
+				return $result;
 			}
 		}
 
@@ -574,7 +647,7 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		 *
 		 * It is Use for delete widget from server
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 */
 		public function wkit_delete_widget() {
 			$data = isset( $_POST['info'] ) ? sanitize_text_field( wp_unslash( $_POST['info'] ) ) : '';
@@ -630,19 +703,18 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 			}
 		}
 
-
 		/* All below functions are helper functions for this file */
 
 		/**
 		 *
 		 * This Function is used for API call
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 *
 		 * @param array $data give array.
 		 * @param array $name store data.
 		 */
-		protected function wkit_api_call( $data, $name ) {
+		public function wkit_api_call( $data, $name ) {
 			$u_r_l = $this->wdkit_api;
 
 			if ( empty( $u_r_l ) ) {
@@ -699,7 +771,7 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		 *
 		 * Custom_upload_dir
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 *
 		 * @param array $upload store data.
 		 */
@@ -725,8 +797,8 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		 * @param string $type store text data.
 		 * @param string $condition store text data.
 		 */
-		
-		 protected function wdkit_sanitizer_bypass( $data, $type, $condition = 'none' ) {
+
+		public function wdkit_sanitizer_bypass( $data, $type, $condition = 'none' ) {
 
 			if ( 'none' === $condition ) {
 				return $data[ $type ];
@@ -738,13 +810,13 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		/**
 		 * Parse args $_POST
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 *
 		 * @param string $data send all post data.
 		 * @param string $type store text data.
 		 * @param string $condition store text data.
 		 */
-		protected function wdkit_file_sanitizer_bypass( $data, $type, $condition = 'none' ) {
+		public function wdkit_file_sanitizer_bypass( $data, $type, $condition = 'none' ) {
 
 			if ( 'name' === $condition ) {
 				return wp_normalize_path( $data[ $type ]['tmp_name'] );
@@ -752,12 +824,11 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		}
 
 		/**
-		 *
 		 * Get list local Widget List
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 */
-		protected function wdkit_get_local_widgets() {
+		public function wdkit_get_local_widgets() {
 			$builder       = array();
 			$a_c_s_d_s_c   = array();
 			$j_s_o_n_array = array();
@@ -821,51 +892,27 @@ if ( ! class_exists( 'Wdkit_Widget_Ajax' ) ) {
 		/**
 		 * Error JSON message
 		 *
-		 * @param array  $data give array.
-		 * @param string $status api code number.
+		 * @param array $data give array.
+		 *
+		 * @since 1.1.4
 		 * */
-		public function wdkit_error_msg( $data = null, $status = null ) {
+		public function wdkit_error_msg( $data = null ) {
 			wp_send_json_error( $data );
 			wp_die();
 		}
 
 		/**
-		 *
 		 * Create Uniq name
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.4
 		 */
-		protected function generate_unique_id() {
+		public function wdkit_generate_unique_id() {
 			$now        = new DateTime();
 			$unique_i_d = $now->format( 'YmdHis' );
 			$hashed_i_d = (int) $unique_i_d % 10000;
 			return str_pad( $hashed_i_d, 4, '0', STR_PAD_LEFT );
 		}
+	}
 
-
-		/**
-         * Set the response data.
-         *
-         * @since 6.0.0
-         *
-         * @param bool   $success     Indicates whether the operation was successful. Default is false.
-         * @param string $message     The main message to include in the response. Default is an empty string.
-         * @param string $description A more detailed description of the message or error. Default is an empty string.
-         * @param mixed  $data        Optional additional data to include in the response. Default is an empty string.
-         */
-        public function wkit_set_response( $success = false, $message = '', $description = '', $data = '' ) {
-
-            $response = array(
-                'success'     => $success,
-                'message'     => esc_html( $message ),
-                'description' => esc_html( $description ),
-            );
-
-            return $response;
-        }
-
-
-    }
-
-    Wdkit_Widget_Ajax::get_instance();
+	Wdkit_Widget_Ajax::get_instance();
 }

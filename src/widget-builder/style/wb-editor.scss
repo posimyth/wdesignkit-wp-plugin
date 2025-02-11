@@ -1,11 +1,11 @@
-@import '/src/style/variable.scss';
+@use '/src/style/variable';
 
 .wkit-wb-editor {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: $radius_big;
+    border-radius: variable.$radius_big;
     overflow: hidden;
 
     .wkit-editor {
@@ -106,7 +106,7 @@
                     bottom: 0;
                     -webkit-transition: .4s;
                     transition: .4s;
-                    border-radius: $radius_small;
+                    border-radius: variable.$radius_small;
                 }
 
                 .wb-slider:before {
@@ -118,7 +118,7 @@
                     bottom: 3px;
                     background-color: white;
                     transition: 0.4s;
-                    border-radius: $radius_small;
+                    border-radius: variable.$radius_small;
                 }
 
                 input:checked+.wb-slider:before {
@@ -141,7 +141,7 @@
                 overflow: hidden;
                 cursor: pointer;
                 border: 1px solid #ffffff1f;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
 
                 &.wkit-editor-js-val,
                 &.wkit-editor-css-val {
@@ -196,7 +196,7 @@
                     width: 16px;
                     margin-top: 3px;
                     margin-left: 7px;
-                    transition: $transition;
+                    transition: variable.$transition;
                 }
             }
 
@@ -294,7 +294,7 @@
         height: 50px;
 
         .wkit-wb-external-link-popup {
-            padding: $radius_small;
+            padding: variable.$radius_small;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -312,7 +312,7 @@
 
                 &:hover {
                     fill: #B2C8DF !important;
-                    transition: $transition;
+                    transition: variable.$transition;
                 }
             }
         }
@@ -322,7 +322,7 @@
             width: 17px;
             display: none;
             fill: #cecece;
-            transition: $transition;
+            transition: variable.$transition;
 
             &:hover {
                 fill: #fff;
@@ -334,7 +334,7 @@
             width: 17px;
             display: none;
             fill: #cecece;
-            transition: $transition;
+            transition: variable.$transition;
 
             &:hover {
                 fill: #fff;
@@ -470,7 +470,7 @@
             }
 
             .wkit-wb-editor-btns-label {
-                font-family: $Wdkit_font_family !important;
+                font-family: variable.$Wdkit_font_family !important;
             }
 
             .wkit-wb-editor-top-ions {
@@ -504,7 +504,7 @@
         bottom: 0;
         display: flex;
         flex-direction: column;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
         background-color: #344552;
         padding: 10px 10px 0px 10px;
 
@@ -636,7 +636,7 @@
         }
 
         .active-editor {
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             color: #ffffff;
             width: max-content;
             width: 150px;
@@ -657,7 +657,7 @@
         .wb-editor-popup {
             display: none;
             background-color: #011627;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             position: absolute;
             z-index: 1;
             top: 32px;
@@ -685,7 +685,7 @@
         .wb-editor-js-popup {
             display: none;
             background-color: #011627;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             position: absolute;
             z-index: 1;
             top: 32px;
@@ -752,7 +752,6 @@
         //     gap: 2px;
         //     flex-direction: row;
         //     justify-content: center;
-        //     width: -moz-fit-content;
         //     width: 33%;
         //     background-color: #344552;
         //     color: #808B93;
@@ -779,7 +778,7 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
         width: 50%;
 
         .wkit-wb-loopError-close {
@@ -843,7 +842,7 @@
     }
 
     .wkit-zoom-icon-box-border {
-        padding: $radius_small;
+        padding: variable.$radius_small;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -870,7 +869,7 @@
     .wkit-expand-icon-box-border {
         justify-content: center;
         align-items: center;
-        padding: $radius_small;
+        padding: variable.$radius_small;
         display: flex;
         border: 1px solid #344552;
         transition: 0.3s linear;
@@ -971,11 +970,11 @@
                     }
 
                     .wb-editor-popup-input {
-                        background-color: $Wdkit_primary_color;
+                        background-color: variable.$Wdkit_primary_color;
                         border: none;
                         color: #000000;
                         width: 100%;
-                        border-radius: $radius_small;
+                        border-radius: variable.$radius_small;
                         margin: 0px 5px;
                         height: 4vh;
 
@@ -1029,11 +1028,11 @@
 
 
                     .wb-editor-popup-input {
-                        background-color: $Wdkit_primary_color;
+                        background-color: variable.$Wdkit_primary_color;
                         border: none;
                         color: #000000;
                         width: 100%;
-                        border-radius: $radius_small;
+                        border-radius: variable.$radius_small;
                         margin: 0px 5px;
                         height: 35px;
 
@@ -1080,7 +1079,7 @@
                         width: 100%;
                         top: 45px;
                         border-radius: 6px;
-                        background-color: $color_white;
+                        background-color: variable.$color_white;
                         box-shadow: 0px 4px 10px 0px #0000001A;
                         z-index: 1;
 
@@ -1098,7 +1097,7 @@
                                 color: black;
                                 cursor: pointer;
                                 text-transform: capitalize;
-                                transition: $transition;
+                                transition: variable.$transition;
                                 font-weight: 600;
 
                                 span {
@@ -1176,7 +1175,7 @@
                         padding-left: 41px;
                         background-position-x: 10px;
                         background-position-y: center;
-                        background-color: $Wdkit_primary_color;
+                        background-color: variable.$Wdkit_primary_color;
                         background-repeat: no-repeat;
                     }
 
@@ -1187,12 +1186,12 @@
 
                 .wb-editor-popup-add-btn {
                     background-color: #878787;
-                    color: $Wdkit_secondary_color;
+                    color: variable.$Wdkit_secondary_color;
                     border: none;
                     padding: 7px 10px;
-                    border-radius: $radius_small;
+                    border-radius: variable.$radius_small;
                     margin: 5px;
-                    transition: $transition;
+                    transition: variable.$transition;
                     cursor: pointer;
 
                     &:hover {
@@ -1275,7 +1274,7 @@
                     padding: 10px 20px;
                     border-radius: 6px;
                     border: none;
-                    color: $Wdkit_secondary_color;
+                    color: variable.$Wdkit_secondary_color;
                     cursor: pointer;
                 }
             }
@@ -1290,7 +1289,7 @@
 //     background-color: #fff;
 //     margin-top: 25px;
 //     border: 1px solid #1A2D3D;
-//     border-radius: $radius_small;
+//     border-radius: variable.$radius_small;
 
 //     .wkit-wb-live-preview-header {
 //         display: flex;
@@ -1327,7 +1326,7 @@
 //         padding: 5px;
 //         display: flex;
 //         border: 1px solid #344552;
-//         border-radius: $radius_small;
+//         border-radius: variable.$radius_small;
 //         cursor: pointer;
 //         margin-right: 15px;
 

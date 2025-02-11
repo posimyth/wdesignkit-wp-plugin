@@ -1,0 +1,653 @@
+@use '../../style/variable';
+
+.wkit-theplus-popup-parent {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    padding: 20px 30px;
+    overflow-y: auto;
+    background-color: variable.$Wdkit_blue_normal;
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c1c1c1a6;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 0;
+        background: #040483;
+    }
+
+    .theplus-wkit-loader-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    // Login popup
+    .wkit-login-popup {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 30px;
+        width: 100%;
+        padding: 0 10px;
+
+        .wkit-tpae-login-heading {
+            color: variable.$cr_white;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .wkit-tpae-login-btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .wkit-tpae-btn {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            min-width: 210px;
+            color: variable.$font_cr_black;
+            padding: 9px 45px;
+            background: variable.$cr_white;
+            border: 1px solid variable.$sivercr_normal;
+            border-radius: variable.$radius_small;
+            transition: variable.$transition;
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+
+            img {
+                width: 24px;
+                height: 24px;
+                margin-right: 5px;
+            }
+
+            span {
+                display: flex;
+                flex-direction: row;
+                width: max-content;
+                color: #0b0b0b;
+            }
+
+            &:hover {
+                border: 1px solid #0b0b0b;
+            }
+        }
+
+
+        .wkit-tpae-sign-email {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .wkit-tpae-line-text {
+            color: #ffffff7a;
+        }
+
+        .wkit-tpae-line {
+            width: 50%;
+            border: 1px solid #FFFFFF66;
+        }
+
+        .wkit-tpae-login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+
+            .wkit-tpae-login-field {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .wkit-tpae-label {
+                font-size: 16px;
+                cursor: pointer;
+                color: variable.$cr_white;
+            }
+
+            input.wkit-input-field {
+                padding: 9px 10px;
+                background: transparent;
+                color: variable.$cr_white;
+                font-weight: 400;
+                font-size: 13px;
+                margin-left: 0px;
+                border: 1px solid #FFFFFF66;
+                width: 100%;
+                border-radius: variable.$radius_small;
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+                &::placeholder {
+                    color: variable.$sivercr_normal;
+                }
+
+            }
+
+            .wkit-login-password-inp {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                border: 1px solid #FFFFFF66;
+                border-radius: variable.$radius_small;
+
+                input {
+                    width: 92%;
+                    border: none;
+                    border-radius: 5px 0px 0px 5px;
+                }
+
+                .wkit-password-eye {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    width: 8%;
+                    margin-right: 5px;
+
+                    svg {
+                        display: flex;
+                        min-width: 18px;
+                        min-height: 18px;
+                        margin: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .wkit-remember-wrapper {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                label {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 5px;
+                    color: #ffffff7a;
+                    cursor: pointer;
+                }
+            }
+
+            .wkit-loader-btn {
+                width: 100%;
+            }
+
+            .wkit-tpae-login-btn {
+                padding: 15px;
+            }
+
+            .wkit-tpae-page-link {
+                position: relative;
+                color: variable.$cr_white ;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    transform: scaleX(0);
+                    height: 2px;
+                    bottom: -4px;
+                    left: 0;
+                    background-color: variable.$cr_white;
+                    transform-origin: bottom right;
+                    transition: transform 0.25s ease-out;
+                }
+
+                &:hover:after {
+                    transform: scaleX(1);
+                    transform-origin: bottom left;
+                }
+            }
+
+            .wkit-check-box {
+                height: 17px;
+                width: 17px;
+                margin: 0;
+                background-color: transparent;
+                border-color: #FFFFFF66;
+
+                &:focus {
+                    border-color: #DADAF0;
+                    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+                    outline: 0px solid transparent;
+                }
+
+                &:checked {
+                    background-color: variable.$Wdkit_blue_normal;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &::before {
+                        content: "";
+                        border: 2px solid variable.$cr_white;
+                        border-left: 0px;
+                        border-top: 0px;
+                        transform: rotate(40deg);
+                        width: 4px;
+                        height: 9px;
+                        margin: 0;
+                        margin-bottom: 2px;
+                    }
+                }
+
+            }
+
+            .wkit-signup-account {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff7a;
+                gap: 2px;
+            }
+
+        }
+
+        /**Social Login Loading*/
+        .wkit-loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 10px;
+            width: 40px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .wkit-loader:before {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: variable.$Wdkit_blue_normal;
+            animation: loaderAnimation 1.2s infinite ease-in-out;
+        }
+
+        @keyframes loaderAnimation {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                background-color: variable.$Wdkit_blue_normal;
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0);
+            }
+        }
+
+    }
+
+    // Buy pro popup
+    .wkit-pro-popup {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+
+        .wkit-text-content {
+
+            .wkit-buy-pro {
+                color: variable.$cr_white;
+                font-size: 24px;
+                font-weight: 600;
+                margin: 0;
+                text-align: center;
+            }
+        }
+
+        .wkit-widget-switcher {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: variable.$cr_white;
+            border: 1px solid variable.$cr_white;
+            border-radius: variable.$radius_big;
+            box-shadow: 0 2px 10px 0 transparent;
+            box-sizing: border-box;
+            min-width: 310px;
+            justify-content: space-between;
+            padding: 10px 20px;
+            transition: variable.$transition;
+
+            .wkit-widget-detail {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .wkit-widget-tag {
+                position: absolute;
+                top: -10px;
+                border-radius: 5px;
+                color: #8072fc;
+                font-size: 10px;
+                line-height: 12px;
+                padding: 4px 8px;
+                background-color: #f4f2ff;
+                border: 1px solid #e5e0ff;
+                text-transform: uppercase;
+            }
+
+            .wkit-tpae-widget-detail {
+                position: relative;
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                font-weight: 500;
+                gap: 7px;
+                justify-content: left;
+                line-height: 16px;
+            }
+
+            .wkit-widget-status {
+                border-radius: 5px;
+                background-color: #ff586c;
+                color: variable.$cr_white;
+                font-size: 10px;
+                line-height: 12px;
+                padding: 4px 8px;
+                ;
+            }
+
+            .wkit-tpae-widget-links {
+                display: flex;
+                position: relative;
+                align-items: center;
+                gap: 6px;
+                justify-content: left;
+            }
+
+            .wkit_block_toggle_btn_cover {
+                position: relative;
+                display: inline-block;
+                width: 49px;
+                height: 26px;
+
+                .wkit_toggle_btn {
+                    height: 0;
+                    width: 0;
+                    visibility: hidden;
+                }
+
+                .wkit_toggle_lock_icon {
+                    position: absolute;
+                    padding-right: 7px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 0px;
+                }
+
+                .switch-label {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #d1d1d6;
+                    transition: 0.4s;
+                    border-radius: 100px;
+                    display: flex;
+                    justify-content: right;
+                }
+
+                .switch-button {
+                    position: absolute;
+                    height: 16px;
+                    width: 16px;
+                    left: 5px;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    border-radius: 50%;
+                    background-color: variable.$cr_white;
+                    transition: 0.4s;
+                }
+
+                .wkit_toggle_btn:checked+.switch-label {
+                    background-color: variable.$Wdkit_blue_normal;
+                }
+
+                .wkit_toggle_btn:checked+.switch-label .switch-button {
+                    left: calc(100% - 5px);
+                    transform: translateX(-100%);
+                }
+
+                .switch-label:active .switch-button {
+                    width: 25px;
+                    height: 16px;
+                }
+            }
+        }
+
+        .wkit-widget-btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+
+            .wkit-pro-btn {
+                padding: 13px 22px;
+                width: 100%;
+                white-space: nowrap;
+                color: variable.$cr_white;
+            }
+
+            a {
+                width: 100%;
+            }
+
+            .wkit-transparetn-btn {
+                background: transparent;
+                border-color: white;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.089);
+                }
+            }
+        }
+
+        .wkit-tpae-details-dropdown {
+            position: relative;
+            width: 100%;
+
+            .wkit-tpae-question {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: variable.$cr_white;
+                padding: 15px;
+                background-color: #ffffff36;
+                border-radius: variable.$radius_small;
+                border: 1px solid #FFFFFF24;
+            }
+
+            .wkit-dropdown-svg {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .wkit-tpae-answer {
+                display: flex;
+                flex-direction: column;
+                color: variable.$cr_white;
+                line-height: 25px;
+                transition: variable.$transition;
+                overflow: hidden;
+                padding: 0px 15px;
+                height: 0vh;
+                border-color: #FFFFFF24;
+            }
+
+            .wkit-show-answer {
+                border: 1px solid #FFFFFF24;
+                height: max-content;
+                padding: 15px;
+                border-radius: 0 0 6px 6px;
+            }
+
+            .wkit-dropdown-link {
+                color: variable.$cr_white;
+                text-decoration: underline;
+            }
+
+            .wkit-show-question {
+                border-radius: 6px 6px 0 0;
+            }
+        }
+    }
+
+    // Activate license popup
+    .wkit-tpae-activate-license {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        .wkit-text-content {
+            width: 70%;
+
+            .wkit-tpae-license-text {
+                color: variable.$cr_white;
+                text-align: center;
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            .wkit-tpae-license-notice {
+                color: #B1B1D9;
+                text-align: center;
+            }
+        }
+
+        .wkit-activate-license {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 95%;
+
+            .wkit-enter-key {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #FFFFFF66;
+                border-radius: variable.$radius_small;
+                width: 80%;
+                padding: 5px;
+            }
+
+            .wkit-empty-license {
+                border: 1px solid red;
+            }
+
+            .wkit-tpae-license-input {
+                width: 100%;
+                background-color: transparent;
+                border: 1px solid transparent;
+                color: variable.$cr_white;
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+                &::placeholder {
+                    color: #FFFFFF66;
+                }
+            }
+
+            .wkit-tpae-active-loader {
+                font-size: 16px;
+                font-weight: 500;
+                height: 50px;
+                width: 100px;
+            }
+        }
+    }
+}
+
+.wkit-widget-downloading {
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.theplus-wkit-loader-outer,
+.theplus-wkit-loader-inner {
+    position: absolute;
+    z-index: 1;
+    height: 100px;
+    width: 100px;
+    border: 4px solid #C22076;
+    border-bottom: 4px solid transparent;
+    border-radius: 50%;
+    padding: 11px;
+    animation: loader 1.2s infinite linear;
+}
+
+.theplus-wkit-loader-inner {
+    height: 70px;
+    width: 70px;
+    animation: Reverseloader 0.6s infinite linear;
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes Reverseloader {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}

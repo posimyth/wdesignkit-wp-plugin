@@ -1,3 +1,5 @@
+@use '../../style/variable';
+
 .wkit-myupload-main {
 
     .wkit-upload-heading {
@@ -85,6 +87,7 @@
                 transform: rotate(40deg);
                 width: 4px;
                 height: 10px;
+                box-sizing: unset;
             }
         }
     }
@@ -217,7 +220,6 @@
         position: relative;
         display: flex;
         flex-wrap: wrap;
-        -moz-column-gap: 10px;
         column-gap: 10px;
         row-gap: 10px;
         width: 100%;
@@ -245,7 +247,7 @@
         column-gap: 8px;
         align-items: center;
 
-        .heading{
+        .heading {
             text-align: left;
         }
 
@@ -290,8 +292,6 @@
         border-radius: 6px;
         padding: 8px 15px;
         color: #fff;
-        width: -webkit-max-content;
-        width: -moz-max-content;
         width: max-content;
         bottom: 41px;
         left: auto;
@@ -352,7 +352,7 @@
             width: 80px;
         }
 
-        .wkit-template-error{
+        .wkit-template-error {
             display: block;
             padding: 5px;
             background-color: #FFE9E9;
@@ -428,7 +428,6 @@
     display: flex;
     flex-wrap: wrap;
     row-gap: 10px;
-    -moz-column-gap: 10px;
     column-gap: 10px;
     row-gap: 15px;
     width: 100%;
@@ -530,6 +529,37 @@
             top: 5px;
         }
 
+    }
+}
+
+/************************  popup Skeleton  ************************/
+
+.wkit-skeleton.popup-body {
+
+    .wkit-pluginMissing-text,
+    .wkit-plugin-image,
+    .wkit-plugin-name,
+    .wkit-download-skeleton-img,
+    .wkit-download-select,
+    .wkit-download-all {
+        background: variable.$skeleton_bg;
+        animation: variable.$animation;
+        border-radius: variable.$radius_small;
+        color: transparent;
+        pointer-events: none;
+        width: fit-content;
+        border: none !important;
+
+        img,
+        input,
+        svg {
+            visibility: hidden;
+        }
+
+        span,
+        label {
+            color: transparent !important;
+        }
     }
 }
 

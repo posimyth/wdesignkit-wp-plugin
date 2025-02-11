@@ -31,7 +31,7 @@ const Widget_browse_skeleton = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="wdkit-star-rating">
+                        <div className="wdkit-star-rating" style={{ width: '50%' }}>
                             <span>1 Review</span>
                         </div>
                         <div className="wkit-widget-info-content">

@@ -1876,7 +1876,7 @@ const CreatFile = async (call, all_files, html, css, js, old_folder, image_file,
     }
 
     var formData = new FormData();
-    formData.append('action', 'wdkit_widget_ajax');
+    formData.append('action', 'get_wdesignkit');
     formData.append('kit_nonce', wdkitData.kit_nonce);
     formData.append('type', 'wkit_create_widget');
     formData.append('image', image_file);

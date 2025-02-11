@@ -1,0 +1,197 @@
+@use '../../style/variable.scss';
+
+.wkit-dashSupport-content {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    z-index: 499;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    .wkit-sup-top {
+        background-color: variable.$Wdkit_blue_normal;
+        border: 1px solid rgba(0, 0, 0, .08);
+        border-radius: 4px 4px 0 0;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .wkit_support_section_heading {
+            color: variable.$cr_white;
+            margin: 0px;
+            font-size: 16px;
+            line-height: 11px;
+            font-weight: 500;
+            margin: 0;
+        }
+    }
+
+    .wkit-support-inner {
+        padding: 15px;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 20px 50px rgb(0 0 0 / 10%);
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, .08);
+    }
+
+    .wkit-sup-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 25px;
+
+        .wkit-support-list {
+            display: block;
+            position: relative;
+
+            &:not(:last-child) {
+                &::after {
+                    content: '';
+                    content: "";
+                    width: 100%;
+                    height: 1px;
+                    background-color: rgba(0, 0, 0, 0.08);
+                    position: absolute;
+                    left: 0;
+                    bottom: -14px;
+                }
+            }
+
+            .wkit-support-link {
+                display: flex;
+                justify-content: space-between;
+                font-size: 14px;
+                font-weight: 500;
+                color: #0a102f;
+                letter-spacing: .2px;
+                outline: 0;
+                box-shadow: none;
+                align-items: center;
+                text-decoration: blink;
+
+                .wkit-title-wrap {
+                    font-size: 14px;
+                    line-height: 18px;
+                    font-weight: 400;
+                    color: variable.$font_cr_black;
+                }
+
+                path.arrow-one,
+                path.arrow-two {
+                    transition: 0.4s;
+                    transform: translateX(0%);
+                }
+
+                &:hover {
+                    path.arrow-one {
+                        transform: translateX(30%);
+                    }
+
+                    path.arrow-two {
+                        transform: translateX(60%);
+                        animation: wkit_arrow_anim 1s infinite 0.6s;
+                    }
+
+                    path.arrow-three {
+                        animation: wkit_arrow_anim 1s infinite 0.2s;
+                    }
+                }
+            }
+        }
+    }
+
+    .wkit-panel-row {
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        margin: 22px 0 0 0;
+
+        .wkit-socialLogo-link {
+            border: 1.5px solid #00000014;
+            border-radius: 2px;
+            padding: 6px;
+            font-size: 14px;
+            color: #0a102f;
+            border-radius: 50%;
+            transition: all 0.3s;
+
+            &:hover {
+                border-color: variable.$Wdkit_blue_normal;
+            }
+
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .wkit-version-info {
+            font-size: 12px;
+            line-height: 24px;
+            font-weight: 400;
+            color: #878787;
+        }
+    }
+}
+
+.wkit-support-bottom {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px solid #00000014;
+    border-radius: 30px;
+    color: #0A102F;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: blink;
+    position: fixed;
+    bottom: 35px;
+    right: 90px;
+    z-index: 599;
+    background: variable.$cr_white;
+
+    &:hover {
+        color: inherit;
+    }
+}
+
+@keyframes wkit_arrow_anim {
+    0% {
+        stroke: #1717CC;
+    }
+
+    50% {
+        stroke: #ff5a6e;
+    }
+
+    100% {
+        stroke: #1717CC;
+    }
+}
+
+.wkit-dashsupport-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    z-index: 9;
+    background: variable.$Wdkit_blue_normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .15s ease;
+
+    svg {
+        max-width: 15px;
+        fill: #fff;
+    }
+}

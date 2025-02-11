@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { Get_site_url, Page_header, Wkit_availble_not, Wkit_template_Skeleton } from "../../helper/helper-function";
 import ReactPaginate from "react-paginate";
+import { __ } from '@wordpress/i18n';
 const { Fragment } = wp.element;
-const { __ } = wp.i18n;
 
 const {
     Success_import_template,
@@ -243,11 +243,11 @@ const MyUploaded = (props) => {
      * @version 1.0.35
      */
     const Handle_btn = (data) => {
-            if (data === 'websitekit') {
-                return 'Kit';
-            } else {
-                return 'Template';
-            }
+        if (data === 'websitekit') {
+            return 'Kit';
+        } else {
+            return 'Template';
+        }
     }
 
     /** header tabing filter part */
@@ -261,7 +261,7 @@ const MyUploaded = (props) => {
                                 <path fillRule="evenodd" clipRule="evenodd" d="M4 1.75C2.75736 1.75 1.75 2.75736 1.75 4V18C1.75 19.2426 2.75736 20.25 4 20.25H14C15.2426 20.25 16.25 19.2426 16.25 18V6.75H14C12.4812 6.75 11.25 5.51878 11.25 4V1.75H4ZM12.75 2.81066L15.1893 5.25H14C13.3096 5.25 12.75 4.69036 12.75 4V2.81066ZM0.25 4C0.25 1.92893 1.92893 0.25 4 0.25H12H12.3107L12.5303 0.46967L17.5303 5.46967L17.75 5.68934V6V18C17.75 20.0711 16.0711 21.75 14 21.75H4C1.92893 21.75 0.25 20.0711 0.25 18V4ZM4.25 11C4.25 10.5858 4.58579 10.25 5 10.25H10C10.4142 10.25 10.75 10.5858 10.75 11C10.75 11.4142 10.4142 11.75 10 11.75H5C4.58579 11.75 4.25 11.4142 4.25 11ZM5 14.75C4.58579 14.75 4.25 15.0858 4.25 15.5C4.25 15.9142 4.58579 16.25 5 16.25H13C13.4142 16.25 13.75 15.9142 13.75 15.5C13.75 15.0858 13.4142 14.75 13 14.75H5Z" className="wkit-svg-hover" />
                             </svg>
                         </div>
-                        <div className="wdkit-filter-title">{__("Pages")}</div>
+                        <div className="wdkit-filter-title">{__("Pages", 'wdesignkit')}</div>
                     </button>
                     <button className={tab == "section" ? "wdesignkit-menu tab-active" : "wdesignkit-menu"} onClick={() => { setActivePage(1); setTab("section"); }}>
                         <div className="wdkit-img">
@@ -269,12 +269,12 @@ const MyUploaded = (props) => {
                                 <path fillRule="evenodd" clipRule="evenodd" d="M1.5 1.5V20.5H8.5V1.5H1.5ZM1 0C0.447715 0 0 0.447716 0 1V21C0 21.5523 0.447715 22 1 22H9C9.55229 22 10 21.5523 10 21V1C10 0.447715 9.55228 0 9 0H1ZM13.5 1.5V8.5H20.5V1.5H13.5ZM13 0C12.4477 0 12 0.447715 12 1V9C12 9.55229 12.4477 10 13 10H21C21.5523 10 22 9.55228 22 9V1C22 0.447715 21.5523 0 21 0H13ZM12.7539 12.25C12.3397 12.25 12.0039 12.5858 12.0039 13C12.0039 13.4142 12.3397 13.75 12.7539 13.75H21.25C21.6642 13.75 22 13.4142 22 13C22 12.5858 21.6642 12.25 21.25 12.25H12.7539ZM12.0039 17C12.0039 16.5858 12.3397 16.25 12.7539 16.25H21.25C21.6642 16.25 22 16.5858 22 17C22 17.4142 21.6642 17.75 21.25 17.75H12.7539C12.3397 17.75 12.0039 17.4142 12.0039 17ZM12.7539 20.25C12.3397 20.25 12.0039 20.5858 12.0039 21C12.0039 21.4142 12.3397 21.75 12.7539 21.75H21.25C21.6642 21.75 22 21.4142 22 21C22 20.5858 21.6642 20.25 21.25 20.25H12.7539Z" className="wkit-svg-hover" />
                             </svg>
                         </div>
-                        <div className="wdkit-filter-title">{__("Sections")}</div>
+                        <div className="wdkit-filter-title">{__("Sections", 'wdesignkit')}</div>
                     </button>
                     <div className="wdkit-menu-disable-button">
                         {wdkitData.use_editor !== 'wdkit' &&
                             <span className="wdkit-kit-disable-tooltip">
-                                Our Pagekits can only be imported from the plugin dashboard, <a href={Get_site_url() + '/admin.php?page=wdesign-kit#/browse'} target="_blank" rel="noopener noreferrer">click here</a> to open the dashboard.
+                                {__('Our Pagekits can only be imported from the plugin dashboard,', 'wdesignkit')} <a href={Get_site_url() + '/admin.php?page=wdesign-kit#/browse'} target="_blank" rel="noopener noreferrer">{__('click here', 'wdesignkit')}</a> {__('to open the dashboard.', 'wdesignkit')}
                             </span>
                         }
                         <button className={`${tab === "websitekit" ? "wdesignkit-menu tab-active" : "wdesignkit-menu"} ${wdkitData.use_editor !== 'wdkit' ? 'wdesignkit-menu-disable' : ''}`}
@@ -285,7 +285,7 @@ const MyUploaded = (props) => {
                                     <path fillRule="evenodd" clipRule="evenodd" d="M1.87873 4.07646L9.87873 2.07646C10.1943 1.99757 10.5 2.23625 10.5 2.56153V2.99998V4.49998V17.5V19V19.4384C10.5 19.7637 10.1943 20.0024 9.87873 19.9235L1.87873 17.9235C1.65615 17.8679 1.5 17.6679 1.5 17.4384V4.56153C1.5 4.3321 1.65615 4.13211 1.87873 4.07646ZM12 19V19.4384C12 20.7396 10.7772 21.6943 9.51493 21.3787L1.51493 19.3787C0.624594 19.1561 0 18.3562 0 17.4384V4.56153C0 3.6438 0.624595 2.84383 1.51493 2.62125L9.51493 0.621247C10.7772 0.305674 12 1.26039 12 2.56153V2.99998H17.5C18.6046 2.99998 19.5 3.89541 19.5 4.99998V17C19.5 18.1045 18.6046 19 17.5 19H12ZM12 4.49998V17.5H17.5C17.7761 17.5 18 17.2761 18 17V4.99998C18 4.72384 17.7761 4.49998 17.5 4.49998H12Z" className="wkit-svg-hover" />
                                 </svg>
                             </div>
-                            <div className="wdkit-filter-title">{__("Kits")}</div>
+                            <div className="wdkit-filter-title">{__("Kits", 'wdesignkit')}</div>
                         </button>
                     </div>
                 </div>
@@ -296,7 +296,7 @@ const MyUploaded = (props) => {
                             :
                             <svg className="wkit-svg-hover" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.6602 3.98968C17.0202 2.18968 13.7602 3.02968 12.0002 5.08968C10.2402 3.02968 6.98021 2.17968 4.34021 3.98968C2.94021 4.94968 2.06021 6.56968 2.00021 8.27968C1.86021 12.1597 5.30021 15.2697 10.5502 20.0397L10.6502 20.1297C11.4102 20.8197 12.5802 20.8197 13.3402 20.1197L13.4502 20.0197C18.7002 15.2597 22.1302 12.1497 22.0002 8.26968C21.9402 6.56968 21.0602 4.94968 19.6602 3.98968ZM12.1002 18.5497L12.0002 18.6497L11.9002 18.5497C7.14021 14.2397 4.00021 11.3897 4.00021 8.49968C4.00021 6.49968 5.50021 4.99968 7.50021 4.99968C9.04021 4.99968 10.5402 5.98968 11.0702 7.35968H12.9402C13.4602 5.98968 14.9602 4.99968 16.5002 4.99968C18.5002 4.99968 20.0002 6.49968 20.0002 8.49968C20.0002 11.3897 16.8602 14.2397 12.1002 18.5497Z" fill="#040483" /></svg>
                         }
-                        <span className="wdkit-favourite-btn-title">{__("Favourites")}</span>
+                        <span className="wdkit-favourite-btn-title">{__("Favourites", 'wdesignkit')}</span>
                     </div>
                 </div>
             </div>
@@ -307,7 +307,7 @@ const MyUploaded = (props) => {
         <div className="wkit-myupload-main">
             {window.wdkit_editor == 'wdkit' &&
                 <Page_header
-                    title={'My Templates'}
+                    title={__('My Templates', 'wdesignkit')}
                     svg={
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 20H20M9.5 15.5V9.5H5L12 2.5L19 9.5H14.5V15.5H9.5Z" stroke="#040483" strokeWidth="1.5" strokeLinecap="round" />

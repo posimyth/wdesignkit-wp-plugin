@@ -2,10 +2,10 @@
 Contributors: posimyththemes, devangvachheta, sagarpatel124
 Donate link: https://wdesignkit.com/
 Tags: page templates, elementor template, wordpress template, elementor widgets, gutenberg blocks
-Requires at least: 5.7.0
+Requires at least: 6.0
 Tested up to: 6.6
-Requires PHP: 5.6
-Stable tag: 1.1.0
+Requires PHP: 7.0
+Stable tag: 1.1.15
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -24,6 +24,8 @@ License URI: https://opensource.org/licenses/GPL-3.0
 
 https://www.youtube.com/watch?v=Bw5IHPxr0Nc
 
+https://www.youtube.com/watch?v=4RhZwuyFd8k&t=101s
+
 ## What is WDesignKit ?
 * <strong>[1000+ Elementor Page Templates, Kit & Sections](https://wdesignkit.com/browse/template?builder=1001&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
 * <strong>[1000+ Gutenberg Templates & Patterns](https://wdesignkit.com/browse/template?builder=1002&utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
@@ -36,18 +38,6 @@ https://www.youtube.com/watch?v=Bw5IHPxr0Nc
 * <strong>[1- Click Widget Convertor](https://wdesignkit.com/widget-builder?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks#wkit-one-click-convert)</strong> — Easily Convert Elementor Widgets to Gutenberg Blocks or Bricks Elements & Vice Versa 
 * <strong>[Cloud Workspace](https://wdesignkit.com/cloud-workspace?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong> — Collaborate with your Team & Store Page Templates, Figma Designs or Custom Widgets on Cloud 
 * <strong>[200+ Figma Designed Websites](https://wdesignkit.com/browse/figma?utm_source=wordpress&utm_medium=readmepage&utm_campaign=widgetslinks)</strong>
-
-### WDesignKit Replace Multiple Plugins & Tools for You
-
-* Starter Templates — Elementor, WordPress & Beaver Builder Templates
-* AI Powered Starter Templates by Kadence WP
-* Toolkit for Block Theme (Starter Templates, Portfolio, Gutenberg Blocks, Patterns) – Twentig
-* Templately – Gutenberg & Elementor Template Library: 5000+ Free & Pro Ready Templates & Cloud!
-* Unlimited Elements for Elementor
-* Envato & Themeforest Marketplace
-* Template Monster
-* And Much More
-
 
 ###🔍 OUR PRODUCTS
 
@@ -98,15 +88,75 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == External services ==
 
-This plugin relies on external services to enhance its functionality and user experience. Below is a detailed description of the external services used by this plugin:
-1. wdesignkit.com API
-This API is used to fetch plugin-related data for onboarding and updates. It sends the plugin version and identifier during activation, updates, or specific plugin-related requests. For more details, you can review the Privacy Policy [https://wdesignkit.com/privacy-policy] and Terms of Service[https://wdesignkit.com/terms].
-2. api.wordpress.org Plugins Info API
-This API retrieves plugin metadata and compatibility information from WordPress.org. It sends the plugin identifier during updates or when checking compatibility. More information can be found in the Privacy Policy[https://wordpress.org/about/privacy/] and Terms of Service[https://wordpress.org/tos/].
-3. api.posimyth.com APIs
-The plugin connects to this API for two purposes: collecting optional feedback during deactivation and storing anonymized data during onboarding. For deactivation feedback, anonymized data is sent voluntarily by users, while onboarding interactions transmit minimal anonymized statistics. These APIs are only accessed during feedback submission or onboarding. You can find more details in the Privacy Policy[https://api.posimyth.com/privacy-policy/] and Terms of Service[https://api.posimyth.com/terms-and-conditions/].
+1. wdesignkit.com API : This API is used to fetch plugin-related data for onboarding and updates. It sends the plugin version and identifier during activation, updates, or specific plugin-related requests. For more details, you can review the [Privacy Policy](https://wdesignkit.com/privacy-policy) and [Terms of Service](https://wdesignkit.com/terms).
+2. api.wordpress.org : This API retrieves plugin metadata and compatibility information from WordPress.org. It sends the plugin identifier during updates or when checking compatibility. More information can be found in the [Privacy Policy](https://wordpress.org/about/privacy/) and [Terms of Service](https://wordpress.org/tos/).
+3. api.posimyth.com : The plugin connects to this API for two purposes: collecting optional feedback during deactivation and storing anonymized data during onboarding. For deactivation feedback, anonymized data is sent voluntarily by users, while onboarding interactions transmit minimal anonymized statistics. These APIs are only accessed during feedback submission or onboarding. You can find more details in the [Privacy Policy](https://api.posimyth.com/privacy-policy/) and [Terms of Service](https://api.posimyth.com/terms-and-conditions/).
 
 == Changelog ==
+
+1.1.15 – 10 February 2025
+Fix : Widget Builder : Security Patch ( Medium security ).
+Fix: Minor bugs and improvements.
+
+1.1.14 – 6 February 2025
+Fix : Post-Type Selection in Import Section Feature. 
+Fix : Get Widget JSON file in edit Widget Page.
+Improve : Import Template Design.
+Fix: Minor bugs and improvements.
+
+1.1.13 – 30 January 2025
+Fix : Gallery Controller Error in Gutenberg Widget Builder.
+Fix : Border Controller Error in Gutenberg Widget Builder.
+Fix: Minor bugs and improvements.
+
+1.1.12 – 27 January 2025
+Improve : Gutenberg Template Import Feature.
+Fix: Minor bugs and improvements.
+
+1.1.11 – 21 January 2025
+New: Preview Controller in Elementor Widget Builder.
+New: AI Support Switcher in Some Controller.
+Fix: Export Template / Section Error.
+Fix: Remove Support Icon from Widget Builder Page.
+Fix: Minor bugs and improvements.
+
+1.1.10 – 16 January 2025
+Add: YouTube video Tutorial Section to the Widget Builder.
+Fix: Error from White Label Icon Selection Feature.
+Fix: Raw HTML controller in the Elementor Widget Builder.
+Fix: Minor bugs and improvements.
+
+1.1.9 – 10 January 2025
+New: White Label Feature.
+Fix: Import Template Error in Elementor Page Builder.
+Fix: Minor Bugs and Improvements.
+
+1.1.8 – 08 January 2025
+Fix: Minor Bugs and Improvements.
+
+1.1.7 – 06 January 2025
+New : Remove Image Feature in Create and Edit Widget Popup.
+Fix : Solve Language Translation Error in Toast message.
+Fix: Minor Bugs and Improvements.
+
+1.1.6 – 27 December 2024
+Fix: Disable routing feature error.
+New: Option to remove database values of the plugin.
+New: Users can directly activate the license if already activated in the relevant plugin.
+Fix: Minor Bugs and Improvements.
+
+1.1.5 – 12 December 2024
+Fix: Minor Bugs and Improvements.
+
+1.1.4 – 06 December 2024
+New: Added Support Button.
+Improvement: Optimized Code for Improved Performance.
+Fix: Resolved language translation errors.
+Fix: Resolved Image Height error from share-with-me page.
+Fix: Minor Bugs and Improvements.
+
+1.1.3 – 23 November 2024
+Fix: Minor Bugs and Improvements.
 
 1.1.2 – 21 November 2024
 Fix: Minor Bugs and Improvements.

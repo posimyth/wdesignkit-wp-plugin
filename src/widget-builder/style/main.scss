@@ -1,5 +1,5 @@
 //elementor
-@import '/src/style/variable.scss';
+@use '/src/style/variable';
 
 .wkit-wb-main-builder-page {
     height: 100%;
@@ -37,12 +37,16 @@
 
         &.wkit-drag-over {
             border-color: #91003bdb;
-            color: $elementor_text_color;
+            color: variable.$elementor_text_color;
 
             svg {
-                fill: $elementor_bg_color;
+                fill: variable.$elementor_bg_color;
             }
         }
+    }
+
+    .wkit-wb-widget-builder .wkit-yt-slider .wkit-slider-dot .wkit-active-slide {
+        background-color: variable.$elementor_bg_color;
     }
 
     .wkit-wb-parentClass-swicher .wb-slider {
@@ -50,48 +54,48 @@
     }
 
     .wkit-wb-parentClass-swicher input:checked+.wb-slider {
-        background-color: $elementor_bg_color !important;
+        background-color: variable.$elementor_bg_color !important;
     }
 
     .wkit-widget-edit-setting-panel .wkit-widget-back-btn .wkit-back-btn-icon {
         background-color: #94003b1a;
 
         svg path {
-            stroke: $elementor_bg_color;
+            stroke: variable.$elementor_bg_color;
         }
     }
 
     .wkit-wb-publish-btn {
-        background-color: $elementor_bg_color;
-        transition: $transition;
+        background-color: variable.$elementor_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $elementor_bg_hover_color;
+            background-color: variable.$elementor_bg_hover_color;
         }
     }
 
     .wkit-wb-publish-btn {
         .wkit-wb-save-success-icon {
-            stroke: $elementor_bg_color;
+            stroke: variable.$elementor_bg_color;
         }
     }
 
     .wkit-wb-popoverLable {
-        border: 1px solid $elementor_border_color;
-        background: $elementor_bg_color;
+        border: 1px solid variable.$elementor_border_color;
+        background: variable.$elementor_bg_color;
     }
 
     .wb-popover-options {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
     }
 
     .wb-repeater-field {
-        background: $elementor_bg_color;
-        border: 1px solid $elementor_border_color;
+        background: variable.$elementor_bg_color;
+        border: 1px solid variable.$elementor_border_color;
     }
 
     .wb-repeater-options {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
     }
 
     .wkit-wb-popoverInput {
@@ -100,84 +104,84 @@
 
     .wb_drag-over {
         height: 14px !important;
-        background-color: $elementor_bg_color;
+        background-color: variable.$elementor_bg_color;
         border: 1px dashed rgba(33, 37, 41, 0.25);
     }
 
     .wb-draggable-main-icon {
-        background-color: $elementor_bg_color;
+        background-color: variable.$elementor_bg_color;
     }
 
     .wkit-wb-popup-links .wkit-wb-links-popup .wb-external-links .wkit-wb-links-content {
 
         .wkit-popup-link {
-            transition: $transition;
+            transition: variable.$transition;
 
             &:hover {
-                border-bottom: 2px solid $elementor_border_color;
+                border-bottom: 2px solid variable.$elementor_border_color;
             }
         }
 
         .wkit-active-link {
-            border-bottom: 2px solid $elementor_border_color;
-            background-color: $Wdkit_primary_color;
+            border-bottom: 2px solid variable.$elementor_border_color;
+            background-color: variable.$Wdkit_primary_color;
         }
     }
 
     .wkit-wb-popup-links .wkit-wb-links-popup .close-popup-btn .wkit-wb-close-popup-btn {
-        background-color: $elementor_bg_color;
-        transition: $transition;
+        background-color: variable.$elementor_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $elementor_bg_hover_color;
+            background-color: variable.$elementor_bg_hover_color;
         }
     }
 
     .wkit-version-popup-inside {
         .wb-version-header {
-            background-color: $elementor_bg_color;
+            background-color: variable.$elementor_bg_color;
         }
 
         .wkit-add-log-btn {
-            border: 1px solid $elementor_border_color;
-            color: $elementor_text_color;
-            transition: $transition;
+            border: 1px solid variable.$elementor_border_color;
+            color: variable.$elementor_text_color;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $elementor_outer_border_bg;
+                background-color: variable.$elementor_outer_border_bg;
             }
 
             svg {
-                fill: $elementor_bg_color;
+                fill: variable.$elementor_bg_color;
             }
         }
 
         .wb-version-popup-btn {
-            background: $elementor_bg_color;
-            transition: $transition;
+            background: variable.$elementor_bg_color;
+            transition: variable.$transition;
             color: #fff;
 
             &:hover {
-                background-color: $elementor_bg_hover_color;
+                background-color: variable.$elementor_bg_hover_color;
             }
         }
     }
 
     .wb-repeater.wkit-wb-main-selected,
     .wb-popover.wkit-wb-main-selected {
-        border: 1px solid $elementor_bg_color;
+        border: 1px solid variable.$elementor_bg_color;
     }
 
     .wb-hover-main-component {
         .wb-sec-edit {
-            background-color: $elementor_bg_color;
+            background-color: variable.$elementor_bg_color;
         }
     }
 
     .wb-range-content {
         .wb-range-bar {
             .wb-range-inp::-webkit-slider-thumb {
-                background: $elementor_bg_color;
+                background: variable.$elementor_bg_color;
             }
         }
     }
@@ -185,7 +189,7 @@
     .wb-block-detail-content {
         .wb-NHA-option-select {
             .wb-select-component {
-                border: 1px solid $elementor_border_color;
+                border: 1px solid variable.$elementor_border_color;
             }
         }
 
@@ -193,15 +197,15 @@
         .wb-NHA-option-select {
 
             .wb-select-component-inp {
-                border: 1px solid $elementor_border_color;
+                border: 1px solid variable.$elementor_border_color;
             }
 
             .wb-select-component-inp:checked {
-                background-color: $elementor_bg_color;
+                background-color: variable.$elementor_bg_color;
             }
 
             .wb-select-component-inp:focus {
-                border-color: $elementor_border_color;
+                border-color: variable.$elementor_border_color;
             }
         }
     }
@@ -210,10 +214,10 @@
         .wb-dimension-unit {
             .wb-units {
                 input {
-                    border: 1px solid $elementor_border_color !important;
+                    border: 1px solid variable.$elementor_border_color !important;
 
                     &:checked {
-                        background-color: $elementor_bg_color;
+                        background-color: variable.$elementor_bg_color;
                     }
                 }
             }
@@ -221,90 +225,90 @@
     }
 
     .wb-select-unit-inp {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
 
         &:focus {
-            border-color: $elementor_border_color;
-            box-shadow: 0 0 0 0px $elementor_border_color;
+            border-color: variable.$elementor_border_color;
+            box-shadow: 0 0 0 0px variable.$elementor_border_color;
         }
 
         &:checked {
-            background-color: $elementor_bg_color;
+            background-color: variable.$elementor_bg_color;
         }
     }
 
     .wb-option {
         .wkit-wb-choose-popup {
             &::before {
-                background-color: $elementor_bg_color;
+                background-color: variable.$elementor_bg_color;
             }
 
             .wkit-wb-choose-popup-header {
-                background-color: $elementor_bg_color;
+                background-color: variable.$elementor_bg_color;
             }
 
             .wkit-wb-save-btn {
-                background-color: $elementor_bg_color;
+                background-color: variable.$elementor_bg_color;
             }
         }
     }
 
     .wb-eicons-content .wb-eicons-links .wb-eicons-links-content {
         .wb-eicons-lable {
-            color: $elementor_text_color;
+            color: variable.$elementor_text_color;
         }
 
         .wb-eicons-hr {
-            border: 1px solid $elementor_bg_color;
+            border: 1px solid variable.$elementor_bg_color;
         }
     }
 
 
     .wb-block-detail-content .wb-options-main {
         .wb-add-option {
-            border: 1px solid $elementor_bg_color;
-            transition: $transition;
+            border: 1px solid variable.$elementor_bg_color;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $elementor_outer_border_bg !important;
+                background-color: variable.$elementor_outer_border_bg !important;
             }
 
             .wb-addOption-lable {
-                color: $elementor_text_color;
+                color: variable.$elementor_text_color;
             }
 
             .wb-addOption-icon {
-                fill: $elementor_bg_color;
+                fill: variable.$elementor_bg_color;
             }
         }
     }
 
     .wkit-wb-custom-category-btns {
-        background-color: $elementor_bg_color;
+        background-color: variable.$elementor_bg_color;
     }
 
     .wkit-wb-custom-category-add-more {
-        border: 1px solid $elementor_border_color;
-        color: $elementor_text_color;
+        border: 1px solid variable.$elementor_border_color;
+        color: variable.$elementor_text_color;
     }
 
     .wkit-wb-custom-category {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
 
         &:before {
-            border-top: 1px solid $elementor_border_color;
-            border-left: 1px solid $elementor_border_color;
-            background-color: $elementor_bg_color;
+            border-top: 1px solid variable.$elementor_border_color;
+            border-left: 1px solid variable.$elementor_border_color;
+            background-color: variable.$elementor_bg_color;
         }
 
         .wkit-wb-custom-category-header {
-            background-color: $elementor_bg_color;
+            background-color: variable.$elementor_bg_color;
         }
     }
 
     .wkit-wb-publish-btn.wdkit-saved {
         background-color: #91003B1A;
-        color: $elementor_text_color !important;
+        color: variable.$elementor_text_color !important;
     }
 
     .wkit-wb-publish-btn.wdkit-disable {
@@ -316,11 +320,11 @@
     .wkit-wb-editor-css-btn.active-editor,
     .wkit-wb-editor-js-btn.active-editor,
     .wkit-wb-editor-php-btn.active-editor {
-        background-color: $elementor_bg_color;
+        background-color: variable.$elementor_bg_color;
         border-right: 1px solid transparent;
 
         &:hover {
-            background-color: $elementor_bg_color;
+            background-color: variable.$elementor_bg_color;
             border-right: 1px solid transparent;
         }
     }
@@ -334,23 +338,23 @@
     }
 
     .wkit-wb-components .wkit-wb-search-bar .wkit-wb-search-input:focus {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
         box-shadow: none;
     }
 
     .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate,
     .wkit-wb-widget-builder .wkit-wb-third .wb-third-header .wkit-wkit-wb-third-header-text:hover {
-        background-color: $Wdkit_secondary_color;
-        color: $elementor_border_color;
-        border-radius: $radius_small;
+        background-color: variable.$Wdkit_secondary_color;
+        color: variable.$elementor_border_color;
+        border-radius: variable.$radius_small;
     }
 
     .wkit-wb-components .wkit-wb-all-widgets .wkit-wb-widget:hover svg path {
-        fill: $elementor_bg_color;
+        fill: variable.$elementor_bg_color;
     }
 
     .wkit-widget-detail .wb-block-detail-content .wb-block-name input:checked+.wb-slider {
-        background-color: $elementor_bg_color;
+        background-color: variable.$elementor_bg_color;
     }
 
 
@@ -363,45 +367,45 @@
 
 
     .wb-toggle .wb-toggle-content input:checked+.wb-slider {
-        background-color: $elementor_bg_color;
+        background-color: variable.$elementor_bg_color;
     }
 
     .wkit-wb-widget-builder .active,
     .wkit-wb-widget-builder .wkit-wb-second .wb-second-header .active svg {
-        color: $elementor_text_color;
-        stroke: $elementor_text_color;
+        color: variable.$elementor_text_color;
+        stroke: variable.$elementor_text_color;
     }
 
     .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate svg {
-        stroke: $elementor_bg_color;
+        stroke: variable.$elementor_bg_color;
     }
 
     .wkit-wb-widget:hover {
         background-color: #F9FAFA;
-        border: 1px solid $elementor_text_color;
-        color: $elementor_text_color;
+        border: 1px solid variable.$elementor_text_color;
+        color: variable.$elementor_text_color;
     }
 
     .wb-typography:hover {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
     }
 
     .wp-head-wrapper .wb-right-head-side .wb-setting-panel-link {
-        color: $elementor_text_color;
+        color: variable.$elementor_text_color;
     }
 
     .wb-hover-component .wb-sec-edit,
     .wb-draggable-icon {
-        background-color: $elementor_bg_color;
-        transition: $transition;
+        background-color: variable.$elementor_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $elementor_bg_hover_color;
+            background-color: variable.$elementor_bg_hover_color;
         }
     }
 
     .wb-main-component.wkit-wb-selected {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
     }
 
     .wb-main-component {
@@ -409,18 +413,18 @@
     }
 
     .wb-main-component:hover {
-        border: 1px solid $elementor_border_color;
+        border: 1px solid variable.$elementor_border_color;
     }
 
     .wkit-wb-popup .wkit-wb-header-popup,
     .wkit-wb-block-btn-save,
     .wb-block-detail-content.wb-options-main.wb-add-option {
-        background-color: $elementor_bg_color;
-        transition: $transition;
+        background-color: variable.$elementor_bg_color;
+        transition: variable.$transition;
     }
 
     .wkit-wb-popup .wkit-wb-block-btn-save:hover {
-        background: $elementor_bg_hover_color;
+        background: variable.$elementor_bg_hover_color;
     }
 
     .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-help-link .wkit-wb-input-content:focus,
@@ -437,12 +441,12 @@
     .wkit-wb-editor .wkit-wb-editor-content {
 
         .wb-editor-popup-add-btn {
-            background-color: $elementor_bg_color;
+            background-color: variable.$elementor_bg_color;
             color: #fff;
-            transition: $transition;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $elementor_bg_hover_color;
+                background-color: variable.$elementor_bg_hover_color;
             }
 
             svg path {
@@ -473,12 +477,16 @@
 
         &.wkit-drag-over {
             border-color: #3E58E1;
-            color: $gutenberg_text_color;
+            color: variable.$gutenberg_text_color;
 
             svg {
-                fill: $gutenberg_border_color;
+                fill: variable.$gutenberg_border_color;
             }
         }
+    }
+
+    .wkit-wb-widget-builder .wkit-yt-slider .wkit-slider-dot .wkit-active-slide {
+        background-color: variable.$gutenberg_bg_color;
     }
 
     .wkit-wb-parentClass-swicher .wb-slider {
@@ -486,48 +494,48 @@
     }
 
     .wkit-wb-parentClass-swicher input:checked+.wb-slider {
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
     }
 
     .wkit-widget-edit-setting-panel .wkit-widget-back-btn .wkit-back-btn-icon {
         background-color: #287cb21a;
 
         svg path {
-            stroke: $gutenberg_bg_color;
+            stroke: variable.$gutenberg_bg_color;
         }
     }
 
     .wkit-wb-publish-btn {
-        background-color: $gutenberg_bg_color;
-        transition: $transition;
+        background-color: variable.$gutenberg_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $gutenberg_bg_hover_color;
+            background-color: variable.$gutenberg_bg_hover_color;
         }
     }
 
     .wkit-wb-publish-btn {
         .wkit-wb-save-success-icon {
-            stroke: $gutenberg_bg_color;
+            stroke: variable.$gutenberg_bg_color;
         }
     }
 
     .wkit-wb-popoverLable {
-        border: 1px solid $gutenberg_border_color;
-        background: $gutenberg_bg_color;
+        border: 1px solid variable.$gutenberg_border_color;
+        background: variable.$gutenberg_bg_color;
     }
 
     .wb-popover-options {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
     }
 
     .wb-repeater-field {
-        border: 1px solid $gutenberg_border_color;
-        background: $gutenberg_bg_color;
+        border: 1px solid variable.$gutenberg_border_color;
+        background: variable.$gutenberg_bg_color;
     }
 
     .wb-repeater-options {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
     }
 
     .wkit-wb-popoverInput {
@@ -536,59 +544,59 @@
 
     .wb-eicons-content .wb-eicons-links .wb-eicons-links-content {
         .wb-eicons-lable {
-            color: $gutenberg_text_color;
+            color: variable.$gutenberg_text_color;
         }
 
         .wb-eicons-hr {
-            border: 1px solid $gutenberg_border_color;
+            border: 1px solid variable.$gutenberg_border_color;
         }
     }
 
     .wb_drag-over {
         height: 14px !important;
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
         border: 1px dashed rgba(33, 37, 41, 0.25);
     }
 
     .wb-draggable-main-icon {
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
     }
 
     .wkit-wb-popup-links .wkit-wb-links-popup .wb-external-links .wkit-wb-links-content {
         .wkit-popup-link {
-            transition: $transition;
+            transition: variable.$transition;
 
             &:hover {
-                border-bottom: 2px solid $gutenberg_border_color;
+                border-bottom: 2px solid variable.$gutenberg_border_color;
             }
         }
 
         .wkit-active-link {
-            border-bottom: 2px solid $gutenberg_border_color;
-            background-color: $Wdkit_primary_color;
+            border-bottom: 2px solid variable.$gutenberg_border_color;
+            background-color: variable.$Wdkit_primary_color;
         }
     }
 
 
     .wkit-wb-popup-links .wkit-wb-links-popup .close-popup-btn .wkit-wb-close-popup-btn {
-        background-color: $gutenberg_bg_color;
-        transition: $transition;
+        background-color: variable.$gutenberg_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $gutenberg_bg_hover_color;
+            background-color: variable.$gutenberg_bg_hover_color;
         }
     }
 
     .wb-hover-main-component {
         .wb-sec-edit {
-            background-color: $gutenberg_bg_color;
+            background-color: variable.$gutenberg_bg_color;
         }
     }
 
     .wb-range-content {
         .wb-range-bar {
             .wb-range-inp::-webkit-slider-thumb {
-                background: $gutenberg_bg_color;
+                background: variable.$gutenberg_bg_color;
             }
         }
     }
@@ -596,7 +604,7 @@
     .wb-block-detail-content {
         .wb-NHA-option-select {
             .wb-select-component {
-                border: 1px solid $gutenberg_border_color;
+                border: 1px solid variable.$gutenberg_border_color;
             }
         }
 
@@ -604,15 +612,15 @@
         .wb-NHA-option-select {
 
             .wb-select-component-inp {
-                border: 1px solid $gutenberg_border_color;
+                border: 1px solid variable.$gutenberg_border_color;
             }
 
             .wb-select-component-inp:checked {
-                background-color: $gutenberg_bg_color;
+                background-color: variable.$gutenberg_bg_color;
             }
 
             .wb-select-component-inp:focus {
-                border-color: $gutenberg_border_color;
+                border-color: variable.$gutenberg_border_color;
             }
         }
     }
@@ -620,30 +628,30 @@
 
     .wkit-version-popup-inside {
         .wb-version-header {
-            background-color: $gutenberg_bg_color;
+            background-color: variable.$gutenberg_bg_color;
         }
 
         .wkit-add-log-btn {
-            border: 1px solid $gutenberg_border_color;
-            color: $gutenberg_bg_color;
-            transition: $transition;
+            border: 1px solid variable.$gutenberg_border_color;
+            color: variable.$gutenberg_bg_color;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $gutenberg_outer_border_bg;
+                background-color: variable.$gutenberg_outer_border_bg;
             }
 
             svg {
-                fill: $gutenberg_border_color;
+                fill: variable.$gutenberg_border_color;
             }
         }
 
         .wb-version-popup-btn {
-            background: $gutenberg_bg_color;
-            transition: $transition;
+            background: variable.$gutenberg_bg_color;
+            transition: variable.$transition;
             color: #fff;
 
             &:hover {
-                background-color: $gutenberg_bg_hover_color;
+                background-color: variable.$gutenberg_bg_hover_color;
             }
         }
     }
@@ -651,36 +659,36 @@
     .wb-option {
         .wkit-wb-choose-popup {
             &::before {
-                background-color: $gutenberg_bg_color;
+                background-color: variable.$gutenberg_bg_color;
             }
 
             .wkit-wb-choose-popup-header {
-                background-color: $gutenberg_bg_color;
+                background-color: variable.$gutenberg_bg_color;
             }
 
             .wkit-wb-save-btn {
-                background-color: $gutenberg_bg_color;
+                background-color: variable.$gutenberg_bg_color;
             }
         }
     }
 
     .wkit-wb-custom-category {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
 
         &:before {
-            border-top: 1px solid $gutenberg_border_color;
-            border-left: 1px solid $gutenberg_border_color;
-            background-color: $gutenberg_bg_color;
+            border-top: 1px solid variable.$gutenberg_border_color;
+            border-left: 1px solid variable.$gutenberg_border_color;
+            background-color: variable.$gutenberg_bg_color;
         }
 
         .wkit-wb-custom-category-header {
-            background-color: $gutenberg_bg_color;
+            background-color: variable.$gutenberg_bg_color;
         }
     }
 
     .wkit-wb-publish-btn.wdkit-saved {
         background-color: #3e58e11a;
-        color: $gutenberg_text_color;
+        color: variable.$gutenberg_text_color;
     }
 
     .wkit-wb-publish-btn.wdkit-disable {
@@ -689,60 +697,60 @@
     }
 
     .wkit-wb-custom-category-btns {
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
     }
 
     .wkit-wb-custom-category-add-more {
-        border: 1px solid $gutenberg_border_color;
-        color: $gutenberg_text_color;
+        border: 1px solid variable.$gutenberg_border_color;
+        color: variable.$gutenberg_text_color;
     }
 
     .wb-block-detail-content .wb-options-main {
         .wb-add-option {
-            border: 1px solid $gutenberg_bg_color;
-            transition: $transition;
+            border: 1px solid variable.$gutenberg_bg_color;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $gutenberg_outer_border_bg !important;
+                background-color: variable.$gutenberg_outer_border_bg !important;
             }
 
             .wb-addOption-lable {
-                color: $gutenberg_text_color;
+                color: variable.$gutenberg_text_color;
             }
 
             .wb-addOption-icon {
-                fill: $gutenberg_border_color;
+                fill: variable.$gutenberg_border_color;
             }
         }
     }
 
     .wb-select-unit-inp {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
 
         &:focus {
-            border-color: $gutenberg_border_color;
-            box-shadow: 0 0 0 0px $gutenberg_border_color;
+            border-color: variable.$gutenberg_border_color;
+            box-shadow: 0 0 0 0px variable.$gutenberg_border_color;
         }
 
         &:checked {
-            background-color: $gutenberg_bg_color;
+            background-color: variable.$gutenberg_bg_color;
         }
     }
 
     .wb-repeater.wkit-wb-main-selected,
     .wb-popover.wkit-wb-main-selected {
-        border: 1px solid $gutenberg_bg_color;
+        border: 1px solid variable.$gutenberg_bg_color;
     }
 
     .wkit-wb-editor-html-btn.active-editor,
     .wkit-wb-editor-css-btn.active-editor,
     .wkit-wb-editor-js-btn.active-editor,
     .wkit-wb-editor-php-btn.active-editor {
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
         border-right: 1px solid transparent;
 
         &:hover {
-            background-color: $gutenberg_bg_color;
+            background-color: variable.$gutenberg_bg_color;
             border-right: 1px solid transparent;
         }
     }
@@ -756,33 +764,33 @@
     }
 
     .wb-append-content:hover {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
     }
 
     .wkit-wb-components .wkit-wb-search-bar .wkit-wb-search-input:focus {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
         box-shadow: none;
     }
 
     .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate,
     .wkit-wb-widget-builder .wkit-wb-third .wb-third-header .wkit-wb-third-header-text:hover {
         background-color: #ffffff;
-        color: $gutenberg_text_color;
+        color: variable.$gutenberg_text_color;
         border-radius: 6px;
     }
 
 
     .wkit-wb-components .wkit-wb-all-widgets .wkit-wb-widget:hover svg path {
-        fill: $gutenberg_bg_color;
+        fill: variable.$gutenberg_bg_color;
     }
 
 
     .wkit-widget-detail .wb-block-detail-content .wb-block-name input:checked+.wb-slider {
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
     }
 
     .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate svg {
-        stroke: $gutenberg_text_color;
+        stroke: variable.$gutenberg_text_color;
     }
 
 
@@ -796,61 +804,61 @@
 
 
     .wb-toggle .wb-toggle-content input:checked+.wb-slider {
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
     }
 
     .wkit-wb-widget-builder .active,
     .wkit-wb-widget-builder .wkit-wb-second .wb-second-header .active svg {
-        color: $gutenberg_text_color;
-        stroke: $gutenberg_text_color;
+        color: variable.$gutenberg_text_color;
+        stroke: variable.$gutenberg_text_color;
     }
 
     .wkit-wb-widget:hover {
         background-color: #F9FAFA;
-        border: 1px solid $gutenberg_text_color;
-        color: $gutenberg_text_color;
+        border: 1px solid variable.$gutenberg_text_color;
+        color: variable.$gutenberg_text_color;
     }
 
     .wb-typography:hover {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
     }
 
     .wb-hover-component .wb-sec-edit,
     .wb-draggable-icon {
-        background-color: $gutenberg_bg_color;
-        transition: $transition;
+        background-color: variable.$gutenberg_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $gutenberg_bg_hover_color;
+            background-color: variable.$gutenberg_bg_hover_color;
         }
     }
 
     .wb-main-component {
-        border: 1px solid #ffffff;
+        border: 1px solid transparent;
     }
 
     .wb-main-component.wkit-wb-selected {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
     }
 
     .wb-main-component:hover {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
     }
 
     .wkit-wb-popup .wkit-wb-header-popup,
     .wkit-wb-block-btn-save,
     .wb-add-option {
-        background-color: $gutenberg_bg_color;
-        transition: $transition;
+        background-color: variable.$gutenberg_bg_color;
+        transition: variable.$transition;
     }
 
     .wb-block-detail-content .wb-options-main {
         .wb-add-option {
-            border: 1px solid $gutenberg_border_color;
+            border: 1px solid variable.$gutenberg_border_color;
         }
 
         .wb-addOption-icon {
-            fill: $gutenberg_border_color;
+            fill: variable.$gutenberg_border_color;
         }
     }
 
@@ -858,10 +866,10 @@
         .wb-dimension-unit {
             .wb-units {
                 input {
-                    border: 1px solid $gutenberg_border_color !important;
+                    border: 1px solid variable.$gutenberg_border_color !important;
 
                     &:checked {
-                        background-color: $gutenberg_bg_color;
+                        background-color: variable.$gutenberg_bg_color;
                     }
                 }
             }
@@ -872,12 +880,12 @@
     .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-block-name .wkit-wb-block-text-inp:focus,
     .wkit-wb-block-detail .wkit-wb-block-dec .wkit-wb-block-textarea:focus,
     .wkit-wb-block-detail .wkit-wb-category-option:focus {
-        border: 1px solid $gutenberg_border_color;
+        border: 1px solid variable.$gutenberg_border_color;
         box-shadow: none;
     }
 
     .wkit-wb-popup .wkit-wb-block-btn-save:hover {
-        background: $gutenberg_bg_hover_color;
+        background: variable.$gutenberg_bg_hover_color;
     }
 
     .wkit-gutenberg-icon {
@@ -885,12 +893,12 @@
     }
 
     .wkit-wb-editor .wkit-wb-editor-content .wb-editor-popup-add-btn {
-        background-color: $gutenberg_bg_color;
+        background-color: variable.$gutenberg_bg_color;
         color: #fff;
-        transition: $transition;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $gutenberg_bg_hover_color;
+            background-color: variable.$gutenberg_bg_hover_color;
         }
     }
 
@@ -900,7 +908,7 @@
 
     .wb-loader {
         .wb-loader-circle {
-            border-top: 8px solid $gutenberg_border_color;
+            border-top: 8px solid variable.$gutenberg_border_color;
         }
     }
 }
@@ -911,12 +919,17 @@
 
         &.wkit-drag-over {
             border-color: #FFD64F;
-            color: $bricks_text_color;
+            color: variable.$bricks_text_color;
 
             svg {
-                fill: $bricks_border_color;
+                fill: variable.$bricks_border_color;
             }
         }
+    }
+
+
+    .wkit-wb-widget-builder .wkit-yt-slider .wkit-slider-dot .wkit-active-slide {
+        background-color: variable.$bricks_bg_color;
     }
 
     .wkit-wb-parentClass-swicher .wb-slider {
@@ -924,16 +937,16 @@
     }
 
     .wkit-wb-parentClass-swicher input:checked+.wb-slider {
-        background-color: $bricks_bg_color;
+        background-color: variable.$bricks_bg_color;
     }
 
     .wb-eicons-content .wb-eicons-links .wb-eicons-links-content {
         .wb-eicons-lable {
-            color: $bricks_text_color;
+            color: variable.$bricks_text_color;
         }
 
         .wb-eicons-hr {
-            border: 1px solid $bricks_border_color;
+            border: 1px solid variable.$bricks_border_color;
         }
     }
 
@@ -941,20 +954,20 @@
         background-color: #ffd53e80;
 
         svg path {
-            stroke: $bricks_inner_color;
+            stroke: variable.$bricks_inner_color;
         }
     }
 
     .wkit-wb-publish-btn {
-        background-color: $bricks_bg_color;
-        transition: $transition;
+        background-color: variable.$bricks_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $bricks_bg_hover_color;
+            background-color: variable.$bricks_bg_hover_color;
         }
 
         span {
-            color: $bricks_inner_color;
+            color: variable.$bricks_inner_color;
         }
     }
 
@@ -976,26 +989,26 @@
         }
 
         .wkit-wb-save-success-icon {
-            stroke: $bricks_bg_color;
+            stroke: variable.$bricks_bg_color;
         }
     }
 
     .wkit-wb-popoverLable {
-        border: 1px solid $bricks_border_color;
-        background: $bricks_bg_color;
+        border: 1px solid variable.$bricks_border_color;
+        background: variable.$bricks_bg_color;
     }
 
     .wb-popover-options {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
     }
 
     .wb-repeater-field {
-        background: $bricks_bg_color;
-        border: 1px solid $bricks_border_color;
+        background: variable.$bricks_bg_color;
+        border: 1px solid variable.$bricks_border_color;
     }
 
     .wb-repeater-options {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
     }
 
     .wkit-wb-popoverInput {
@@ -1004,72 +1017,72 @@
 
     .wb_drag-over {
         height: 14px !important;
-        background-color: $bricks_bg_color;
+        background-color: variable.$bricks_bg_color;
         border: 1px dashed rgba(33, 37, 41, 0.25);
     }
 
     .wb-draggable-main-icon {
-        background-color: $bricks_bg_color;
+        background-color: variable.$bricks_bg_color;
     }
 
 
     .wkit-wb-popup-links .wkit-wb-links-popup .wb-external-links .wkit-wb-links-content {
         .wkit-popup-link {
-            transition: $transition;
+            transition: variable.$transition;
 
             &:hover {
-                border-bottom: 2px solid $bricks_border_color;
+                border-bottom: 2px solid variable.$bricks_border_color;
             }
         }
 
         .wkit-active-link {
-            border-bottom: 2px solid $bricks_border_color;
-            background-color: $Wdkit_primary_color;
+            border-bottom: 2px solid variable.$bricks_border_color;
+            background-color: variable.$Wdkit_primary_color;
         }
     }
 
 
 
     .wkit-wb-popup-links .wkit-wb-links-popup .close-popup-btn .wkit-wb-close-popup-btn {
-        background-color: $bricks_bg_color;
-        transition: $transition;
+        background-color: variable.$bricks_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $bricks_bg_hover_color;
+            background-color: variable.$bricks_bg_hover_color;
         }
     }
 
     .wkit-version-popup-inside {
         .wb-version-header {
-            background-color: $bricks_bg_color;
+            background-color: variable.$bricks_bg_color;
 
             label {
-                color: $bricks_inner_color;
+                color: variable.$bricks_inner_color;
             }
         }
 
 
         .wkit-add-log-btn {
-            border: 1px solid $bricks_border_color;
-            color: $bricks_text_color;
-            transition: $transition;
+            border: 1px solid variable.$bricks_border_color;
+            color: variable.$bricks_text_color;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $bricks_outer_border_bg;
+                background-color: variable.$bricks_outer_border_bg;
             }
 
             svg {
-                fill: $bricks_border_color;
+                fill: variable.$bricks_border_color;
             }
         }
 
         .wb-version-popup-btn {
-            background: $bricks_bg_color;
-            transition: $transition;
-            color: $bricks_inner_color;
+            background: variable.$bricks_bg_color;
+            transition: variable.$transition;
+            color: variable.$bricks_inner_color;
 
             &:hover {
-                background-color: $bricks_bg_hover_color;
+                background-color: variable.$bricks_bg_hover_color;
             }
 
             span {
@@ -1081,19 +1094,19 @@
     .wb-repeater.wkit-wb-main-selected,
     .wb-cpt-inner.wkit-wb-main-selected,
     .wb-popover.wkit-wb-main-selected {
-        border: 1px solid $bricks_bg_color;
+        border: 1px solid variable.$bricks_bg_color;
     }
 
     .wb-hover-main-component {
         .wb-sec-edit {
-            background-color: $bricks_bg_color;
+            background-color: variable.$bricks_bg_color;
         }
     }
 
     .wb-range-content {
         .wb-range-bar {
             .wb-range-inp::-webkit-slider-thumb {
-                background: $bricks_bg_color;
+                background: variable.$bricks_bg_color;
             }
         }
     }
@@ -1102,22 +1115,22 @@
 
         .wb-NHA-option-select {
             .wb-select-component {
-                border: 1px solid $bricks_border_color;
+                border: 1px solid variable.$bricks_border_color;
             }
         }
 
         .wb-option-select,
         .wb-NHA-option-select {
             .wb-select-component-inp {
-                border: 1px solid $bricks_border_color;
+                border: 1px solid variable.$bricks_border_color;
             }
 
             .wb-select-component-inp:checked {
-                background-color: $bricks_bg_color;
+                background-color: variable.$bricks_bg_color;
             }
 
             .wb-select-component-inp:focus {
-                border-color: $bricks_border_color;
+                border-color: variable.$bricks_border_color;
             }
         }
     }
@@ -1126,10 +1139,10 @@
         .wb-dimension-unit {
             .wb-units {
                 input {
-                    border: 1px solid $bricks_border_color !important;
+                    border: 1px solid variable.$bricks_border_color !important;
 
                     &:checked {
-                        background-color: $bricks_bg_color;
+                        background-color: variable.$bricks_bg_color;
                     }
                 }
             }
@@ -1137,80 +1150,80 @@
     }
 
     .wb-select-unit-inp {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
 
         &:focus {
-            border-color: $bricks_border_color;
-            box-shadow: 0 0 0 0px $bricks_border_color;
+            border-color: variable.$bricks_border_color;
+            box-shadow: 0 0 0 0px variable.$bricks_border_color;
         }
 
         &:checked {
-            background-color: $bricks_bg_color;
+            background-color: variable.$bricks_bg_color;
         }
     }
 
     .wb-option {
         .wkit-wb-choose-popup {
             &::before {
-                background-color: $bricks_bg_color;
+                background-color: variable.$bricks_bg_color;
             }
 
             .wkit-wb-choose-popup-header {
-                background-color: $bricks_bg_color;
+                background-color: variable.$bricks_bg_color;
             }
 
             .wkit-wb-save-btn {
-                background-color: $bricks_bg_color;
+                background-color: variable.$bricks_bg_color;
             }
         }
     }
 
     .wb-block-detail-content .wb-options-main {
         .wb-add-option {
-            border: 1px solid $bricks_bg_color;
-            transition: $transition;
+            border: 1px solid variable.$bricks_bg_color;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $bricks_outer_border_bg !important;
+                background-color: variable.$bricks_outer_border_bg !important;
             }
 
             .wb-addOption-lable {
-                color: $bricks_text_color;
+                color: variable.$bricks_text_color;
             }
 
             .wb-addOption-icon {
-                fill: $bricks_bg_color;
+                fill: variable.$bricks_bg_color;
             }
         }
     }
 
     .wkit-wb-custom-category-btns {
-        background-color: $bricks_bg_color;
+        background-color: variable.$bricks_bg_color;
     }
 
     .wkit-wb-custom-category-add-more {
-        border: 1px solid $bricks_border_color;
-        color: $bricks_text_color;
+        border: 1px solid variable.$bricks_border_color;
+        color: variable.$bricks_text_color;
     }
 
     .wkit-wb-custom-category {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
         ;
 
         &:before {
-            border-top: 1px solid $bricks_border_color;
-            border-left: 1px solid $bricks_border_color;
-            background-color: $bricks_bg_color;
+            border-top: 1px solid variable.$bricks_border_color;
+            border-left: 1px solid variable.$bricks_border_color;
+            background-color: variable.$bricks_bg_color;
         }
 
         .wkit-wb-custom-category-header {
-            background-color: $bricks_bg_color;
+            background-color: variable.$bricks_bg_color;
         }
     }
 
     .wkit-wb-publish-btn.wdkit-saved {
         background-color: #011627;
-        color: $bricks_text_color !important;
+        color: variable.$bricks_text_color !important;
     }
 
     .wkit-wb-publish-btn.wdkit-disable {
@@ -1222,20 +1235,20 @@
     .wkit-wb-editor-css-btn.active-editor,
     .wkit-wb-editor-js-btn.active-editor,
     .wkit-wb-editor-php-btn.active-editor {
-        background-color: $bricks_bg_color;
-        color: $bricks_inner_color;
+        background-color: variable.$bricks_bg_color;
+        color: variable.$bricks_inner_color;
 
         &:hover {
-            background-color: $bricks_bg_color;
-            color: $bricks_inner_color;
+            background-color: variable.$bricks_bg_color;
+            color: variable.$bricks_inner_color;
         }
 
         svg {
-            transition: $transition;
+            transition: variable.$transition;
             fill: #444;
 
             &:hover {
-                fill: $bricks_inner_color;
+                fill: variable.$bricks_inner_color;
             }
 
         }
@@ -1250,27 +1263,27 @@
     }
 
     .wkit-wb-components .wkit-wb-search-bar .wkit-wb-search-input:focus {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
         box-shadow: none;
     }
 
     .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate,
     .wkit-wb-widget-builder .wkit-wb-third .wb-third-header .wkit-wkit-wb-third-header-text:hover {
         background-color: #ffffff;
-        color: $bricks_text_color;
+        color: variable.$bricks_text_color;
         border-radius: 6px;
     }
 
     .wkit-wb-components .wkit-wb-all-widgets .wkit-wb-widget:hover svg path {
-        fill: $bricks_bg_color;
+        fill: variable.$bricks_bg_color;
     }
 
     .wkit-widget-detail .wb-block-detail-content .wb-block-name input:checked+.wb-slider {
-        background-color: $bricks_bg_color;
+        background-color: variable.$bricks_bg_color;
     }
 
     .wkit-wb-widget-builder .wkit-wb-third .wkit-wb-third-header .wkit-wb-third-header-text.activate svg {
-        stroke: $bricks_text_color;
+        stroke: variable.$bricks_text_color;
     }
 
 
@@ -1284,37 +1297,37 @@
 
 
     .wb-toggle .wb-toggle-content input:checked+.wb-slider {
-        background-color: $bricks_bg_color;
+        background-color: variable.$bricks_bg_color;
     }
 
     .wkit-wb-widget-builder .active,
     .wkit-wb-widget-builder .wkit-wb-second .wb-second-header .active svg {
-        color: $bricks_text_color;
-        stroke: $bricks_text_color;
+        color: variable.$bricks_text_color;
+        stroke: variable.$bricks_text_color;
     }
 
 
     .wkit-wb-widget:hover {
         background-color: #F9FAFA;
-        border: 1px solid $bricks_text_color;
-        color: $bricks_text_color;
+        border: 1px solid variable.$bricks_text_color;
+        color: variable.$bricks_text_color;
     }
 
     .wb-typography:hover {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
     }
 
     .wp-head-wrapper .wb-right-head-side .wb-setting-panel-link {
-        color: $bricks_text_color;
+        color: variable.$bricks_text_color;
     }
 
     .wb-hover-component .wb-sec-edit,
     .wb-draggable-icon {
-        background-color: $bricks_bg_color;
-        transition: $transition;
+        background-color: variable.$bricks_bg_color;
+        transition: variable.$transition;
 
         &:hover {
-            background-color: $bricks_bg_hover_color;
+            background-color: variable.$bricks_bg_hover_color;
         }
     }
 
@@ -1323,18 +1336,18 @@
     }
 
     .wb-main-component.wkit-wb-selected {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
     }
 
     .wb-main-component:hover {
-        border: 1px solid $bricks_border_color;
+        border: 1px solid variable.$bricks_border_color;
     }
 
     .wkit-wb-popup .wkit-wb-header-popup,
     .wkit-wb-block-btn-save,
     .wb-block-detail-content.wb-options-main.wb-add-option {
-        background-color: $bricks_bg_color;
-        transition: $transition;
+        background-color: variable.$bricks_bg_color;
+        transition: variable.$transition;
     }
 
     .wkit-wb-popup .wkit-wb-header-popup .wkit-wb-popup-hreader,
@@ -1356,7 +1369,7 @@
     }
 
     .wkit-wb-popup .wkit-wb-block-btn-save:hover {
-        background: $bricks_bg_hover_color;
+        background: variable.$bricks_bg_hover_color;
     }
 
     .wkit-wb-third-part-content .wkit-wb-block-detail .wkit-wb-help-link .wkit-wb-input-content:focus,
@@ -1373,16 +1386,16 @@
     .wkit-wb-editor .wkit-wb-editor-content {
 
         .wb-editor-popup-add-btn {
-            background-color: $bricks_bg_color;
-            color: $bricks_inner_color;
-            transition: $transition;
+            background-color: variable.$bricks_bg_color;
+            color: variable.$bricks_inner_color;
+            transition: variable.$transition;
 
             &:hover {
-                background-color: $bricks_bg_hover_color;
+                background-color: variable.$bricks_bg_hover_color;
             }
 
             svg path {
-                fill: $bricks_inner_color;
+                fill: variable.$bricks_inner_color;
             }
         }
 
@@ -1400,7 +1413,7 @@
 
 // Widget design third column
 .wkit-wb-components {
-    background: $Wdkit_secondary_color;
+    background: variable.$Wdkit_secondary_color;
     border-radius: 0px 0px 6px 6px;
     height: 100%;
     overflow: hidden;
@@ -1455,7 +1468,6 @@
     z-index: 10;
     margin-top: -20px;
     display: flex;
-    margin-left: -20px;
     justify-content: center;
     align-items: center;
     z-index: 0;
@@ -1463,7 +1475,7 @@
     .wb-loader-circle {
         border: 8px solid #f3f3f3;
         border-radius: 50%;
-        border-top: 8px solid $Wdkit_blue_normal;
+        border-top: 8px solid variable.$Wdkit_blue_normal;
         width: 50px;
         height: 50px;
         margin-right: 10%;
@@ -1553,7 +1565,7 @@
                 align-items: center;
                 justify-content: center;
                 gap: 9px;
-                transition: $transition;
+                transition: variable.$transition;
 
                 &:hover {
                     background-color: #ffffffbf;
@@ -1584,7 +1596,7 @@
                 justify-content: center;
                 height: 100%;
                 gap: 9px;
-                transition: $transition;
+                transition: variable.$transition;
 
                 &:hover {
                     background-color: #ffffffbf;
@@ -1630,7 +1642,7 @@
                 border-radius: 6px;
                 align-items: center;
                 height: 60px;
-                transition: $transition;
+                transition: variable.$transition;
                 cursor: pointer;
 
                 &:hover {
@@ -1708,7 +1720,7 @@
                 align-items: center;
                 height: 100%;
                 color: black;
-                transition: $transition;
+                transition: variable.$transition;
                 border-radius: 6px;
 
                 &:hover {
@@ -1822,7 +1834,7 @@
                     width: 100%;
                     margin-left: 10px;
                     background: transparent;
-                    font-family: $Wdkit_font_family;
+                    font-family: variable.$Wdkit_font_family;
 
                     &:focus {
                         display: flex;
@@ -1842,7 +1854,7 @@
                 .wb-sec-btn {
                     width: 18px;
                     height: 18px;
-                    transition: $transition;
+                    transition: variable.$transition;
                     opacity: 0.75;
 
                     &:hover {
@@ -1871,7 +1883,7 @@
         margin: 5px;
         padding: 5px;
         border-radius: 6px;
-        transition: $transition;
+        transition: variable.$transition;
         cursor: pointer;
 
         &:hover {
@@ -1936,7 +1948,7 @@
     font-size: 14px;
     gap: 10px;
     justify-content: center;
-    transition: $transition;
+    transition: variable.$transition;
 
     &:hover {
         background: #00070e;
@@ -2062,7 +2074,7 @@
         justify-content: space-between;
         padding: 5px 0px;
         border-radius: 4px;
-        background-color: $Wdkit_primary_color;
+        background-color: variable.$Wdkit_primary_color;
 
         .wkit-wb-multi-selected {
             background-color: #d5dadf;
@@ -2094,7 +2106,7 @@
     }
 
     .wkit-wb-custom-dropDown-header.wkit-multi-select-dropDown {
-        background: $Wdkit_primary_color;
+        background: variable.$Wdkit_primary_color;
         border: 0.5px solid #e4e4e4;
         border-radius: 2px;
         width: 100%;

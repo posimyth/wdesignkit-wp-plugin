@@ -1,5 +1,4 @@
-const { __ } = wp.i18n;
-
+import { __ } from '@wordpress/i18n';
 import { useState } from 'react';
 
 const Post_notFound = () => {
@@ -10,7 +9,7 @@ const Post_notFound = () => {
         <div className='wkit-post-notFound'>
             <div className='wkit-post-notFound-content'>
                 <img src={img_path + 'assets/images/jpg/empty-dog.png'} />
-                <span>{__('It seems to be empty!')}</span>
+                <span>{__('It seems to be empty!', 'wdesignkit')}</span>
             </div>
         </div>
     );

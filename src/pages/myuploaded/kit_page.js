@@ -1,14 +1,11 @@
 import './myuploaded.scss';
 import { useState, useEffect } from 'react';
-const { Fragment } = wp.element;
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { Page_header, Wkit_availble_not, Wkit_template_Skeleton } from '../../helper/helper-function';
 import { WKit_successfully_import_kit } from '../../helper/helper-function';
+import { __ } from '@wordpress/i18n';
 
-const {
-    __,
-} = wp.i18n;
-
+const { Fragment } = wp.element;
 const {
     form_data,
     Success_import_template,
@@ -198,7 +195,7 @@ const Kit_Page = (props) => {
                     type='checkbox'
                     checked={selectAll}
                     onChange={() => { SelectAllTemp() }} />
-                <label htmlFor='wkit-selectAll-kitTemp'>{__('Select All')}</label>
+                <label htmlFor='wkit-selectAll-kitTemp'>{__('Select All', 'wdesignkit')}</label>
             </div>
         );
     };
@@ -318,6 +315,7 @@ const Kit_Page = (props) => {
                                 template_id={downloadMulti}
                                 custom_meta_import={customMetaImport}
                                 template_list={kitData?.data?.template}
+                                meta_data={props?.wdkit_meta}
                                 handlerAfterSuccessImported={() => { setSuccessImport(false), setDownloadTempId('') }}
                             />
                         }

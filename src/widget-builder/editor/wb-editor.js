@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import '../style/wb-editor.scss';
 import axios from "axios";
+import { __ } from '@wordpress/i18n';
 const { Fragment } = wp.element;
-const { __ } = wp.i18n;
 
 const Editor = (props) => {
     const [editor_type, seteditor_type] = useState("html");
@@ -26,7 +26,7 @@ const Editor = (props) => {
 
     var img_path = wdkitData.WDKIT_URL;
 
-    let Ex_controllers = ['align', 'hidden', 'switcher', 'slider', 'dimension', 'heading', 'rawhtml', 'divider', 'choose', 'color', 'background', 'border', 'boxshadow', 'textshadow', 'cssfilter', 'typography'];
+    let Ex_controllers = ['align', 'hidden', 'switcher', 'slider', 'dimension', 'heading', 'rawhtml', 'divider', 'choose', 'color', 'background', 'border', 'boxshadow', 'textshadow', 'cssfilter', 'typography', 'preview'];
     /** 
     * get unique string of 8 character
     * 
@@ -369,7 +369,7 @@ const Editor = (props) => {
 
     /** Used to get version of cdn link in popup */
     const getVersion = (cdnUrl) => {
-        
+
         if (cdnUrl) {
             let regex = /\/(\d+\.\d+(\.\d+)?)(\/|\/.*)$/;
             let match = cdnUrl.match(regex);
@@ -860,9 +860,9 @@ const Editor = (props) => {
                             </span>
                         </div>
                         <div className="wb-controller-values">
-                            <div className="wkit-wb-editor-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'repeater', loop_validation) }}>{"Loop"}</div>
-                            <div className="wkit-wb-editor-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'repeater_index', components.name) }}>{"Index"}</div>
-                            <div className="wkit-wb-editor-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'repeater_UID', components.name) }}>{"ID"}</div>
+                            <div className="wkit-wb-editor-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'repeater', loop_validation) }}>Loop</div>
+                            <div className="wkit-wb-editor-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'repeater_index', components.name) }}>Index</div>
+                            <div className="wkit-wb-editor-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'repeater_UID', components.name) }}>ID</div>
                             {
                                 components.fields.map((controller, index) => {
                                     return (
@@ -889,22 +889,22 @@ const Editor = (props) => {
                             </span>
                         </div>
                         <div className="wb-controller-values">
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'cpt', loop_validation) }}>{"Loop"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'title', components.name) }}>{"Title"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'description', components.name) }}>{"Description"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'thumbnail', components.name) }}>{"Thumbnail"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'post_date', components.name) }}>{"Post Date"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'post_link', components.name) }}>{"Post Link"}</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'cpt', loop_validation) }}>Loop</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'title', components.name) }}>Title</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'description', components.name) }}>Description</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'thumbnail', components.name) }}>Thumbnail</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'post_date', components.name) }}>Post Date</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'post_link', components.name) }}>Post Link</div>
                             {components.type != "product_listing" &&
                                 <Fragment>
                                     <hr className="wkit-wp-editor-hr" />
-                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_id', components.name) }}>{"Author ID"}</div>
-                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_name', components.name) }}>{"Author Name"}</div>
+                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_id', components.name) }}>Author ID</div>
+                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_name', components.name) }}>Author Name</div>
                                     {props?.widgetdata?.type != "gutenberg" &&
-                                        <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_email', components.name) }}>{"Author Email"}</div>
+                                        <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_email', components.name) }}>Author Email</div>
                                     }
-                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_profile', components.name) }}>{"Author Profile"}</div>
-                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_url', components.name) }}>{"Author URL"}</div>
+                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_profile', components.name) }}>Author Profile</div>
+                                    <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'auth_url', components.name) }}>Author URL</div>
                                 </Fragment>
 
                             }
@@ -919,9 +919,9 @@ const Editor = (props) => {
                                 </span>
                             </div>
                             <div className="wb-controller-values wkit-inside-drp-body">
-                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name + '_cat', 'cpt_cat', components.name) }}>{"loop"}</div>
-                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'cat_name', components.name) }}>{"name"}</div>
-                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'cat_url', components.name) }}>{"URL"}</div>
+                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name + '_cat', 'cpt_cat', components.name) }}>loop</div>
+                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'cat_name', components.name) }}>name</div>
+                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'cat_url', components.name) }}>URL</div>
                             </div>
                             <div className="wkit-wb-editor-value wkit-inside-drp-head" onClick={(e) => { Value_dropDown(e) }}>
                                 <span className="wkit-wb-hover-marquee">
@@ -934,9 +934,9 @@ const Editor = (props) => {
                                 </span>
                             </div>
                             <div className="wb-controller-values wkit-inside-drp-body">
-                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name + '_tag', 'cpt_tag', components.name) }}>{"loop"}</div>
-                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'tag_name', components.name) }}>{"name"}</div>
-                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'tag_url', components.name) }}>{"URL"}</div>
+                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name + '_tag', 'cpt_tag', components.name) }}>loop</div>
+                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'tag_name', components.name) }}>name</div>
+                                <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'tag_url', components.name) }}>URL</div>
                             </div>
                         </div>
                     </>
@@ -955,12 +955,12 @@ const Editor = (props) => {
                             </span>
                         </div>
                         <div className="wb-controller-values">
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxonomy', loop_validation) }}>{"Loop"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'title', components.name) }}>{"Name"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'description', components.name) }}>{"Description"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxo_image', components.name) }}>{"Image"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxo_slug', components.name) }}>{"Slug"}</div>
-                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxo_link', components.name) }}>{"Link"}</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxonomy', loop_validation) }}>Loop</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'title', components.name) }}>Name</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'description', components.name) }}>Description</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxo_image', components.name) }}>Image</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxo_slug', components.name) }}>Slug</div>
+                            <div className="wkit-wb-editor-value" onClick={() => { AddName(components.name, 'taxo_link', components.name) }}>Link</div>
                         </div>
                     </>
                 );
@@ -977,10 +977,10 @@ const Editor = (props) => {
                         </span>
                     </div>
                     <div className={loop_validation ? 'wb-controller-values wkit-inside-drp-body' : 'wb-controller-values'}>
-                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-url`, "", loop_validation) }}>{"URL"}</div>
-                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-is_external`, "", loop_validation) }}>{"Is_external"}</div>
-                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-nofollow`, "", loop_validation) }}>{"Nofollow"}</div>
-                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-Custom_atr`, "", loop_validation) }}>{"Custom_atr"}</div>
+                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-url`, "", loop_validation) }}>URL</div>
+                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-is_external`, "", loop_validation) }}>Is_external</div>
+                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-nofollow`, "", loop_validation) }}>Nofollow</div>
+                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(`${components.name}-Custom_atr`, "", loop_validation) }}>Custom_atr</div>
                     </div>
                 </>
                 );
@@ -997,8 +997,8 @@ const Editor = (props) => {
                         </span>
                     </div>
                     <div className={loop_validation ? 'wb-controller-values wkit-inside-drp-body' : 'wb-controller-values'}>
-                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'gallery', loop_validation) }}>{"Loop"}</div>
-                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'loop_value', components.name) }}>{"URL"}</div>
+                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'gallery', loop_validation) }}>Loop</div>
+                        <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'loop_value', components.name) }}>URL</div>
                     </div>
                 </>
                 );
@@ -1076,8 +1076,8 @@ const Editor = (props) => {
                             </span>
                         </div>
                         <div className={loop_validation ? 'wb-controller-values wkit-inside-drp-body' : 'wb-controller-values'}>
-                            <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'select2', loop_validation) }}>{"Loop"}</div>
-                            <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'loop_value', components.name) }}>{"Value"}</div>
+                            <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'select2', loop_validation) }}>Loop</div>
+                            <div className="wb-editor-dropDown-value wkit-wb-short-value" onClick={() => { AddName(components.name, 'loop_value', components.name) }}>Value</div>
                         </div>
                     </>
                 );
@@ -1141,7 +1141,7 @@ const Editor = (props) => {
                                 <svg className="wkit-wb-toolTip-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 12 12" fill="white">
                                     <path d="M6 0C2.68594 0 0 2.68594 0 6C0 9.31406 2.68594 12 6 12C9.31406 12 12 9.31406 12 6C12 2.68594 9.31406 0 6 0ZM6 11.25C3.10547 11.25 0.75 8.89453 0.75 6C0.75 3.10547 3.10547 0.75 6 0.75C8.89453 0.75 11.25 3.10547 11.25 6C11.25 8.89453 8.89453 11.25 6 11.25ZM6 4.3125C6.31055 4.3125 6.5625 4.06078 6.5625 3.75C6.5625 3.43945 6.31055 3.1875 6 3.1875C5.68945 3.1875 5.4375 3.43828 5.4375 3.75C5.4375 4.06172 5.68828 4.3125 6 4.3125ZM7.125 8.25H6.375V5.625C6.375 5.41875 6.20625 5.25 6 5.25H5.25C5.04375 5.25 4.875 5.41875 4.875 5.625C4.875 5.83125 5.04375 6 5.25 6H5.625V8.25H4.875C4.66875 8.25 4.5 8.41875 4.5 8.625C4.5 8.83125 4.66875 9 4.875 9H7.125C7.33209 9 7.5 8.83209 7.5 8.625C7.5 8.41875 7.33125 8.25 7.125 8.25Z" />
                                 </svg>
-                                <span className="wkit-css-toolTip-text">Enable this if you want us to append unique class at all possible places in your CSS file. If Disabled, You will need to manage it manually from your end.</span>
+                                <span className="wkit-css-toolTip-text">{__('Enable this if you want us to append unique class at all possible places in your CSS file. If Disabled, You will need to manage it manually from your end.', 'wdesignkit')}</span>
                             </div>
                             <label className="wb-switch">
                                 <input type="checkbox" checked={props.widgetdata.css_parent_node} onChange={(e) => { Change_css_switcher(e) }} />
@@ -1160,11 +1160,11 @@ const Editor = (props) => {
                 <div className="wkit-editor-button">
                     <div className="wkit-wb-editor-btns">
                         <button className={editor_type == "html" ? "wkit-wb-editor-html-btn active-editor" : "wkit-wb-editor-html-btn"} onClick={(e) => { htmlOff(e, "html") }}>
-                            <span className="wkit-wb-editor-btns-label">HTML</span>
+                            <span className="wkit-wb-editor-btns-label">{__('HTML', 'wdesignkit')}</span>
                         </button>
                         <div className={editor_type == "css" ? "wkit-wb-editor-css-btn active-editor" : "wkit-wb-editor-css-btn"}
                             onClick={(e) => { { cssPopupOff(e, "css") } { setActiveLink('css') } }} >
-                            <span className="wkit-wb-editor-btns-label">CSS</span>
+                            <span className="wkit-wb-editor-btns-label">{__('CSS', 'wdesignkit')}</span>
                             <svg
                                 onClick={() => { setOpenPopup('css') }}
                                 className={`wb-editor-img-css-icon ${editor_type == "css" ? 'wkit-wb-show' : ''}`} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 18 18" fill="#fff">
@@ -1180,7 +1180,7 @@ const Editor = (props) => {
                         </div>
                         <div className={editor_type == "js" ? "wkit-wb-editor-js-btn active-editor" : "wkit-wb-editor-js-btn"}
                             onClick={(e) => { { JsPopupOff(e, "js") } { setActiveLink('js') } }}>
-                            <span className="wkit-wb-editor-btns-label">JAVASCRIPT</span>
+                            <span className="wkit-wb-editor-btns-label">{__('JAVASCRIPT', 'wdesignkit')}</span>
                             <svg
                                 onClick={() => { setOpenPopup('js') }}
                                 className={`wb-editor-img-js-icon ${editor_type == "js" ? 'wkit-wb-show' : ''}`} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 18 18" fill="#fff">
@@ -1248,9 +1248,9 @@ const Editor = (props) => {
                                     <div className="wkit-wb-loopError-icon">
                                         <img src={img_path + 'assets/images/wb-svg/error_info.svg'} />
                                     </div>
-                                    <div className="wkit-wb-loopError-headerText">Perform activity inside the loop</div>
+                                    <div className="wkit-wb-loopError-headerText">{__('Perform activity inside the loop', 'wdesignkit')}</div>
                                 </div>
-                                <div className="wkit-wb-loopError-description">You need to write or perform any of your activity inside the loop</div>
+                                <div className="wkit-wb-loopError-description">{__('You need to write or perform any of your activity inside the loop', 'wdesignkit')}</div>
                             </div>
                         </div>
                         <div id="editor-css" className="wkit-wb-editor-class">
@@ -1264,8 +1264,8 @@ const Editor = (props) => {
                 </div>
                 <div className="wkit-wb-editor-bottom-content">
                     <div className="wkit-wb-bottom-characters">
-                        <div className="wkit-wb-characters-title">{code_characters} Characters</div>
-                        <div className="wkit-wb-characters-title">{code_lines} Line</div>
+                        <div className="wkit-wb-characters-title">{code_characters} {__('Characters', 'wdesignkit')}</div>
+                        <div className="wkit-wb-characters-title">{code_lines} {__('Line', 'wdesignkit')}</div>
                     </div>
                 </div>
             </div>
@@ -1280,17 +1280,17 @@ const Editor = (props) => {
                                         <span
                                             onClick={() => { setActiveLink('css') }}
                                             className={ActiveLink == 'css' ? 'wkit-popup-link wkit-active-link' : 'wkit-popup-link'}
-                                        >CSS</span>
+                                        >{__('CSS', 'wdesignkit')}</span>
                                         <span
                                             onClick={() => { setActiveLink('js') }}
                                             className={ActiveLink == 'js' ? 'wkit-popup-link wkit-active-link' : 'wkit-popup-link'}
-                                        >JS</span>
+                                        >{__('JS', 'wdesignkit')}</span>
                                     </div>
                                     {
                                         ActiveLink == 'css' &&
                                         <div className="wkit-wb-editor-links">
-                                            <span className="wkit-Add-link">{__('Insert CSS Library')}</span>
-                                            <span className="wkit-link-desc">{__('Enter the URL of Your External CSS Library, Which You Want to Load in this Widget.')}</span>
+                                            <span className="wkit-Add-link">{__('Insert CSS Library', 'wdesignkit')}</span>
+                                            <span className="wkit-link-desc">{__('Enter the URL of Your External CSS Library, Which You Want to Load in this Widget.', 'wdesignkit')}</span>
                                             <div className='wkit-links-search-bar'>
                                                 <input className='wkit-links-search-input'
                                                     type='text'
@@ -1304,7 +1304,7 @@ const Editor = (props) => {
                                                         {fResult.length > 0 ?
                                                             <ul className="wkit-custom-cdn-list">
                                                                 {
-                                                                    fResult?.map((data, index) => {                                                                        
+                                                                    fResult?.map((data, index) => {
                                                                         return (
                                                                             <li onClick={(e) => { Add_Link_btn('search_data', data.latest) }} key={index}>{data.name} <span>{getVersion(data.latest)}</span></li>
                                                                         )
@@ -1320,8 +1320,8 @@ const Editor = (props) => {
                                                                     <path d="M59.344 35.229C61.0641 35.229 62.4585 33.8346 62.4585 32.1145C62.4585 30.3944 61.0641 29 59.344 29C57.6239 29 56.2295 30.3944 56.2295 32.1145C56.2295 33.8346 57.6239 35.229 59.344 35.229Z" fill="#FAFAFA" />
                                                                     <path d="M74.2759 14.644H73.0558C72.9728 14.644 72.9027 14.5765 72.9027 14.4909C72.9027 14.4052 72.9702 14.3377 73.0558 14.3377H74.1227V14.2676C74.1227 14.1845 74.1902 14.1145 74.2759 14.1145C74.3616 14.1145 74.4291 14.182 74.4291 14.2676V14.4883C74.4291 14.5713 74.3616 14.6414 74.2759 14.6414V14.644ZM71.8383 14.644C71.7553 14.644 71.6852 14.5765 71.6852 14.4909V14.2261C71.6852 13.8782 71.7007 13.5537 71.7319 13.2578C71.7397 13.1747 71.8176 13.115 71.9006 13.1228C71.9837 13.1306 72.046 13.2059 72.0356 13.2915C72.0045 13.5771 71.9889 13.8912 71.9889 14.2287V14.4935C71.9889 14.5765 71.9214 14.6466 71.8357 14.6466L71.8383 14.644ZM74.3901 13.2137C74.3901 13.2137 74.3642 13.2137 74.3512 13.2085C74.2707 13.1877 74.2214 13.1046 74.2422 13.0216C74.2785 12.8814 74.3148 12.7931 74.3408 12.7438L74.3564 12.7152C74.4083 12.6036 74.5692 12.3622 75.0677 12.0273C75.1378 11.9806 75.2312 11.9988 75.2779 12.0689C75.3247 12.139 75.3065 12.2324 75.2364 12.2791C74.7717 12.5906 74.6549 12.7905 74.6316 12.845L74.616 12.8788C74.5978 12.9177 74.5692 12.9852 74.5381 13.0994C74.5199 13.1669 74.4576 13.2137 74.3901 13.2137ZM72.1421 12.2402C72.1239 12.2402 72.1083 12.2376 72.0901 12.2298C72.0123 12.2013 71.9707 12.113 71.9993 12.0351C72.046 11.9079 72.0979 11.7833 72.155 11.6691C72.2744 11.4173 72.4354 11.1707 72.6301 10.9396C72.6846 10.8747 72.7806 10.8669 72.8455 10.9215C72.9104 10.976 72.9182 11.072 72.8637 11.1369C72.6846 11.3498 72.5392 11.573 72.4302 11.8041C72.3757 11.9131 72.329 12.0247 72.2874 12.1415C72.2641 12.2038 72.2069 12.2428 72.1446 12.2428L72.1421 12.2402ZM76.1787 11.6483C76.1294 11.6483 76.0801 11.6224 76.0489 11.5782C76.0048 11.5081 76.023 11.4121 76.0957 11.368L76.1372 11.342C76.4747 11.1291 76.7862 10.9007 77.0639 10.6645C77.1262 10.6099 77.2249 10.6177 77.2794 10.68C77.3339 10.7449 77.3261 10.841 77.2638 10.8955C76.9757 11.1447 76.6512 11.3809 76.3033 11.599L76.2644 11.625C76.2384 11.6405 76.2099 11.6483 76.1813 11.6483H76.1787ZM73.6529 10.3789C73.6062 10.3789 73.5568 10.3555 73.5283 10.314C73.479 10.2465 73.4971 10.1505 73.5646 10.1011C73.6996 10.0051 73.845 9.90905 73.9981 9.81819L74.5926 9.43659C74.6627 9.39246 74.7587 9.41063 74.8029 9.48331C74.847 9.5534 74.8288 9.64945 74.7562 9.69358L74.1591 10.0778C74.0085 10.1686 73.8709 10.2595 73.7411 10.353C73.7152 10.3711 73.684 10.3815 73.6529 10.3815V10.3789ZM78.0089 10.057C77.9751 10.057 77.9414 10.0466 77.9128 10.0233C77.8479 9.97135 77.8349 9.8753 77.8894 9.8104C78.1387 9.49629 78.3515 9.15882 78.5203 8.81097C78.5566 8.73568 78.6475 8.70453 78.7227 8.74087C78.798 8.77722 78.8292 8.86807 78.7928 8.94336C78.6163 9.31198 78.3905 9.66762 78.1257 9.9999C78.0945 10.0388 78.0504 10.057 78.0063 10.057H78.0089ZM75.6621 9.00566C75.6206 9.00566 75.5791 8.98749 75.5479 8.95374C75.4908 8.89144 75.496 8.79539 75.5609 8.73828C75.8776 8.45532 76.1216 8.1516 76.2878 7.83749C76.3267 7.76221 76.4201 7.73365 76.4928 7.77259C76.5681 7.81153 76.5967 7.90498 76.5577 7.97767C76.3734 8.32552 76.1086 8.65521 75.7634 8.96412C75.7348 8.99008 75.6985 9.00306 75.6621 9.00306V9.00566ZM79.0498 7.87903C79.0498 7.87903 79.0291 7.87902 79.0187 7.87643C78.9356 7.85826 78.8837 7.77778 78.9019 7.69471C78.9771 7.34167 79.0161 6.97304 79.0161 6.60183V6.51616C79.0161 6.43309 79.0836 6.363 79.1666 6.363C79.2497 6.363 79.3172 6.43049 79.3198 6.51356V6.60183C79.3198 6.99381 79.2783 7.3832 79.1978 7.75702C79.1822 7.82711 79.1199 7.87643 79.0498 7.87643V7.87903ZM68.5856 7.49483C68.5856 7.49483 68.5804 7.49483 68.5778 7.49483L67.3603 7.43772C67.2773 7.43252 67.2124 7.36243 67.215 7.27936C67.2176 7.19889 67.2851 7.13399 67.3681 7.13399C67.3681 7.13399 67.3733 7.13399 67.3759 7.13399L68.5934 7.1911C68.6765 7.19629 68.7414 7.26638 68.7388 7.34945C68.7362 7.42993 68.6687 7.49483 68.5856 7.49483ZM66.1532 7.37801C66.1532 7.37801 66.148 7.37801 66.1454 7.37801C66.0624 7.37282 65.9975 7.30273 66.0001 7.21966C66.0208 6.79133 66.0676 6.37858 66.1429 5.98919C66.1584 5.90612 66.2389 5.8516 66.322 5.86718C66.405 5.88276 66.4596 5.96323 66.444 6.0463C66.3713 6.42011 66.3272 6.81988 66.3064 7.23523C66.3038 7.31571 66.2363 7.3806 66.1532 7.3806V7.37801ZM76.7265 6.89257C76.7265 6.89257 76.7239 6.89257 76.7213 6.89257C76.6382 6.88998 76.5707 6.81989 76.5733 6.73422C76.5733 6.68749 76.5733 6.64336 76.5759 6.59923C76.5759 6.21244 76.5266 5.88016 76.4279 5.58422C76.402 5.50375 76.4435 5.41808 76.524 5.39212C76.6019 5.36616 76.6901 5.4077 76.7161 5.48817C76.8277 5.81526 76.8796 6.17869 76.8796 6.59923C76.8796 6.64596 76.8796 6.69528 76.877 6.7446C76.8744 6.82767 76.8069 6.88997 76.7239 6.88997L76.7265 6.89257ZM68.7621 6.29291C68.7621 6.29291 68.7362 6.29291 68.7232 6.28772C68.6427 6.26695 68.5934 6.18388 68.6142 6.10081C68.731 5.6647 68.9023 5.27531 69.1282 4.94562C69.1749 4.87553 69.2709 4.85736 69.341 4.90668C69.4111 4.95341 69.4267 5.04946 69.38 5.11955C69.1749 5.42068 69.014 5.77632 68.9075 6.17869C68.8893 6.24619 68.827 6.29291 68.7596 6.29291H68.7621ZM79.0317 5.45702C78.9616 5.45702 78.8993 5.4077 78.8837 5.33761C78.798 4.94562 78.6656 4.57181 78.4943 4.22395C78.4579 4.14867 78.4891 4.05781 78.5644 4.01887C78.6397 3.98253 78.7305 4.01368 78.7695 4.08896C78.9512 4.45759 79.0914 4.85477 79.1822 5.27011C79.2004 5.35318 79.1485 5.43366 79.0654 5.45183C79.055 5.45183 79.042 5.45442 79.0317 5.45442V5.45702ZM66.6257 4.99754C66.6075 4.99754 66.5894 4.99495 66.5712 4.98716C66.4933 4.95601 66.4544 4.86774 66.4829 4.78987C66.6361 4.39269 66.8256 4.01888 67.0488 3.67621C67.0956 3.60612 67.189 3.58536 67.2591 3.63208C67.3292 3.67881 67.35 3.77226 67.3032 3.84235C67.093 4.16684 66.9112 4.51989 66.7685 4.89889C66.7451 4.9586 66.688 4.99754 66.6257 4.99754ZM75.9087 4.68862C75.8724 4.68862 75.8361 4.67565 75.8075 4.64969C75.7712 4.61854 75.7348 4.58738 75.6985 4.55623C75.4467 4.35635 75.1481 4.1902 74.8107 4.063C74.7328 4.03445 74.6913 3.94619 74.7224 3.86571C74.751 3.78784 74.8392 3.7463 74.9197 3.77745C75.2857 3.91504 75.6128 4.09675 75.8906 4.31741C75.9321 4.35116 75.9736 4.3849 76.0126 4.42124C76.0749 4.47576 76.0801 4.5744 76.0256 4.63671C75.9944 4.67045 75.9529 4.68862 75.9113 4.68862H75.9087ZM70.1302 4.34856C70.0783 4.34856 70.029 4.3226 70.0004 4.27587C69.9563 4.20319 69.9796 4.10973 70.0497 4.0656C70.3846 3.85793 70.7766 3.70217 71.2205 3.59574C71.301 3.57757 71.384 3.62689 71.4048 3.70996C71.4256 3.79303 71.3737 3.8735 71.2906 3.89427C70.8778 3.99032 70.5144 4.13569 70.2081 4.3252C70.1821 4.34077 70.1562 4.34856 70.1276 4.34856H70.1302ZM73.6814 3.79562C73.6814 3.79562 73.6685 3.79562 73.6633 3.79562C73.2946 3.75149 72.8741 3.73592 72.4717 3.7489C72.3887 3.75149 72.316 3.68659 72.3134 3.60093C72.3108 3.51786 72.3757 3.44517 72.4613 3.44258C72.8767 3.427 73.3154 3.44517 73.7022 3.4919C73.7853 3.50228 73.845 3.57757 73.8346 3.66064C73.8242 3.73852 73.7593 3.79562 73.684 3.79562H73.6814ZM77.9595 3.2998C77.918 3.2998 77.8739 3.28163 77.8453 3.24788C77.6584 3.03242 77.4481 2.83253 77.2171 2.64822C77.1366 2.58332 77.051 2.52102 76.9653 2.46131C76.8978 2.41199 76.8796 2.31854 76.9289 2.24845C76.9783 2.18096 77.0717 2.16278 77.1418 2.21211C77.2327 2.27441 77.3209 2.3419 77.4066 2.4094C77.6506 2.60409 77.8765 2.81696 78.0738 3.0454C78.1283 3.1077 78.1231 3.20375 78.0582 3.26086C78.0296 3.28682 77.9933 3.2972 77.9569 3.2972L77.9595 3.2998ZM67.9522 2.97531C67.9133 2.97531 67.8717 2.95973 67.8432 2.92858C67.7861 2.86888 67.7861 2.77283 67.8484 2.71312L67.9159 2.64822C68.1962 2.38603 68.5077 2.1524 68.84 1.95251C68.9127 1.90838 69.0062 1.93175 69.0477 2.00443C69.0918 2.07712 69.0685 2.17057 68.9958 2.2147C68.6817 2.4042 68.3883 2.62486 68.1235 2.87147L68.0587 2.93378C68.0301 2.96233 67.9912 2.97531 67.9522 2.97531ZM75.9918 1.898C75.9711 1.898 75.9503 1.8928 75.9321 1.88502C75.5817 1.73445 75.2001 1.61245 74.8003 1.51899C74.7172 1.50082 74.6679 1.41775 74.6861 1.33728C74.7042 1.25421 74.7873 1.20489 74.8678 1.22306C75.2857 1.31911 75.6829 1.4489 76.0515 1.60466C76.1294 1.6384 76.1657 1.72667 76.132 1.80454C76.1086 1.86165 76.0515 1.898 75.9918 1.898ZM70.0212 1.72148C69.9589 1.72148 69.8992 1.68254 69.8784 1.62023C69.8498 1.53976 69.894 1.45409 69.9719 1.42554C70.3483 1.29574 70.7532 1.19191 71.1764 1.12182C71.262 1.10884 71.3373 1.16335 71.3529 1.24642C71.3685 1.32949 71.3114 1.40737 71.2283 1.42294C70.8207 1.49044 70.4339 1.58908 70.0731 1.71369C70.0575 1.71888 70.0393 1.72148 70.0238 1.72148H70.0212ZM73.6321 1.33987C73.6321 1.33987 73.6243 1.33987 73.6191 1.33987C73.2349 1.30872 72.8196 1.29834 72.4198 1.30872C72.3264 1.30872 72.2667 1.24642 72.2615 1.16075C72.2615 1.07768 72.3238 1.00759 72.4094 1.005C72.8222 0.992016 73.2505 1.005 73.6451 1.03615C73.7282 1.04394 73.7905 1.11662 73.7853 1.19969C73.7775 1.28016 73.7126 1.33987 73.6347 1.33987H73.6321ZM74.3226 19H73.4089C73.3258 19 73.2557 18.9325 73.2557 18.8468C73.2557 18.7612 73.3232 18.6937 73.4089 18.6937H74.2837C74.3745 18.6677 74.4758 18.7352 74.4758 18.8339V18.8442C74.4758 18.9273 74.4083 18.9974 74.3226 18.9974V19ZM72.4951 19H71.8072C71.7241 19 71.654 18.9325 71.654 18.8468V18.6184C71.654 18.5353 71.7215 18.4652 71.8072 18.4652C71.8928 18.4652 71.9603 18.5327 71.9603 18.6184V18.6937H72.4951C72.5782 18.6937 72.6483 18.7612 72.6483 18.8468C72.6483 18.9325 72.5808 19 72.4951 19ZM74.3226 18.0733C74.2396 18.0733 74.1695 18.0058 74.1695 17.9201V17.0063C74.1695 16.9233 74.237 16.8532 74.3226 16.8532C74.4083 16.8532 74.4758 16.9207 74.4758 17.0063V17.9201C74.4758 18.0032 74.4083 18.0733 74.3226 18.0733ZM71.8072 17.8578C71.7241 17.8578 71.654 17.7903 71.654 17.7046V16.7909C71.654 16.7078 71.7215 16.6377 71.8072 16.6377C71.8928 16.6377 71.9603 16.7052 71.9603 16.7909V17.7046C71.9603 17.7877 71.8928 17.8578 71.8072 17.8578ZM73.6295 16.9388H72.7157C72.6327 16.9388 72.5626 16.8713 72.5626 16.7857C72.5626 16.7 72.6301 16.6325 72.7157 16.6325H73.6295C73.7126 16.6325 73.7827 16.7 73.7827 16.7857C73.7827 16.8713 73.7152 16.9388 73.6295 16.9388Z" fill="#7D8395" />
                                                                 </svg>
-                                                                <p className="wkit-cdn-not-found">{__('Not Result Found')}</p>
-                                                                <p className="wkit-cdn-not-found-desc">{__('Sorry, the cdn you are looking for doesn\'t exist.')}</p>
+                                                                <p className="wkit-cdn-not-found">{__('Not Result Found', 'wdesignkit')}</p>
+                                                                <p className="wkit-cdn-not-found-desc">{__('Sorry, the cdn you are looking for doesn\'t exist.', 'wdesignkit')}</p>
                                                             </div>
                                                         }
                                                     </div>
@@ -1379,7 +1379,7 @@ const Editor = (props) => {
                                             </div>
                                             <div className="wb-popuo-btn-class">
                                                 <button className="wb-editor-popup-add-btn" onClick={() => { Add_Link_btn("css") }}>
-                                                    <span>Add more</span>
+                                                    <span>{__('Add more', 'wdesignkit')}</span>
                                                 </button>
                                             </div>
 
@@ -1388,8 +1388,8 @@ const Editor = (props) => {
                                     {
                                         ActiveLink == 'js' &&
                                         <div className="wkit-wb-editor-js-links">
-                                            <span className="wkit-Add-link">{__('Insert JS Library')}</span>
-                                            <span className="wkit-link-desc">{__('Enter the URL of Your External JS Library, Which You Want to Load in this Widget.')}</span>
+                                            <span className="wkit-Add-link">{__('Insert JS Library', 'wdesignkit')}</span>
+                                            <span className="wkit-link-desc">{__('Enter the URL of Your External JS Library, Which You Want to Load in this Widget.', 'wdesignkit')}</span>
                                             <div className='wkit-links-search-bar'>
                                                 <input className='wkit-links-search-input'
                                                     type='text'
@@ -1419,8 +1419,8 @@ const Editor = (props) => {
                                                                     <path d="M59.344 35.229C61.0641 35.229 62.4585 33.8346 62.4585 32.1145C62.4585 30.3944 61.0641 29 59.344 29C57.6239 29 56.2295 30.3944 56.2295 32.1145C56.2295 33.8346 57.6239 35.229 59.344 35.229Z" fill="#FAFAFA" />
                                                                     <path d="M74.2759 14.644H73.0558C72.9728 14.644 72.9027 14.5765 72.9027 14.4909C72.9027 14.4052 72.9702 14.3377 73.0558 14.3377H74.1227V14.2676C74.1227 14.1845 74.1902 14.1145 74.2759 14.1145C74.3616 14.1145 74.4291 14.182 74.4291 14.2676V14.4883C74.4291 14.5713 74.3616 14.6414 74.2759 14.6414V14.644ZM71.8383 14.644C71.7553 14.644 71.6852 14.5765 71.6852 14.4909V14.2261C71.6852 13.8782 71.7007 13.5537 71.7319 13.2578C71.7397 13.1747 71.8176 13.115 71.9006 13.1228C71.9837 13.1306 72.046 13.2059 72.0356 13.2915C72.0045 13.5771 71.9889 13.8912 71.9889 14.2287V14.4935C71.9889 14.5765 71.9214 14.6466 71.8357 14.6466L71.8383 14.644ZM74.3901 13.2137C74.3901 13.2137 74.3642 13.2137 74.3512 13.2085C74.2707 13.1877 74.2214 13.1046 74.2422 13.0216C74.2785 12.8814 74.3148 12.7931 74.3408 12.7438L74.3564 12.7152C74.4083 12.6036 74.5692 12.3622 75.0677 12.0273C75.1378 11.9806 75.2312 11.9988 75.2779 12.0689C75.3247 12.139 75.3065 12.2324 75.2364 12.2791C74.7717 12.5906 74.6549 12.7905 74.6316 12.845L74.616 12.8788C74.5978 12.9177 74.5692 12.9852 74.5381 13.0994C74.5199 13.1669 74.4576 13.2137 74.3901 13.2137ZM72.1421 12.2402C72.1239 12.2402 72.1083 12.2376 72.0901 12.2298C72.0123 12.2013 71.9707 12.113 71.9993 12.0351C72.046 11.9079 72.0979 11.7833 72.155 11.6691C72.2744 11.4173 72.4354 11.1707 72.6301 10.9396C72.6846 10.8747 72.7806 10.8669 72.8455 10.9215C72.9104 10.976 72.9182 11.072 72.8637 11.1369C72.6846 11.3498 72.5392 11.573 72.4302 11.8041C72.3757 11.9131 72.329 12.0247 72.2874 12.1415C72.2641 12.2038 72.2069 12.2428 72.1446 12.2428L72.1421 12.2402ZM76.1787 11.6483C76.1294 11.6483 76.0801 11.6224 76.0489 11.5782C76.0048 11.5081 76.023 11.4121 76.0957 11.368L76.1372 11.342C76.4747 11.1291 76.7862 10.9007 77.0639 10.6645C77.1262 10.6099 77.2249 10.6177 77.2794 10.68C77.3339 10.7449 77.3261 10.841 77.2638 10.8955C76.9757 11.1447 76.6512 11.3809 76.3033 11.599L76.2644 11.625C76.2384 11.6405 76.2099 11.6483 76.1813 11.6483H76.1787ZM73.6529 10.3789C73.6062 10.3789 73.5568 10.3555 73.5283 10.314C73.479 10.2465 73.4971 10.1505 73.5646 10.1011C73.6996 10.0051 73.845 9.90905 73.9981 9.81819L74.5926 9.43659C74.6627 9.39246 74.7587 9.41063 74.8029 9.48331C74.847 9.5534 74.8288 9.64945 74.7562 9.69358L74.1591 10.0778C74.0085 10.1686 73.8709 10.2595 73.7411 10.353C73.7152 10.3711 73.684 10.3815 73.6529 10.3815V10.3789ZM78.0089 10.057C77.9751 10.057 77.9414 10.0466 77.9128 10.0233C77.8479 9.97135 77.8349 9.8753 77.8894 9.8104C78.1387 9.49629 78.3515 9.15882 78.5203 8.81097C78.5566 8.73568 78.6475 8.70453 78.7227 8.74087C78.798 8.77722 78.8292 8.86807 78.7928 8.94336C78.6163 9.31198 78.3905 9.66762 78.1257 9.9999C78.0945 10.0388 78.0504 10.057 78.0063 10.057H78.0089ZM75.6621 9.00566C75.6206 9.00566 75.5791 8.98749 75.5479 8.95374C75.4908 8.89144 75.496 8.79539 75.5609 8.73828C75.8776 8.45532 76.1216 8.1516 76.2878 7.83749C76.3267 7.76221 76.4201 7.73365 76.4928 7.77259C76.5681 7.81153 76.5967 7.90498 76.5577 7.97767C76.3734 8.32552 76.1086 8.65521 75.7634 8.96412C75.7348 8.99008 75.6985 9.00306 75.6621 9.00306V9.00566ZM79.0498 7.87903C79.0498 7.87903 79.0291 7.87902 79.0187 7.87643C78.9356 7.85826 78.8837 7.77778 78.9019 7.69471C78.9771 7.34167 79.0161 6.97304 79.0161 6.60183V6.51616C79.0161 6.43309 79.0836 6.363 79.1666 6.363C79.2497 6.363 79.3172 6.43049 79.3198 6.51356V6.60183C79.3198 6.99381 79.2783 7.3832 79.1978 7.75702C79.1822 7.82711 79.1199 7.87643 79.0498 7.87643V7.87903ZM68.5856 7.49483C68.5856 7.49483 68.5804 7.49483 68.5778 7.49483L67.3603 7.43772C67.2773 7.43252 67.2124 7.36243 67.215 7.27936C67.2176 7.19889 67.2851 7.13399 67.3681 7.13399C67.3681 7.13399 67.3733 7.13399 67.3759 7.13399L68.5934 7.1911C68.6765 7.19629 68.7414 7.26638 68.7388 7.34945C68.7362 7.42993 68.6687 7.49483 68.5856 7.49483ZM66.1532 7.37801C66.1532 7.37801 66.148 7.37801 66.1454 7.37801C66.0624 7.37282 65.9975 7.30273 66.0001 7.21966C66.0208 6.79133 66.0676 6.37858 66.1429 5.98919C66.1584 5.90612 66.2389 5.8516 66.322 5.86718C66.405 5.88276 66.4596 5.96323 66.444 6.0463C66.3713 6.42011 66.3272 6.81988 66.3064 7.23523C66.3038 7.31571 66.2363 7.3806 66.1532 7.3806V7.37801ZM76.7265 6.89257C76.7265 6.89257 76.7239 6.89257 76.7213 6.89257C76.6382 6.88998 76.5707 6.81989 76.5733 6.73422C76.5733 6.68749 76.5733 6.64336 76.5759 6.59923C76.5759 6.21244 76.5266 5.88016 76.4279 5.58422C76.402 5.50375 76.4435 5.41808 76.524 5.39212C76.6019 5.36616 76.6901 5.4077 76.7161 5.48817C76.8277 5.81526 76.8796 6.17869 76.8796 6.59923C76.8796 6.64596 76.8796 6.69528 76.877 6.7446C76.8744 6.82767 76.8069 6.88997 76.7239 6.88997L76.7265 6.89257ZM68.7621 6.29291C68.7621 6.29291 68.7362 6.29291 68.7232 6.28772C68.6427 6.26695 68.5934 6.18388 68.6142 6.10081C68.731 5.6647 68.9023 5.27531 69.1282 4.94562C69.1749 4.87553 69.2709 4.85736 69.341 4.90668C69.4111 4.95341 69.4267 5.04946 69.38 5.11955C69.1749 5.42068 69.014 5.77632 68.9075 6.17869C68.8893 6.24619 68.827 6.29291 68.7596 6.29291H68.7621ZM79.0317 5.45702C78.9616 5.45702 78.8993 5.4077 78.8837 5.33761C78.798 4.94562 78.6656 4.57181 78.4943 4.22395C78.4579 4.14867 78.4891 4.05781 78.5644 4.01887C78.6397 3.98253 78.7305 4.01368 78.7695 4.08896C78.9512 4.45759 79.0914 4.85477 79.1822 5.27011C79.2004 5.35318 79.1485 5.43366 79.0654 5.45183C79.055 5.45183 79.042 5.45442 79.0317 5.45442V5.45702ZM66.6257 4.99754C66.6075 4.99754 66.5894 4.99495 66.5712 4.98716C66.4933 4.95601 66.4544 4.86774 66.4829 4.78987C66.6361 4.39269 66.8256 4.01888 67.0488 3.67621C67.0956 3.60612 67.189 3.58536 67.2591 3.63208C67.3292 3.67881 67.35 3.77226 67.3032 3.84235C67.093 4.16684 66.9112 4.51989 66.7685 4.89889C66.7451 4.9586 66.688 4.99754 66.6257 4.99754ZM75.9087 4.68862C75.8724 4.68862 75.8361 4.67565 75.8075 4.64969C75.7712 4.61854 75.7348 4.58738 75.6985 4.55623C75.4467 4.35635 75.1481 4.1902 74.8107 4.063C74.7328 4.03445 74.6913 3.94619 74.7224 3.86571C74.751 3.78784 74.8392 3.7463 74.9197 3.77745C75.2857 3.91504 75.6128 4.09675 75.8906 4.31741C75.9321 4.35116 75.9736 4.3849 76.0126 4.42124C76.0749 4.47576 76.0801 4.5744 76.0256 4.63671C75.9944 4.67045 75.9529 4.68862 75.9113 4.68862H75.9087ZM70.1302 4.34856C70.0783 4.34856 70.029 4.3226 70.0004 4.27587C69.9563 4.20319 69.9796 4.10973 70.0497 4.0656C70.3846 3.85793 70.7766 3.70217 71.2205 3.59574C71.301 3.57757 71.384 3.62689 71.4048 3.70996C71.4256 3.79303 71.3737 3.8735 71.2906 3.89427C70.8778 3.99032 70.5144 4.13569 70.2081 4.3252C70.1821 4.34077 70.1562 4.34856 70.1276 4.34856H70.1302ZM73.6814 3.79562C73.6814 3.79562 73.6685 3.79562 73.6633 3.79562C73.2946 3.75149 72.8741 3.73592 72.4717 3.7489C72.3887 3.75149 72.316 3.68659 72.3134 3.60093C72.3108 3.51786 72.3757 3.44517 72.4613 3.44258C72.8767 3.427 73.3154 3.44517 73.7022 3.4919C73.7853 3.50228 73.845 3.57757 73.8346 3.66064C73.8242 3.73852 73.7593 3.79562 73.684 3.79562H73.6814ZM77.9595 3.2998C77.918 3.2998 77.8739 3.28163 77.8453 3.24788C77.6584 3.03242 77.4481 2.83253 77.2171 2.64822C77.1366 2.58332 77.051 2.52102 76.9653 2.46131C76.8978 2.41199 76.8796 2.31854 76.9289 2.24845C76.9783 2.18096 77.0717 2.16278 77.1418 2.21211C77.2327 2.27441 77.3209 2.3419 77.4066 2.4094C77.6506 2.60409 77.8765 2.81696 78.0738 3.0454C78.1283 3.1077 78.1231 3.20375 78.0582 3.26086C78.0296 3.28682 77.9933 3.2972 77.9569 3.2972L77.9595 3.2998ZM67.9522 2.97531C67.9133 2.97531 67.8717 2.95973 67.8432 2.92858C67.7861 2.86888 67.7861 2.77283 67.8484 2.71312L67.9159 2.64822C68.1962 2.38603 68.5077 2.1524 68.84 1.95251C68.9127 1.90838 69.0062 1.93175 69.0477 2.00443C69.0918 2.07712 69.0685 2.17057 68.9958 2.2147C68.6817 2.4042 68.3883 2.62486 68.1235 2.87147L68.0587 2.93378C68.0301 2.96233 67.9912 2.97531 67.9522 2.97531ZM75.9918 1.898C75.9711 1.898 75.9503 1.8928 75.9321 1.88502C75.5817 1.73445 75.2001 1.61245 74.8003 1.51899C74.7172 1.50082 74.6679 1.41775 74.6861 1.33728C74.7042 1.25421 74.7873 1.20489 74.8678 1.22306C75.2857 1.31911 75.6829 1.4489 76.0515 1.60466C76.1294 1.6384 76.1657 1.72667 76.132 1.80454C76.1086 1.86165 76.0515 1.898 75.9918 1.898ZM70.0212 1.72148C69.9589 1.72148 69.8992 1.68254 69.8784 1.62023C69.8498 1.53976 69.894 1.45409 69.9719 1.42554C70.3483 1.29574 70.7532 1.19191 71.1764 1.12182C71.262 1.10884 71.3373 1.16335 71.3529 1.24642C71.3685 1.32949 71.3114 1.40737 71.2283 1.42294C70.8207 1.49044 70.4339 1.58908 70.0731 1.71369C70.0575 1.71888 70.0393 1.72148 70.0238 1.72148H70.0212ZM73.6321 1.33987C73.6321 1.33987 73.6243 1.33987 73.6191 1.33987C73.2349 1.30872 72.8196 1.29834 72.4198 1.30872C72.3264 1.30872 72.2667 1.24642 72.2615 1.16075C72.2615 1.07768 72.3238 1.00759 72.4094 1.005C72.8222 0.992016 73.2505 1.005 73.6451 1.03615C73.7282 1.04394 73.7905 1.11662 73.7853 1.19969C73.7775 1.28016 73.7126 1.33987 73.6347 1.33987H73.6321ZM74.3226 19H73.4089C73.3258 19 73.2557 18.9325 73.2557 18.8468C73.2557 18.7612 73.3232 18.6937 73.4089 18.6937H74.2837C74.3745 18.6677 74.4758 18.7352 74.4758 18.8339V18.8442C74.4758 18.9273 74.4083 18.9974 74.3226 18.9974V19ZM72.4951 19H71.8072C71.7241 19 71.654 18.9325 71.654 18.8468V18.6184C71.654 18.5353 71.7215 18.4652 71.8072 18.4652C71.8928 18.4652 71.9603 18.5327 71.9603 18.6184V18.6937H72.4951C72.5782 18.6937 72.6483 18.7612 72.6483 18.8468C72.6483 18.9325 72.5808 19 72.4951 19ZM74.3226 18.0733C74.2396 18.0733 74.1695 18.0058 74.1695 17.9201V17.0063C74.1695 16.9233 74.237 16.8532 74.3226 16.8532C74.4083 16.8532 74.4758 16.9207 74.4758 17.0063V17.9201C74.4758 18.0032 74.4083 18.0733 74.3226 18.0733ZM71.8072 17.8578C71.7241 17.8578 71.654 17.7903 71.654 17.7046V16.7909C71.654 16.7078 71.7215 16.6377 71.8072 16.6377C71.8928 16.6377 71.9603 16.7052 71.9603 16.7909V17.7046C71.9603 17.7877 71.8928 17.8578 71.8072 17.8578ZM73.6295 16.9388H72.7157C72.6327 16.9388 72.5626 16.8713 72.5626 16.7857C72.5626 16.7 72.6301 16.6325 72.7157 16.6325H73.6295C73.7126 16.6325 73.7827 16.7 73.7827 16.7857C73.7827 16.8713 73.7152 16.9388 73.6295 16.9388Z" fill="#7D8395" />
                                                                 </svg>
-                                                                <p className="wkit-cdn-not-found">{__('Not Result Found')}</p>
-                                                                <p className="wkit-cdn-not-found-desc">{__('Sorry, the cdn you are looking for doesn\'t exist.')}</p>
+                                                                <p className="wkit-cdn-not-found">{__('Not Result Found', 'wdesignkit')}</p>
+                                                                <p className="wkit-cdn-not-found-desc">{__('Sorry, the cdn you are looking for doesn\'t exist.', 'wdesignkit')}</p>
                                                             </div>
                                                         }
                                                     </div>
@@ -1481,7 +1481,7 @@ const Editor = (props) => {
                                             </div>
                                             <div className="wb-popuo-btn-class">
                                                 <button className="wb-editor-popup-add-btn" onClick={() => { Add_Link_btn("js") }}>
-                                                    <span>Add more</span>
+                                                    <span>{__('Add more', 'wdesignkit')}</span>
                                                 </button>
                                             </div>
 
@@ -1489,7 +1489,7 @@ const Editor = (props) => {
                                     }
                                 </div>
                                 <div className="close-popup-btn">
-                                    <button className="wkit-wb-close-popup-btn" onClick={(e) => { { Close_popup(e) } }}>Close</button>
+                                    <button className="wkit-wb-close-popup-btn" onClick={(e) => { { Close_popup(e) } }}>{__('Close', 'wdesignkit')}</button>
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import '../style/component_layout.scss';
 import { useState, useEffect, useRef } from 'react';
 import { component_array } from '../components-data/component_array';
 import Component_html_container from '../redux-container/component_html_container';
+import { __ } from '@wordpress/i18n';
 
 const { Fragment } = wp.element;
 
@@ -142,7 +143,7 @@ const Component_html = (props) => {
 
             if ("repeater" == item || "popover" == item) {
 
-                props.wdkit_set_toast(['Not Valid', 'You Can Not put this controller here', '', 'danger']);
+                props.wdkit_set_toast([__('Not Valid', 'wdesignkit'), __('You Can Not put this controller here', 'wdesignkit'), '', 'danger']);
 
             } else {
 
@@ -176,7 +177,7 @@ const Component_html = (props) => {
         if (item) {
 
             if ("normalhover" == item) {
-                props.wdkit_set_toast(['Not Valid', 'You Can Not put this controller here', '', 'danger']);
+                props.wdkit_set_toast([__('Not Valid', 'wdesignkit'), __('You Can Not put this controller here', 'wdesignkit'), '', 'danger']);
 
             } else {
                 const val = component_array[item].name;
@@ -362,7 +363,9 @@ const Component_html = (props) => {
                     controller = Object.assign({}, controller, { 'cpt_controller': true })
                 }
 
-                props.addToActiveController(controller);
+                if ('preview' !== props.cardData.CardItems.cardData[0][data.dataset.array_type][data.dataset.sec_id].inner_sec[data.dataset.compo_id].fields[data.dataset.rnp].type) {
+                    props.addToActiveController(controller);
+                }
 
             } else if (data && data.dataset.compo_id && data.dataset.sec_id && data.dataset.array_type) {
                 let controller = {
@@ -404,11 +407,13 @@ const Component_html = (props) => {
     const Hover_Icon = (props) => {
         return (
             <div className='wb-hover-component'>
-                <div className='wb-sec-edit edit-btn' onClick={(e) => { Activate_controller(e) }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="9" viewBox="0 0 8 8" fill="none">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M6.99072 0.195068L7.77844 0.975586C8.07385 1.26831 8.07385 1.7561 7.77844 2.04883L6.99072 2.82922L5.12 0.975586L6.0061 0.195068C6.10461 0.0975342 6.30151 0 6.49841 0C6.69543 0 6.89233 0.0975342 6.99072 0.195068ZM4.3324 1.75623L6.20312 3.60986L6.59705 3.2196L4.7262 1.36597L4.3324 1.75623ZM1.37842 4.7804L1.08313 5.07312C1.08313 5.11548 1.06458 5.1394 1.03552 5.17688C0.997681 5.22583 0.941895 5.29773 0.886108 5.46326L0 7.99988L2.65845 7.02429C2.73352 6.98706 2.79431 6.96411 2.84619 6.94434L2.85242 6.94214C2.93347 6.91138 2.99292 6.88806 3.05225 6.8291C3.07422 6.8291 3.09619 6.82422 3.11804 6.81458C3.1405 6.80469 3.16296 6.78979 3.18542 6.76978C3.2395 6.72144 3.29358 6.64368 3.34766 6.5365L5.8092 3.99988L3.93848 2.14624L1.37842 4.7804ZM2.65845 5.85352C2.62085 5.89075 2.59766 5.9281 2.57776 5.95996C2.54565 6.01147 2.52246 6.04871 2.46155 6.04871C2.46155 6.04871 2.42773 6.04871 2.37988 6.06836C2.34619 6.08215 2.30542 6.10583 2.26465 6.14624L1.67383 6.34131L1.87073 5.75598C1.87073 5.65845 1.96924 5.56091 1.96924 5.56091C1.96924 5.56091 1.96924 5.52722 1.98926 5.49939C2.0033 5.47986 2.0271 5.46326 2.06775 5.46326L3.93848 3.60962L4.43079 4.09741L2.65845 5.85352Z" fill="white" />
-                    </svg>
-                </div>
+                {!props?.hide_edit &&
+                    <div className='wb-sec-edit edit-btn' onClick={(e) => { Activate_controller(e) }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="9" viewBox="0 0 8 8" fill="none">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M6.99072 0.195068L7.77844 0.975586C8.07385 1.26831 8.07385 1.7561 7.77844 2.04883L6.99072 2.82922L5.12 0.975586L6.0061 0.195068C6.10461 0.0975342 6.30151 0 6.49841 0C6.69543 0 6.89233 0.0975342 6.99072 0.195068ZM4.3324 1.75623L6.20312 3.60986L6.59705 3.2196L4.7262 1.36597L4.3324 1.75623ZM1.37842 4.7804L1.08313 5.07312C1.08313 5.11548 1.06458 5.1394 1.03552 5.17688C0.997681 5.22583 0.941895 5.29773 0.886108 5.46326L0 7.99988L2.65845 7.02429C2.73352 6.98706 2.79431 6.96411 2.84619 6.94434L2.85242 6.94214C2.93347 6.91138 2.99292 6.88806 3.05225 6.8291C3.07422 6.8291 3.09619 6.82422 3.11804 6.81458C3.1405 6.80469 3.16296 6.78979 3.18542 6.76978C3.2395 6.72144 3.29358 6.64368 3.34766 6.5365L5.8092 3.99988L3.93848 2.14624L1.37842 4.7804ZM2.65845 5.85352C2.62085 5.89075 2.59766 5.9281 2.57776 5.95996C2.54565 6.01147 2.52246 6.04871 2.46155 6.04871C2.46155 6.04871 2.42773 6.04871 2.37988 6.06836C2.34619 6.08215 2.30542 6.10583 2.26465 6.14624L1.67383 6.34131L1.87073 5.75598C1.87073 5.65845 1.96924 5.56091 1.96924 5.56091C1.96924 5.56091 1.96924 5.52722 1.98926 5.49939C2.0033 5.47986 2.0271 5.46326 2.06775 5.46326L3.93848 3.60962L4.43079 4.09741L2.65845 5.85352Z" fill="white" />
+                        </svg>
+                    </div>
+                }
                 {!props?.only_edit &&
                     <>
                         <div className='wb-sec-edit duplicate-btn' onClick={(e) => { Duplicate_component(e) }}>
@@ -507,6 +512,41 @@ const Component_html = (props) => {
                         <p className='wb-append-dec'>{props.description}</p>
                     }
                     <Hover_Icon only_edit={props?.only_edit ? true : false} />
+                </div>
+            </>
+        );
+    } else if (props.type == "preview") {
+        return (
+            <>
+                <div className='wb-drop'
+                    onDragOver={(e) => { e.preventDefault() }}
+                    onDragEnter={(e) => { e.target.classList.add("wb_drag-over") }}
+                    onDrop={(e) => { e.target.classList.remove("wb_drag-over") }}
+                    onDragLeave={(e) => { e.target.classList.remove("wb_drag-over") }} >
+                </div>
+                <div className={`wb-append-content wb-main-component`}
+                    draggable={Drag_event}
+                    onDragEnd={() => { setDrag_event(false) }}
+                    style={{ marginTop: props.separator == "before" ? "15px" : "", marginBottom: props.separator == "after" ? "15px" : "" }}
+                    data-compo_id={props.compo_index}
+                    data-sec_id={props.sec_index}
+                    data-array_type={props.array_type}
+                    data-rnp={props.rnp_id}
+                    data-rnp2={props.rnp2_id}
+                    data-nha={props.nha_type}
+                    data-editable={props?.only_edit}>
+                    <div className='wb-draggable-icon' onMouseDown={() => { setDrag_event(true) }} onMouseUp={() => { setDrag_event(true) }} >
+                        <img draggable={false} className='tp-sec-edit' src={img_path + 'assets/images/wb-svg/white-drag.svg'} />
+                    </div>
+                    <div className='wb-append-input-field' style={{ flexDirection: props.lableBlock == true ? "column" : "row" }}>
+                        <div className='wb-append-inner'>
+                            <div className='wkit-wb-preview-ct'>
+                                <p className='wkit-wb-preview-ct-text'>{__('Update changes to page', 'wdesignkit')}</p>
+                                <span className='wkit-wb-preview-ct-btn'>{__('Apply', 'wdesignkit')}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <Hover_Icon hide_edit={true} />
                 </div>
             </>
         );
@@ -711,9 +751,9 @@ const Component_html = (props) => {
                             <input className='wb-append-label' style={{ display: props.showLable == true ? "" : "none" }} value={props.lable} onChange={(e) => { Change_value(e, "lable") }} />
                         </div>
                         <select className='select-dropdown' >
-                            <option>font-1</option>
-                            <option>font-2</option>
-                            <option>font-3</option>
+                            <option>{__('font-1', 'wdesignkit')}</option>
+                            <option>{__('font-2', 'wdesignkit')}</option>
+                            <option>{__('font-3', 'wdesignkit')}</option>
                         </select>
                     </div>
                     <Hover_Icon only_edit={props?.only_edit ? true : false} />
@@ -792,7 +832,7 @@ const Component_html = (props) => {
                         </div>
                         <div className='wb-gallery-image'>
                             <div className="wb-gallery-image-header">
-                                <label>No Images Selected</label>
+                                <label>{__('No Images Selected', 'wdesignkit')}</label>
                             </div>
                             <div className="wb-gallery-image-content">
                                 <div className='wb-gallery-image-backgorund'>
@@ -913,23 +953,23 @@ const Component_html = (props) => {
                         </div>
                         <div className='wb-box-shadow-content'>
                             <div className='content-1'>
-                                <span className='content-text'>Color</span>
+                                <span className='content-text'>{__('Color', 'wdesignkit')}</span>
                                 <img className='wb-color-icon' src={img_path + 'assets/images/wb-svg/box.svg'} />
                             </div>
                             <div className='content-2'>
-                                <span className='content-text'>X</span>
+                                <span className='content-text'>{__('X', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                             <div className='content-3'>
-                                <span className='content-text'>Y</span>
+                                <span className='content-text'>{__('Y', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                             <div className='content-4'>
-                                <span className='content-text'>Blur</span>
+                                <span className='content-text'>{__('Blur', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                             <div className='content-5'>
-                                <span className='content-text'>Spread</span>
+                                <span className='content-text'>{__('Spread', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                         </div>
@@ -973,23 +1013,23 @@ const Component_html = (props) => {
                         </div>
                         <div className='wb-box-shadow-content'>
                             <div className='content-1'>
-                                <span className='content-text'>Color</span>
+                                <span className='content-text'>{__('Color', 'wdesignkit')}</span>
                                 <img className='wb-color-icon' src={img_path + 'assets/images/wb-svg/box.svg'} />
                             </div>
                             <div className='content-2'>
-                                <span className='content-text'>X</span>
+                                <span className='content-text'>{__('X', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                             <div className='content-3'>
-                                <span className='content-text'>Y</span>
+                                <span className='content-text'>{__('Y', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                             <div className='content-4'>
-                                <span className='content-text'>Blur</span>
+                                <span className='content-text'>{__('Blur', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                             <div className='content-5'>
-                                <span className='content-text'>Spread</span>
+                                <span className='content-text'>{__('Spread', 'wdesignkit')}</span>
                                 <input className='shadow-inp' type="number" />
                             </div>
                         </div>
@@ -1111,19 +1151,19 @@ const Component_html = (props) => {
                                 <div className='wb-dimension-content'>
                                     <div className='wb-dimension-inp'>
                                         <input className='dimension-inp top-inp' value={props.dimension_defaultValue.top} onChange={(e) => { Change_value(e, 'dimension_defaultValue', `top`) }} type='number' />
-                                        <span className='wb-dimension-lable'>TOP</span>
+                                        <span className='wb-dimension-lable'>{__('TOP', 'wdesignkit')}</span>
                                     </div>
                                     <div className='wb-dimension-inp'>
                                         <input className='dimension-inp right-inp' value={props.dimension_defaultValue.isLinked == true ? props.dimension_defaultValue.top : props.dimension_defaultValue.right} onChange={(e) => { Change_value(e, 'dimension_defaultValue', `${props.dimension_defaultValue.isLinked == true ? 'top' : 'right'}`) }} type='number' />
-                                        <span className='wb-dimension-lable'>RIGHT</span>
+                                        <span className='wb-dimension-lable'>{__('RIGHT', 'wdesignkit')}</span>
                                     </div>
                                     <div className='wb-dimension-inp'>
                                         <input className='dimension-inp bottom-inp' value={props.dimension_defaultValue.isLinked == true ? props.dimension_defaultValue.top : props.dimension_defaultValue.bottom} onChange={(e) => { Change_value(e, 'dimension_defaultValue', `${props.dimension_defaultValue.isLinked == true ? 'top' : 'bottom'}`) }} type='number' />
-                                        <span className='wb-dimension-lable'>BOTTOM</span>
+                                        <span className='wb-dimension-lable'>{__('BOTTOM', 'wdesignkit')}</span>
                                     </div>
                                     <div className='wb-dimension-inp'>
                                         <input className='dimension-inp left-inp' value={props.dimension_defaultValue.isLinked == true ? props.dimension_defaultValue.top : props.dimension_defaultValue.left} onChange={(e) => { Change_value(e, 'dimension_defaultValue', `${props.dimension_defaultValue.isLinked == true ? 'top' : 'left'}`) }} type='number' />
-                                        <span className='wb-dimension-lable'>LEFT</span>
+                                        <span className='wb-dimension-lable'>{__('LEFT', 'wdesignkit')}</span>
                                     </div>
                                     <div className='wb-dimension-icon' onClick={(e) => { e, Change_value(e, 'dimension_defaultValue', 'isLinked') }}>
                                         <img className={props.dimension_defaultValue.isLinked == true ? 'dimension-icon wkit-wb-dark' : 'dimension-icon'} src={img_path + 'assets/images/wb-svg/link.svg'} />
@@ -1201,9 +1241,9 @@ const Component_html = (props) => {
                                 </div>
                             }
                             <select className='gradiant-color-dropDown'>
-                                <option>Linear</option>
-                                <option>radial</option>
-                                <option>conic</option>
+                                <option>{__('Linear', 'wdesignkit')}</option>
+                                <option>{__('radial', 'wdesignkit')}</option>
+                                <option>{__('conic', 'wdesignkit')}</option>
                             </select>
                             <input className='grediant-color-inp' value='135' type='text' />
                         </div>
@@ -1347,7 +1387,7 @@ const Component_html = (props) => {
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M6.25 0H5.25V5.25H0V6.25H5.25V12H6.25V6.25H12V5.25H6.25V0Z" fill="#888888" />
                                 </svg>
-                                <span>Add Controller</span>
+                                <span>{__('Add Controller', 'wdesignkit')}</span>
                             </div>
                         </div>
                     </div>
@@ -1460,7 +1500,7 @@ const Component_html = (props) => {
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M6.25 0H5.25V5.25H0V6.25H5.25V12H6.25V6.25H12V5.25H6.25V0Z" fill="#888888" />
                                 </svg>
-                                <span>Add Controller</span>
+                                <span>{__('Add Controller', 'wdesignkit')}</span>
                             </div>
                         </div>
                     </div>
@@ -1595,7 +1635,7 @@ const Component_html = (props) => {
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M6.25 0H5.25V5.25H0V6.25H5.25V12H6.25V6.25H12V5.25H6.25V0Z" fill="#888888" />
                                 </svg>
-                                <span>Add Controller</span>
+                                <span>{__('Add Controller', 'wdesignkit')}</span>
                             </div>
                         </div>
                     </div>
@@ -1989,7 +2029,7 @@ const Component_html = (props) => {
                                 </div>
                                 {props.description !== "" &&
                                     <div>
-                                        <textarea className='wb-note-inp' value={props.description} placeholder='Write Your Note here....' onChange={(e) => { Change_value(e, "description") }}></textarea>
+                                        <textarea className='wb-note-inp' value={props.description} placeholder={__('Write Your Note here....', 'wdesignkit')} onChange={(e) => { Change_value(e, "description") }}></textarea>
                                     </div>
                                 }
                             </div>
@@ -2033,8 +2073,8 @@ const Component_html = (props) => {
                             <input className='wb-append-label' value={props.lable} onChange={(e) => { Change_value(e, "lable") }} />
                         </div>
                         <div className='wb-radio-color'>
-                            <div className={type == "normal" ? "radio-btn active-ra" : "radio-btn"} onClick={() => { settype("normal") }}>Normal</div>
-                            <div className={type == "grediant" ? "radio-btn active-ra" : "radio-btn"} onClick={() => { settype("grediant") }}>grediant</div>
+                            <div className={type == "normal" ? "radio-btn active-ra" : "radio-btn"} onClick={() => { settype("normal") }}>{__('Normal', 'wdesignkit')}</div>
+                            <div className={type == "grediant" ? "radio-btn active-ra" : "radio-btn"} onClick={() => { settype("grediant") }}>{__('grediant', 'wdesignkit')}</div>
                         </div>
                     </div>
                     <Hover_Icon only_edit={props?.only_edit ? true : false} />
@@ -2178,7 +2218,7 @@ const Component_html = (props) => {
                                 <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                             </div>
                             <div className='wkit-wb-custom-dropDown-content'>
-                                <option selected="Select Template">Select Template</option>
+                                <option selected="Select Template">{__('Select Template', 'wdesignkit')}</option>
                             </div>
                         </div>
                     </div>
@@ -2219,25 +2259,25 @@ const Component_html = (props) => {
                                 {props.alignType == "text-align" &&
                                     <Fragment>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Left
+                                            <div className='wkit-wb-align-icon-lable'>{__('Left', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/eicon-text-align-left.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Center
+                                            <div className='wkit-wb-align-icon-lable'>{__('Center', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/eicon-text-align-center.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Right
+                                            <div className='wkit-wb-align-icon-lable'>{__('Right', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/eicon-text-align-right.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Justify
+                                            <div className='wkit-wb-align-icon-lable'>{__('Justify', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/eicon-text-align-justify.svg`} />
@@ -2247,37 +2287,37 @@ const Component_html = (props) => {
                                 {props.alignType == "justify-content" &&
                                     <Fragment>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Start
+                                            <div className='wkit-wb-align-icon-lable'>{__('Start', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/justify-content-start.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Center
+                                            <div className='wkit-wb-align-icon-lable'>{__('Center', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/justify-content-center.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>End
+                                            <div className='wkit-wb-align-icon-lable'>{__('End', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/justify-content-end.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Space Between
+                                            <div className='wkit-wb-align-icon-lable'>{__('Space Between', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/justify-content-space-between.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Space Around
+                                            <div className='wkit-wb-align-icon-lable'>{__('Space Around', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/justify-content-space-around.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Space Evenly
+                                            <div className='wkit-wb-align-icon-lable'>{__('Space Evenly', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/justify-content-space-evenly.svg`} />
@@ -2287,25 +2327,25 @@ const Component_html = (props) => {
                                 {props.alignType == "align-items" &&
                                     <Fragment>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Start
+                                            <div className='wkit-wb-align-icon-lable'>{__('Start', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/align-items-start.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Center
+                                            <div className='wkit-wb-align-icon-lable'>{__('Center', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/align-items-center.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>End
+                                            <div className='wkit-wb-align-icon-lable'>{__('End', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/align-items-end.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Stretch
+                                            <div className='wkit-wb-align-icon-lable'>{__('Stretch', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/align-items-stretch.svg`} />
@@ -2315,19 +2355,19 @@ const Component_html = (props) => {
                                 {props.alignType == "flex-direction" &&
                                     <Fragment>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Vertical(Collumn)
+                                            <div className='wkit-wb-align-icon-lable'>{__('Vertical', 'wdesignkit')}(Collumn)
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/align-vertical-direction.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Horizontal(row)
+                                            <div className='wkit-wb-align-icon-lable'>{__('Horizontal', 'wdesignkit')}(row)
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/align-horizontal-direction.svg`} />
                                         </div>
                                         <div className='wkit-wb-alignIcon-content'>
-                                            <div className='wkit-wb-align-icon-lable'>Row
+                                            <div className='wkit-wb-align-icon-lable'>{__('Row', 'wdesignkit')}
                                                 <div className='wkit-wb-align-icon-tooltip'></div>
                                             </div>
                                             <img className='wkit-wb-align-icon' src={`${img_path}assets/images/wb-svg/align-reverse-direction.svg`} />
@@ -2575,11 +2615,11 @@ const Component_html = (props) => {
                             <div className='wb-url-options'>
                                 <div className='url-opt'>
                                     <input type='checkbox' checked={props.is_external} onChange={(e) => { Change_value(e, "is_external") }} />
-                                    <label>Open in new window</label>
+                                    <label>{__('Open in new window', 'wdesignkit')}</label>
                                 </div>
                                 <div className='url-opt'>
                                     <input type='checkbox' checked={props.nofollow} onChange={(e) => { Change_value(e, "nofollow") }} />
-                                    <label>Add Nofollow</label>
+                                    <label>{__('Add Nofollow', 'wdesignkit')}</label>
                                 </div>
                             </div>
                         </div>
@@ -2675,7 +2715,7 @@ const Component_html = (props) => {
                     </div>
                     <div className='wb-note-content' style={{ borderLeft: '2px solid #f59e0b', background: '#fffbeb', padding: '10px' }}>
                         <div className='wb-append-inner' >
-                            <p className='wb-append-label' style={{ background: '#fffbeb', height: '180px' }}>The <b>{props.deprecatedValue[0].Widget}</b> widget has been deprecated since ${props.deprecatedValue[3].Plugin} ${props.deprecatedValue[1].Since}. It has been replaced by <b>{props.deprecatedValue[4].Replacement}</b>. Note that ${props.deprecatedValue[0].Widget} will be completely removed once ${props.deprecatedValue[3].Plugin} ${props.deprecatedValue[2].Last} is released.</p>
+                            <p className='wb-append-label' style={{ background: '#fffbeb', height: '180px' }}>{__(`The <b>${props.deprecatedValue[0].Widget}</b> widget has been deprecated since ${props.deprecatedValue[3].Plugin} ${props.deprecatedValue[1].Since}. It has been replaced by <b>${props.deprecatedValue[4].Replacement}</b>. Note that ${props.deprecatedValue[0].Widget} will be completely removed once ${props.deprecatedValue[3].Plugin} ${props.deprecatedValue[2].Last} is released.`, 'wdesignkit')}</p>
                         </div>
                         <div>
                         </div>

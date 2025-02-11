@@ -1,16 +1,15 @@
-import '../widget_brows/widget_brows.scss';
+import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
-import { Wkit_browse_template_Skeleton, Wkit_availble_not, get_user_login, wdKit_Form_data, loadingIcon, Wkit_template_Skeleton, Widget_card } from '../../helper/helper-function';
+import { Wkit_availble_not, get_user_login, wdKit_Form_data, loadingIcon, Wkit_template_Skeleton, Widget_card } from '../../helper/helper-function';
 import { Wkit_Filter_widget } from './mobile-filter-widget';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import axios from 'axios';
 import Widget_browse_skeleton from './widget-browse-skeleton';
+import { __ } from '@wordpress/i18n';
+import '../widget_brows/widget_brows.scss';
 
-const { __ } = wp.i18n;
 const { Fragment } = wp.element;
 const {
-    form_data,
     wkit_get_user_login,
 } = wp.wkit_Helper;
 
@@ -144,7 +143,7 @@ const Widget_brows = (props) => {
                 <div className='wkit-browse-search-inner'>
                     <input
                         className='wkit-browse-search'
-                        placeholder={__('Search Widgets')}
+                        placeholder={__('Search Widgets', 'wdesignkit')}
                         type="text"
                         value={searchQuery}
                         onChange={(e) => { setSearchQuery(e.target.value) }}
@@ -270,7 +269,7 @@ const Widget_brows = (props) => {
             controller = new AbortController();
 
             let form = new FormData();
-            form.append('action', 'wdkit_widget_ajax');
+            form.append('action', 'get_wdesignkit');
             form.append('kit_nonce', wdkitData.kit_nonce);
 
             Object.entries(api_data).forEach(([key, val]) => {
@@ -359,7 +358,7 @@ const Widget_brows = (props) => {
         return (
             <div className="wkit-filter-category">
                 <div className='wkit-filter-accordion' onClick={() => { Add_accordion('category') }}>
-                    <div className="wkit-filter-heading">{__('Categories')}</div>
+                    <div className="wkit-filter-heading">{__('Categories', 'wdesignkit')}</div>
                     <svg width="10" height="5" style={{ transform: accordionToggle.includes('category') ? "rotate(180deg)" : "" }} viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.21338 0.637695L4.93579 4.34956L8.6582 0.637695" stroke="#9C9CD1" strokeWidth="1.11356" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -395,7 +394,7 @@ const Widget_brows = (props) => {
         return (
             <Fragment>
                 <div className='wkit-filter-accordion' onClick={() => Add_accordion('free_pro')}>
-                    <div className="wkit-filter-heading">{__('Free / Pro')}</div>
+                    <div className="wkit-filter-heading">{__('Free / Pro', 'wdesignkit')}</div>
                     <svg width="10" height="5" style={{ transform: accordionToggle.includes('free_pro') ? "rotate(180deg)" : "" }} viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.21338 0.637695L4.93579 4.34956L8.6582 0.637695" stroke="#9C9CD1" strokeWidth="1.11356" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -412,7 +411,7 @@ const Widget_brows = (props) => {
                                 onChange={(e) => { handleFilterChecked(e, 'free_pro') }}
                                 checked={filterArgs.free_pro == 'free' ? true : false}
                             />
-                            <span className='wkit-freePro-label'>{__('Free')}</span>
+                            <span className='wkit-freePro-label'>{__('Free', 'wdesignkit')}</span>
                         </label>
                         <label htmlFor='wkit-pro-btn-label' className='wkit-select-freePro-type'>
                             <input
@@ -423,7 +422,7 @@ const Widget_brows = (props) => {
                                 onChange={(e) => { handleFilterChecked(e, 'free_pro') }}
                                 checked={filterArgs.free_pro == 'pro' ? true : false}
                             />
-                            <span className='wkit-freePro-label'>{__('Pro')}</span>
+                            <span className='wkit-freePro-label'>{__('Pro', 'wdesignkit')}</span>
                         </label>
                     </div>
                 }
@@ -437,17 +436,17 @@ const Widget_brows = (props) => {
             return (
                 <div className="wkit-browse-widget-inner-column">
                     <div className='wkit-expand-filter'>
-                        <div className="wkit-left-main-title">{__('Filters')}</div>
+                        <div className="wkit-left-main-title">{__('Filters', 'wdesignkit')}</div>
                         <div style={{ cursor: 'pointer' }} onClick={() => { setFilterToggle(!filterToggle) }}>
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.64182 7.47781L6.76141 4.58998L9.64924 1.70215C9.93877 1.41262 9.93877 0.944928 9.64924 0.655403C9.35972 0.365878 8.89202 0.365878 8.6025 0.655403L5.195 4.06289C4.90548 4.35242 4.90548 4.82011 5.195 5.10964L8.6025 8.51713C8.89202 8.80666 9.35972 8.80666 9.64924 8.51713C9.93134 8.23503 9.93134 7.75991 9.64182 7.47781ZM1.69843 0.135742C2.10673 0.135742 2.4408 0.46981 2.4408 0.878115V8.30184C2.4408 8.71015 2.10673 9.04422 1.69843 9.04422C1.29012 9.04422 0.956055 8.71015 0.956055 8.30184V0.878115C0.956055 0.46981 1.29012 0.135742 1.69843 0.135742Z" fill="#19191B" /></svg>
                         </div>
                     </div>
-                    <div className='wkit-wb-filterTitle'>{__('Search')}</div>
+                    <div className='wkit-wb-filterTitle'>{__('Search', 'wdesignkit')}</div>
                     <div className='wkit-search-filter'>
                         {SearchFilter()}
                     </div>
                     {BuilderArray.length > 1 &&
-                        <div className='wkit-wb-filterTitle'>{__('Page Builder')}</div>
+                        <div className='wkit-wb-filterTitle'>{__('Page Builder', 'wdesignkit')}</div>
                     }
                     {wdkitData.use_editor == 'wdkit' &&
                         <div className='wkit-filter-wrap-panel wkit-mt-15 wkit-justify-left'>
@@ -466,7 +465,7 @@ const Widget_brows = (props) => {
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.724998 7.9175L3.635 5L0.7175 2.0825C0.425 1.79 0.425 1.3175 0.7175 1.025C1.01 0.7325 1.4825 0.7325 1.775 1.025L5.2175 4.4675C5.51 4.76 5.51 5.2325 5.2175 5.525L1.775 8.9675C1.4825 9.26 1.01 9.26 0.7175 8.9675C0.4325 8.6825 0.432499 8.2025 0.724998 7.9175ZM8.75 0.5C8.3375 0.5 8 0.8375 8 1.25V8.75C8 9.1625 8.3375 9.5 8.75 9.5C9.1625 9.5 9.5 9.1625 9.5 8.75V1.25C9.5 0.8375 9.1625 0.5 8.75 0.5Z" fill="white" />
                     </svg>
-                    {__('Filters')}
+                    {__('Filters', 'wdesignkit')}
                 </div>
             );
         }
@@ -603,7 +602,7 @@ const Widget_brows = (props) => {
                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.724998 7.9175L3.635 5L0.7175 2.0825C0.425 1.79 0.425 1.3175 0.7175 1.025C1.01 0.7325 1.4825 0.7325 1.775 1.025L5.2175 4.4675C5.51 4.76 5.51 5.2325 5.2175 5.525L1.775 8.9675C1.4825 9.26 1.01 9.26 0.7175 8.9675C0.4325 8.6825 0.432499 8.2025 0.724998 7.9175ZM8.75 0.5C8.3375 0.5 8 0.8375 8 1.25V8.75C8 9.1625 8.3375 9.5 8.75 9.5C9.1625 9.5 9.5 9.1625 9.5 8.75V1.25C9.5 0.8375 9.1625 0.5 8.75 0.5Z" fill="white" />
                             </svg>
-                            {__('Filters')}
+                            {__('Filters', 'wdesignkit')}
                         </div>
                         <div className='wkit-browse-widget-right-column'>
                             {FilterArray()}

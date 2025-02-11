@@ -1,4 +1,4 @@
-@import '/src/style/variable.scss';
+@use '/src/style/variable';
 
 .wkit-publish-loader {
     justify-content: center;
@@ -205,8 +205,6 @@
             box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
             padding: 5px;
             margin-bottom: -115px;
-            width: -webkit-max-content;
-            width: -moz-max-content;
             width: max-content;
             border-radius: 6px;
             position: absolute;
@@ -387,7 +385,6 @@
 
             .wb-version-wrap {
                 display: flex;
-                -moz-column-gap: 15px;
                 gap: 15px;
                 flex-direction: row;
                 justify-content: center;
@@ -473,7 +470,7 @@
                     padding: 13px;
                     width: 50%;
                     border: none;
-                    border-radius: $radius_small;
+                    border-radius: variable.$radius_small;
                     cursor: pointer;
                 }
             }

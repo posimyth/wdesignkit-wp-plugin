@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom'
 import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-const {
-    __,
-} = wp.i18n;
-
 window.userData = []
 
 window.wdkit_editor = wdkitData.use_editor;

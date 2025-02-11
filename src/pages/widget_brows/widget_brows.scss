@@ -1,4 +1,4 @@
-@import '../../style/variable.scss';
+@use '../../style/variable';
 
 
 .wkit-browse-widget-wrap {
@@ -55,7 +55,7 @@
         width: 100%;
         padding: 5px 5px 5px 10px;
         border: 1px solid #DADAF0;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
         margin-bottom: 15px;
 
         span {
@@ -207,7 +207,7 @@
 
         .wkit-custom-cateogry:checked~label {
             background: #F5F5FA;
-            border: 0.5px solid $Wdkit_blue_normal;
+            border: 0.5px solid variable.$Wdkit_blue_normal;
             border-radius: 18px;
         }
 
@@ -228,7 +228,7 @@
     .wkit-widget-browse-main {
         width: 100%;
         background: #FFFFFF;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
         height: auto;
         padding: 25px;
     }
@@ -262,14 +262,13 @@
             position: absolute;
             display: flex;
             align-items: center;
-            background: $Wdkit_blue_normal;
+            background: variable.$Wdkit_blue_normal;
             transform: rotate(90deg);
             color: #fff;
             left: -50px;
             padding: 10px;
             border-radius: 6px 6px 0px 0px;
             top: 75px;
-            -moz-column-gap: 10px;
             column-gap: 10px;
             font-style: normal;
             font-weight: 500;
@@ -298,7 +297,6 @@
             padding: 10px;
             border-radius: 6px 6px 0px 0px;
             top: 210px;
-            -moz-column-gap: 10px;
             column-gap: 10px;
             font-style: normal;
             font-weight: 500;
@@ -316,7 +314,7 @@
         flex-direction: column;
         height: 100%;
         column-gap: 45px;
-        border-radius: $radius_big;
+        border-radius: variable.$radius_big;
         box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
         border: 1px solid #f1f1f4;
 
@@ -380,7 +378,7 @@
         margin: 0;
         min-width: 20px;
         min-height: 20px;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
 
         &+label {
             position: relative;
@@ -404,7 +402,7 @@
     }
 
     .wkit-check-box:checked {
-        background-color: $Wdkit_blue_normal;
+        background-color: variable.$Wdkit_blue_normal;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -483,7 +481,7 @@
                 background: #fff;
                 padding: 5px 8px;
                 height: 36px;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 border: 1px solid #00000010;
 
                 label {
@@ -534,7 +532,7 @@
                     top: -30px;
                     white-space: nowrap;
                     background: #19191B;
-                    border-radius: $radius_small;
+                    border-radius: variable.$radius_small;
                     color: #fff;
                     padding: 4px;
                 }
@@ -582,7 +580,7 @@
             .wkit-freePro-radio-inp {
                 min-width: 20px;
                 min-height: 20px;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 cursor: pointer;
             }
         }
@@ -594,7 +592,7 @@
         border: 1px solid rgba(207, 207, 234, 0.3019607843);
         padding: 15px;
         min-height: 250px;
-        border-radius: $radius_big;
+        border-radius: variable.$radius_big;
         display: flex;
         position: relative;
         background-color: #fff;
@@ -605,7 +603,7 @@
         .wkit-wb-browse-widget-card-top-part {
             position: relative;
             width: 100%;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -625,7 +623,7 @@
         .wkit-wb-fav-icon {
             padding: 6px;
             background-color: #4a4a4a;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             margin: 5px;
             display: flex;
             flex-direction: row;
@@ -639,7 +637,7 @@
                 background-color: black;
                 color: #fff;
                 text-align: center;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 padding: 8px 8px;
                 position: absolute;
                 z-index: 1;
@@ -671,7 +669,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
         }
 
         .wkit-wb-widget-img {
@@ -681,7 +679,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             margin: 0px;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
         }
 
 
@@ -714,7 +712,7 @@
                 position: relative;
                 border: 1px solid #8991A4;
                 padding: 4px;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 cursor: pointer;
 
                 svg {
@@ -732,7 +730,7 @@
                 border: 1px solid;
                 width: 25px;
                 height: 25px;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -750,7 +748,7 @@
                 margin-left: 85px;
                 padding: 8px;
                 box-shadow: 0px 40px 30px rgb(0 0 0 / 10%);
-                border-radius: $radius_big;
+                border-radius: variable.$radius_big;
                 row-gap: 8px;
                 width: 150px;
             }
@@ -760,7 +758,7 @@
                 padding: 5px 7px;
                 margin: 0px;
                 font-size: 13px;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 font-weight: 500;
                 display: flex;
                 column-gap: 5px;
@@ -828,7 +826,7 @@
                 background-color: black;
                 color: #fff;
                 text-align: center;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 padding: 8px 8px;
                 position: absolute;
                 z-index: 1;
@@ -927,7 +925,7 @@
         }
 
         .slider.round {
-            border-radius: $radius_big;
+            border-radius: variable.$radius_big;
         }
 
         .slider.round:before {
@@ -972,9 +970,9 @@
         .wkit-widgetlist-grid-content .wkit-widget-card .wdkit-star-rating,
         .wkit-widgetlist-grid-content .wkit-widget-card .wkit-widget-card-bottom-part .wkit-widget-info-icons,
         .wkit-widgetlist-grid-content .wkit-widget-card .wkit-widget-card-bottom-part .wkit-widget-builder-icon {
-            background: $skeleton_bg;
-            animation: $animation;
-            border-radius: $radius_small;
+            background: variable.$skeleton_bg;
+            animation: variable.$animation;
+            border-radius: variable.$radius_small;
             color: transparent;
             pointer-events: none;
             border: none !important;
@@ -1017,9 +1015,9 @@
     .wkit-browse-widget-right-column .wkit-browse-applied-filter .wkit-applied-list,
     .wkit-browse-widget-right-column .wkit-browse-applied-filter .applied-filter-text,
     .wkit-browse-widget-right-column .wkit-browse-applied-filter .wdkit-reset-all-filters {
-        background: $skeleton_bg;
-        animation: $animation;
-        border-radius: $radius_small;
+        background: variable.$skeleton_bg;
+        animation: variable.$animation;
+        border-radius: variable.$radius_small;
         color: transparent;
         pointer-events: none;
         border: none !important;

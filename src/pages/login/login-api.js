@@ -3,10 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { Get_site_url } from '../../helper/helper-function';
 import Incorrect_login from './incorrect_login';
-
-const {
-    __,
-} = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 const {
     form_data,
@@ -18,26 +15,29 @@ const {
 const Wdkit_Login_Api = (props) => {
 
     const navigation = useNavigate();
+    let plugin_name  = wdkitData?.wdkit_white_label?.plugin_name ? wdkitData?.wdkit_white_label?.plugin_name : "WDesignKit"; 
+
     let api_login_popup = {
         icon: true,
-        heading: 'Wrong or Expired Login Key',
-        sub_heading: 'Your login API key seems to be wrong, Ask your webmaster with main WDesignKit Account access for another Login key.',
-        sub_heading: [{ type: 'normal', text: 'Your login API key seems to be wrong, Ask your webmaster with main WDesignKit Account access for another Login key.' }],
-        checkbox_text: 'I know Purchase key and Login Key is different.',
+        heading: __('Wrong or Expired Login Key', 'wdesignkit'),
+        sub_heading: __(`Your login API key seems to be wrong, Ask your webmaster with main ${plugin_name} Account access for another Login key.`, 'wdesignkit'),
+        sub_heading: [{ type: 'normal', text: __(`Your login API key seems to be wrong, Ask your webmaster with main ${plugin_name} Account access for another Login key.`, 'wdesignkit') }],
+        checkbox_text: __('I know Purchase key and Login Key is different.', 'wdesignkit'),
         note: [
-            { type: 'normal', text: 'This Login key is not your WDesignKit\'s Pro Licence\'s Purchase Key. Do you want to know, ' },
-            { type: 'link', text: 'How to get Login Key?' }
+            { type: 'normal', text: __(`This Login key is not your ${plugin_name}\'s Pro Licence\'s Purchase Key. Do you want to know, `, 'wdesignkit') },
+            { type: 'link', text: __('How to get Login Key?', 'wdesignkit'), link: wdkitData.WDKIT_DOC_URL + 'docs/create-login-key-to-login-to-wdesignkit-account/' }
         ],
-        ft_btn1_text: 'Let me Try again',
+        ft_btn1_text: __('Let me Try again', 'wdesignkit'),
         ft_btn1_link: '',
         ft_btn1_fun: true,
-        ft_btn2_text: 'I need to recheck Login Key',
+        ft_btn2_text: __('I need to recheck Login Key', 'wdesignkit'),
         ft_btn2_link: `${wdkitData.wdkit_server_url}admin/licence/apikey`,
         ft_btn2_fun: false,
         ex_link_text: '',
         ex_link_url: '',
         size: 'small'
     }
+
     var ImgPath = wdkitData.WDKIT_ASSETS;
     const [token, settoken] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -93,7 +93,12 @@ const Wdkit_Login_Api = (props) => {
             navigation('/my_uploaded')
         } else {
             setIsLoading(false)
-            setpopup_data(api_login_popup)
+
+            if (wdkitData?.wdkit_white_label?.help_link) {
+                props.wdkit_set_toast([__("Invalid Login Key", 'wdesignkit'), __('The login key you entered is not valid. Please verify and try again', 'wdesignkit'), '', 'danger'])
+            } else {
+                setpopup_data(api_login_popup)
+            }
         }
     }
 
@@ -101,7 +106,7 @@ const Wdkit_Login_Api = (props) => {
         if (token) {
             Api_click()
         } else {
-            props.wdkit_set_toast([res?.data?.message, res?.data?.description, '', 'danger']);
+            props.wdkit_set_toast([__("API Key Required", 'wdesignkit'), __('Please provide an API key to activate Plugin.', 'wdesignkit'), '', 'danger'])
         }
     }
 
@@ -115,12 +120,12 @@ const Wdkit_Login_Api = (props) => {
             <div className={"wkit-login-left-side"}>
                 <div>
                     <div className={"wkit-login-heading"}>
-                        <span>{__('Login With Key')}</span>
-                        <div className='wkit-login-desc'>{__('Enter your Login Key to get access')}</div>
+                        <span>{__('Login With Key', 'wdesignkit')}</span>
+                        <div className='wkit-login-desc'>{__('Enter your Login Key to get access', 'wdesignkit')}</div>
                     </div>
                 </div>
                 <div className='wkit-form-group'>
-                    <label className='wkit-login-label'>{__('Login Key')}</label>
+                    <label className='wkit-login-label'>{__('Login Key', 'wdesignkit')}</label>
                     <input
                         type="text"
                         name="email"
@@ -141,23 +146,27 @@ const Wdkit_Login_Api = (props) => {
                         </div>
                     </div>
                 ) : (
-                    <button className={"wkit-login-btn"} onClick={(e) => { Check_token(e) }}>{isLoading == 'logged' ? __('Logged In') : __('Login')}</button>
+                    <button className={"wkit-login-btn"} onClick={(e) => { Check_token(e) }}>{isLoading == 'logged' ? __('Logged In', 'wdesignkit') : __('Login', 'wdesignkit')}</button>
                 )}
                 <Link to='/login' className='wkit-wb-backLogin'>
                     <button className='wkit-login-back-btn'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20" fill="none"><path d="M22 11.25C22.6904 11.25 23.25 10.6904 23.25 10C23.25 9.30964 22.6904 8.75 22 8.75L22 11.25ZM1.11612 9.11612C0.627962 9.60427 0.627962 10.3957 1.11612 10.8839L9.07107 18.8388C9.55922 19.327 10.3507 19.327 10.8388 18.8388C11.327 18.3507 11.327 17.5592 10.8388 17.0711L3.76777 10L10.8388 2.92893C11.327 2.44078 11.327 1.64932 10.8388 1.16116C10.3507 0.673009 9.55922 0.673009 9.07107 1.16116L1.11612 9.11612ZM22 8.75L2 8.75L2 11.25L22 11.25L22 8.75Z" fill="#C22076" /></svg>
-                        <span>{__('Back to Login')}</span>
+                        <span>{__('Back to Login', 'wdesignkit')}</span>
                     </button>
                 </Link>
                 <div className='wkit-login-desc-text'>
-                    {__('You need existing account to use this method. ')}
-                    <a className="wkit-login-page-link" href={`${wdkitData.wdkit_server_url}signup`} target="_blank" rel="noopener noreferrer" style={{ color: "#C22076" }}>{__('Signup')}</a>
+                    {__('You need existing account to use this method. ', 'wdesignkit')}
+                    {!(wdkitData?.wdkit_white_label?.help_link) &&
+                        <a className="wkit-login-page-link" href={`${wdkitData.wdkit_server_url}signup`} target="_blank" rel="noopener noreferrer" style={{ color: "#C22076" }}>{__('Signup', 'wdesignkit')}</a>
+                    }
                 </div>
-                <div className='wkit-login-desc-text'>
-                    <a className="wkit-login-page-link" href={wdkitData.WDKIT_DOC_URL + 'documents/create-login-api-key-to-login-to-wdesignkit-account/'} style={{ color: "#C22076" }} target="_blank" rel="noopener noreferrer">
-                        {__('How to get Login Key?')}
-                    </a>
-                </div>
+                {!(wdkitData?.wdkit_white_label?.help_link) &&
+                    <div className='wkit-login-desc-text'>
+                        <a className="wkit-login-page-link" href={wdkitData.WDKIT_DOC_URL + 'docs/create-login-key-to-login-to-wdesignkit-account/'} style={{ color: "#C22076" }} target="_blank" rel="noopener noreferrer">
+                            {__('How to get Login Key?', 'wdesignkit')}
+                        </a>
+                    </div>
+                }
             </div>
             {popup_data &&
                 <Incorrect_login

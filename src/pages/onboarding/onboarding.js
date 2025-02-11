@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import './onboarding.scss';
 import { WkitLoader, wdKit_Form_data } from '../../helper/helper-function';
+import { __ } from '@wordpress/i18n';
+
 
 const { Fragment } = wp.element;
-const {
-    __,
-} = wp.i18n;
 
 const Onboarding = (props) => {
     var ImgPath = wdkitData.WDKIT_ASSETS;
+
 
     const [popupType, setpopupType] = useState('1');
     const [actplugin, setactplugin] = useState({ 'elementor': 'loading', 'the-plus-addons-for-block-editor': 'loading', 'bricks': 'loading', 'bricks-child': 'loading' });
@@ -30,10 +30,10 @@ const Onboarding = (props) => {
         },
         {
             'name': 'the-plus-addons-for-block-editor',
-            'label': 'The Plus Blocks for Gutenberg',
+            'label': 'Nexter Blocks',
             'plugin_slug': 'the-plus-addons-for-block-editor/the-plus-addons-for-block-editor.php',
             'freepro': '0',
-            'icon': 'images/jpg/tpag-logo.png',
+            'icon': 'images/jpg/nexter-blocks-logo.png',
             'type': 'plugin',
             'status': 'tpagplg'
         },
@@ -181,12 +181,12 @@ const Onboarding = (props) => {
                         :
                         <div className='wdkit-onboarding-box'>
                             <div className='wdkit-onboarding-header'>
-                                <span>{__('Welcome to WDesignKit')}</span>
+                                <span>{__('Welcome to WDesignKit', 'wdesignkit')}</span>
                             </div>
                             <div className="wdkit-onboarding-box-content">
                                 <div className="wdkit-select-pageBuilder">
                                     <div className="wdkit-select-pageBuilder-header">
-                                        <span>{__('Page Templates')}</span>
+                                        <span>{__('Page Templates', 'wdesignkit')}</span>
                                         <div className='wkit-switch-setting-wrap'>
                                             <label className="wkit-switch">
                                                 <input type="checkbox" onChange={(e) => { HandleChange(e, 'template') }} checked={props.wdkit_meta.Setting?.template} />
@@ -198,7 +198,7 @@ const Onboarding = (props) => {
                                         <div className="wdkit-select-pageBuilder-content">
                                             <div className='wdkit-pageBuilder-meta'>
                                                 <img src={ImgPath + "images/wb-svg/elementor.svg"} alt="Elementor" draggable="false" />
-                                                <span>{__('Elementor')}</span>
+                                                <span>{__('Elementor', 'wdesignkit')}</span>
                                             </div>
                                             <label className='wdkit-select-builder-checkbox' htmlFor='wkit-pageTemplate-elementor'>
                                                 <input type="checkbox" id='wkit-pageTemplate-elementor' onChange={(e) => HandleChange(e, 'elementor_template', 'template')} checked={props.wdkit_meta.Setting?.elementor_template} />
@@ -211,7 +211,7 @@ const Onboarding = (props) => {
                                         <div className="wdkit-select-pageBuilder-content">
                                             <div className='wdkit-pageBuilder-meta'>
                                                 <img src={ImgPath + "images/wb-svg/gutenberg.svg"} alt="Gutenberg" draggable="false" />
-                                                <span>{__('Gutenberg')}</span>
+                                                <span>{__('Gutenberg', 'wdesignkit')}</span>
                                             </div>
                                             <label className='wdkit-select-builder-checkbox' htmlFor='wkit-pageTemplate-gutenberg'>
                                                 <input type="checkbox" id='wkit-pageTemplate-gutenberg' onChange={(e) => HandleChange(e, 'gutenberg_template', 'template')} checked={props.wdkit_meta.Setting?.gutenberg_template} />
@@ -224,10 +224,10 @@ const Onboarding = (props) => {
                                         <div className="wdkit-select-pageBuilder-content">
                                             <div className='wdkit-pageBuilder-meta'>
                                                 <img src={ImgPath + "images/wb-svg/bricks.svg"} alt="Bricks" draggable="false" style={{ height: '30px', width: '30px' }} />
-                                                <span>{__('Bricks')}</span>
+                                                <span>{__('Bricks', 'wdesignkit')}</span>
                                             </div>
                                             <label className='wdkit-select-builder-checkbox' htmlFor='wkit-pageTemplate-bricks'>
-                                                <span className='wkit-commign-soon-tag'>{__('Coming Soon')}</span>
+                                                <span className='wkit-commign-soon-tag'>{__('Coming Soon', 'wdesignkit')}</span>
                                             </label>
                                         </div>
                                     </div>
@@ -235,7 +235,7 @@ const Onboarding = (props) => {
 
                                 <div className="wdkit-select-pageBuilder">
                                     <div className="wdkit-select-pageBuilder-header">
-                                        <span>{__('Widget Builder')}</span>
+                                        <span>{__('Widget Builder', 'wdesignkit')}</span>
                                         <div className='wkit-switch-setting-wrap'>
                                             <label className="wkit-switch">
                                                 <input type="checkbox" onChange={(e) => { HandleChange(e, 'builder') }} checked={props.wdkit_meta.Setting?.builder} />
@@ -247,7 +247,7 @@ const Onboarding = (props) => {
                                         <div className="wdkit-select-pageBuilder-content">
                                             <div className='wdkit-pageBuilder-meta'>
                                                 <img src={ImgPath + "images/wb-svg/elementor.svg"} alt="Elementor" draggable="false" />
-                                                <span>{__('Elementor')}</span>
+                                                <span>{__('Elementor', 'wdesignkit')}</span>
                                             </div>
                                             <label className='wdkit-select-builder-checkbox' htmlFor='wkit-widgetBuilder-elementor'>
                                                 <input type="checkbox" id='wkit-widgetBuilder-elementor' onChange={(e) => { HandleChange(e, 'elementor_builder', 'builder') }} checked={props.wdkit_meta.Setting?.elementor_builder} />
@@ -260,7 +260,7 @@ const Onboarding = (props) => {
                                         <div className="wdkit-select-pageBuilder-content">
                                             <div className='wdkit-pageBuilder-meta'>
                                                 <img src={ImgPath + "images/wb-svg/gutenberg.svg"} alt="Gutenberg" draggable="false" />
-                                                <span>{__('Gutenberg')}</span>
+                                                <span>{__('Gutenberg', 'wdesignkit')}</span>
                                             </div>
                                             <label className='wdkit-select-builder-checkbox' htmlFor='wkit-widgetBuilder-gutenberg'>
                                                 <input type="checkbox" id='wkit-widgetBuilder-gutenberg' onChange={(e) => { HandleChange(e, 'gutenberg_builder', 'builder') }} checked={props.wdkit_meta.Setting?.gutenberg_builder} />
@@ -273,7 +273,7 @@ const Onboarding = (props) => {
                                         <div className="wdkit-select-pageBuilder-content">
                                             <div className='wdkit-pageBuilder-meta'>
                                                 <img src={ImgPath + "images/wb-svg/bricks.svg"} alt="Bricks" draggable="false" style={{ height: '30px', width: '30px' }} />
-                                                <span>{__('Bricks')}</span>
+                                                <span>{__('Bricks', 'wdesignkit')}</span>
                                             </div>
                                             <label className='wdkit-select-builder-checkbox' htmlFor='wkit-widgetBuilder-bricks'>
                                                 <input type="checkbox" id='wkit-widgetBuilder-bricks' onChange={(e) => { HandleChange(e, 'bricks_builder', 'builder') }} checked={props.wdkit_meta.Setting?.bricks_builder} />
@@ -306,7 +306,7 @@ const Onboarding = (props) => {
                                 <svg className='wkit-image-content-icon' xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M10.7074 21.4147C16.6209 21.4147 21.4147 16.6209 21.4147 10.7074C21.4147 4.79385 16.6209 0 10.7074 0C4.79385 0 0 4.79385 0 10.7074C0 16.6209 4.79385 21.4147 10.7074 21.4147ZM10.598 8.84798C10.2221 9.04794 9.92616 9.30789 9.7102 9.62783V6.42444H8.03052V15.3027H9.7102V14.3549C9.93415 14.6669 10.2301 14.9228 10.598 15.1228C10.974 15.3147 11.4099 15.4107 11.9058 15.4107C12.4737 15.4107 12.9856 15.2668 13.4415 14.9788C13.9054 14.6909 14.2693 14.2869 14.5333 13.767C14.8052 13.2391 14.9412 12.6353 14.9412 11.9554C14.9412 11.2755 14.8052 10.6796 14.5333 10.1677C14.2693 9.64782 13.9054 9.2479 13.4415 8.96795C12.9856 8.68801 12.4737 8.54803 11.9058 8.54803C11.4179 8.54803 10.982 8.64802 10.598 8.84798ZM12.9736 10.9236C13.1415 11.2115 13.2255 11.5555 13.2255 11.9554C13.2255 12.3633 13.1415 12.7152 12.9736 13.0112C12.8136 13.3071 12.5976 13.5351 12.3257 13.6951C12.0617 13.855 11.7738 13.935 11.4619 13.935C11.1579 13.935 10.87 13.859 10.598 13.7071C10.3341 13.5471 10.1181 13.3191 9.95015 13.0232C9.79018 12.7272 9.7102 12.3793 9.7102 11.9794C9.7102 11.5795 9.79018 11.2315 9.95015 10.9356C10.1181 10.6396 10.3341 10.4157 10.598 10.2637C10.87 10.1037 11.1579 10.0238 11.4619 10.0238C11.7738 10.0238 12.0617 10.0997 12.3257 10.2517C12.5976 10.4037 12.8136 10.6276 12.9736 10.9236Z" fill="black" />
                                 </svg>
-                                <span>{__('Bricks Elements  Builder')}</span>
+                                <span>{__('Bricks Elements Builder', 'wdesignkit')}</span>
                             </div>
                         }
                         {actplugin?.elementor == 'active' &&
@@ -314,7 +314,7 @@ const Onboarding = (props) => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
                                     <path d="M14.0541 0C6.29146 0 0 6.29143 0 14.054C0 21.8141 6.29146 28.1081 14.0541 28.1081C21.8167 28.1081 28.1081 21.8165 28.1081 14.054C28.1057 6.29143 21.8142 0 14.0541 0ZM10.5412 19.9078H8.20013V8.19752H10.5412V19.9078ZM19.908 19.9078H12.8823V17.5669H19.908V19.9078ZM19.908 15.2232H12.8823V12.8822H19.908V15.2232ZM19.908 10.5386H12.8823V8.19752H19.908V10.5386Z" fill="white" />
                                 </svg>
-                                <span>{__('Elementor Widget Builder')}</span>
+                                <span>{__('Elementor Widget Builder', 'wdesignkit')}</span>
                             </div>
                         }
                         {actplugin?.['the-plus-addons-for-block-editor'] == 'active' && props?.wdkit_meta?.Setting?.gutenberg_builder &&
@@ -322,14 +322,14 @@ const Onboarding = (props) => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M9.98499 19.97C15.4996 19.97 19.97 15.4995 19.97 9.98499C19.97 4.47046 15.4996 0 9.98499 0C4.47046 0 0 4.47046 0 9.98499C0 15.4995 4.47046 19.97 9.98499 19.97ZM6.01361 10.0663C5.90125 7.36377 6.47913 5.95776 7.98822 5.30176C9.57758 4.59875 11.7609 5.17676 12.403 6.48889C12.676 7.03564 12.7081 7.23877 12.5635 7.48865C12.2585 8.05103 11.9374 7.86365 11.5843 6.95764C11.1669 5.81726 9.36884 5.39551 8.21295 6.14526C7.26581 6.75452 7.02496 7.45752 7.02496 9.69128C7.02496 11.3784 7.07312 11.722 7.36212 12.1907C7.84375 13.0031 8.61432 13.4404 9.54541 13.4404C11.0706 13.4404 11.7609 12.7062 11.7609 11.0504C11.7609 10.5818 11.7127 10.1755 11.6646 10.113C11.4719 9.92566 10.621 10.3787 10.1715 10.8942C9.85046 11.269 9.60968 11.4253 9.4491 11.3628C9.06384 11.2065 9.1441 10.8473 9.68994 10.238C10.1876 9.69128 10.5087 9.56628 12.2906 9.22266C12.9167 9.09766 13.3984 8.87903 13.7515 8.58215C14.3776 8.05103 14.8111 7.98865 14.8111 8.42603C14.8111 8.8009 13.7836 9.64441 13.1896 9.76941C12.7723 9.86316 12.7562 9.91003 12.692 11.144C12.6439 11.9095 12.5154 12.6282 12.3549 12.9249C11.9695 13.6436 11.1187 14.0966 9.93073 14.1747C8.26111 14.3152 7.12134 13.7528 6.43097 12.4407C6.15808 11.9408 6.07782 11.4409 6.01361 10.0663Z" fill="white" />
                                 </svg>
-                                <span>{__('Gutenberg Blocks Builder')}</span>
+                                <span>{__('Gutenberg Blocks Builder', 'wdesignkit')}</span>
                             </div>
                         }
                     </div>
                 </div>
                 <div className='wdkit-onboarding-box' >
                     <div className='wdkit-onboarding-header'>
-                        <span>{__('Basic Requirements')}</span>
+                        <span>{__('Basic Requirements', 'wdesignkit')}</span>
                     </div>
                     <div className="wdkit-onboarding-basic">
                         {plugin_detail.filter((plugin) => {
@@ -375,7 +375,7 @@ const Onboarding = (props) => {
                                                     </div>
                                                     :
                                                     <div className='wdkit-onboarding-basic-content-notInstalled' onClick={() => { Elementor_install(plugin) }}>
-                                                        <span>{actplugin?.[plugin.name] == 'inactive' ? 'Activate Now' : 'Install & Activate'}</span>
+                                                        <span>{actplugin?.[plugin.name] == 'inactive' ? __('Activate Now', 'wdesignkit') : __('Install & Activate', 'wdesignkit')}</span>
                                                     </div>
                                                 }
 
@@ -384,7 +384,7 @@ const Onboarding = (props) => {
                                         {actplugin?.[plugin.name] == 'manually' &&
                                             <div className='wdkit-onboarding-install-manually'>
                                                 <a href={plugin.link} className='wkit-redirect-link ' target='_blank' rel="noopener noreferrer">
-                                                    <span>{__('How to Install ?')}</span>
+                                                    <span>{__('How to Install ?', 'wdesignkit')}</span>
                                                 </a>
                                             </div>
                                         }
@@ -410,7 +410,7 @@ const Onboarding = (props) => {
                 </div>
                 <div className='wdkit-onboarding-box'>
                     <div className='wdkit-onboarding-header'>
-                        <span>{__('Packed with Everything You Need for Exceptional Websites')}</span>
+                        <span>{__('Packed with Everything You Need for Exceptional Websites', 'wdesignkit')}</span>
                     </div>
                     <div className="wdkit-onboarding-allfeatures">
                         <a href='https://wdesignkit.com/browse/template' target='_blank' rel="noopener noreferrer" className="wdkit-onboarding-boxallfeatures">
@@ -420,7 +420,7 @@ const Onboarding = (props) => {
                                 </svg>
                             </div>
                             <div className='wdkit-onboarding-allfeatures-name'>
-                                <span>{__('Browse Our Templates')}</span>
+                                <span>{__('Browse Our Templates', 'wdesignkit')}</span>
                                 <span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.91675 5L12.9167 10L7.91675 15" stroke="#040483" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -436,7 +436,7 @@ const Onboarding = (props) => {
                                 </svg>
                             </div>
                             <div className='wdkit-onboarding-allfeatures-name'>
-                                <span>{__('Widget Library')}</span>
+                                <span>{__('Widget Library', 'wdesignkit')}</span>
                                 <span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.91675 5L12.9167 10L7.91675 15" stroke="#040483" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -451,7 +451,7 @@ const Onboarding = (props) => {
                                 </svg>
                             </div>
                             <div className='wdkit-onboarding-allfeatures-name'>
-                                <span>{__('Figma Design Templates')}</span>
+                                <span>{__('Figma Design Templates', 'wdesignkit')}</span>
                                 <span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.91675 5L12.9167 10L7.91675 15" stroke="#040483" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -467,7 +467,7 @@ const Onboarding = (props) => {
                                 </svg>
                             </div>
                             <div className='wdkit-onboarding-allfeatures-name'>
-                                <span>{__('Widget Builder')}</span>
+                                <span>{__('Widget Builder', 'wdesignkit')}</span>
                                 <span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.91675 5L12.9167 10L7.91675 15" stroke="#040483" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -483,7 +483,7 @@ const Onboarding = (props) => {
                                 </svg>
                             </div>
                             <div className='wdkit-onboarding-allfeatures-name'>
-                                <span>{__('Cloud Workspace')}</span>
+                                <span>{__('Cloud Workspace', 'wdesignkit')}</span>
                                 <span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.91675 5L12.9167 10L7.91675 15" stroke="#040483" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -506,20 +506,20 @@ const Onboarding = (props) => {
                 </div>
                 <div className='wdkit-onboarding-box'>
                     <div className='wdkit-onboarding-header'>
-                        <span>{__('WDesignKit is Ready to Power your WordPress Website')}</span>
+                        <span>{__('WDesignKit is Ready to Power your WordPress Website', 'wdesignkit')}</span>
                     </div>
                     <div className='wdkit-onboarding-doubt'>
-                        <span>{__('Still in Doubt?')}</span>
+                        <span>{__('Still in Doubt?', 'wdesignkit')}</span>
                         <div className='wdkit-onboarding-links'>
-                            <a href='https://www.youtube.com/c/POSIMYTHInnovations' target='_blank' rel="noopener noreferrer" className='wdkit-onbording-link'>{__('Watch Video Tutorials')}</a>
+                            <a href='https://www.youtube.com/c/POSIMYTHInnovations' target='_blank' rel="noopener noreferrer" className='wdkit-onbording-link'>{__('Watch Video Tutorials', 'wdesignkit')}</a>
                             <span className='wdkit-onboarding-dot'></span>
-                            <a href={wdkitData.WDKIT_DOC_URL + 'docs/'} target='_blank' rel="noopener noreferrer" className='wdkit-onbording-link'>{__('Read Documentation')}</a>
+                            <a href={wdkitData.WDKIT_DOC_URL + 'docs/'} target='_blank' rel="noopener noreferrer" className='wdkit-onbording-link'>{__('Read Documentation', 'wdesignkit')}</a>
                             <span className='wdkit-onboarding-dot'></span>
-                            <a href='https://store.posimyth.com/login/' target='_blank' rel="noopener noreferrer" className='wdkit-onbording-link'>{__('Helpdesk')}</a>
+                            <a href='https://store.posimyth.com/login/' target='_blank' rel="noopener noreferrer" className='wdkit-onbording-link'>{__('Helpdesk', 'wdesignkit')}</a>
                         </div>
                     </div>
                     <div className='wdkit-onboarding-ourproducts'>
-                        <span>{__('Check our other products')}</span>
+                        <span>{__('Check our other products', 'wdesignkit')}</span>
                         <div className='wdkit-onboarding-ourproducts-logo'>
                             <a href='https://theplusaddons.com/' target='_blank' rel="noopener noreferrer">
                                 <div className='wdkit-onboarding-border'>
@@ -546,7 +546,7 @@ const Onboarding = (props) => {
                 </div>
                 <div className='wkit-confirm-terms-content'>
                     <input className='wkit-confirm-terms-inp' checked={terms_check} type='checkbox' onChange={(e) => setterms_check(e.target.checked)} />
-                    <span className='wkit-confirm-terms-text'>By accepting this you agree to our <a href={wdkitData.wdkit_server_url + 'terms'} target='_blank' rel="noopener noreferrer" className='wkit-confirm-terms-link-text'>Terms & Conditions</a></span>
+                    <span className='wkit-confirm-terms-text'>{__('By accepting this you agree to our', 'wdesignkit')} <a href={wdkitData.wdkit_server_url + 'terms'} target='_blank' rel="noopener noreferrer" className='wkit-confirm-terms-link-text'>{__('Terms & Conditions', 'wdesignkit')}</a></span>
                 </div>
             </div>
         )
@@ -640,7 +640,7 @@ const Onboarding = (props) => {
                                 </div>
                                 <div className='wdkit-onboarding-footer-right'>
                                     {popupType > 1 &&
-                                        <button className='wdkit-onboarding-back-button' onClick={() => { setpopupType(Number(popupType) - 1) }} disabled={loader}>{__('Back')}</button>
+                                        <button className='wdkit-onboarding-back-button' onClick={() => { setpopupType(Number(popupType) - 1) }} disabled={loader}>{__('Back', 'wdesignkit')}</button>
                                     }
                                     {2 == popupType ?
                                         <>
@@ -649,18 +649,18 @@ const Onboarding = (props) => {
                                                     <WkitLoader />
                                                 </button>
                                                 :
-                                                <button className="wdkit-onboarding-next-button" onClick={() => { Handle_onboarding() }} disabled={pluginInstaller.current.length > 0}>{__('Finish')}</button>
+                                                <button className="wdkit-onboarding-next-button" onClick={() => { Handle_onboarding() }} disabled={pluginInstaller.current.length > 0}>{__('Finish', 'wdesignkit')}</button>
                                             }
 
                                         </>
                                         :
                                         ((props.wdkit_meta.Setting?.template && (props.wdkit_meta.Setting?.gutenberg_template || props.wdkit_meta.Setting?.elementor_template)) ||
                                             (props.wdkit_meta.Setting?.builder && (props.wdkit_meta.Setting?.bricks_builder || props.wdkit_meta.Setting?.gutenberg_builder || props.wdkit_meta.Setting?.elementor_builder))) ?
-                                            <button className="wdkit-onboarding-next-button" onClick={() => { setpopupType(Number(popupType) + 1) }}>{__('Next')}</button>
+                                            <button className="wdkit-onboarding-next-button" onClick={() => { setpopupType(Number(popupType) + 1) }}>{__('Next', 'wdesignkit')}</button>
                                             :
                                             <div className='wkit-tooltip-onboarding'>
-                                                <span>Enable any one feature to continue!</span>
-                                                <button className="wkit-disable-next-btn" disabled>{__('Next')}</button>
+                                                <span>{__('Enable any one feature to continue!', 'wdesignkit')}</span>
+                                                <button className="wkit-disable-next-btn" disabled>{__('Next', 'wdesignkit')}</button>
                                             </div>
                                     }
                                 </div>

@@ -1,4 +1,4 @@
-@import '../style/variable.scss';
+@use '../style/variable';
 
 .popup-header {
     border-radius: 10px 10px 0px 0px;
@@ -9,7 +9,7 @@
     font-size: 17px;
     line-height: 25px;
     text-align: left;
-    background: $Wdkit_blue_normal;
+    background: variable.$Wdkit_blue_normal;
 }
 
 .popup-body {
@@ -95,7 +95,7 @@
             }
 
             input:checked+.slider {
-                background-color: $Wdkit_blue_normal;
+                background-color: variable.$Wdkit_blue_normal;
             }
 
             input:checked+.slider:before {
@@ -292,7 +292,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            transition: $transition;
+            transition: variable.$transition;
         }
     }
 
@@ -373,11 +373,11 @@
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(180deg, #040483 17.01%, #030352 91.14%);
-    border-radius: $radius_big;
+    border-radius: variable.$radius_big;
     color: #fff;
     padding: 10px 20px;
     margin-bottom: 20px;
-    box-shadow: $common_boxshadow;
+    box-shadow: variable.$common_boxshadow;
     gap: 10px;
 
     .wkit-maintenance-mode-text {
@@ -406,11 +406,11 @@
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(180deg, #040483 17.01%, #030352 91.14%);
-    border-radius: $radius_big;
+    border-radius: variable.$radius_big;
     color: #fff;
     padding: 20px 20px;
     margin-bottom: 20px;
-    box-shadow: $common_boxshadow;
+    box-shadow: variable.$common_boxshadow;
     gap: 10px;
 
     .wkit-notification-text {
@@ -441,9 +441,9 @@
     padding: 10px 20px;
     gap: 10px;
     margin-bottom: 20px;
-    border-radius: $radius_big;
+    border-radius: variable.$radius_big;
     border-left: 5px solid #FFCD38;
-    box-shadow: $common_boxshadow;
+    box-shadow: variable.$common_boxshadow;
 
     span {
         font-size: 14px;
@@ -524,7 +524,7 @@
         align-items: center;
         justify-content: flex-start;
         height: 85px;
-        background-color: $Wdkit_blue_normal;
+        background-color: variable.$Wdkit_blue_normal;
         border-radius: 10px 10px 0px 0px;
 
         span {
@@ -645,18 +645,24 @@
             white-space: break-spaces;
         }
 
-        .popup-body .wkit-builder-wrapper .wkit-switch-setting-wrap .slider {
-            width: 45px;
-            height: 25px;
-
-            &::before {
-                height: 15px;
-                width: 15px;
-                left: 4px;
-                top: 5px;
-                border-radius: 3px;
+        .popup-body .wkit-builder-wrapper .wkit-switch-setting-wrap {
+            .switch {
+                width: 45px;
+                height: 24px;
             }
 
+            .slider {
+                width: 45px;
+                height: 24px;
+
+                &::before {
+                    height: 16px;
+                    width: 15px;
+                    left: 4px;
+                    top: 4px;
+                    border-radius: 3px;
+                }
+            }
         }
 
         .popup-body .wkit-builder-wrapper .wkit-switch-setting-wrap input:checked+.slider {

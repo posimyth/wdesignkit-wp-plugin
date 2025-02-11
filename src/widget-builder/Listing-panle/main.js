@@ -1,11 +1,14 @@
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
-
-import LisingPanel_popup_container from "../redux-container/lisingPanel_popup_container";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
 import Elementor_file_create from "../file-creation/elementor_file";
 import CreatFile from "../file-creation/gutenberg_file";
+import ReactPaginate from 'react-paginate';
+import Bricks_file_create from "../file-creation/bricks_file";
+import LisingPanel_popup_container from "../redux-container/lisingPanel_popup_container";
+import { __ } from '@wordpress/i18n';
+import "../style/main_page.scss";
+
 import {
   Wkit_template_Skeleton,
   wdKit_Form_data,
@@ -17,13 +20,9 @@ import {
   Page_header
 } from '../../helper/helper-function';
 
-import { useState, useEffect, useRef } from 'react';
-import ReactPaginate from 'react-paginate';
-import "../style/main_page.scss";
-import Bricks_file_create from "../file-creation/bricks_file";
+const { Fragment } = wp.element;
 
 const Main_page = (props) => {
-
   const [img_path, setimg_path] = useState(wdkitData.WDKIT_URL);
   const [editName, seteditName] = useState("");
   const [userData, setUserData] = useState("loading");
@@ -216,7 +215,7 @@ const Main_page = (props) => {
     }
 
     let form = new FormData();
-    form.append('action', 'wdkit_widget_ajax');
+    form.append('action', 'get_wdesignkit');
     form.append('kit_nonce', wdkitData.kit_nonce);
     form.append('type', 'wkit_export_widget');
     form.append('info', JSON.stringify(widget_info));
@@ -236,7 +235,7 @@ const Main_page = (props) => {
         }
 
         let form_data = new FormData();
-        form_data.append('action', 'wdkit_widget_ajax');
+        form_data.append('action', 'get_wdesignkit');
         form_data.append('kit_nonce', wdkitData.kit_nonce);
         form_data.append('type', 'wkit_delete_widget');
         form_data.append('info', JSON.stringify(remove_info));
@@ -297,7 +296,7 @@ const Main_page = (props) => {
         if (response && response.api.success == true) {
           await Update_List();
           await setactivate_loader(-1);
-          props.wdkit_set_toast(["Widget Successfully Retrived", 'Widget Successfully Retrived .', '', 'success'])
+          props.wdkit_set_toast([__("Widget Successfully Retrived", 'wdesignkit'), __('Widget Successfully Retrived .', 'wdesignkit'), '', 'success'])
           return true;
         } else {
           return false;
@@ -421,7 +420,7 @@ const Main_page = (props) => {
     <>
       <div className="wb-widget-main-container">
         <Page_header
-          title={'My Widgets'}
+          title={__('My Widgets', 'wdesignkit')}
           svg={
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 20H20M9.5 15.5V9.5H5L12 2.5L19 9.5H14.5V15.5H9.5Z" stroke="#040483" strokeWidth="1.5" strokeLinecap="round" />
@@ -441,7 +440,7 @@ const Main_page = (props) => {
                     <div className='wkit-widget-search-inner'>
                       <input
                         className='wkit-widget-search-inp'
-                        placeholder='Search Widgets'
+                        placeholder={__('Search Widgets', 'wdesignkit')}
                         type="text"
                         // value={searchQuery}
                         onChange={(e) => { setSearch_Widgets(e.target.value) }}
@@ -465,14 +464,14 @@ const Main_page = (props) => {
               <Fragment>
                 {false == ButtonLoading &&
                   <div className={get_user_login() ? '' : 'wkit-fav-plugin-link'}>
-                    <span className="wkit-creative-button-toolTip wkit-fav-tooltip">{__('Login to use this option.')}</span>
+                    <span className="wkit-creative-button-toolTip wkit-fav-tooltip">{__('Login to use this option.', 'wdesignkit')}</span>
                     <a className="wkit-plugin-link" onClick={() => { get_user_login() && setshow_favourite(!show_favourite); }} >
                       {true == show_favourite ?
                         <svg className="wkit-activate-favourites-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none"><path d="M8.99888 2.24221C10.4655 0.525545 13.1822 -0.174455 15.3822 1.32555C16.5489 2.12555 17.2822 3.47555 17.3322 4.89221C17.4405 8.12555 14.5822 10.7172 10.2072 14.6839L10.1155 14.7672C9.48221 15.3505 8.50721 15.3505 7.87388 14.7755L7.79054 14.7005L7.74021 14.6548C3.39357 10.7056 0.549324 8.12146 0.665542 4.90055C0.715542 3.47555 1.44888 2.12555 2.61554 1.32555C4.81554 -0.182788 7.53221 0.525545 8.99888 2.24221Z" fill="#040483" /></svg>
                         :
                         <svg className="wkit-favourites-icon" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.3822 1.32457C13.1822 -0.175432 10.4655 0.524569 8.99888 2.24124C7.53221 0.524569 4.81554 -0.183765 2.61554 1.32457C1.44888 2.12457 0.715542 3.47457 0.665542 4.89957C0.548876 8.1329 3.41554 10.7246 7.79054 14.6996L7.87388 14.7746C8.50721 15.3496 9.48221 15.3496 10.1155 14.7662L10.2072 14.6829C14.5822 10.7162 17.4405 8.12457 17.3322 4.89124C17.2822 3.47457 16.5489 2.12457 15.3822 1.32457ZM9.08221 13.4579L8.99888 13.5412L8.91554 13.4579C4.94888 9.86624 2.33221 7.49124 2.33221 5.0829C2.33221 3.41624 3.58221 2.16624 5.24888 2.16624C6.53221 2.16624 7.78221 2.99124 8.22388 4.1329H9.78221C10.2155 2.99124 11.4655 2.16624 12.7489 2.16624C14.4155 2.16624 15.6655 3.41624 15.6655 5.0829C15.6655 7.49124 13.0489 9.86624 9.08221 13.4579Z" /></svg>
                       }
-                      {__('Favourites')}
+                      {__('Favourites', 'wdesignkit')}
                     </a>
                   </div>
                 }
@@ -488,12 +487,12 @@ const Main_page = (props) => {
                 {false == ButtonLoading &&
                   <Fragment>
                     <div className={get_user_login() ? '' : 'wkit-primary-button-container'}>
-                      <span className="wkit-creative-button-toolTip wkit-primary-button-tooltip">{__('Login to use this option.')}</span>
-                      <button className="wkit-button-primary wkit-outer-btn-class" onClick={(e) => { importWidget(e), setClosePopup(true) }} disabled={get_user_login() ? false : true}>{__('Import Widget')}</button>
+                      <span className="wkit-creative-button-toolTip wkit-primary-button-tooltip">{__('Login to use this option.', 'wdesignkit')}</span>
+                      <button className="wkit-button-primary wkit-outer-btn-class" onClick={(e) => { importWidget(e), setClosePopup(true) }} disabled={get_user_login() ? false : true}>{__('Import Widget', 'wdesignkit')}</button>
                     </div>
                     <div className={get_user_login() ? '' : 'wkit-secondary-button-container'}>
-                      <span className="wkit-creative-button-toolTip wkit-secondary-button-tooltip">{__('Login to use this option.')}</span>
-                      <button className="wkit-button-secondary wkit-btn-class" onClick={(e) => { AddWidget(e), setClosePopup(true) }} disabled={get_user_login() ? false : true}>{__('Create Widget')}</button>
+                      <span className="wkit-creative-button-toolTip wkit-secondary-button-tooltip">{__('Login to use this option.', 'wdesignkit')}</span>
+                      <button className="wkit-button-secondary wkit-btn-class" onClick={(e) => { AddWidget(e), setClosePopup(true) }} disabled={get_user_login() ? false : true}>{__('Create Widget', 'wdesignkit')}</button>
                     </div>
                   </Fragment>
                 }
@@ -520,10 +519,10 @@ const Main_page = (props) => {
                           {Widgets.is_activated !== 'active' &&
                             <Fragment>
                               <div className='wdkit-inner-boxed-deActivate' style={{ zIndex: '19' }}>
-                                <div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!')}</div>
-                                <div className='wdkit-inner-boxed-deActivate-p'>{__('This Widget got disabled until you have more credits to make it active.')}</div>
+                                <div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!', 'wdesignkit')}</div>
+                                <div className='wdkit-inner-boxed-deActivate-p'>{__('This Widget got disabled until you have more credits to make it active.', 'wdesignkit')}</div>
                                 <a href={`${wdkitData.wdkit_server_url}pricing`} target="_blank" rel="noopener noreferrer">
-                                  <button>{__('Buy Credits')}</button>
+                                  <button>{__('Buy Credits', 'wdesignkit')}</button>
                                 </a>
                               </div>
                               <span className='wdkit-inner-boxed-remove' style={{ zIndex: '29' }}>
@@ -557,7 +556,7 @@ const Main_page = (props) => {
                                     <path d="M6.5 15.75H12.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     <path d="M9.5 12.75V15.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                   </svg>
-                                  {__('Local')}
+                                  {__('Local', 'wdesignkit')}
                                 </div>
                               }
                               {Widgets.type == 'server' &&
@@ -572,7 +571,7 @@ const Main_page = (props) => {
                                       </clipPath>
                                     </defs>
                                   </svg>
-                                  {__('Remote')}
+                                  {__('Remote', 'wdesignkit')}
                                 </div>
                               }
                               {(Widgets.type == 'update' || Widgets.type == 'done') &&
@@ -592,7 +591,7 @@ const Main_page = (props) => {
                                     <path d="M6.5 15.75H12.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     <path d="M9.5 12.75V15.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                   </svg>
-                                  {__('Local + Remote')}
+                                  {__('Local + Remote', 'wdesignkit')}
                                 </div>
                               }
                               {Widgets.type != 'plugin' &&
@@ -601,12 +600,12 @@ const Main_page = (props) => {
                                     {w_favourite?.length > 0 && w_favourite?.includes(Widgets.id) ?
                                       <Fragment>
                                         <img src={img_path + "/assets/images/wb-svg/fav-icon-selected.svg"} />
-                                        <span className="wkit-wb-tooltiplist">{__('UnFavourite')}</span>
+                                        <span className="wkit-wb-tooltiplist">{__('UnFavourite', 'wdesignkit')}</span>
                                       </Fragment>
                                       :
                                       <Fragment>
                                         <img src={img_path + "/assets/images/wb-svg/fav-icon.svg"} />
-                                        <span className="wkit-wb-tooltiplist">{__('Favourite')}</span>
+                                        <span className="wkit-wb-tooltiplist">{__('Favourite', 'wdesignkit')}</span>
                                       </Fragment>
                                     }
                                   </div>
@@ -614,12 +613,12 @@ const Main_page = (props) => {
                                     {Widgets.status == 'private' ?
                                       <Fragment>
                                         <img className="wkit-pin-img-temp" src={img_path + "/assets/images/svg/private.svg"} alt="private" />
-                                        <span className="wkit-wb-tooltiplist">{__('Private')}</span>
+                                        <span className="wkit-wb-tooltiplist">{__('Private', 'wdesignkit')}</span>
                                       </Fragment>
                                       :
                                       <Fragment>
                                         <img src={img_path + "/assets/images/svg/public.svg"} />
-                                        <span className="wkit-wb-tooltiplist">{__('Public')}</span>
+                                        <span className="wkit-wb-tooltiplist">{__('Public', 'wdesignkit')}</span>
                                       </Fragment>
                                     }
                                   </div>
@@ -629,7 +628,7 @@ const Main_page = (props) => {
                             {Widgets?.free_pro == "pro" &&
                               <div className="wdkit-card-tag">
                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.75 16.5H5.25C4.9425 16.5 4.6875 16.245 4.6875 15.9375C4.6875 15.63 4.9425 15.375 5.25 15.375H12.75C13.0575 15.375 13.3125 15.63 13.3125 15.9375C13.3125 16.245 13.0575 16.5 12.75 16.5Z" fill="white" /><path d="M15.2622 4.14003L12.2622 6.28503C11.8647 6.57003 11.2947 6.39753 11.1222 5.94003L9.70468 2.16003C9.46468 1.50753 8.54218 1.50753 8.30218 2.16003L6.87718 5.93253C6.70468 6.39753 6.14218 6.57003 5.74468 6.27753L2.74468 4.13253C2.14468 3.71253 1.34968 4.30503 1.59718 5.00253L4.71718 13.74C4.82218 14.04 5.10718 14.235 5.42218 14.235H12.5697C12.8847 14.235 13.1697 14.0325 13.2747 13.74L16.3947 5.00253C16.6497 4.30503 15.8547 3.71253 15.2622 4.14003ZM10.8747 11.0625H7.12468C6.81718 11.0625 6.56218 10.8075 6.56218 10.5C6.56218 10.1925 6.81718 9.93753 7.12468 9.93753H10.8747C11.1822 9.93753 11.4372 10.1925 11.4372 10.5C11.4372 10.8075 11.1822 11.0625 10.8747 11.0625Z" fill="white" /></svg>
-                                <span>{__('Pro')}</span>
+                                <span>{__('Pro', 'wdesignkit')}</span>
                               </div>
                             }
                             <div className="wkit-wb-widget-image-content">
@@ -663,7 +662,7 @@ const Main_page = (props) => {
                                                   <path d="M10.625 2.37324C10.7892 2.20908 10.984 2.07887 11.1985 1.99003C11.413 1.90119 11.6429 1.85547 11.875 1.85547C12.1071 1.85547 12.337 1.90119 12.5515 1.99003C12.766 2.07887 12.9608 2.20908 13.125 2.37324C13.2892 2.53739 13.4194 2.73227 13.5082 2.94674C13.597 3.16122 13.6428 3.39109 13.6428 3.62324C13.6428 3.85538 13.597 4.08526 13.5082 4.29973C13.4194 4.51421 13.2892 4.70908 13.125 4.87324L4.6875 13.3107L1.25 14.2482L2.1875 10.8107L10.625 2.37324Z" stroke="#737373" strokeWidth="0.9375" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                               </span>
-                                              <span className="wkit-wb-listmenu-text">{__('Edit in New Tab')}</span>
+                                              <span className="wkit-wb-listmenu-text">{__('Edit in New Tab', 'wdesignkit')}</span>
                                             </li>
                                           </Link>
                                         }
@@ -674,7 +673,7 @@ const Main_page = (props) => {
                                                 <path d="M3.75 5.50006H4.91667M4.91667 5.50006H14.25M4.91667 5.50006L4.91638 13.666C4.91638 13.9754 5.0393 14.2722 5.25809 14.491C5.47688 14.7098 5.77363 14.8327 6.08305 14.8327H11.9164C12.2258 14.8327 12.5225 14.7098 12.7413 14.491C12.9601 14.2722 13.083 13.9754 13.083 13.666V5.49935M6.66638 5.49935V4.33268C6.66638 4.02326 6.7893 3.72652 7.00809 3.50772C7.22688 3.28893 7.52363 3.16602 7.83305 3.16602H10.1664C10.4758 3.16602 10.7725 3.28893 10.9913 3.50772C11.2101 3.72652 11.333 4.02326 11.333 4.33268V5.49935" stroke="#737373" strokeWidth="1.3125" strokeLinecap="round" strokeLinejoin="round" />
                                               </svg>
                                             </span>
-                                            <span className="wkit-wb-listmenu-text">{__('Delete')}</span>
+                                            <span className="wkit-wb-listmenu-text">{__('Delete', 'wdesignkit')}</span>
                                           </li>
                                         </div>
                                         <div className="wkit-wb-mainmenu">
@@ -684,7 +683,7 @@ const Main_page = (props) => {
                                                 <path d="M4.64328 5.14612H3.2147C2.83582 5.14612 2.47246 5.29663 2.20455 5.56454C1.93664 5.83244 1.78613 6.19581 1.78613 6.57469V12.2868C1.78613 12.6657 1.93664 13.0291 2.20455 13.297C2.47246 13.5649 2.83582 13.7154 3.2147 13.7154H3.21685L8.93113 13.7054C9.30964 13.7048 9.67246 13.5541 9.9399 13.2862C10.2073 13.0184 10.3576 12.6553 10.3576 12.2768V10.8604M8.92899 4.42969V8.7154M11.0718 6.57255H6.78613M13.215 9.42801V3.71373C13.215 3.33485 13.0645 2.97148 12.7966 2.70358C12.5287 2.43567 12.1653 2.28516 11.7864 2.28516H6.07213C5.69325 2.28516 5.32988 2.43567 5.06197 2.70358C4.79406 2.97148 4.64355 3.33485 4.64355 3.71373V9.42801C4.64355 9.8069 4.79406 10.1703 5.06197 10.4382C5.32988 10.7061 5.69325 10.8566 6.07213 10.8566H11.7864C12.1653 10.8566 12.5287 10.7061 12.7966 10.4382C13.0645 10.1703 13.215 9.8069 13.215 9.42801Z" stroke="#737373" strokeLinecap="round" strokeLinejoin="round" />
                                               </svg>
                                             </span>
-                                            <span className="wkit-wb-listmenu-text">{__('Duplicate')}</span>
+                                            <span className="wkit-wb-listmenu-text">{__('Duplicate', 'wdesignkit')}</span>
                                           </li>
                                         </div>
                                         {BuilderArray.length > 1 && userData?.credits?.convert_widget?.meta_value == '1' &&
@@ -695,7 +694,7 @@ const Main_page = (props) => {
                                                   <path d="M2.56465 10.5233C2.43348 10.2066 2.50598 9.84216 2.74828 9.59981L6.60371 5.74438C6.93477 5.41333 7.47121 5.41333 7.80223 5.74438C8.13316 6.07524 8.13316 6.61188 7.80223 6.94274L5.39344 9.35153H21.6525C22.1205 9.35153 22.5 9.73091 22.5 10.199C22.5 10.6671 22.1205 11.0465 21.6525 11.0465H3.34754C3.00477 11.0465 2.69582 10.8399 2.56465 10.5233ZM21.6525 12.9533H3.34746C2.87945 12.9533 2.5 13.3326 2.5 13.8007C2.5 14.2688 2.87945 14.6482 3.34746 14.6482H19.6066L17.1977 17.057C16.8668 17.3878 16.8668 17.9245 17.1977 18.2553C17.3632 18.4208 17.58 18.5036 17.797 18.5036C18.0138 18.5036 18.2307 18.4208 18.3962 18.2553L22.2517 14.3999C22.494 14.1576 22.5665 13.7931 22.4354 13.4765C22.3042 13.1598 21.9952 12.9533 21.6525 12.9533Z" fill="#737373" />
                                                 </svg>
                                               </span>
-                                              <span className="wkit-wb-listmenu-text">{__('Convert')}</span>
+                                              <span className="wkit-wb-listmenu-text">{__('Convert', 'wdesignkit')}</span>
                                             </li>
                                           </div>
                                         }
@@ -706,7 +705,7 @@ const Main_page = (props) => {
                                                 <path d="M12.1875 4.25V2.375H2.8125V4.25H1.875V2.375L1.87875 2.37734C1.87832 2.25431 1.90213 2.1324 1.94883 2.01858C1.99553 1.90475 2.06419 1.80124 2.15091 1.71397C2.23762 1.62669 2.34068 1.55735 2.4542 1.50991C2.56772 1.46247 2.68947 1.43787 2.8125 1.4375H12.1875C12.4361 1.4375 12.6746 1.53627 12.8504 1.71209C13.0262 1.8879 13.125 2.12636 13.125 2.375V4.25H12.1875ZM2.8125 9.875L3.47391 9.21641L7.03125 12.7695V4.25H7.96875V12.7695L11.527 9.21641L12.1875 9.875L7.5 14.5625L2.8125 9.875Z" fill="#737373" />
                                               </svg>
                                             </span>
-                                            <span className="wkit-wb-listmenu-text">{__('Download ZIP')} </span>
+                                            <span className="wkit-wb-listmenu-text">{__('Download ZIP', 'wdesignkit')} </span>
                                           </li>
                                         </div>
                                         {get_user_login() && (Widgets?.allow_push != undefined && Widgets?.allow_push != false) &&
@@ -725,7 +724,7 @@ const Main_page = (props) => {
                                                   <path d="M12.1875 11.75V13.625H2.8125V11.75H1.875V13.625L1.87875 13.6227C1.87832 13.7457 1.90213 13.8676 1.94883 13.9814C1.99553 14.0952 2.06419 14.1988 2.15091 14.286C2.23762 14.3733 2.34068 14.4427 2.4542 14.4901C2.56772 14.5375 2.68947 14.5621 2.8125 14.5625H12.1875C12.4361 14.5625 12.6746 14.4637 12.8504 14.2879C13.0262 14.1121 13.125 13.8736 13.125 13.625V11.75H12.1875ZM2.8125 6.125L3.47391 6.78359L7.03125 3.23047V11.75H7.96875V3.23047L11.527 6.78359L12.1875 6.125L7.5 1.4375L2.8125 6.125Z" fill="#737373" />
                                                 </svg>
                                               </span>
-                                              <span className="wkit-wb-listmenu-text">{__('Push Widget')}</span>
+                                              <span className="wkit-wb-listmenu-text">{__('Push Widget', 'wdesignkit')}</span>
                                             </li>
                                           </div>
                                         }

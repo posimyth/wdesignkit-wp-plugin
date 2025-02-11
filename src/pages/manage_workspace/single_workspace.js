@@ -1,6 +1,4 @@
-import { Wkit_workspace_skeleton, Wpopup_body_data, wdKit_Form_data, get_user_login, Wkit_template_Skeleton, Get_user_info_data, Wkit_availble_not, WkitLoader, CardRatings } from '../../helper/helper-function';
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
+import { wdKit_Form_data, get_user_login, Wkit_template_Skeleton, Get_user_info_data, Wkit_availble_not, WkitLoader, CardRatings } from '../../helper/helper-function';
 import { useState, useEffect } from 'react';
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import WS_single_skeleton from './single_workspace_header';
@@ -9,9 +7,11 @@ import CreatFile from "../../widget-builder/file-creation/gutenberg_file";
 import Bricks_file_create from '../../widget-builder/file-creation/bricks_file';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import { __ } from '@wordpress/i18n';
+
+const { Fragment } = wp.element;
 
 const {
-    get_userinfo,
     Template_loop,
     form_data,
     Plugin_missing,
@@ -78,7 +78,7 @@ const Workspace_single = (props) => {
                 setloading(false);
             } else {
                 navigation('/manage_workspace')
-                props.wdkit_set_toast(['Workspace Deactivated', 'This Workspace is Deactivated', '', 'danger']);
+                props.wdkit_set_toast([__('Workspace Deactivated', 'wdesignkit'), __('This Workspace is Deactivated', 'wdesignkit'), '', 'danger']);
 
             }
         }
@@ -351,10 +351,10 @@ const Workspace_single = (props) => {
                     </span>
                 </a>
                 <div className="popup-missing">
-                    <div className="popup-header">{__('Please Confirm')}</div>
+                    <div className="popup-header">{__('Please Confirm', 'wdesignkit')}</div>
                     <div className="popup-body">
                         <div className="wkit-popup-content-title">
-                            Are you sure want to permanently delete
+                            {__('Are you sure want to permanently delete', 'wdesignkit')}
                         </div>
                         <div className="wkit-popup-buttons">
                             <button className="wkit-popup-confirm wkit-outer-btn-class" onClick={() => Popup_Close()}>
@@ -364,7 +364,7 @@ const Workspace_single = (props) => {
                                 {loading == true ?
                                     <WkitLoader />
                                     :
-                                    <span>Yes</span>
+                                    <span>{__('Yes', 'wdesignkit')}</span>
                                 }
                             </button>
                         </div>
@@ -534,7 +534,7 @@ const Workspace_single = (props) => {
                 let old = [...existingwidget]
                 old.push(w_data.w_unique)
                 setexistingwidget(old)
-                props.wdkit_set_toast(['Downloaded Successfully!', 'Start using or editing it further.', '', 'success'])
+                props.wdkit_set_toast([__('Downloaded Successfully!', 'wdesignkit'), __('Start using or editing it further.', 'wdesignkit'), '', 'success'])
             }
 
             let new_data = await Get_user_info_data();
@@ -608,10 +608,10 @@ const Workspace_single = (props) => {
                 {data.is_activated != 'active' &&
                     <Fragment>
                         <div className='wdkit-inner-boxed-deActivate'>
-                            <div className='wdkit-inner-boxed-deActivate-h1'>Credit Limit Reached!</div>
-                            <div className='wdkit-inner-boxed-deActivate-p'>This Template got disabled until you have more credits to make it active.</div>
+                            <div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!', 'wdesignkit')}</div>
+                            <div className='wdkit-inner-boxed-deActivate-p'>{__('This Template got disabled until you have more credits to make it active.', 'wdesignkit')}</div>
                             <a href={`${wdkitData.wdkit_server_url}pricing`} target="_blank" rel="noopener noreferrer">
-                                <button>Buy Credits</button>
+                                <button>{__('Buy Credits', 'wdesignkit')}</button>
                             </a>
                         </div>
                         <span className='wdkit-inner-boxed-remove'>
@@ -628,18 +628,19 @@ const Workspace_single = (props) => {
                                 {data.status == 'public' &&
                                     <Fragment>
                                         <img className="wkit-pin-img-temp" src={img_path + "/assets/images/svg/public.svg"} alt="public" draggable={false} />
-                                        <span className="wkit-widget-icon-tooltip">Public</span>
+                                        <span className="wkit-widget-icon-tooltip">{__('Public', 'wdesignkit')}</span>
                                     </Fragment>
                                 }
                                 {data.status == 'private' &&
                                     <Fragment>
                                         <img className="wkit-pin-img-temp" src={img_path + "/assets/images/svg/private.svg"} alt="private" draggable={false} />
-                                        <span className="wkit-widget-icon-tooltip">Private</span>
+                                        <span className="wkit-widget-icon-tooltip">{__('Private', 'wdesignkit')}</span>
                                     </Fragment>
                                 }
                             </div>
                         </div>
-                        <div className='wkit-widget-image-content'>
+                        <div>
+                            <img className="wkit-widget-placeholder-img" src={img_path + 'assets/images/wkit-dummy-bg.png'} draggable={false} />
                             <picture>
                                 {data?.responsive_image?.length > 0 && data?.responsive_image?.map((image_data, key) => {
                                     return (
@@ -655,7 +656,7 @@ const Workspace_single = (props) => {
                     {data?.free_pro == 'pro' &&
                         <div className="wdkit-card-tag">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.75 16.5H5.25C4.9425 16.5 4.6875 16.245 4.6875 15.9375C4.6875 15.63 4.9425 15.375 5.25 15.375H12.75C13.0575 15.375 13.3125 15.63 13.3125 15.9375C13.3125 16.245 13.0575 16.5 12.75 16.5Z" fill="white" /><path d="M15.2622 4.14003L12.2622 6.28503C11.8647 6.57003 11.2947 6.39753 11.1222 5.94003L9.70468 2.16003C9.46468 1.50753 8.54218 1.50753 8.30218 2.16003L6.87718 5.93253C6.70468 6.39753 6.14218 6.57003 5.74468 6.27753L2.74468 4.13253C2.14468 3.71253 1.34968 4.30503 1.59718 5.00253L4.71718 13.74C4.82218 14.04 5.10718 14.235 5.42218 14.235H12.5697C12.8847 14.235 13.1697 14.0325 13.2747 13.74L16.3947 5.00253C16.6497 4.30503 15.8547 3.71253 15.2622 4.14003ZM10.8747 11.0625H7.12468C6.81718 11.0625 6.56218 10.8075 6.56218 10.5C6.56218 10.1925 6.81718 9.93753 7.12468 9.93753H10.8747C11.1822 9.93753 11.4372 10.1925 11.4372 10.5C11.4372 10.8075 11.1822 11.0625 10.8747 11.0625Z" fill="white" /></svg>
-                            <span>Pro</span>
+                            <span>{__('Pro', 'wdesignkit')}</span>
                         </div>
                     }
                     <div className='wkit-widget-card-bottom-part'>
@@ -709,7 +710,7 @@ const Workspace_single = (props) => {
                                                     <a href={`${wdkitData.wdkit_server_url}admin/widgets/edit/${data.id}`} target='_blank' rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                                                         <div className='wkit-widget-option-item' onClick={() => { setopenOuter(false), setOpenDropdown(-1) }}>
                                                             <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.9531 2.66989C12.1378 2.48521 12.357 2.33873 12.5983 2.23878C12.8396 2.13884 13.0983 2.0874 13.3594 2.0874C13.6205 2.0874 13.8791 2.13884 14.1204 2.23878C14.3618 2.33873 14.5809 2.48521 14.7656 2.66989C14.9503 2.85456 15.0968 3.0738 15.1967 3.31508C15.2966 3.55637 15.3482 3.81497 15.3482 4.07614C15.3482 4.3373 15.2966 4.59592 15.1967 4.83719C15.0968 5.07848 14.9503 5.29771 14.7656 5.48239L5.27344 14.9745L1.40625 16.0292L2.46094 12.162L11.9531 2.66989Z" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                                                            <span>Edit</span>
+                                                            <span>{__('Edit', 'wdesignkit')}</span>
                                                         </div>
                                                     </a>
                                                 }
@@ -721,7 +722,7 @@ const Workspace_single = (props) => {
                                                     SelectWorkList(data);
                                                 }}>
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url(#clip0_6220_28330)"><path d="M15 6.75H8.25C7.42157 6.75 6.75 7.42157 6.75 8.25V15C6.75 15.8284 7.42157 16.5 8.25 16.5H15C15.8284 16.5 16.5 15.8284 16.5 15V8.25C16.5 7.42157 15.8284 6.75 15 6.75Z" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M3.75 11.25H3C2.60218 11.25 2.22064 11.092 1.93934 10.8107C1.65804 10.5294 1.5 10.1478 1.5 9.75V3C1.5 2.60218 1.65804 2.22064 1.93934 1.93934C2.22064 1.65804 2.60218 1.5 3 1.5H9.75C10.1478 1.5 10.5294 1.65804 10.8107 1.93934C11.092 2.22064 11.25 2.60218 11.25 3V3.75" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></g><defs><clipPath id="clip0_6220_28330"><rect width="18" height="18" fill="white" /></clipPath></defs></svg>
-                                                    <span>Copy to Workspace</span>
+                                                    <span>{__('Copy to Workspace', 'wdesignkit')}</span>
                                                 </div>
                                                 <div className='wkit-widget-option-item' onClick={() => {
                                                     setopenOuter(false);
@@ -731,11 +732,11 @@ const Workspace_single = (props) => {
                                                     SelectWorkList(data);
                                                 }}>
                                                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.625 6.75L2.375 9M2.375 9L4.625 11.25M2.375 9H17.3746M7.62482 3.75L9.87482 1.5M9.87482 1.5L12.1248 3.75M9.87482 1.5V16.5M12.1248 14.25L9.87482 16.5M9.87482 16.5L7.62482 14.25M15.1246 6.75L17.3746 9M17.3746 9L15.1246 11.25" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                                                    <span>Move from Workspace</span>
+                                                    <span>{__('Move from Workspace', 'wdesignkit')}</span>
                                                 </div>
                                                 <div className='wkit-widget-option-item' onClick={() => { setopenOuter(false), setOpenDropdown(-1), On_OpenPopup(), setwidgetId(data) }}>
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 5.50006H4.91667M4.91667 5.50006H14.25M4.91667 5.50006L4.91638 13.666C4.91638 13.9754 5.0393 14.2722 5.25809 14.491C5.47688 14.7098 5.77363 14.8327 6.08305 14.8327H11.9164C12.2258 14.8327 12.5225 14.7098 12.7413 14.491C12.9601 14.2722 13.083 13.9754 13.083 13.666V5.49935M6.66638 5.49935V4.33268C6.66638 4.02326 6.7893 3.72652 7.00809 3.50772C7.22688 3.28893 7.52363 3.16602 7.83305 3.16602H10.1664C10.4758 3.16602 10.7725 3.28893 10.9913 3.50772C11.2101 3.72652 11.333 4.02326 11.333 4.33268V5.49935" stroke="#737373" strokeWidth="1.3125" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                                                    <span>Remove</span>
+                                                    <span>{__('Remove', 'wdesignkit')}</span>
                                                 </div>
                                             </div>
                                         }
@@ -802,12 +803,10 @@ const Workspace_single = (props) => {
                         </span>
                     </div>
                     <div className="wkit-copy-move-ws-wrap">
-                        <div className="wkit-ws-label-heading">
-                            <span>{__('Copy to Workspace')}</span>
-                        </div>
+                        <div className="wkit-ws-label-heading">{__('Copy to Workspace', 'wdesignkit')}</div>
                         <div className="wkit-ws-content dropdown-custom-width">
                             <select className="wkit-select-workspace" onChange={(e) => { setselectedWs(e.target.value) }}>
-                                <option value={''}>{__('Select Workspace')}</option>
+                                <option value={''}>{__('Select Workspace', 'wdesignkit')}</option>
                                 {WorkList.length > 0 &&
                                     WorkList.map((item, index) => {
                                         return (
@@ -849,7 +848,7 @@ const Workspace_single = (props) => {
                     <div className='wkit-custom-dropDown-content'>
                         <div className='wkit-drop-down-outer'></div>
                         <div className='wkit-custom-dropDown-options' onClick={() => { Change_builder('all') }}>
-                            <label>{__('All')}</label>
+                            <label>{__('All', 'wdesignkit')}</label>
                         </div>
                         {
                             props?.wdkit_meta?.Setting?.elementor_builder &&
@@ -858,7 +857,7 @@ const Workspace_single = (props) => {
                                     <path d="M14 28C21.732 28 28 21.732 28 14C28 6.26801 21.732 0 14 0C6.26801 0 0 6.26801 0 14C0 21.732 6.26801 28 14 28Z" fill="white" />
                                     <path d="M26.6 0H1.4C0.64003 0 0 0.63998 0 1.4V26.6C0 27.36 0.639983 28 1.4 28H26.6C27.3601 28 28 27.36 28 26.6V1.4C28 0.63998 27.3601 0 26.6 0ZM10.28 20.2H7.80001V7.79999H10.28V20.2ZM20.24 20.2H12.76V17.72H20.24V20.2ZM20.24 15.24H12.76V12.76H20.24V15.24ZM20.24 10.28H12.76V7.79999H20.24V10.28Z" fill="#92003B" />
                                 </svg>
-                                <label>{__('Elementor')}</label>
+                                <label>{__('Elementor', 'wdesignkit')}</label>
                             </div>
                         }
                         {
@@ -868,7 +867,7 @@ const Workspace_single = (props) => {
                                     <path d="M26.6 0H1.4C0.640029 0 0 0.63998 0 1.4V26.6C0 27.3599 0.639982 28 1.4 28H26.6C27.3601 28 28 27.36 28 26.6V1.4C28 0.63998 27.3601 0 26.6 0Z" fill="#287CB2" />
                                     <path d="M10.8107 8.42658C8.67739 9.35411 7.86035 11.3416 8.01922 15.1621C8.11 17.1055 8.22348 17.8122 8.6093 18.5189C9.58523 20.374 11.1965 21.169 13.5569 20.9702C15.2363 20.8598 16.4392 20.2194 16.9839 19.2035C17.2108 18.7839 17.3924 17.7681 17.4605 16.6859C17.5512 14.9413 17.5739 14.8751 18.164 14.7426C19.0037 14.5659 20.4563 13.3734 20.4563 12.8433C20.4563 12.225 19.8435 12.3133 18.9584 13.0642C18.4591 13.4838 17.7782 13.7929 16.8931 13.9696C14.3739 14.4555 13.92 14.6321 13.2164 15.4051C12.4448 16.2663 12.3313 16.7743 12.876 16.9951C13.103 17.0835 13.4434 16.8626 13.8973 16.3326C14.5328 15.6038 15.7356 14.9634 16.008 15.2284C16.076 15.3167 16.1441 15.8909 16.1441 16.5534C16.1441 18.8943 15.1682 19.9323 13.0122 19.9323C11.6958 19.9323 10.6065 19.3139 9.92563 18.1656C9.51713 17.503 9.44903 17.0172 9.44903 14.6321C9.44903 11.4741 9.78943 10.4804 11.1285 9.61912C12.7625 8.55909 15.3044 9.15535 15.8945 10.7675C16.3938 12.0483 16.8477 12.3133 17.2789 11.5183C17.4832 11.165 17.4378 10.8779 17.0519 10.105C16.1441 8.24991 13.0576 7.43281 10.8107 8.42658Z" fill="white" />
                                 </svg>
-                                <label>{__('Gutenberg')}</label>
+                                <label>{__('Gutenberg', 'wdesignkit')}</label>
                             </div>
 
                         }
@@ -876,7 +875,7 @@ const Workspace_single = (props) => {
                             props?.wdkit_meta?.Setting?.bricks_builder && Temp_filter == 'widgets' &&
                             <div className='wkit-custom-dropDown-options' onClick={() => { Change_builder('gutenberg') }}>
                                 <img src={img_path + 'assets/images/wb-svg/bricks.svg'} />
-                                <label>{__('Bricks')}</label>
+                                <label>{__('Bricks', 'wdesignkit')}</label>
                             </div>
 
                         }
@@ -897,7 +896,7 @@ const Workspace_single = (props) => {
                     <div className='wkit-custom-dropDown-content'>
                         <div className='wkit-drop-down-outer'></div>
                         <div className='wkit-custom-dropDown-options' onClick={() => { Change_builder('all') }}>
-                            <label>{__('All')}</label>
+                            <label>{__('All', 'wdesignkit')}</label>
                         </div>
                         {
                             props?.wdkit_meta?.Setting?.elementor_template &&
@@ -906,7 +905,7 @@ const Workspace_single = (props) => {
                                     <path d="M14 28C21.732 28 28 21.732 28 14C28 6.26801 21.732 0 14 0C6.26801 0 0 6.26801 0 14C0 21.732 6.26801 28 14 28Z" fill="white" />
                                     <path d="M26.6 0H1.4C0.64003 0 0 0.63998 0 1.4V26.6C0 27.36 0.639983 28 1.4 28H26.6C27.3601 28 28 27.36 28 26.6V1.4C28 0.63998 27.3601 0 26.6 0ZM10.28 20.2H7.80001V7.79999H10.28V20.2ZM20.24 20.2H12.76V17.72H20.24V20.2ZM20.24 15.24H12.76V12.76H20.24V15.24ZM20.24 10.28H12.76V7.79999H20.24V10.28Z" fill="#92003B" />
                                 </svg>
-                                <label>{__('Elementor')}</label>
+                                <label>{__('Elementor', 'wdesignkit')}</label>
                             </div>
                         }
                         {
@@ -916,7 +915,7 @@ const Workspace_single = (props) => {
                                     <path d="M26.6 0H1.4C0.640029 0 0 0.63998 0 1.4V26.6C0 27.3599 0.639982 28 1.4 28H26.6C27.3601 28 28 27.36 28 26.6V1.4C28 0.63998 27.3601 0 26.6 0Z" fill="#287CB2" />
                                     <path d="M10.8107 8.42658C8.67739 9.35411 7.86035 11.3416 8.01922 15.1621C8.11 17.1055 8.22348 17.8122 8.6093 18.5189C9.58523 20.374 11.1965 21.169 13.5569 20.9702C15.2363 20.8598 16.4392 20.2194 16.9839 19.2035C17.2108 18.7839 17.3924 17.7681 17.4605 16.6859C17.5512 14.9413 17.5739 14.8751 18.164 14.7426C19.0037 14.5659 20.4563 13.3734 20.4563 12.8433C20.4563 12.225 19.8435 12.3133 18.9584 13.0642C18.4591 13.4838 17.7782 13.7929 16.8931 13.9696C14.3739 14.4555 13.92 14.6321 13.2164 15.4051C12.4448 16.2663 12.3313 16.7743 12.876 16.9951C13.103 17.0835 13.4434 16.8626 13.8973 16.3326C14.5328 15.6038 15.7356 14.9634 16.008 15.2284C16.076 15.3167 16.1441 15.8909 16.1441 16.5534C16.1441 18.8943 15.1682 19.9323 13.0122 19.9323C11.6958 19.9323 10.6065 19.3139 9.92563 18.1656C9.51713 17.503 9.44903 17.0172 9.44903 14.6321C9.44903 11.4741 9.78943 10.4804 11.1285 9.61912C12.7625 8.55909 15.3044 9.15535 15.8945 10.7675C16.3938 12.0483 16.8477 12.3133 17.2789 11.5183C17.4832 11.165 17.4378 10.8779 17.0519 10.105C16.1441 8.24991 13.0576 7.43281 10.8107 8.42658Z" fill="white" />
                                 </svg>
-                                <label>{__('Gutenberg')}</label>
+                                <label>{__('Gutenberg', 'wdesignkit')}</label>
                             </div>
 
                         }
@@ -955,13 +954,13 @@ const Workspace_single = (props) => {
                         <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd" d="M17.375 1.5H2.375L2.375 4.5H17.375V1.5ZM0.875 4.5V6V16.5C0.875 17.3284 1.54657 18 2.375 18H17.375C18.2034 18 18.875 17.3284 18.875 16.5V6V4.5V1.5C18.875 0.671573 18.2034 0 17.375 0H2.375C1.54657 0 0.875 0.671573 0.875 1.5V4.5ZM2.375 16.5H17.375V6H2.375L2.375 16.5ZM3.875 8.625C3.875 8.41789 4.04289 8.25 4.25 8.25H15.5C15.7071 8.25 15.875 8.41789 15.875 8.625V9.375C15.875 9.58211 15.7071 9.75 15.5 9.75H4.25C4.04289 9.75 3.875 9.58211 3.875 9.375V8.625ZM4.625 11.25C4.21079 11.25 3.875 11.5858 3.875 12V13.5C3.875 13.9142 4.21079 14.25 4.625 14.25H6.125C6.53921 14.25 6.875 13.9142 6.875 13.5V12C6.875 11.5858 6.53921 11.25 6.125 11.25H4.625ZM8.375 12C8.375 11.5858 8.71079 11.25 9.125 11.25H10.625C11.0392 11.25 11.375 11.5858 11.375 12V13.5C11.375 13.9142 11.0392 14.25 10.625 14.25H9.125C8.71079 14.25 8.375 13.9142 8.375 13.5V12ZM13.625 11.25C13.2108 11.25 12.875 11.5858 12.875 12V13.5C12.875 13.9142 13.2108 14.25 13.625 14.25H15.125C15.5392 14.25 15.875 13.9142 15.875 13.5V12C15.875 11.5858 15.5392 11.25 15.125 11.25H13.625ZM4.625 3.75C5.03921 3.75 5.375 3.41421 5.375 3C5.375 2.58579 5.03921 2.25 4.625 2.25C4.21079 2.25 3.875 2.58579 3.875 3C3.875 3.41421 4.21079 3.75 4.625 3.75ZM8.375 3C8.375 3.41421 8.03921 3.75 7.625 3.75C7.21079 3.75 6.875 3.41421 6.875 3C6.875 2.58579 7.21079 2.25 7.625 2.25C8.03921 2.25 8.375 2.58579 8.375 3ZM10.625 3.75C11.0392 3.75 11.375 3.41421 11.375 3C11.375 2.58579 11.0392 2.25 10.625 2.25C10.2108 2.25 9.875 2.58579 9.875 3C9.875 3.41421 10.2108 3.75 10.625 3.75Z" fill="#737373" />
                         </svg>
-                        <span>{__('Templates')}</span>
+                        <span>{__('Templates', 'wdesignkit')}</span>
                     </div>
                     <div className='wkit-custom-dropDown-options' onClick={() => { setTemp_filter('widgets'), setbuilder_filter('all') }}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path fillRule="evenodd" clipRule="evenodd" d="M9.04331 0.48585C9.61718 0.0841431 10.381 0.0841441 10.9549 0.485851L17.8986 5.34646C18.8097 5.98426 18.8524 7.31853 17.984 8.0133L17.6387 8.28953L17.8986 8.47146C18.8097 9.10925 18.8524 10.4435 17.984 11.1383L17.6387 11.4145L17.8986 11.5965C18.8097 12.2343 18.8524 13.5685 17.984 14.2633L14.6863 16.9014L12.0814 18.9854C10.864 19.9593 9.13416 19.9593 7.91677 18.9854L5.31184 16.9014L2.01419 14.2633C1.14573 13.5685 1.18845 12.2343 2.09958 11.5965L2.35948 11.4145L2.01419 11.1383C1.14573 10.4435 1.18845 9.10925 2.09958 8.47146L2.35948 8.28953L2.01419 8.0133C1.14572 7.31852 1.18845 5.98425 2.09958 5.34646L3.05535 6.71185L6.35299 9.34997L8.95792 11.4339C9.56662 11.9209 10.4315 11.9209 11.0402 11.4339L13.6452 9.34997L16.9428 6.71185L9.99908 1.85124L10.477 1.16854L9.99908 1.85124L3.05535 6.71185L2.09958 5.34646L9.04331 0.48585ZM3.71577 12.4996L3.05535 12.9618L6.35299 15.6L8.95792 17.6839C9.56662 18.1709 10.4315 18.1709 11.0402 17.6839L13.6452 15.6L16.9428 12.9618L16.2824 12.4996L14.6863 13.7764L12.0814 15.8604C10.864 16.8343 9.13416 16.8343 7.91677 15.8604L5.31184 13.7764L3.71577 12.4996ZM14.6863 10.6514L16.2824 9.37456L16.9428 9.83685L13.6452 12.475L11.0402 14.5589C10.4315 15.0459 9.56662 15.0459 8.95792 14.5589L6.35299 12.475L3.05535 9.83685L3.71577 9.37456L5.31184 10.6514L7.91677 12.7354C9.13416 13.7093 10.864 13.7093 12.0814 12.7354L14.6863 10.6514Z" fill="#737373"></path>
                         </svg>
-                        <span>{__('Widgets')}</span>
+                        <span>{__('Widgets', 'wdesignkit')}</span>
                     </div>
                 </div>
             </div>
@@ -972,7 +971,7 @@ const Workspace_single = (props) => {
         if (value.length <= 100) {
             return true;
         } else {
-            props.wdkit_set_toast(['Limit Reached', 'Limit Reached', '', 'danger'])
+            props.wdkit_set_toast([__('Limit Reached', 'wdesignkit'), __('Limit Reached', 'wdesignkit'), '', 'danger'])
             return false;
         }
     }
@@ -1008,7 +1007,7 @@ const Workspace_single = (props) => {
                                                         (setinp_name(e.target.value))
                                                     }
                                                 }} />
-                                                <button className={'wkit-title-update-btn'} onClick={() => { WKit_input_text(inp_name) }}>Update</button>
+                                                <button className={'wkit-title-update-btn'} onClick={() => { WKit_input_text(inp_name) }}>{__('Update', 'wdesignkit')}</button>
                                             </div>
                                         }
                                     </div>
@@ -1044,7 +1043,7 @@ const Workspace_single = (props) => {
                                 </div>
                                 <a href={`${wdkitData.wdkit_server_url}admin/workspace/workspacetemplate/${wsData?.w_id}`} target="_blank" rel="noopener noreferrer">
                                     <div className='wkit-manage-member'>
-                                        <span>{__('Manage Members')}</span>
+                                        <span>{__('Manage Members', 'wdesignkit')}</span>
                                     </div>
                                 </a>
                             </div>

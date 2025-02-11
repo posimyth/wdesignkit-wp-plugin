@@ -97,32 +97,30 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 		 * @since   1.0.0
 		 */
 		protected function wdkit_use_editor() {
-            global $current_screen;
+			global $current_screen;
 
-            $editor = 'wdkit';
+			$editor = 'wdkit';
 
-            $action = ! empty( $_GET['action'] ) ? $_GET['action'] : '';
+			$action = ! empty( $_GET['action'] ) ? $_GET['action'] : '';
 
-            if( $current_screen->is_block_editor() ){
+			if ( $current_screen->is_block_editor() ) {
 
-                if ( array_key_exists('action', $_GET) && isset( $action ) ) {
-                    if ( 'elementor' === $action ) {
-                        $editor = 'elementor';  
-                    } else if ( 'edit' === $action ) {
-                        $editor = 'gutenberg';
-                    }
-                } else {
-                    $editor = 'gutenberg';
-                }
-            } else {
-                if ( 'elementor' === $action ) {
-                    $editor = 'elementor';  
-                }
-            }
+				if ( array_key_exists( 'action', $_GET ) && isset( $action ) ) {
+					if ( 'elementor' === $action ) {
+						$editor = 'elementor';
+					} elseif ( 'edit' === $action ) {
+						$editor = 'gutenberg';
+					}
+				} else {
+					$editor = 'gutenberg';
+				}
+			} elseif ( 'elementor' === $action ) {
+					$editor = 'elementor';
+			}
 
-            return $editor;
-        }
-		
+			return $editor;
+		}
+
 		/**
 		 * Load Admin Scripts.
 		 *
@@ -149,12 +147,14 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 		 * @param string $hook use for check page type.
 		 */
 		public function wdkit_admin_scripts( $hook ) {
-			
+
 			wp_enqueue_style( 'wdkit-out-dashborad', WDKIT_URL . 'assets/css/dashborad/wdkit-dashborad.css', array(), WDKIT_VERSION, false );
 
 			if ( ! in_array( $hook, array( 'toplevel_page_wdesign-kit', 'elementor', 'post-new.php', 'post.php' ), true ) ) {
 				return;
 			}
+
+			wp_enqueue_media(); 
 
 			$this->wdkit_enqueue_scripts( $hook );
 			$this->wdkit_enqueue_styles();
@@ -180,6 +180,8 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 			wp_set_script_translations( 'wdkit-editor-js', 'wdesignkit' );
 
 			$onbording_end = get_option( $this->wdkit_onbording_end );
+			$white_label   = get_option( 'wkit_white_label', false );
+
 
 			wp_localize_script(
 				'wdkit-editor-js',
@@ -190,6 +192,7 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 					'WDKIT_URL'           => WDKIT_URL,
 					'WDKIT_ASSETS'        => WDKIT_ASSETS,
 					'wdkit_server_url'    => WDKIT_SERVER_SITE_URL,
+					'wdkit_wp_version'    => get_bloginfo( 'version' ),
 					'home_url'            => esc_url( home_url( '/' ) ),
 					'kit_nonce'           => wp_create_nonce( 'wdkit_nonce' ),
 					'post_id'             => get_the_ID(),
@@ -198,6 +201,7 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 					'use_editor'          => $this->wdkit_use_editor(),
 					'post_type_list'      => $this->wdkit_get_post_type_list(),
 					'WDKIT_onbording_end' => $onbording_end,
+					'wdkit_white_label'   => $white_label,
 
 					/** Widget Builder Path */
 					'WDKIT_SITE_URL'      => WDKIT_GET_SITE_URL,
@@ -229,8 +233,13 @@ if ( ! class_exists( 'Wdkit_Enqueue' ) ) {
 		 */
 		public function wdkit_admin_menu() {
 			$capability = 'manage_options';
+
+			$options      = get_option( 'wkit_white_label' );
+			$setting_name = ! empty( $options['plugin_name'] ) ? $options['plugin_name'] : __( 'WDesignKit', 'wdesignkit' );
+			$setting_logo = ! empty( $options['plugin_logo'] ) ? $options['plugin_logo'] : WDKIT_ASSETS . 'images/svg/logo-icon.svg';
+
 			if ( current_user_can( $capability ) ) {
-				$hook = add_menu_page( __( 'WDesignKit', 'wdesignkit' ), __( 'WDesignKit', 'wdesignkit' ), 'manage_options', 'wdesign-kit', array( $this, 'wdkit_menu_page_template' ), WDKIT_ASSETS . 'images/svg/logo-icon.svg', 67 );
+				$hook = add_menu_page( $setting_name, $setting_name, 'manage_options', 'wdesign-kit', array( $this, 'wdkit_menu_page_template' ), $setting_logo, 67 );
 			}
 		}
 

@@ -3,12 +3,9 @@ import './manage_workspace.scss'
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { DeletePopup, Page_header, Wkit_workspace_skeleton } from '../../helper/helper-function';
+import { __ } from '@wordpress/i18n';
 
 const { Fragment } = wp.element;
-
-const {
-    __,
-} = wp.i18n;
 
 const {
     get_userinfo,
@@ -117,13 +114,13 @@ const Manage_Workspace = (props) => {
                     <div className="wkit-add-new-workspace">
                         <div className="wkit-add-new-content">
                             <div className='wkit-add-new-text'>
-                                <span className='wkit-add-new-Title'>{limit == "unlimited" || Wslength < limit ? __('New Workspace ?') : __('You have Used Free Credit')}</span>
-                                <span className='wkit-add-new-desc'>{limit == "unlimited" || Wslength < limit ? __('Manage and collaborate with ease.') : __('You need to purchase now to add more workspace')}</span>
+                                <span className='wkit-add-new-Title'>{limit == "unlimited" || Wslength < limit ? __('New Workspace ?', 'wdesignkit') : __('You have Used Free Credit', 'wdesignkit')}</span>
+                                <span className='wkit-add-new-desc'>{limit == "unlimited" || Wslength < limit ? __('Manage and collaborate with ease.', 'wdesignkit') : __('You need to purchase now to add more workspace', 'wdesignkit')}</span>
                             </div>
                             {limit == "unlimited" || Wslength < limit ?
-                                <button className='wkit-pink-btn-class' onClick={() => setPopup(true)}>{__('Create Workspace')}</button>
+                                <button className='wkit-pink-btn-class' onClick={() => setPopup(true)}>{__('Create Workspace', 'wdesignkit')}</button>
                                 :
-                                <div><a className='wkit-btn-buy-now wkit-pink-btn-class' href={`${wdkitData.wdkit_server_url}pricing`} target="_blank" rel="noopener noreferrer">{__('Buy Now')}</a></div>
+                                <div><a className='wkit-btn-buy-now wkit-pink-btn-class' href={`${wdkitData.wdkit_server_url}pricing`} target="_blank" rel="noopener noreferrer">{__('Buy Now', 'wdesignkit')}</a></div>
                             }
                         </div>
                         <div className='wkit-add-new-workspace-img'>
@@ -145,7 +142,7 @@ const Manage_Workspace = (props) => {
 
         return (
             <div className='wkit-avatar-name'>
-                <span>{__('by')}</span>
+                <span>{__('by', 'wdesignkit')}</span>
                 {data.u_id == user_id && user_profile ?
                     <img src={user_profile} alt="user-img" style={{ borderRadius: "50px" }} draggable="false" />
                     :
@@ -182,7 +179,7 @@ const Manage_Workspace = (props) => {
                                     <path d="M9 11.25C10.2426 11.25 11.25 10.2426 11.25 9C11.25 7.75736 10.2426 6.75 9 6.75C7.75736 6.75 6.75 7.75736 6.75 9C6.75 10.2426 7.75736 11.25 9 11.25Z" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </span>
-                            <span>{__('View')}</span>
+                            <span>{__('View', 'wdesignkit')}</span>
                         </div>
                     </Link>
                     {data?.roles == 'admin' &&
@@ -192,7 +189,7 @@ const Manage_Workspace = (props) => {
                                     <path d="M3.75 5.50006H4.91667M4.91667 5.50006H14.25M4.91667 5.50006L4.91638 13.666C4.91638 13.9754 5.0393 14.2722 5.25809 14.491C5.47688 14.7098 5.77363 14.8327 6.08305 14.8327H11.9164C12.2258 14.8327 12.5225 14.7098 12.7413 14.491C12.9601 14.2722 13.083 13.9754 13.083 13.666V5.49935M6.66638 5.49935V4.33268C6.66638 4.02326 6.7893 3.72652 7.00809 3.50772C7.22688 3.28893 7.52363 3.16602 7.83305 3.16602H10.1664C10.4758 3.16602 10.7725 3.28893 10.9913 3.50772C11.2101 3.72652 11.333 4.02326 11.333 4.33268V5.49935" stroke="#737373" strokeWidth="1.3125" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </span>
-                            <span>{__('Delete')}</span>
+                            <span>{__('Delete', 'wdesignkit')}</span>
                         </div>
                     }
                 </div>
@@ -207,20 +204,20 @@ const Manage_Workspace = (props) => {
                 <div className='wkit-live-user wkit-workspace-detail'>
                     <img src={img_path + "assets/images/svg/user.svg"} alt="user img" draggable="false" />
                     <span>{Object.values(data.share_user).length}</span>
-                    <span className='wkit-workspace-tool-tip'>{__('Users')}</span>
+                    <span className='wkit-workspace-tool-tip'>{__('Users', 'wdesignkit')}</span>
                 </div>
                 {props?.wdkit_meta?.Setting?.template == true &&
                     <div className='wkit-workspace-edit-temp wkit-workspace-detail'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M12.1062 3.54375C12.35 3.3 12.35 2.90625 12.1062 2.6625L10.3375 0.89375C10.0938 0.65 9.7 0.65 9.45625 0.89375L6.65 3.7L4.21875 1.26875C3.73125 0.78125 2.9375 0.78125 2.45 1.26875L1.2625 2.45625C0.775 2.94375 0.775 3.7375 1.2625 4.225L3.69375 6.65625L0.875 9.475V12.125H3.525L6.35 9.3L8.78125 11.7313C9.375 12.325 10.175 12.1063 10.55 11.7313L11.7375 10.5437C12.225 10.0562 12.225 9.2625 11.7375 8.775L9.30625 6.34375L12.1062 3.54375ZM2.15 3.3375L3.33125 2.15L4.125 2.94375L3.3875 3.6875L4.26875 4.56875L5.0125 3.825L5.7625 4.575L4.575 5.7625L2.15 3.3375ZM9.16875 7.9875L8.425 8.73125L9.30625 9.6125L10.05 8.86875L10.8438 9.6625L9.65625 10.85L7.225 8.41875L8.4125 7.23125L9.16875 7.9875ZM3.00625 10.875H2.125V9.99375L8.13125 3.9875L8.94375 4.8L9.0125 4.86875L3.00625 10.875ZM9.0125 3.1L9.89375 2.21875L10.775 3.1L9.89375 3.98125L9.0125 3.1Z" fill="#4D69FA" /></svg>
                         <span>{data.work_templates.length}</span>
-                        <span className='wkit-workspace-tool-tip'>{__('Templates')}</span>
+                        <span className='wkit-workspace-tool-tip'>{__('Templates', 'wdesignkit')}</span>
                     </div>
                 }
                 {props?.wdkit_meta?.Setting?.builder == true &&
                     <div className='wkit-workspace-edit-widget wkit-workspace-detail'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M6.12111 0.363656C6.55151 0.0623758 7.12436 0.0623748 7.55476 0.363655L12.7626 4.00912C13.4459 4.48746 13.478 5.48816 12.8266 6.00924L12.5676 6.21642L12.7626 6.35287C13.4459 6.83121 13.478 7.83191 12.8266 8.35299L12.5676 8.56017L12.7626 8.69662C13.4459 9.17496 13.478 10.1757 12.8266 10.6967L10.3534 12.6753L8.39967 14.2383C7.48663 14.9687 6.18924 14.9687 5.2762 14.2383L3.3225 12.6753L0.849267 10.6967C0.197919 10.1757 0.229957 9.17496 0.913307 8.69662L1.10823 8.56017L0.849267 8.35299C0.197919 7.83191 0.229957 6.83121 0.913307 6.35287L1.10824 6.21642L0.849267 6.00924C0.197919 5.48816 0.229957 4.48746 0.913307 4.00912L6.12111 0.363656ZM2.12545 9.37394L1.63014 9.72066L4.10337 11.6992L6.05707 13.2622C6.51359 13.6274 7.16228 13.6274 7.6188 13.2622L9.5725 11.6992L12.0457 9.72066L11.5504 9.37394L10.3534 10.3316L8.39967 11.8945C7.48663 12.625 6.18924 12.625 5.2762 11.8945L3.3225 10.3316L2.12545 9.37394ZM10.3534 7.98783L11.5504 7.03019L12.0457 7.37691L9.5725 9.35549L7.6188 10.9185C7.16228 11.2837 6.51359 11.2837 6.05707 10.9185L4.10337 9.35549L1.63014 7.37691L2.12545 7.03019L3.3225 7.98783L5.2762 9.55079C6.18924 10.2812 7.48663 10.2812 8.39967 9.55079L10.3534 7.98783ZM12.0457 5.03316L6.83794 1.3877L1.63013 5.03316L4.10337 7.01174L6.05707 8.5747C6.51359 8.93992 7.16228 8.93992 7.6188 8.5747L9.5725 7.01174L12.0457 5.03316Z" fill="#C22076" /></svg>
                         <span>{data.work_widgets.length}</span>
-                        <span className='wkit-workspace-tool-tip'>{__('Widgets')}</span>
+                        <span className='wkit-workspace-tool-tip'>{__('Widgets', 'wdesignkit')}</span>
                     </div>
                 }
             </div>
@@ -240,10 +237,10 @@ const Manage_Workspace = (props) => {
                                     {data?.is_activated != "active" &&
                                         <Fragment>
                                             <div className='wdkit-inner-boxed-deActivate'>
-                                                <div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!')}</div>
-                                                <div className='wdkit-inner-boxed-deActivate-p'>{__('This Template got disabled until you have more credits to make it active.')}</div>
+                                                <div className='wdkit-inner-boxed-deActivate-h1'>{__('Credit Limit Reached!', 'wdesignkit')}</div>
+                                                <div className='wdkit-inner-boxed-deActivate-p'>{__('This Template got disabled until you have more credits to make it active.', 'wdesignkit')}</div>
                                                 <a href={`${wdkitData.wdkit_server_url}pricing`} target="_blank" rel="noopener noreferrer">
-                                                    <button>{__('Buy Credits')}</button>
+                                                    <button>{__('Buy Credits', 'wdesignkit')}</button>
                                                 </a>
                                             </div>
                                             <span className='wdkit-inner-boxed-remove'>
@@ -264,7 +261,7 @@ const Manage_Workspace = (props) => {
                                             }
                                             {workspace_info(data)}
                                         </div>
-                                        <Link to={'/manage_workspace/workspace_template/' + w_id}>
+                                        <Link className='wkit-wp-card-link' to={'/manage_workspace/workspace_template/' + w_id}>
                                             <div className='wkit-user-name'>{data.work_title}</div>
                                         </Link>
                                         <div className='wkit-author-select-wrapper'>
@@ -286,7 +283,7 @@ const Manage_Workspace = (props) => {
     return (
         <div className="wkit-manage-main">
             <Page_header
-                title={'Manage Workspace'}
+                title={__('Manage Workspace', 'wdesignkit')}
                 svg={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.6843 6.81612C15.6843 8.67309 14.1299 10.2143 12.1676 10.2143C10.2054 10.2143 8.65098 8.67309 8.65098 6.81612C8.65098 4.95915 10.2054 3.41797 12.1676 3.41797C14.1299 3.41797 15.6843 4.95915 15.6843 6.81612ZM22.0843 17.1865C22.0843 19.0435 20.5299 20.5846 18.5676 20.5846C16.6054 20.5846 15.051 19.0435 15.051 17.1865C15.051 15.3295 16.6054 13.7883 18.5676 13.7883C20.5299 13.7883 22.0843 15.3295 22.0843 17.1865ZM9.28431 17.1865C9.28431 19.0435 7.7299 20.5846 5.76764 20.5846C3.80538 20.5846 2.25098 19.0435 2.25098 17.1865C2.25098 15.3295 3.80539 13.7883 5.76764 13.7883C7.7299 13.7883 9.28431 15.3295 9.28431 17.1865Z" stroke="#040483" strokeWidth="1.5" />
                 </svg>}

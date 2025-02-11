@@ -1,14 +1,14 @@
-const { __ } = wp.i18n;
-const { Fragment } = wp.element;
+import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Elementor_file_create from "../file-creation/elementor_file";
 import CreatFile from "../file-creation/gutenberg_file";
 import Bricks_file_create from "../file-creation/bricks_file";
-import { Wkit_template_Skeleton, wdKit_Form_data, get_user_login, Get_user_info_data, Toast_message } from '../../helper/helper-function';
+import { get_user_login } from '../../helper/helper-function';
 import { component_array } from "../components-data/component_array";
+import { __ } from '@wordpress/i18n';
 
+const { Fragment } = wp.element;
 
 const Popup = (props) => {
 
@@ -19,6 +19,7 @@ const Popup = (props) => {
     let number = Math.random();
     number.toString(36);
     let uid = number.toString(36).substr(2, 6);
+
     return uid + year;
   }
 
@@ -26,22 +27,22 @@ const Popup = (props) => {
     elementor: {
       defaultValue: "eicon-code",
       links: [
-        { label: "E-icons", href: "https://elementor.github.io/elementor-icons/" },
-        { label: "Font-Awesome 5", href: "https://fontawesome.com/v5/search" }
+        { label: __("E-icons", 'wdesignkit'), href: "https://elementor.github.io/elementor-icons/" },
+        { label: __("Font-Awesome 5", 'wdesignkit'), href: "https://fontawesome.com/v5/search" }
       ]
     },
     bricks: {
       defaultValue: "ti-shield",
       links: [
-        { label: "Ionicons 4", href: "https://ionic.io/ionicons" },
-        { label: "Font-Awesome 6", href: "https://fontawesome.com/v6/icons/" },
-        { label: "Themify", href: "https://themify.me/themify-icons" }
+        { label: __("Ionicons 4", 'wdesignkit'), href: "https://ionic.io/ionicons" },
+        { label: __("Font-Awesome 6", 'wdesignkit'), href: "https://fontawesome.com/v6/icons/" },
+        { label: __("Themify", 'wdesignkit'), href: "https://themify.me/themify-icons" }
       ]
     },
     gutenberg: {
       defaultValue: "fas fa-yin-yang",
       links: [
-        { label: "Font-Awesome 5", href: "https://fontawesome.com/v5/search" }
+        { label: __("Font-Awesome 5", 'wdesignkit'), href: "https://fontawesome.com/v5/search" }
       ]
     }
   };
@@ -58,19 +59,20 @@ const Popup = (props) => {
       }
     },
     'gutenberg': {
-      'array': ['wysiwyg', 'code', 'divider', 'align'],
+      'array': ['wysiwyg', 'code', 'divider', 'align', 'preview'],
       'info': {
         'wysiwyg': 'textarea',
         'align': 'choose',
         'code': '',
         'divider': '',
+        'preview': '',
       },
       'selector': {
         '{{WRAPPER}}': '{{PLUS_WRAP}}'
       }
     },
     'bricks': {
-      'array': ['wysiwyg', 'popover', 'choose', 'normalhover', 'divider', 'dimension'],
+      'array': ['wysiwyg', 'popover', 'choose', 'normalhover', 'divider', 'dimension', 'preview'],
       'info': {
         'wysiwyg': 'textarea',
         'choose': 'align',
@@ -78,6 +80,7 @@ const Popup = (props) => {
         'normalhover': '',
         'divider': '',
         'dimension': '',
+        'preview': '',
       },
       'selector': {
         '{{WRAPPER}}': '',
@@ -179,7 +182,7 @@ const Popup = (props) => {
 
 
     let form_data = new FormData();
-    form_data.append('action', 'wdkit_widget_ajax');
+    form_data.append('action', 'get_wdesignkit');
     form_data.append('kit_nonce', wdkitData.kit_nonce);
     form_data.append('type', 'wkit_delete_widget');
     form_data.append('info', JSON.stringify(remove_info));
@@ -244,30 +247,30 @@ const Popup = (props) => {
         await Elementor_file_create('add', data, html, css, js, "", widget_image).then(async (res) => {
           if (res?.api?.success) {
             await props.UpdateData();
-            await props.wdkit_set_toast(['Widget Added Successfully', 'Widget Added Successfully', '', 'success']);
+            await props.wdkit_set_toast([__('Widget Added Successfully', 'wdesignkit'), __('Widget Added Successfully', 'wdesignkit'), '', 'success']);
             navigation(`/widget-listing/builder/${widgetName.trim()}_${unique_name}`)
           } else {
-            props.wdkit_set_toast(['Widget Creation Fail !', 'Widget is not created.', '', 'danger']);
+            props.wdkit_set_toast([__('Widget Creation Fail !', 'wdesignkit'), __('Widget is not created.', 'wdesignkit'), '', 'danger']);
           }
         });
       } else if (addwidgetRadio == "gutenberg") {
         await CreatFile('add', data, html, css, js, "", widget_image).then(async (res) => {
           if (res?.api?.success) {
             await props.UpdateData();
-            await props.wdkit_set_toast(['Widget Added Successfully', 'Widget Added Successfully', '', 'success']);
+            await props.wdkit_set_toast([__('Widget Added Successfully', 'wdesignkit'), __('Widget Added Successfully', 'wdesignkit'), '', 'success']);
             navigation(`/widget-listing/builder/${widgetName.trim()}_${unique_name}`)
           } else {
-            props.wdkit_set_toast(['Widget Creation Fail !', 'Widget is not created.', '', 'danger']);
+            props.wdkit_set_toast([__('Widget Creation Fail !', 'wdesignkit'), __('Widget is not created.', 'wdesignkit'), '', 'danger']);
           }
         });
       } else if (addwidgetRadio == "bricks") {
         await Bricks_file_create('add', data, html, css, js, "", widget_image).then(async (res) => {
           if (res?.api?.success) {
             await props.UpdateData();
-            await props.wdkit_set_toast(['Widget Added Successfully', 'Widget Added Successfully', '', 'success']);
+            await props.wdkit_set_toast([__('Widget Added Successfully', 'wdesignkit'), __('Widget Added Successfully', 'wdesignkit'), '', 'success']);
             navigation(`/widget-listing/builder/${widgetName.trim()}_${unique_name}`)
           } else {
-            props.wdkit_set_toast(['Widget Creation Fail !', 'Widget is not created.', '', 'danger']);
+            props.wdkit_set_toast([__('Widget Creation Fail !', 'wdesignkit'), __('Widget is not created.', 'wdesignkit'), '', 'danger']);
           }
         });
       }
@@ -350,7 +353,7 @@ const Popup = (props) => {
         }
 
         if (response && response?.api?.success) {
-          props.wdkit_set_toast(['Successfully Imported.', 'Yay! Your Widget has been successfully imported.', '', 'success']);
+          props.wdkit_set_toast([__('Successfully Imported.', 'wdesignkit'), __('Yay! Your Widget has been successfully imported.', 'wdesignkit'), '', 'success']);
           await setTimeout(() => {
             props.UpdateData();
           }, 1000);
@@ -360,14 +363,14 @@ const Popup = (props) => {
 
       } else {
         props.endLoading();
-        props.wdkit_set_toast(['Widget import fail', 'Widget import fail! data not get ', '', 'danger']);
+        props.wdkit_set_toast([__('Widget import fail', 'wdesignkit'), __('Widget import fail! data not get ', 'wdesignkit'), '', 'danger']);
       }
     }
 
     if (IsFileDrop) {
 
       var formData = new FormData();
-      formData.append('action', 'wdkit_widget_ajax');
+      formData.append('action', 'get_wdesignkit');
       formData.append('kit_nonce', wdkitData.kit_nonce);
       formData.append('type', 'wkit_import_widget');
       formData.append('zipName', DropFile);
@@ -384,7 +387,7 @@ const Popup = (props) => {
             document.querySelector('.wb-function-call').click();
           }
 
-          props.wdkit_set_toast(['Widget imported', 'Widget imported Succesfully', '', 'success']);
+          props.wdkit_set_toast([__('Widget imported', 'wdesignkit'), __('Widget imported Succesfully', 'wdesignkit'), '', 'success']);
         } else {
           props.wdkit_set_toast([response?.data?.message, response?.data?.description, '', 'danger']);
           props.ClosePopup();
@@ -402,12 +405,25 @@ const Popup = (props) => {
     e.stopImmediatePropagation();
   }
 
+
+  const handleImage = (e, type) => {
+    if (type == 'upload') {
+      if (!e.target.closest('.wkit-remove-widget-img')) {
+        document.querySelector("#wb-addwidget-img").click()
+      }
+    } else if (type == 'remove') {
+      let background_div = e.target.closest('.wb-drop-file');
+      background_div.style.backgroundImage = ''
+      setwidget_image('');
+    }
+  }
+
   const Upload_image = (e, file) => {
     if (file) {
       if (file?.size && ((Number(file?.size) / 1000000) > 1)) {
         e.preventDefault();
 
-        props.wdkit_set_toast(['Insert valid Image', 'Image size must be less tahn 2 mb.', '', 'danger']);
+        props.wdkit_set_toast([__('Insert valid Image', 'wdesignkit'), __('Image size must be less tahn 2 mb.', 'wdesignkit'), '', 'danger']);
       } else {
         e.preventDefault();
 
@@ -420,7 +436,7 @@ const Popup = (props) => {
             setwidget_image(file);
           }
         } else {
-          props.wdkit_set_toast(['Insert valid Image', 'only ".png", ".jpg", ".jpeg" images are allowed.', '', 'danger']);
+          props.wdkit_set_toast([__('Insert valid Image', 'wdesignkit'), __('only ".png", ".jpg", ".jpeg" images are allowed.', 'wdesignkit'), '', 'danger']);
         }
       }
     }
@@ -478,10 +494,10 @@ const Popup = (props) => {
       }
 
       if (creat_api?.ajax?.data?.success == true) {
-        props.wdkit_set_toast(['Widget synced', 'Widget synced', '', 'success']);
+        props.wdkit_set_toast([__('Widget synced', 'wdesignkit'), __('Widget synced', 'wdesignkit'), '', 'success']);
         props.ClosePopup();
       } else {
-        props.wdkit_set_toast(['Operation fail', 'Something went wrong', '', 'danger']);
+        props.wdkit_set_toast([__('Operation fail', 'wdesignkit'), __('Something went wrong', 'wdesignkit'), '', 'danger']);
         seterror_msg(creat_api?.ajax?.data?.message)
       }
     } else {
@@ -610,7 +626,7 @@ const Popup = (props) => {
       if (w_json_data.widget_data.widgetdata.type == "elementor") {
         await Elementor_file_create('import', data, html, css, js, "", "", w_json_data?.widget_data?.widgetdata?.w_image).then(async (res) => {
           if (res?.api?.success) {
-            props.wdkit_set_toast(['Widget Duplicated', 'Widget Duplicated successfully.', '', 'success']);
+            props.wdkit_set_toast([__('Widget Duplicated', 'wdesignkit'), __('Widget Duplicated successfully.', 'wdesignkit'), '', 'success']);
             await props.UpdateData()
             setloader(false);
           } else {
@@ -620,7 +636,7 @@ const Popup = (props) => {
       } else if (w_json_data.widget_data.widgetdata.type == "gutenberg") {
         await CreatFile('import', data, html, css, js, "", "", w_json_data?.widget_data?.widgetdata?.w_image).then(async (res) => {
           if (res?.api?.success) {
-            props.wdkit_set_toast(['Widget Duplicated', 'Widget Duplicated successfully.', '', 'success']);
+            props.wdkit_set_toast([__('Widget Duplicated', 'wdesignkit'), __('Widget Duplicated successfully.', 'wdesignkit'), '', 'success']);
             await props.UpdateData()
             setloader(false);
           } else {
@@ -630,7 +646,7 @@ const Popup = (props) => {
       } else if (w_json_data.widget_data.widgetdata.type == "bricks") {
         await Bricks_file_create('import', data, html, css, js, "", "", w_json_data?.widget_data?.widgetdata?.w_image).then(async (res) => {
           if (res?.api?.success) {
-            props.wdkit_set_toast(['Widget Duplicated', 'Widget Duplicated successfully.', '', 'success']);
+            props.wdkit_set_toast([__('Widget Duplicated', 'wdesignkit'), __('Widget Duplicated successfully.', 'wdesignkit'), '', 'success']);
             await props.UpdateData()
             setloader(false);
           } else {
@@ -1042,11 +1058,11 @@ const Popup = (props) => {
 
       if (response?.api?.success) {
         setloader(false);
-        props.wdkit_set_toast(['Widget Converted', 'Widget Converted successfully.', '', 'success']);
+        props.wdkit_set_toast([__('Widget Converted', 'wdesignkit'), __('Widget Converted successfully.', 'wdesignkit'), '', 'success']);
         await props.UpdateData()
       } else {
         setloader(false);
-        props.wdkit_set_toast(['Widget Conversion Fail!', 'Widget not Converted successfully.', '', 'danger']);
+        props.wdkit_set_toast([__('Widget Conversion Fail!', 'wdesignkit'), __('Widget not Converted successfully.', 'wdesignkit'), '', 'danger']);
       }
 
     }
@@ -1101,21 +1117,21 @@ const Popup = (props) => {
                 </svg>
               </div>
             </div>
-            <div className="wkit-popup-header">Are you sure you want to delete?</div>
+            <div className="wkit-popup-header">{__('Are you sure you want to delete?', 'wdesignkit')}</div>
             <div className="wkit-member-popup">
-              <h3 className='wkit-heading-delete'>Please select an option from below:</h3>
+              <h3 className='wkit-heading-delete'>{__('Please select an option from below:', 'wdesignkit')}</h3>
               {get_user_login() && props.quickediteditMeta != 'plugin' &&
                 <label className='wkit-custom-radio-wrap'>
                   <span className='wkit-server-heading' id='wkit-radio1' >
-                    <input type="radio" name="server-1" id='wkit-radio1' checked={Delete_type == 'plugin_server'} onChange={(e) => { setDelete_type('plugin_server') }} />Permanently Delete </span>
-                  <span className='wkit-radio-desc'>This will remove your widget from cloud and local system both. Make sure you download it as a ZIP as then you will not be able to get access of it.</span>
+                    <input type="radio" name="server-1" id='wkit-radio1' checked={Delete_type == 'plugin_server'} onChange={(e) => { setDelete_type('plugin_server') }} />{__('Permanently Delete', 'wdesignkit')} </span>
+                  <span className='wkit-radio-desc'>{__('This will remove your widget from cloud and local system both. Make sure you download it as a ZIP as then you will not be able to get access of it.', 'wdesignkit')}</span>
                 </label>
               }
               {props.quickediteditMeta != 'server' &&
                 <label className='wkit-custom-radio-wrap'>
                   <span className='wkit-server-heading' id='wkit-radio2'>
-                    <input type="radio" name="server-1" id='wkit-radio2' checked={Delete_type == 'plugin'} onChange={(e) => { setDelete_type('plugin') }} />Local Delete</span>
-                  <span className='wkit-radio-desc'>{__('This will remove your Widget from your current website. If you need to use it in the future, you can simply download it again from the server.')}</span>
+                    <input type="radio" name="server-1" id='wkit-radio2' checked={Delete_type == 'plugin'} onChange={(e) => { setDelete_type('plugin') }} />{__('Local Delete', 'wdesignkit')}</span>
+                  <span className='wkit-radio-desc'>{__('This will remove your Widget from your current website. If you need to use it in the future, you can simply download it again from the server.', 'wdesignkit')}</span>
                 </label>
               }
               <div className='wkit-widget-delete-btn-position'>
@@ -1128,7 +1144,7 @@ const Popup = (props) => {
                 }
                 {loader == false &&
                   <button className="wkit-template-delete wkit-btn-class" onClick={(e) => { Delete_widget(e) }} >
-                    <span>Yes, Delete it!</span>
+                    <span>{__('Yes, Delete it!', 'wdesignkit')}</span>
                   </button>
                 }
               </div>
@@ -1148,12 +1164,12 @@ const Popup = (props) => {
             </div>
             <div className="wb-version-detail">
               <div className="wkit-add-widget-header-container">
-                <div className="popup-header">Add Sync Details</div>
+                <div className="popup-header">{__('Add Sync Details', 'wdesignkit')}</div>
               </div>
               <div className="wb-version-body wb-add-widget">
                 <div className='wb-version-wrap wb-version-current'>
                   <div className="wb-version-number">
-                    <span className='wb-version-label'>Current Version</span>
+                    <span className='wb-version-label'>{__('Current Version', 'wdesignkit')}</span>
                     <input className="wb-version-input"
                       type="text"
                       defaultValue={props?.w_version ? props?.w_version : '1.0.0'}
@@ -1161,7 +1177,7 @@ const Popup = (props) => {
                       style={{ cursor: "not-allowed" }} />
                   </div>
                   <div className="wb-version-details">
-                    <span className='wb-version-label'>Latest Version</span>
+                    <span className='wb-version-label'>{__('Latest Version', 'wdesignkit')}</span>
                     <input className="wb-version-input"
                       value={props?.w_version ? w_version : '1.0.0'}
                       type="text"
@@ -1170,12 +1186,12 @@ const Popup = (props) => {
                     <div className="wb-error-message">{error_msg}</div>
                   </div>
                 </div>
-                <span className='wb-version-label'>Changelog</span>
+                <span className='wb-version-label'>{__('Changelog', 'wdesignkit')}</span>
                 <div className="wb-version-changes">
                   {version_details.map((val, index) => {
                     return (
                       <div className='wb-version-wrap'>
-                        <textarea className="wb-version-detail-input" value={val} placeholder='Please enter description' rows="2" onChange={(e) => { Update_changelog(e, index) }} />
+                        <textarea className="wb-version-detail-input" value={val} placeholder={__('Please enter description', 'wdesignkit')} rows="2" onChange={(e) => { Update_changelog(e, index) }} />
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" onClick={() => { Delete_changelog(index) }} fill="black">
                           <path fillRule="evenodd" clipRule="evenodd" d="M8.89978 1.92188C8.57488 1.92188 8.2633 2.05094 8.03359 2.28066L8.03358 2.28067C7.80384 2.51041 7.67478 2.82199 7.67478 3.14687V4.37187H14.3248V3.14687C14.3248 2.82204 14.1957 2.51043 13.966 2.28064C13.7363 2.05095 13.4247 1.92188 13.0998 1.92188H8.89978ZM16.0748 4.37187V3.14687C16.0748 2.3578 15.7613 1.60113 15.2034 1.04326C14.6455 0.485289 13.8887 0.17188 13.0998 0.17188H8.89978C8.11078 0.17188 7.35406 0.485298 6.79613 1.04324C6.23822 1.60115 5.92478 2.35785 5.92478 3.14687V4.37187H3.64978C3.63803 4.37187 3.62634 4.3721 3.61471 4.37256H1.55005C1.0668 4.37256 0.675049 4.76431 0.675049 5.24756C0.675049 5.73081 1.0668 6.12256 1.55005 6.12256H2.77478V19.9469C2.77478 20.7358 3.08821 21.4926 3.64617 22.0505C4.20403 22.6084 4.96072 22.9219 5.74978 22.9219H16.2498C17.0388 22.9219 17.7955 22.6084 18.3534 22.0505C18.9113 21.4926 19.2248 20.7359 19.2248 19.9469V6.12256H20.4501C20.9333 6.12256 21.3251 5.73081 21.3251 5.24756C21.3251 4.76431 20.9333 4.37256 20.4501 4.37256H18.3849C18.3732 4.3721 18.3615 4.37187 18.3498 4.37187H16.0748ZM4.52478 19.9469V6.12256H17.4748V19.9469C17.4748 20.2717 17.3457 20.5834 17.116 20.8131C16.8863 21.0428 16.5746 21.1719 16.2498 21.1719H5.74978C5.42494 21.1719 5.11333 21.0428 4.88356 20.8131L4.26572 21.4309L4.88355 20.8131C4.65385 20.5834 4.52478 20.2718 4.52478 19.9469ZM11.8751 10.4971C11.8751 10.0139 11.4833 9.6221 11.0001 9.6221C10.5169 9.6221 10.1251 10.0139 10.1251 10.4971V16.7971C10.1251 17.2803 10.5169 17.6721 11.0001 17.6721C11.4833 17.6721 11.8751 17.2803 11.8751 16.7971V10.4971Z" />
                         </svg>
@@ -1188,11 +1204,11 @@ const Popup = (props) => {
                   <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M6.5 0.546875H5.5V6.04688H0V7.04688H5.5V12.5469H6.5V7.04688H12V6.04688H6.5V0.546875Z" fill="#040483" />
                   </svg>
-                  <label>Add more</label>
+                  <label>{__('Add more', 'wdesignkit')}</label>
                 </button>
                 <div className="wb-add-widget-footer">
                   <div className="wb-add-widget-cancelBtn">
-                    <button onClick={(e) => { props.ClosePopup(); }} > Cancel </button>
+                    <button onClick={(e) => { props.ClosePopup(); }} > {__('Cancel', 'wdesignkit')} </button>
                   </div>
                   {loader == true &&
                     <button className={`wb-version-popup-btn wb-addss-widget-updateBtn wkit-btn-class`}>
@@ -1206,7 +1222,7 @@ const Popup = (props) => {
                       style={{ cursor: (props?.w_version < w_version || !props?.w_version) ? '' : "no-drop" }}
                       disabled={props?.w_version < w_version || !props?.w_version ? false : true}
                       onClick={(e) => { Update_version() }}>
-                      <span>Update</span>
+                      <span>{__('Update', 'wdesignkit')}</span>
                     </button>
                   }
                 </div>
@@ -1228,7 +1244,7 @@ const Popup = (props) => {
             <div className="wb-version-detail">
               <div className="wkit-add-widget-header-container">
                 <div className="wb-version-header">
-                  <label>Duplicate Widget</label>
+                  <label>{__('Duplicate Widget', 'wdesignkit')}</label>
                 </div>
               </div>
               {subpopup == 'duplicate' &&
@@ -1236,17 +1252,16 @@ const Popup = (props) => {
                   <div className='wb-version-wrap'>
                     <div className="wb-version-number">
                       <div className="wb-add-widget-name-title">
-                        <span className='wb-version-label'>Enter New Widget Name</span>
+                        <span className='wb-version-label'>{__('Enter New Widget Name', 'wdesignkit')}</span>
                         <div className='wkit-wb-toolTip wkit-popup-first-toolTip'>
                           <img className="wkit-wb-toolTip-icon" src={ImagePath + 'assets/images/wb-svg/info.svg'} width="13" style={{ marginBottom: '-8px' }} />
                           <span className='wkit-wb-toolTip-text wb-wkit-widgetName-toolTip wkit-wb-name-Tooltip' >
-                            Only numbers and alphabet are allowed for this field,
-                            Widget name must be smaller then 25 charaters and first letter can't be digit.</span>
+                            {__('Only numbers and alphabet are allowed for this field,Widget name must be smaller then 25 charaters and first letter can\'t be digit.', 'wdesignkit')}</span>
                         </div>
                       </div>
                       <input className="wb-version-input"
                         type="text"
-                        placeholder="Enter Widget Name"
+                        placeholder={__("Enter Widget Name", 'wdesignkit')}
                         value={duplicate_w_name}
                         onChange={(e) => { Get_widget_name(e) ? setduplicate_w_name(e.target.value) : '' }}
                         onBlur={() => { setduplicate_w_name(duplicate_w_name.trim()) }}
@@ -1265,13 +1280,13 @@ const Popup = (props) => {
                       <Fragment>
                         <div className="wkit-quickedit-note">
                           <span>
-                            <b>Note :</b> This new widget will have unique class, So It will work independently from previous widget.
+                            <b>{__('Note :', 'wdesignkit')}</b> {__('This new widget will have unique class, So It will work independently from previous widget.', 'wdesignkit')}
                           </span>
                         </div>
                         <button className='wb-version-popup-btn wkit-btn-class'
                           disabled={duplicate_w_name ? false : true}
                           onClick={() => { Widget_Duplicate(); setsubpopup('success_duplicate') }}>
-                          <span>Duplicate</span>
+                          <span>{__('Duplicate', 'wdesignkit')}</span>
                         </button>
                       </Fragment>
                     }
@@ -1299,7 +1314,7 @@ const Popup = (props) => {
                               <path d="M21.9015 12.5103C23.0606 12.5103 24.0003 11.5881 24.0003 10.4505C24.0003 9.31285 23.0606 8.39062 21.9015 8.39062C20.7424 8.39062 19.8027 9.31285 19.8027 10.4505C19.8027 11.5881 20.7424 12.5103 21.9015 12.5103Z" fill="#B1B1D9" />
                               <path d="M12.701 5.98793C14.3545 5.98793 15.695 4.64748 15.695 2.99396C15.695 1.34044 14.3545 0 12.701 0C11.0475 0 9.70703 1.34044 9.70703 2.99396C9.70703 4.64748 11.0475 5.98793 12.701 5.98793Z" fill="#040483" />
                             </svg>
-                            <span>In Progress</span>
+                            <span>{__('In Progress', 'wdesignkit')}</span>
                           </div>
                           <div className="wkit-duplicate-widget-name">
                             <div className="wkit-duplicate-widget-oldName">{props.quickeditName}</div>
@@ -1308,26 +1323,27 @@ const Popup = (props) => {
                             </svg>
                             <div className="wkit-duplicate-widget-NewName">{duplicate_w_name}</div>
                           </div>
-                          <div className="wkit-duplicate-widget-details">Transferring all your HTML,CSS and JS to New one</div>
+                          <div className="wkit-duplicate-widget-details">{__('Transferring all your HTML,CSS and JS to New one', 'wdesignkit')}</div>
                         </Fragment>
                       }
                       {loader == false &&
                         <Fragment>
-                          <span className="wkit-duplicate-congratularions">Congratulations! <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12.0437 18.8299C11.2209 19.1329 10.1762 19.5169 8.85467 20.0067C6.59792 19.6917 4.22642 18.9574 3.20117 17.2722C3.57467 16.2664 3.90017 15.3852 4.18817 14.6074C6.12017 16.8394 9.49592 18.2569 12.0437 18.8299Z" fill="#00A31B" />
-                            <path d="M12.6979 11.3027C10.5019 9.10744 7.67437 7.48594 6.52162 8.64094C6.27562 8.88694 6.34987 8.73994 4.64062 13.3787C6.46312 16.0089 11.0681 17.8457 14.2759 18.0069C15.2351 17.6462 15.2126 17.6282 15.3604 17.4797C16.7741 16.0659 14.1109 12.7149 12.6979 11.3027ZM14.5639 16.6832C14.4566 16.7919 13.9579 16.7972 13.0721 16.3599C12.1091 15.8837 11.0104 15.0534 9.97837 14.0214C7.58738 11.6304 7.02862 9.72394 7.31662 9.43594C7.36162 9.39094 7.44562 9.36694 7.56487 9.36694C8.21062 9.36694 9.88388 10.0802 11.9029 12.0984C12.9349 13.1304 13.7659 14.2292 14.2421 15.1922C14.6794 16.0764 14.6719 16.5759 14.5639 16.6832Z" fill="#00A31B" />
-                            <path d="M6.79345 20.7708C5.49445 21.2538 3.9967 21.8133 2.25745 22.465C1.8052 22.6315 1.3672 22.192 1.53445 21.742C1.97245 20.569 2.3677 19.5085 2.7277 18.541C3.7162 19.6765 5.2027 20.365 6.79345 20.7708Z" fill="#00A31B" />
-                            <path d="M14.7526 2.92042C14.4024 2.98192 14.0641 3.03742 13.8346 3.15292C14.1796 3.68242 14.9004 4.35667 14.4601 5.23717C14.0664 6.02467 13.2481 5.97817 12.5379 6.00292C12.9736 6.59842 13.4776 7.20217 13.0891 7.97992C12.6864 8.78617 11.6304 8.95342 11.0071 9.05467C10.8054 9.08767 10.6179 8.95267 10.5804 8.75242L10.4439 8.01592C10.4056 7.81117 10.5436 7.61392 10.7484 7.57792C11.1031 7.51567 11.4354 7.46167 11.6664 7.34542C11.3199 6.81967 10.6021 6.13867 11.0401 5.26192C11.4331 4.47667 12.2506 4.52092 12.9624 4.49617C12.5259 3.90067 12.0226 3.29692 12.4111 2.51917C12.8139 1.71367 13.8706 1.54567 14.4924 1.44442C14.6941 1.41142 14.8816 1.54642 14.9184 1.74667L15.0549 2.48317C15.0946 2.68792 14.9581 2.88442 14.7526 2.92042Z" fill="#00A31B" />
-                            <path d="M21.5159 8.9437L22.2524 9.0802C22.4534 9.1177 22.5877 9.3052 22.5547 9.5062C22.4534 10.128 22.2854 11.1847 21.4799 11.5875C20.7022 11.976 20.0984 11.4727 19.5029 11.0362C19.4782 11.748 19.5224 12.5662 18.7372 12.9585C17.8604 13.3965 17.1794 12.6787 16.6537 12.3322C16.5374 12.5632 16.4834 12.8955 16.4212 13.2502C16.3852 13.4557 16.1879 13.593 15.9832 13.5547L15.2467 13.4182C15.0457 13.3807 14.9114 13.1932 14.9444 12.9915C15.0457 12.369 15.2137 11.313 16.0192 10.9095C16.7962 10.521 17.4007 11.025 17.9962 11.4607C18.0209 10.7505 17.9744 9.93145 18.7619 9.53845C19.6424 9.0982 20.3167 9.81895 20.8462 10.164C20.9617 9.93445 21.0172 9.5962 21.0787 9.24595C21.1139 9.0427 21.3104 8.9062 21.5159 8.9437Z" fill="#00A31B" />
-                            <path d="M19.275 15.75H17.85C17.7255 15.75 17.625 15.6495 17.625 15.525V14.85C17.625 14.7255 17.7255 14.625 17.85 14.625H19.275C19.3995 14.625 19.5 14.7255 19.5 14.85V15.525C19.5 15.6495 19.3995 15.75 19.275 15.75Z" fill="#00A31B" />
-                            <path d="M20.8415 2.45531L19.8335 3.46331C19.7457 3.55106 19.6032 3.55106 19.5155 3.46331L19.0385 2.98556C18.9507 2.89781 18.9507 2.75531 19.0385 2.66756L20.0465 1.65956C20.1342 1.57181 20.2767 1.57181 20.3645 1.65956L20.8415 2.13656C20.9292 2.22431 20.9292 2.36681 20.8415 2.45531Z" fill="#00A31B" />
-                            <path d="M9.15 4.875H8.475C8.3505 4.875 8.25 4.7745 8.25 4.65V3.225C8.25 3.1005 8.3505 3 8.475 3H9.15C9.2745 3 9.375 3.1005 9.375 3.225V4.65C9.375 4.7745 9.2745 4.875 9.15 4.875Z" fill="#00A31B" />
-                            <path d="M14.537 9.9415L13.9745 9.5665C13.8688 9.496 13.838 9.3535 13.9108 9.24925C15.4415 7.07125 18.3928 4.801 21.515 4.6915C21.6433 4.68775 21.7498 4.79425 21.7498 4.92175V5.5975C21.7498 5.7175 21.6553 5.81125 21.5353 5.8165C18.923 5.92 16.247 7.88725 14.8393 9.8845C14.7695 9.98425 14.6375 10.009 14.537 9.9415Z" fill="#00A31B" />
-                          </svg></span>
-                          <span className="wkit-duplicate-success-msg">Congratulations! New Widget <b>{duplicate_w_name}</b> created from Widget <b>{props.quickeditName}</b> Successfully!</span>
+                          <span className="wkit-duplicate-congratularions">{__('Congratulations!', 'wdesignkit')}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M12.0437 18.8299C11.2209 19.1329 10.1762 19.5169 8.85467 20.0067C6.59792 19.6917 4.22642 18.9574 3.20117 17.2722C3.57467 16.2664 3.90017 15.3852 4.18817 14.6074C6.12017 16.8394 9.49592 18.2569 12.0437 18.8299Z" fill="#00A31B" />
+                              <path d="M12.6979 11.3027C10.5019 9.10744 7.67437 7.48594 6.52162 8.64094C6.27562 8.88694 6.34987 8.73994 4.64062 13.3787C6.46312 16.0089 11.0681 17.8457 14.2759 18.0069C15.2351 17.6462 15.2126 17.6282 15.3604 17.4797C16.7741 16.0659 14.1109 12.7149 12.6979 11.3027ZM14.5639 16.6832C14.4566 16.7919 13.9579 16.7972 13.0721 16.3599C12.1091 15.8837 11.0104 15.0534 9.97837 14.0214C7.58738 11.6304 7.02862 9.72394 7.31662 9.43594C7.36162 9.39094 7.44562 9.36694 7.56487 9.36694C8.21062 9.36694 9.88388 10.0802 11.9029 12.0984C12.9349 13.1304 13.7659 14.2292 14.2421 15.1922C14.6794 16.0764 14.6719 16.5759 14.5639 16.6832Z" fill="#00A31B" />
+                              <path d="M6.79345 20.7708C5.49445 21.2538 3.9967 21.8133 2.25745 22.465C1.8052 22.6315 1.3672 22.192 1.53445 21.742C1.97245 20.569 2.3677 19.5085 2.7277 18.541C3.7162 19.6765 5.2027 20.365 6.79345 20.7708Z" fill="#00A31B" />
+                              <path d="M14.7526 2.92042C14.4024 2.98192 14.0641 3.03742 13.8346 3.15292C14.1796 3.68242 14.9004 4.35667 14.4601 5.23717C14.0664 6.02467 13.2481 5.97817 12.5379 6.00292C12.9736 6.59842 13.4776 7.20217 13.0891 7.97992C12.6864 8.78617 11.6304 8.95342 11.0071 9.05467C10.8054 9.08767 10.6179 8.95267 10.5804 8.75242L10.4439 8.01592C10.4056 7.81117 10.5436 7.61392 10.7484 7.57792C11.1031 7.51567 11.4354 7.46167 11.6664 7.34542C11.3199 6.81967 10.6021 6.13867 11.0401 5.26192C11.4331 4.47667 12.2506 4.52092 12.9624 4.49617C12.5259 3.90067 12.0226 3.29692 12.4111 2.51917C12.8139 1.71367 13.8706 1.54567 14.4924 1.44442C14.6941 1.41142 14.8816 1.54642 14.9184 1.74667L15.0549 2.48317C15.0946 2.68792 14.9581 2.88442 14.7526 2.92042Z" fill="#00A31B" />
+                              <path d="M21.5159 8.9437L22.2524 9.0802C22.4534 9.1177 22.5877 9.3052 22.5547 9.5062C22.4534 10.128 22.2854 11.1847 21.4799 11.5875C20.7022 11.976 20.0984 11.4727 19.5029 11.0362C19.4782 11.748 19.5224 12.5662 18.7372 12.9585C17.8604 13.3965 17.1794 12.6787 16.6537 12.3322C16.5374 12.5632 16.4834 12.8955 16.4212 13.2502C16.3852 13.4557 16.1879 13.593 15.9832 13.5547L15.2467 13.4182C15.0457 13.3807 14.9114 13.1932 14.9444 12.9915C15.0457 12.369 15.2137 11.313 16.0192 10.9095C16.7962 10.521 17.4007 11.025 17.9962 11.4607C18.0209 10.7505 17.9744 9.93145 18.7619 9.53845C19.6424 9.0982 20.3167 9.81895 20.8462 10.164C20.9617 9.93445 21.0172 9.5962 21.0787 9.24595C21.1139 9.0427 21.3104 8.9062 21.5159 8.9437Z" fill="#00A31B" />
+                              <path d="M19.275 15.75H17.85C17.7255 15.75 17.625 15.6495 17.625 15.525V14.85C17.625 14.7255 17.7255 14.625 17.85 14.625H19.275C19.3995 14.625 19.5 14.7255 19.5 14.85V15.525C19.5 15.6495 19.3995 15.75 19.275 15.75Z" fill="#00A31B" />
+                              <path d="M20.8415 2.45531L19.8335 3.46331C19.7457 3.55106 19.6032 3.55106 19.5155 3.46331L19.0385 2.98556C18.9507 2.89781 18.9507 2.75531 19.0385 2.66756L20.0465 1.65956C20.1342 1.57181 20.2767 1.57181 20.3645 1.65956L20.8415 2.13656C20.9292 2.22431 20.9292 2.36681 20.8415 2.45531Z" fill="#00A31B" />
+                              <path d="M9.15 4.875H8.475C8.3505 4.875 8.25 4.7745 8.25 4.65V3.225C8.25 3.1005 8.3505 3 8.475 3H9.15C9.2745 3 9.375 3.1005 9.375 3.225V4.65C9.375 4.7745 9.2745 4.875 9.15 4.875Z" fill="#00A31B" />
+                              <path d="M14.537 9.9415L13.9745 9.5665C13.8688 9.496 13.838 9.3535 13.9108 9.24925C15.4415 7.07125 18.3928 4.801 21.515 4.6915C21.6433 4.68775 21.7498 4.79425 21.7498 4.92175V5.5975C21.7498 5.7175 21.6553 5.81125 21.5353 5.8165C18.923 5.92 16.247 7.88725 14.8393 9.8845C14.7695 9.98425 14.6375 10.009 14.537 9.9415Z" fill="#00A31B" />
+                            </svg></span>
+                          <span className="wkit-duplicate-success-msg">{__('Congratulations! New Widget', 'wdesignkit')} <b>{duplicate_w_name}</b> {__('created from Widget', 'wdesignkit')} <b>{props.quickeditName}</b> {__('Successfully!', 'wdesignkit')}</span>
                           <Link to={`/widget-listing/builder/${duplicate_w_name + "_" + cn_new_widget_id}`} target='_blank' rel="noopener noreferrer">
                             <button className="wb-convert-popup-btn wkit-btn-class">
-                              <span>Edit {duplicate_w_name}</span>
+                              <span>{__('Edit', 'wdesignkit')} {duplicate_w_name}</span>
                             </button>
                           </Link>
                         </Fragment>
@@ -1354,7 +1370,7 @@ const Popup = (props) => {
             <div className="wb-version-detail">
               <div className="wkit-add-widget-header-container">
                 <div className="wb-version-header">
-                  <label>Convert Widget</label>
+                  <label>{__('Convert Widget', 'wdesignkit')}</label>
                 </div>
               </div>
               {subpopup == 'duplicate' &&
@@ -1363,7 +1379,7 @@ const Popup = (props) => {
                   <div className='wb-version-wrap'>
                     <div className="wb-convert-main">
                       <div className="wb-convert-widget-group">
-                        <span className='wb-convert-label'>Current Widget</span>
+                        <span className='wb-convert-label'>{__('Current Widget', 'wdesignkit')}</span>
                         <span className="wkit-select-builder-wrap">
                           <img style={{ width: '24px' }} src={img_path + `/assets/images/wb-svg/${props?.quickediteditType}.svg`} />
                           <label>{CapitalizedText(props?.quickediteditType)}</label>
@@ -1375,7 +1391,7 @@ const Popup = (props) => {
                         </svg>
                       </div>
                       <div className="wb-convert-widget-group">
-                        <span className='wb-convert-label'>Convert to</span>
+                        <span className='wb-convert-label'>{__('Convert to', 'wdesignkit')}</span>
 
                         <div className='wkit-select-builder-inner-wrap wkit-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
                           <div className="wkit-custom-dropDown-header">
@@ -1383,7 +1399,7 @@ const Popup = (props) => {
                               {selectedBuilder &&
                                 <img style={{ width: '24px' }} src={img_path + `/assets/images/wb-svg/${selectedBuilder}.svg`} />
                               }
-                              <span>{selectedBuilder || __('Select Builder')}</span>
+                              <span>{selectedBuilder || __('Select Builder', 'wdesignkit')}</span>
                             </div>
                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} alt="Controller Open" />
                           </div>
@@ -1416,13 +1432,13 @@ const Popup = (props) => {
                       <Fragment>
                         <div className="wkit-quickedit-note">
                           <span>
-                            <b>Note :</b> This new widget will have have unique class, So It will work independently from previous widget.
+                            <b>{__('Note :', 'wdesignkit')}</b> {__('This new widget will have have unique class, So It will work independently from previous widget.', 'wdesignkit')}
                           </span>
                         </div>
                         <button className='wb-version-popup-btn wkit-btn-class'
                           disabled={selectedBuilder == '' ? true : false}
                           onClick={() => { setsubpopup('widget_infomation') }}>
-                          <span>Next</span>
+                          <span>{__('Next', 'wdesignkit')}</span>
                         </button>
                       </Fragment>
                     }
@@ -1435,12 +1451,11 @@ const Popup = (props) => {
 
                     <div className="wb-convert-widget-group">
                       <div className="wb-add-widget-name-title">
-                        <span className='wb-version-label'>Widget Name</span>
+                        <span className='wb-version-label'>{__('Widget Name', 'wdesignkit')}</span>
                         <div className='wkit-wb-toolTip wkit-popup-first-toolTip'>
                           <img className="wkit-wb-toolTip-icon" src={ImagePath + 'assets/images/wb-svg/info.svg'} width="13" style={{ marginBottom: '-9px' }} />
                           <span className='wkit-wb-toolTip-text wb-wkit-widgetName-toolTip wkit-wb-name-Tooltip'>
-                            Only numbers and alphabet are allowed for this field,
-                            Widget name must be smaller then 25 charaters and first letter can't be digit.</span>
+                            {__('Only numbers and alphabet are allowed for this field,Widget name must be smaller then 25 charaters and first letter can\'t be digit.', 'wdesignkit')}</span>
                         </div>
                       </div>
                       <input className="wb-convert-input-text"
@@ -1454,7 +1469,7 @@ const Popup = (props) => {
                     </div>
                     <div className="wb-convert-widget-main">
                       <div className="wb-add-widget-image-content">
-                        <label className="wb-version-label">Featured Image</label>
+                        <label className="wb-version-label">{__('Featured Image', 'wdesignkit')}</label>
                         <div className="wb-drop-file"
                           onDragOver={(e) => { e.preventDefault(); }}
                           onDrop={(e) => { Upload_image(e, e.dataTransfer.files[0]) }}
@@ -1467,14 +1482,14 @@ const Popup = (props) => {
                         </div>
                       </div>
                       <div className="wb-icon-convert-select">
-                        <label className="wb-version-label">Widget Icon</label>
+                        <label className="wb-version-label">{__('Widget Icon', 'wdesignkit')}</label>
                         <div className="wb-eicons-content">
                           <div className="wb-eicons-val">
                             <input className="wb-eicons-inp" value={widget_icon} type="text" placeholder="Enter Icon code from below links (e.g. eicon-code)" onChange={(e) => { Icon_validation(e) }} />
                           </div>
                           <div className="wb-eicons-links">
                             <div className="wb-eicons-links-heading">
-                              <span>Copy Icon Name From Below Libraries and Paste Above.</span>
+                              <span>{__('Copy Icon Name From Below Libraries and Paste Above.', 'wdesignkit')}</span>
                             </div>
                             <div className="wb-eicons-links-content">
                               {specificLinks[selectedBuilder].links.map((links, index) => {
@@ -1499,7 +1514,7 @@ const Popup = (props) => {
 
                     <div className='wkit-switch-convert-wrap'>
                       <input id="wkit-convert-load-jquery" type="checkbox" className="wkit-convert-input" checked={LoadjQuery} onChange={(e) => { setLoadjQuery(e.target.checked) }} />
-                      <label htmlFor="wkit-convert-load-jquery">Do you want to load jQuery ?</label>
+                      <label htmlFor="wkit-convert-load-jquery">{__('Do you want to load jQuery ?', 'wdesignkit')}</label>
                     </div>
                   }
                   <div className="wb-quickedit-footer">
@@ -1507,7 +1522,7 @@ const Popup = (props) => {
                       <Fragment>
                         <div className="wkit-quickedit-note">
                           <span>
-                            <b>Note :</b> This new widget will have have unique class, So It will work independently from previous widget.
+                            <b>{__('Note :', 'wdesignkit')}</b> {__('This new widget will have have unique class, So It will work independently from previous widget.', 'wdesignkit')}
                           </span>
                         </div>
                         <button className='wb-version-popup-btn wkit-btn-class' disabled={duplicate_w_name ? false : true}
@@ -1541,7 +1556,7 @@ const Popup = (props) => {
                               <path d="M21.9015 12.5103C23.0606 12.5103 24.0003 11.5881 24.0003 10.4505C24.0003 9.31285 23.0606 8.39062 21.9015 8.39062C20.7424 8.39062 19.8027 9.31285 19.8027 10.4505C19.8027 11.5881 20.7424 12.5103 21.9015 12.5103Z" fill="#B1B1D9" />
                               <path d="M12.701 5.98793C14.3545 5.98793 15.695 4.64748 15.695 2.99396C15.695 1.34044 14.3545 0 12.701 0C11.0475 0 9.70703 1.34044 9.70703 2.99396C9.70703 4.64748 11.0475 5.98793 12.701 5.98793Z" fill="#040483" />
                             </svg>
-                            <span> Converting </span>
+                            <span> {__('Converting', 'wdesignkit')} </span>
                           </div>
                           <div className="wb-convert-main">
                             <div className="wb-convert-widget-group">
@@ -1562,7 +1577,7 @@ const Popup = (props) => {
                               </div>
                             </div>
                           </div>
-                          <div className="wkit-duplicate-widget-details">Converting your widget {CapitalizedText(props?.quickediteditType)} to {CapitalizedText(selectedBuilder)} </div>
+                          <div className="wkit-duplicate-widget-details">{__('Converting your widget', 'wdesignkit')} {CapitalizedText(props?.quickediteditType)} {__('to', 'wdesignkit')} {CapitalizedText(selectedBuilder)} </div>
 
                         </Fragment>
                       }
@@ -1573,17 +1588,17 @@ const Popup = (props) => {
                             <img src={widget_image ? window.URL.createObjectURL(widget_image) : props.widget_image} />
                           </div>
 
-                          <span className="wkit-duplicate-congratularions">Successfully  converted
+                          <span className="wkit-duplicate-congratularions">{__('Successfully  converted', 'wdesignkit')}
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><rect y="0.640625" width="24" height="24" rx="12" fill="#00A31B" /><path fillRule="evenodd" clipRule="evenodd" d="M8.25533 18.4895L3.86655 13.7922C3.2657 13.1491 3.30018 12.1316 3.94327 11.5308C4.58636 10.9299 5.60381 10.9645 6.20466 11.6075L9.58998 15.2308L14.9485 10.2241C14.9967 10.179 15.047 10.1378 15.0991 10.0998L17.619 7.74541C18.2621 7.14456 19.2796 7.17914 19.8804 7.82223C20.4813 8.46522 20.4467 9.48276 19.8037 10.0836L12.1072 17.2746L12.099 17.2658L9.43672 19.7533L8.25533 18.4895Z" fill="white" /></svg>
                           </span>
 
                           <span className="wkit-duplicate-success-msg">
-                            Your {duplicate_w_name} widget has been successfully converted to {CapitalizedText(selectedBuilder)} Builder
+                            {__('Your', 'wdesignkit')} {duplicate_w_name} {__('widget has been successfully converted to', 'wdesignkit')} {CapitalizedText(selectedBuilder)} {__('Builder', 'wdesignkit')}
                           </span>
 
                           <Link to={`/widget-listing/builder/${duplicate_w_name + "_" + cn_new_widget_id}`} target='_blank' rel="noopener noreferrer">
                             <button className="wb-convert-popup-btn wkit-btn-class">
-                              <span>Edit {duplicate_w_name}</span>
+                              <span>{__('Edit', 'wdesignkit')} {duplicate_w_name}</span>
                             </button>
                           </Link>
                         </Fragment>
@@ -1603,7 +1618,7 @@ const Popup = (props) => {
       {props.popup == "add-widget" && (
         <div id="popup" className="wb-add-widget addWidget">
           <div className="wkit-add-widget-header-container">
-            <div className="popup-header">Create Widget</div>
+            <div className="popup-header">{__('Create Widget', 'wdesignkit')}</div>
             <div className="wkit-popup-close-icon" onClick={(e) => { props.ClosePopup(); }} >
               <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.40091 15.2558C1.66182 15.5169 2.01481 15.6637 2.38274 15.6637C2.75067 15.6637 3.10366 15.5169 3.36456 15.2558L8.29499 10.2193L13.2254 15.2558C13.5884 15.6217 14.118 15.7645 14.6141 15.6306C15.1103 15.4967 15.4981 15.1062 15.6309 14.6064C15.7639 14.1067 15.6221 13.5733 15.2588 13.2076L10.2587 8.24141L15.2588 3.27521C15.5659 2.91424 15.6703 2.42082 15.5365 1.96497C15.4027 1.50913 15.0485 1.15236 14.5959 1.01757C14.1431 0.882762 13.6535 0.987976 13.2949 1.29727L8.29499 6.26348L3.36455 1.29727C3.00619 0.987976 2.51632 0.882762 2.06375 1.01757C1.61119 1.15237 1.257 1.50911 1.12317 1.96497C0.989339 2.42082 1.0938 2.91424 1.40087 3.27521L6.3313 8.24141L1.40087 13.2076C1.11968 13.4728 0.959961 13.8436 0.959961 14.2316C0.959961 14.6198 1.11968 14.9904 1.40087 15.2557L1.40091 15.2558Z" fill="black" />
@@ -1615,12 +1630,11 @@ const Popup = (props) => {
               <div className="wb-add-widget-name-warpper">
                 <div className="wb-add-widget-name">
                   <div className="wb-add-widget-name-title">
-                    <span className="wb-add-widget-headings">Widget Name</span>
+                    <span className="wb-add-widget-headings">{__('Widget Name', 'wdesignkit')}</span>
                     <div className='wkit-wb-toolTip wkit-popup-first-toolTip'>
                       <img className="wkit-wb-toolTip-icon" src={ImagePath + 'assets/images/wb-svg/info.svg'} width="13" style={{ marginBottom: '-5px' }} />
                       <span className='wkit-wb-toolTip-text wb-wkit-widgetName-toolTip wkit-wb-name-Tooltip'>
-                        Only numbers and alphabet are allowed for this field,
-                        Widget name must be smaller than 25 characters and first letter can't be digit.</span>
+                        {__('Only numbers and alphabet are allowed for this field, Widget name must be smaller than 25 characters and first letter can\'t be digit.', 'wdesignkit')}</span>
                     </div>
                   </div>
                   <input
@@ -1638,26 +1652,32 @@ const Popup = (props) => {
               </div>
               <div className="wb-add-widget-image">
                 <div className="wb-add-widget-image-content">
-                  <span className="wb-add-widget-imageinput wb-add-widget-headings">Featured Image</span>
+                  <span className="wb-add-widget-imageinput wb-add-widget-headings">{__('Featured Image', 'wdesignkit')}</span>
                   <div className="wb-drop-file"
                     onDragOver={(e) => { e.preventDefault(); }}
                     onDrop={(e) => { Upload_image(e, e.dataTransfer.files[0]) }}
-                    onClick={() => { document.querySelector("#wb-addwidget-img").click() }}>
+                    onClick={(e) => { handleImage(e, 'upload') }}>
                     <input className="wb-dropinput-file" type="file" id="wb-addwidget-img" name="wbdropfile" onChange={(event) => {
                       Upload_image(event, event.target.files[0])
                     }} accept="image/*" />
                     {
-                      !widget_image &&
-                      <>
-                        <img src={ImagePath + "/assets/images/wb-svg/file-upload.svg"} />
-                        <span> Drag & Drop or Upload Image File Here <br />(Only .JPG and .PNG Allowed)</span>
-                      </>
+                      !widget_image ?
+                        <>
+                          <img src={ImagePath + "/assets/images/wb-svg/file-upload.svg"} />
+                          <span> {__('Drag & Drop or Upload Image File Here', 'wdesignkit')} <br />{__('(Only .JPG and .PNG Allowed)', 'wdesignkit')}</span>
+                        </>
+                        :
+                        <span className='wkit-remove-widget-img' onClick={(e) => { handleImage(e, 'remove') }}>
+                          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.40091 15.2558C1.66182 15.5169 2.01481 15.6637 2.38274 15.6637C2.75067 15.6637 3.10366 15.5169 3.36456 15.2558L8.29499 10.2193L13.2254 15.2558C13.5884 15.6217 14.118 15.7645 14.6141 15.6306C15.1103 15.4967 15.4981 15.1062 15.6309 14.6064C15.7639 14.1067 15.6221 13.5733 15.2588 13.2076L10.2587 8.24141L15.2588 3.27521C15.5659 2.91424 15.6703 2.42082 15.5365 1.96497C15.4027 1.50913 15.0485 1.15236 14.5959 1.01757C14.1431 0.882762 13.6535 0.987976 13.2949 1.29727L8.29499 6.26348L3.36455 1.29727C3.00619 0.987976 2.51632 0.882762 2.06375 1.01757C1.61119 1.15237 1.257 1.50911 1.12317 1.96497C0.989339 2.42082 1.0938 2.91424 1.40087 3.27521L6.3313 8.24141L1.40087 13.2076C1.11968 13.4728 0.959961 13.8436 0.959961 14.2316C0.959961 14.6198 1.11968 14.9904 1.40087 15.2557L1.40091 15.2558Z" fill="white"></path>
+                          </svg>
+                        </span>
                     }
                   </div>
                 </div>
                 <div className="wb-add-widget-image-content">
                   <div className="wb-add-widget-name-title">
-                    <span className="wb-add-widget-headings">Widget Icon</span>
+                    <span className="wb-add-widget-headings">{__('Widget Icon', 'wdesignkit')}</span>
                   </div>
                   <div className="wb-eicons-content">
                     <div className="wb-eicons-val">
@@ -1666,7 +1686,7 @@ const Popup = (props) => {
 
                     <div className="wb-eicons-links">
                       <div className="wb-eicons-links-heading">
-                        <span>Copy Icon Name From Below Libraries and Paste Above.</span>
+                        <span>{__('Copy Icon Name From Below Libraries and Paste Above.', 'wdesignkit')}</span>
                       </div>
                       <div className="wb-eicons-links-content">
                         {
@@ -1691,7 +1711,7 @@ const Popup = (props) => {
               {props.BuilderArray.length > 0 &&
                 <>
                   <div className="wb-select-radio-label">
-                    <span className="wb-add-widget-headings">Choose Page Builder</span>
+                    <span className="wb-add-widget-headings">{__('Choose Page Builder', 'wdesignkit')}</span>
                   </div>
                   <div className='wb-add-widget-radio-main'>
                     {props.BuilderArray.map((data, index) => {
@@ -1717,7 +1737,7 @@ const Popup = (props) => {
             </div>
             <div className="wb-add-widget-footer">
               <div className="wb-add-widget-cancelBtn">
-                <button onClick={(e) => { props.ClosePopup(); }} > Cancel </button>
+                <button onClick={(e) => { props.ClosePopup(); }} > {__('Cancel', 'wdesignkit')} </button>
               </div>
               {widgetName && widgetName.trim() ?
                 <>
@@ -1732,14 +1752,14 @@ const Popup = (props) => {
                     :
                     <div className="wb-add-widget-link wkit-btn-class" onClick={(e) => { handleSubmit(e) }}>
                       <button className="wb-add-widget-updateBtn">
-                        <span>Create Widget</span>
+                        <span>{__('Create Widget', 'wdesignkit')}</span>
                       </button>
                     </div>
                   }
                 </>
                 :
                 <button className="wb-addss-widget-updateBtn wkit-disable-btn"
-                  onClick={() => { inputRef.current.focus(); inputRef.current.style.border = '1px solid red' }}>Create Widget</button>
+                  onClick={() => { inputRef.current.focus(); inputRef.current.style.border = '1px solid red' }}>{__('Create Widget', 'wdesignkit')}</button>
               }
             </div>
           </div>
@@ -1751,7 +1771,7 @@ const Popup = (props) => {
         <div>
           <div id="popup" className="wb-add-widget ImportWidget">
             <div className="wkit-add-widget-header-container">
-              <div className="popup-header">Import Widget</div>
+              <div className="popup-header">{__('Import Widget', 'wdesignkit')}</div>
               <div className="wkit-popup-close-icon" onClick={(e) => { props.ClosePopup(); }} >
                 <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.40091 15.2558C1.66182 15.5169 2.01481 15.6637 2.38274 15.6637C2.75067 15.6637 3.10366 15.5169 3.36456 15.2558L8.29499 10.2193L13.2254 15.2558C13.5884 15.6217 14.118 15.7645 14.6141 15.6306C15.1103 15.4967 15.4981 15.1062 15.6309 14.6064C15.7639 14.1067 15.6221 13.5733 15.2588 13.2076L10.2587 8.24141L15.2588 3.27521C15.5659 2.91424 15.6703 2.42082 15.5365 1.96497C15.4027 1.50913 15.0485 1.15236 14.5959 1.01757C14.1431 0.882762 13.6535 0.987976 13.2949 1.29727L8.29499 6.26348L3.36455 1.29727C3.00619 0.987976 2.51632 0.882762 2.06375 1.01757C1.61119 1.15237 1.257 1.50911 1.12317 1.96497C0.989339 2.42082 1.0938 2.91424 1.40087 3.27521L6.3313 8.24141L1.40087 13.2076C1.11968 13.4728 0.959961 13.8436 0.959961 14.2316C0.959961 14.6198 1.11968 14.9904 1.40087 15.2557L1.40091 15.2558Z" fill="black" />
@@ -1760,7 +1780,7 @@ const Popup = (props) => {
             </div>
             <div className="wb-popup-content" style={{ height: "max-content" }}>
               <div className="wb-import-widget-inputs">
-                <label>{__('Select or Drop Your File Here (.ZIP Only)')}</label>
+                <label>{__('Select or Drop Your File Here (.ZIP Only)', 'wdesignkit')}</label>
                 <div className="wb-drop-file-inp" onDragOver={(e) => { e.preventDefault() }} onDrop={(e) => { DropImportFile(e) }} onClick={(e) => { document.querySelector('#wb-import-file').click() }}>
                   {!DropFile ?
                     <img src={ImagePath + "/assets/images/wb-svg/file-upload.svg"} />
@@ -1771,16 +1791,16 @@ const Popup = (props) => {
                   }
                   <input id="wb-import-file" name="myFile" type='file' accept=".zip" onChange={(e) => { Get_file(e) }} />
                   {!DropFile ?
-                    <span>Drag & Drop or Upload Widget ZIP File Here</span>
+                    <span>{__('Drag & Drop or Upload Widget ZIP File Here', 'wdesignkit')}</span>
                     :
                     <span>{DropFile?.name}</span>
                   }
                 </div>
-                <div className="dropFileErrorMessage">Zip file invalid or Missing. Upload Again!</div>
+                <div className="dropFileErrorMessage">{__('Zip file invalid or Missing. Upload Again!', 'wdesignkit')}</div>
               </div>
               <div className="wb-add-widget-footer">
                 <div className="wb-add-widget-cancelBtn">
-                  <button onClick={(e) => { props.ClosePopup(); }} >Close</button>
+                  <button onClick={(e) => { props.ClosePopup(); }} >{__('Close', 'wdesignkit')}</button>
                 </div>
                 {DropFile &&
                   <>
@@ -1792,13 +1812,13 @@ const Popup = (props) => {
                       </button>
                       :
                       <button className="wb-import-widget-updateBtn wkit-btn-class" onClick={(e) => { Import_Widget(e) }}>
-                        <span>Import</span>
+                        <span>{__('Import', 'wdesignkit')}</span>
                       </button>
                     }
                   </>
                 }
                 {!DropFile &&
-                  <button className="wkit-imports-widget-updateBtn wkit-disable-btn" onClick={(e) => { Import_Widget(e) }}>Import</button>
+                  <button className="wkit-imports-widget-updateBtn wkit-disable-btn">{__('Import', 'wdesignkit')}</button>
                 }
               </div>
             </div>

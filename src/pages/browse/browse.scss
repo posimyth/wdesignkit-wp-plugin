@@ -1,4 +1,4 @@
-@import '../../style/variable.scss';
+@use '../../style/variable';
 
 .wkit-browse-main {
     display: flex;
@@ -71,7 +71,7 @@
         }
 
         a {
-            color: $color_white;
+            color: variable.$color_white;
             text-decoration: underline;
             font-weight: 600;
         }
@@ -90,9 +90,9 @@
             right: -100px;
             display: none;
             background-color: black;
-            color: $color_white;
+            color: variable.$color_white;
             padding: 10px;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             width: 237px;
 
             &::before {
@@ -107,7 +107,7 @@
             }
 
             a {
-                color: $color_white;
+                color: variable.$color_white;
                 text-decoration: underline;
                 font-weight: 600;
             }
@@ -276,7 +276,7 @@
 
         .wkit-custom-cateogry:checked~label {
             background: #F5F5FA;
-            border: 0.5px solid $Wdkit_blue_normal;
+            border: 0.5px solid variable.$Wdkit_blue_normal;
             border-radius: 50px;
         }
 
@@ -305,7 +305,7 @@
             position: absolute;
             display: flex;
             align-items: center;
-            background: $Wdkit_blue_normal;
+            background: variable.$Wdkit_blue_normal;
             transform: rotate(90deg);
             color: #fff;
             left: -50px;
@@ -340,7 +340,6 @@
             padding: 10px;
             border-radius: 6px 6px 0px 0px;
             top: 210px;
-            -moz-column-gap: 10px;
             column-gap: 10px;
             font-style: normal;
             font-weight: 500;
@@ -370,7 +369,7 @@
         flex-direction: column;
         height: 100%;
         column-gap: 45px;
-        border-radius: $radius_big;
+        border-radius: variable.$radius_big;
         border: 1px solid #f1f1f4;
         box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
 
@@ -494,7 +493,7 @@
             .wkit-freePro-radio-inp {
                 min-width: 20px;
                 min-height: 20px;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
             }
         }
     }
@@ -550,7 +549,7 @@
                     content: "";
                     margin: 2px;
                     padding: 0;
-                    background-color: $Wdkit_blue_normal;
+                    background-color: variable.$Wdkit_blue_normal;
                     width: 75%;
                     height: 75%;
                     border-radius: 50%;
@@ -598,7 +597,7 @@
         margin: 0;
         min-width: 20px;
         min-height: 20px;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
 
         &+label {
             position: relative;
@@ -620,7 +619,7 @@
     }
 
     .wkit-check-box:checked {
-        background-color: $Wdkit_blue_normal;
+        background-color: variable.$Wdkit_blue_normal;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -672,7 +671,7 @@
         width: 100%;
         padding: 5px 5px 5px 10px;
         border: 1px solid #DADAF0;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
         margin-bottom: 15px;
 
         span {
@@ -721,7 +720,7 @@
         margin-bottom: 20px;
         border: 1px solid #DADAF0;
         padding: 10px;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
 
         .wkit-tag-checkbox {
             display: none;
@@ -732,7 +731,7 @@
             gap: 10px;
             padding: 8px 10px;
             border: 1px solid #DADAF0;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             font-weight: 400;
             font-size: 14px;
             color: #19191B;
@@ -741,8 +740,8 @@
 
             &:hover {
                 transition: 0.3s linear;
-                background-color: $Wdkit_blue_normal;
-                border: 1px solid $Wdkit_blue_normal;
+                background-color: variable.$Wdkit_blue_normal;
+                border: 1px solid variable.$Wdkit_blue_normal;
                 color: #fff;
             }
         }
@@ -757,21 +756,28 @@
         }
 
         .wkit-browse-tag-name-mobile {
-            color: $Wdkit_blue_normal;
+            color: variable.$Wdkit_blue_normal;
             border-radius: 50px;
             font-size: 12px;
+            
+            &:hover {
+                border: 1px solid #DADAF0;
+                color: variable.$Wdkit_blue_normal;
+                background-color: unset;
+            }
+
         }
 
         .wkit-tag-checkbox:checked+.wkit-browse-tag-name {
-            background-color: $Wdkit_blue_normal;
-            border: 1px solid $Wdkit_blue_normal;
+            background-color: variable.$Wdkit_blue_normal;
+            border: 1px solid variable.$Wdkit_blue_normal;
             color: #fff;
         }
 
         .wkit-tag-checkbox:checked+.wkit-browse-tag-name-mobile {
             background: #F5F5FA;
-            border: 0.5px solid $Wdkit_blue_normal;
-            color: $Wdkit_blue_normal;
+            border: 0.5px solid variable.$Wdkit_blue_normal;
+            color: variable.$Wdkit_blue_normal;
         }
     }
 
@@ -795,7 +801,7 @@
             background: #fff;
             padding: 5px 8px;
             height: 36px;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             border: 1px solid #00000010;
 
             label {
@@ -846,7 +852,7 @@
                 top: -30px;
                 white-space: nowrap;
                 background: #19191B;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 color: #fff;
                 padding: 4px;
             }
@@ -870,13 +876,13 @@
         button.wkit-category-free {
             background: transparent;
             border: 1px solid #DADAF0;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             padding: 7px 13px;
             font-size: 12px;
             cursor: pointer;
 
             &:hover {
-                background-color: $Wdkit_blue_normal;
+                background-color: variable.$Wdkit_blue_normal;
                 color: #fff;
                 transition: 0.3s linear;
             }
@@ -895,7 +901,7 @@
             padding: 5px 7px;
             border: 1px solid #DADAF0;
             background: transparent;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             font-weight: 400;
             font-size: 13px;
             line-height: 1;
@@ -917,11 +923,10 @@
             border: none;
             display: flex;
             align-items: center;
-            -moz-column-gap: 5px;
             column-gap: 5px;
             cursor: pointer;
             border: 1px solid #F8F8FF;
-            border-radius: $radius_big;
+            border-radius: variable.$radius_big;
         }
 
         .wkit-action {
@@ -940,7 +945,7 @@
             padding: 5px;
             top: 42px;
             z-index: 1;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
 
             .wkit-browse-select-item {
                 color: #19191B;
@@ -987,7 +992,7 @@
         label.wkit-free-pro {
             padding: 8px 10px;
             border: 1px solid #DADAF0;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             display: flex;
             font-weight: 400;
             font-size: 13px;
@@ -1000,8 +1005,8 @@
         }
 
         .wkit-free-pro-checkbox:checked+label.wkit-free-pro {
-            background-color: $Wdkit_blue_normal;
-            border: 1px solid $Wdkit_blue_normal;
+            background-color: variable.$Wdkit_blue_normal;
+            border: 1px solid variable.$Wdkit_blue_normal;
             color: #fff;
         }
     }
@@ -1027,9 +1032,9 @@
     .wkit-browse-applied-filter .applied-filter-text,
     .wkit-browse-applied-filter .wdkit-reset-all-filters {
 
-        background: $skeleton_bg;
-        animation: $animation;
-        border-radius: $radius_small;
+        background: variable.$skeleton_bg;
+        animation: variable.$animation;
+        border-radius: variable.$radius_small;
         color: transparent;
         pointer-events: none;
         border: none !important;
@@ -1062,9 +1067,9 @@
         .wdkit-star-rating,
         .wkit-widget-card-bottom-part .wkit-widget-info-icons,
         .wkit-widget-card-bottom-part .wkit-widget-builder-icon {
-            background: $skeleton_bg;
-            animation: $animation;
-            border-radius: $radius_small;
+            background: variable.$skeleton_bg;
+            animation: variable.$animation;
+            border-radius: variable.$radius_small;
             color: transparent;
             pointer-events: none;
             border: none !important;

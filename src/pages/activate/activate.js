@@ -2,13 +2,9 @@ import './activate.scss';
 import { useState, useEffect, useRef } from 'react';
 import { Form, Navigate, useNavigate } from 'react-router-dom';
 import { Get_user_info_data, Page_header, PopupContent, WkitLoader, get_user_login } from '../../helper/helper-function';
+import { __ } from '@wordpress/i18n';
 
-const { Fragment } = wp.element;
 var img_path = wdkitData.WDKIT_URL;
-
-const {
-    __,
-} = wp.i18n;
 
 const {
     wkit_get_user_login,
@@ -33,6 +29,21 @@ const Activate = (props) => {
     const [selectedOption, setSelectedOption] = useState('wdkit');
     const [SelectfigmaOpt, setSelectfigmaOpt] = useState('266965');
     const [selectedOptionImage, setSelectedOptionImage] = useState('assets/images/jpg/wdkit-logo.png');
+    const [BannerBtn, setBannerBtn] = useState(false);
+    const [bannerData, setBannerData] = useState([
+        {
+            'plugin_name': 'The Plus Addons for Elementor',
+            'banner_type': 'default',
+            'image': 'assets/images/jpg/tpae-logo.png',
+            'value': 'tpae'
+        },
+        {
+            'plugin_name': 'Nexter Blocks',
+            'banner_type': 'default',
+            'image': 'assets/images/jpg/nexter-blocks-logo.png',
+            'value': 'tpag'
+        }
+    ]);
 
     const options = [
         {
@@ -54,8 +65,8 @@ const Activate = (props) => {
             value: 'tpae'
         },
         {
-            text: 'The Plus Addons For Gutenberg',
-            imageSrc: 'assets/images/jpg/tpag-logo.png',
+            text: 'Nexter Blocks',
+            imageSrc: 'assets/images/jpg/nexter-blocks-logo.png',
             alt: 'Tpag',
             value: 'tpag'
         },
@@ -100,8 +111,8 @@ const Activate = (props) => {
         if (props.wdkit_meta.credits?.tpag_licence && props.wdkit_meta?.credits?.tpag_licence?.ApiKey != undefined) {
             initialdata.push(
                 {
-                    Img: 'assets/images/jpg/tpag-logo.png',
-                    Plugin: 'The Plus Addons for Gutenberg',
+                    Img: 'assets/images/jpg/nexter-blocks-logo.png',
+                    Plugin: 'Nexter Blocks',
                     value: 'tpag',
                     Key: props.wdkit_meta.credits?.tpag_licence?.ApiKey,
                     Credits: props.wdkit_meta.credits?.tpag_credits,
@@ -159,7 +170,7 @@ const Activate = (props) => {
         }
 
         UpdatingData.current = initialdata;
-        setArrayData(initialdata)
+        setArrayData(initialdata);
     }
 
     useEffect(() => {
@@ -197,6 +208,9 @@ const Activate = (props) => {
     }
 
     const DeleteApiKey = (value, key) => {
+        let indx = bannerData.findIndex((data) => data.value === value);
+        let checkSuccess = bannerData[indx]?.banner_type !== 'default'
+
         setDeleteBtnLoader(true);
         let token = get_user_login();
         const apiData = {
@@ -211,6 +225,14 @@ const Activate = (props) => {
                 let updatedArray = await Get_user_info_data();
                 setDeleteBtnLoader(false);
                 props.wdkit_set_toast([result?.message, result?.description, '', 'success']);
+
+                if (checkSuccess) {
+                    const new_obj = { ...bannerData[indx], 'banner_type': 'default' };
+                    const updatedBanner = bannerData.map((item, index) =>
+                        index === indx ? new_obj : item
+                    );
+                    setBannerData(updatedBanner)
+                }
 
                 if (updatedArray?.data) {
                     props.wdkit_set_meta(updatedArray?.data)
@@ -229,11 +251,16 @@ const Activate = (props) => {
         setInputEmpty(false);
     }
 
-    const AddApiKey = async () => {
+    const AddApiKey = async (license, plugin_name, banner_index) => {
+
+        if (banner_index > -1) {
+            setBannerBtn(true);
+        }
+
         setIsOpen(false);
-        if (!licenseKey.trim()) {
+        if (!license.trim()) {
             setInputEmpty(true);
-            props.wdkit_set_toast(['Invalid key entered', 'Key error, check and fix', '', 'danger']);
+            props.wdkit_set_toast([__('Invalid key entered', 'wdesignkit'), __('Key error, check and fix', 'wdesignkit'), '', 'danger']);
             return;
         } else {
             setActivateLoader(true);
@@ -241,9 +268,9 @@ const Activate = (props) => {
             const apiData = {
                 'type': 'active_licence',
                 'token': token.token,
-                'licencekey': licenseKey,
-                'licencename': selectedOption,
-                'uichemyid': selectedOption == 'uichemy' ? SelectfigmaOpt : '',
+                'licencekey': license,
+                'licencename': plugin_name,
+                'uichemyid': plugin_name == 'uichemy' ? SelectfigmaOpt : '',
             }
             await form_data(apiData).then(async (result) => {
 
@@ -253,12 +280,24 @@ const Activate = (props) => {
                     if (updatedArray?.data) {
                         props.wdkit_set_meta(updatedArray?.data)
                     }
+
+                    if (banner_index > -1) {
+                        const new_obj = { ...bannerData[banner_index], 'banner_type': 'success' };
+
+                        const updatedBannerData = bannerData.map((item, index) =>
+                            index === banner_index ? new_obj : item
+                        );
+
+                        setBannerData(updatedBannerData);
+                    }
+
                     props.wdkit_set_toast([result?.message, result?.description, '', 'success']);
                     setActivateLoader(false);
                 } else {
                     props.wdkit_set_toast([result?.message, result?.description, '', 'danger']);
                     setActivateLoader(false);
                 }
+                setBannerBtn(false);
             });
         }
         setLicenseKey('');
@@ -309,28 +348,28 @@ const Activate = (props) => {
         return (
             <div className="popup-body">
                 <div className="wkit-popup-content-title">
-                    {__("Are you sure you want to deactivate the")} {deleteItem?.Plugin ? deleteItem.Plugin : ''} {__("Pro License Key ?")}
+                    {__("Are you sure you want to deactivate the", 'wdesignkit')} {deleteItem?.Plugin ? deleteItem.Plugin : ''} {__("Pro License Key ?", 'wdesignkit')}
                 </div>
                 <div className="wkit-popup-buttons">
                     <button className="wkit-popup-confirm wkit-outer-btn-class" onClick={() => setOpenPopup(false)}>
-                        {__("No")}
+                        {__("No", 'wdesignkit')}
                     </button>
                     <button className="wkit-popup-cancel wkit-btn-class" onClick={() => DeleteApiKey(deleteItem.value, deleteItem.Key)}>
                         {deleteBtnLoader == true ?
                             <WkitLoader />
                             :
-                            <span>{__("Yes")}</span>
+                            <span>{__("Yes", 'wdesignkit')}</span>
                         }
                     </button>
                 </div>
-            </div >
+            </div>
         );
     }
 
     return (
         <div className={`wkit-activate-key-wrapper ${loader ? 'wkit-skeleton' : ''}`}>
             <Page_header
-                title={'Manage Licence'}
+                title={__('Manage Licence', 'wdesignkit')}
                 svg={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M12 8.5C12.646 8.5 13.2347 8.25502 13.6784 7.85289C13.7324 7.79071 13.7907 7.73238 13.8529 7.67836C14.255 7.23469 14.5 6.64595 14.5 6C14.5 4.61929 13.3807 3.5 12 3.5C10.6193 3.5 9.5 4.61929 9.5 6C9.5 6.64595 9.74498 7.23469 10.1471 7.67836C10.2093 7.73238 10.2676 7.79071 10.3216 7.85289C10.7653 8.25502 11.354 8.5 12 8.5ZM12 10C12.4365 10 12.8567 9.93007 13.25 9.80081V11.5394L12.2304 11.2845C12.0791 11.2467 11.9209 11.2467 11.7696 11.2845L10.75 11.5394V9.80081C11.1433 9.93007 11.5635 10 12 10ZM9.21332 8.86957C9.18529 8.84235 9.15765 8.81471 9.13043 8.78668C9.09246 8.76341 9.04779 8.75 9 8.75H4C3.86193 8.75 3.75 8.86193 3.75 9V20C3.75 20.1381 3.86193 20.25 4 20.25H20C20.1381 20.25 20.25 20.1381 20.25 20V9C20.25 8.86193 20.1381 8.75 20 8.75H15C14.9522 8.75 14.9075 8.76341 14.8696 8.78668C14.8423 8.81471 14.8147 8.84235 14.7867 8.86957C14.7634 8.90754 14.75 8.95221 14.75 9V12.2438C14.75 12.8619 14.1692 13.3154 13.5696 13.1655L12 12.7731L10.4304 13.1655C9.83082 13.3154 9.25 12.8619 9.25 12.2438V9C9.25 8.95221 9.23659 8.90754 9.21332 8.86957ZM8 6C8 6.43653 8.06993 6.85673 8.19919 7.25H4C3.0335 7.25 2.25 8.0335 2.25 9V20C2.25 20.9665 3.0335 21.75 4 21.75H20C20.9665 21.75 21.75 20.9665 21.75 20V9C21.75 8.0335 20.9665 7.25 20 7.25H15.8008C15.9301 6.85673 16 6.43653 16 6C16 3.79086 14.2091 2 12 2C9.79086 2 8 3.79086 8 6ZM7 16C6.44772 16 6 16.4477 6 17C6 17.5523 6.44771 18 7 18H17C17.5523 18 18 17.5523 18 17C18 16.4477 17.5523 16 17 16H7Z" fill="#040483" />
                 </svg>
@@ -364,28 +403,26 @@ const Activate = (props) => {
                             </div>
                             {props.wdkit_meta?.credits?.type == "free" ?
                                 <div className='wkit-center-chart-tag'>
-                                    {__("Free")}
+                                    {__("Free", 'wdesignkit')}
                                 </div>
                                 :
                                 <div className='wkit-center-chart-pro-tag'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
-                                        <path d="M1.39994 2.59894L3.49994 3.99894L5.59294 1.06895C5.63919 1.00413 5.70024 0.951295 5.77104 0.914845C5.84184 0.878395 5.92029 0.859375 5.99994 0.859375C6.07959 0.859375 6.15804 0.878395 6.22884 0.914845C6.29964 0.951295 6.36069 1.00413 6.40694 1.06895L8.49994 3.99894L10.5999 2.59894C10.6794 2.54606 10.7724 2.51705 10.8678 2.51531C10.9632 2.51358 11.0572 2.5392 11.1385 2.58915C11.2199 2.6391 11.2852 2.71131 11.3268 2.79721C11.3685 2.88312 11.3846 2.97915 11.3734 3.07395L10.5519 10.0574C10.5376 10.1791 10.4791 10.2912 10.3876 10.3726C10.2961 10.4539 10.1779 10.4989 10.0554 10.4989H1.94444C1.82198 10.4989 1.70377 10.4539 1.61226 10.3726C1.52074 10.2912 1.46227 10.1791 1.44794 10.0574L0.626442 3.07345C0.615342 2.97869 0.631587 2.88273 0.673252 2.7969C0.714922 2.71108 0.780272 2.63896 0.861597 2.58908C0.942923 2.53919 1.03682 2.51361 1.13221 2.51536C1.2276 2.51711 1.3205 2.54611 1.39994 2.59894ZM5.99994 7.49894C6.26514 7.49894 6.51949 7.39359 6.70704 7.20604C6.89459 7.01849 6.99994 6.76414 6.99994 6.49894C6.99994 6.23374 6.89459 5.97939 6.70704 5.79184C6.51949 5.60429 6.26514 5.49894 5.99994 5.49894C5.73474 5.49894 5.48039 5.60429 5.29284 5.79184C5.10529 5.97939 4.99994 6.23374 4.99994 6.49894C4.99994 6.76414 5.10529 7.01849 5.29284 7.20604C5.48039 7.39359 5.73474 7.49894 5.99994 7.49894Z" fill="white" />
-                                    </svg>
-                                    <span>{__("Pro")}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none"><path d="M1.39994 2.59894L3.49994 3.99894L5.59294 1.06895C5.63919 1.00413 5.70024 0.951295 5.77104 0.914845C5.84184 0.878395 5.92029 0.859375 5.99994 0.859375C6.07959 0.859375 6.15804 0.878395 6.22884 0.914845C6.29964 0.951295 6.36069 1.00413 6.40694 1.06895L8.49994 3.99894L10.5999 2.59894C10.6794 2.54606 10.7724 2.51705 10.8678 2.51531C10.9632 2.51358 11.0572 2.5392 11.1385 2.58915C11.2199 2.6391 11.2852 2.71131 11.3268 2.79721C11.3685 2.88312 11.3846 2.97915 11.3734 3.07395L10.5519 10.0574C10.5376 10.1791 10.4791 10.2912 10.3876 10.3726C10.2961 10.4539 10.1779 10.4989 10.0554 10.4989H1.94444C1.82198 10.4989 1.70377 10.4539 1.61226 10.3726C1.52074 10.2912 1.46227 10.1791 1.44794 10.0574L0.626442 3.07345C0.615342 2.97869 0.631587 2.88273 0.673252 2.7969C0.714922 2.71108 0.780272 2.63896 0.861597 2.58908C0.942923 2.53919 1.03682 2.51361 1.13221 2.51536C1.2276 2.51711 1.3205 2.54611 1.39994 2.59894ZM5.99994 7.49894C6.26514 7.49894 6.51949 7.39359 6.70704 7.20604C6.89459 7.01849 6.99994 6.76414 6.99994 6.49894C6.99994 6.23374 6.89459 5.97939 6.70704 5.79184C6.51949 5.60429 6.26514 5.49894 5.99994 5.49894C5.73474 5.49894 5.48039 5.60429 5.29284 5.79184C5.10529 5.97939 4.99994 6.23374 4.99994 6.49894C4.99994 6.76414 5.10529 7.01849 5.29284 7.20604C5.48039 7.39359 5.73474 7.49894 5.99994 7.49894Z" fill="white" /></svg>
+                                    <span>{__("Pro", 'wdesignkit')}</span>
                                 </div>
                             }
                         </div>
                     </div>
                     <div className='wkit-credit-meta'>
                         <div className='wkit-credit-meta-header'>
-                            {__("Credits")}
+                            {__("Credits", 'wdesignkit')}
                         </div>
                         <div className='wkit-credit-meta-body'>
                             <div className='wkit-credit-meta-content'>
                                 <div className='wkit-credit-meta-content-top'>
                                     <div className='wkit-active-dot wkit-cl-template'>
                                     </div>
-                                    <div>{__("Templates")}</div>
+                                    <div>{__("Templates", 'wdesignkit')}</div>
                                 </div>
                                 <div className='wkit-credit-meta-content-bottom'>
                                     {props.wdkit_meta?.credits?.template_limit?.meta_value == "unlimited" ? (
@@ -402,7 +439,7 @@ const Activate = (props) => {
                                 <div className='wkit-credit-meta-content-top'>
                                     <div className='wkit-active-dot wkit-cl-widget'>
                                     </div>
-                                    <div>{__("Widgets")}</div>
+                                    <div>{__("Widgets", 'wdesignkit')}</div>
                                 </div>
                                 <div className='wkit-credit-meta-content-bottom'>
                                     {props.wdkit_meta?.credits?.widget_limit?.meta_value === "unlimited" ? (
@@ -420,7 +457,7 @@ const Activate = (props) => {
                                 <div className='wkit-credit-meta-content-top'>
                                     <div className='wkit-active-dot wkit-cl-workspace'>
                                     </div>
-                                    <div>{__("Workspace")}</div>
+                                    <div>{__("Workspace", 'wdesignkit')}</div>
                                 </div>
                                 <div className='wkit-credit-meta-content-bottom'>
                                     {props.wdkit_meta?.credits?.workspace_limit?.meta_value === "unlimited" ? (
@@ -441,23 +478,53 @@ const Activate = (props) => {
                                     <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.79989 4.2018L5.99989 7.0018L10.1859 1.1418C10.2784 1.01217 10.4005 0.906496 10.5421 0.833596C10.6837 0.760696 10.8406 0.722656 10.9999 0.722656C11.1592 0.722656 11.3161 0.760696 11.4577 0.833596C11.5993 0.906496 11.7214 1.01217 11.8139 1.1418L15.9999 7.0018L20.1999 4.2018C20.3589 4.09604 20.5448 4.038 20.7356 4.03453C20.9265 4.03106 21.1144 4.08231 21.2771 4.18222C21.4398 4.28212 21.5705 4.42652 21.6537 4.59833C21.737 4.77014 21.7693 4.9622 21.7469 5.1518L20.1039 19.1188C20.0752 19.3621 19.9583 19.5863 19.7753 19.7491C19.5922 19.9118 19.3558 20.0018 19.1109 20.0018H2.88889C2.64396 20.0018 2.40755 19.9118 2.22452 19.7491C2.04148 19.5863 1.92455 19.3621 1.89589 19.1188L0.252885 5.1508C0.230685 4.96128 0.263175 4.76937 0.346505 4.59771C0.429845 4.42606 0.560545 4.28183 0.723195 4.18206C0.885845 4.08228 1.07365 4.03112 1.26443 4.03462C1.45521 4.03812 1.64101 4.09613 1.79989 4.2018V4.2018ZM10.9999 14.0018C11.5303 14.0018 12.039 13.7911 12.4141 13.416C12.7892 13.0409 12.9999 12.5322 12.9999 12.0018C12.9999 11.4714 12.7892 10.9627 12.4141 10.5876C12.039 10.2125 11.5303 10.0018 10.9999 10.0018C10.4695 10.0018 9.96079 10.2125 9.58569 10.5876C9.21059 10.9627 8.99989 11.4714 8.99989 12.0018C8.99989 12.5322 9.21059 13.0409 9.58569 13.416C9.96079 13.7911 10.4695 14.0018 10.9999 14.0018Z" fill="white" />
                                     </svg>
-                                    {__("Go Pro")}
+                                    {__("Go Pro", 'wdesignkit')}
                                 </button>
                             }
                             {props.wdkit_meta?.credits?.type != "free" && ((props.wdkit_meta?.credits?.count_template * 2) + (props.wdkit_meta?.credits?.count_widget * 5) + (props.wdkit_meta?.credits?.count_workspace * 10) >= props.wdkit_meta?.credits?.total_credits?.meta_value) &&
-
-                                <button className='wkit-credit-meta-btn wkit-goPro-btn wkit-pink-btn-class'>{__("Buy Extra Credits")}</button>
+                                <button className='wkit-credit-meta-btn wkit-goPro-btn wkit-pink-btn-class'>{__("Buy Extra Credits", 'wdesignkit')}</button>
                             }
                         </a>
                     </div>
                 </div>
                 <div className='wkit-apiKey-content'>
                     <div className='wkit-apiKey-add-content'>
-                        <div className='wkit-addKey-header'>
-                            {__("Add Licence Key")}
-                        </div>
+                        <div className='wkit-addKey-header'>{__("Add Licence Key", 'wdesignkit')}</div>
+                        {props?.wdkit_meta?.manage_licence &&
+                            bannerData?.map((license_data, index) => {
+                                let check_table = arraydata.findIndex(data => data.value === license_data.value)
+                                if (check_table === -1 || license_data?.banner_type === 'success') {
+                                    let license_key = props?.wdkit_meta?.manage_licence[license_data.value]?.license_key;
+                                    let email = props?.wdkit_meta?.manage_licence[license_data.value]?.customer_email || props.wdkit_meta?.userinfo?.user_email;
+                                    if (license_key) {
+                                        if (license_data?.banner_type === 'default') {
+                                            return (
+                                                <div className='wkit-theplus-activation' key={index}>
+                                                    <div className='wkit-theplus-text'>
+                                                        <span>{__(`We found active ${license_data?.plugin_name} key on this site.`, 'wdesignkit')}</span>
+                                                        <p>{__('Key:', 'wdesignkit')} {license_key.replace(/.(?=.{4})/g, '*')}</p>
+                                                        <p>{__('Email:', 'wdesignkit')} {email?.replace(/(?<=^...).*(?=@)/, (match) => '*'.repeat(match.length))}</p>
+                                                    </div>
+                                                    <button className='wkit-pink-btn-class wkit-applyKey-btn'
+                                                        disabled={BannerBtn}
+                                                        onClick={() => {
+                                                            AddApiKey(license_key, license_data?.value, index);
+                                                        }}>{__('Apply Key', 'wdesignkit')}</button>
+                                                </div>
+                                            )
+                                        } else {
+                                            return (
+                                                <div className='wkit-theplus-activated' key={index}>
+                                                    <p>{__(`Successfully connected your ${license_data?.plugin_name} key with your WDesignKit Account.`, 'wdesignkit')}</p>
+                                                </div>
+                                            )
+                                        }
+                                    }
+                                }
+                            })
+                        }
                         <div className='wkit-addKey-content'>
-                            <span>{__("Enter Licence Key")}</span>
+                            <span>{__("Enter Licence Key", 'wdesignkit')}</span>
                             <div className='wkit-addKey-body'>
                                 <div className={`wkit-addkey-dropdown-field ${isInputEmpty ? 'wkit-empty-key' : ''}`}>
                                     <div className='wkit-addkey-dropdown-parent'>
@@ -508,31 +575,29 @@ const Activate = (props) => {
                                         </select>
                                     </div>
                                 }
-                                <div className='wkit-credit-meta-btn wkit-activte-btn wkit-pink-btn-class' onClick={() => AddApiKey()} >
-                                    {ActivateLoader == true ?
-                                        <WkitLoader />
-                                        :
-                                        <span>{__("Activate")}</span>
-                                    }
+                                <div className='wkit-credit-meta-btn wkit-activte-btn wkit-pink-btn-class' onClick={() => AddApiKey(licenseKey, selectedOption)} >
+                                    {ActivateLoader == true ? <WkitLoader /> : <span>{__("Activate", 'wdesignkit')}</span>}
                                 </div>
-                                <a className='wkit-link-hover-effect' href={wdkitData.WDKIT_DOC_URL + 'documents/how-to-get-key-for-wdesignkit-activation/'} target='_blank' rel="noopener noreferrer">How to get key?</a>
+                                {!(wdkitData?.wdkit_white_label?.help_link) &&
+                                    <a className='wkit-link-hover-effect' href={wdkitData.WDKIT_DOC_URL + 'documents/how-to-get-key-for-wdesignkit-activation/'} target='_blank' rel="noopener noreferrer">{__('How to get key?', 'wdesignkit')}</a>
+                                }
                             </div>
                         </div>
                     </div>
                     {arraydata.length > 0 ?
                         <div className='wkit-apiKey-table-content'>
                             <div className='wkit-apiKey-table-header'>
-                                <span>{__("Existing Licence Keys")}</span>
-                                <p>{__("To utilize the credits associated with this license key, it must be in an 'Active' status. If it has expired, access will be restricted, and you won't be able to use it.")}</p>
+                                <span>{__("Existing Licence Keys", 'wdesignkit')}</span>
+                                <p>{__("To utilize the credits associated with this license key, it must be in an 'Active' status. If it has expired, access will be restricted, and you won't be able to use it.", 'wdesignkit')}</p>
                             </div>
                             <div className='wkit-apiKey-table-body'>
                                 <table>
                                     <thead>
                                         <tr className='wkit-table-hraders'>
-                                            <th className='wkit-apikey-plugin'>{__("Name")}</th>
-                                            <th>{__("Licence Key")}</th>
-                                            <th>{__("Credits")}</th>
-                                            <th>{__("Status")}</th>
+                                            <th className='wkit-apikey-plugin'>{__("Name", 'wdesignkit')}</th>
+                                            <th>{__("Licence Key", 'wdesignkit')}</th>
+                                            <th>{__("Credits", 'wdesignkit')}</th>
+                                            <th>{__("Status", 'wdesignkit')}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -609,7 +674,11 @@ const Activate = (props) => {
                         :
                         <div className='wkit-apiKey-nokey'>
                             <img src={img_path + "assets/images/jpg/noKey.png"} alt='nokey image' draggable={false} />
-                            <span>{__("No licence keys found. Add your WDesignKit, The Plus Addons, UiChemy or other keys to activate and get benefits of pro version.")} <a className='wkit-link-hover-effect' href={wdkitData.WDKIT_DOC_URL + 'documents/how-to-get-key-for-wdesignkit-activation/'} target='_blank' rel="noopener noreferrer">{__("How to get a key?")}</a></span>
+                            <span>{__("No licence keys found. Add your WDesignKit, Nexter Blocks, The Plus Addons, UiChemy or other keys to activate and get benefits of pro version.", 'wdesignkit')}
+                                {!(wdkitData?.wdkit_white_label?.help_link) &&
+                                    <a className='wkit-link-hover-effect' href={wdkitData.WDKIT_DOC_URL + 'documents/how-to-get-key-for-wdesignkit-activation/'} target='_blank' rel="noopener noreferrer">{__("How to get a key?", 'wdesignkit')}</a>
+                                }
+                            </span>
                         </div>
                     }
                 </div>

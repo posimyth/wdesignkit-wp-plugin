@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { __ } from '@wordpress/i18n';
 const { Fragment } = wp.element;
-const { __ } = wp.i18n;
 
 export const Wkit_Filter_widget = (props) => {
     const [filter, setfilter] = useState(props.filterArgs);
@@ -112,7 +112,7 @@ export const Wkit_Filter_widget = (props) => {
                             onChange={(e) => { handleFilterChecked(e, 'free_pro') }}
                             checked={free_pro == 'free' ? true : false}
                         />
-                        <label className='wkit-check-wrapper' htmlFor='wkit-free-btn-label'>{__('Free')}</label>
+                        <label className='wkit-check-wrapper' htmlFor='wkit-free-btn-label'>{__('Free', 'wdesignkit')}</label>
                     </div>
                     <div className='wkit-custom-category-wrap'>
                         <input
@@ -123,7 +123,7 @@ export const Wkit_Filter_widget = (props) => {
                             onChange={(e) => { handleFilterChecked(e, 'free_pro') }}
                             checked={free_pro == 'pro' ? true : false}
                         />
-                        <label className='wkit-check-wrapper' htmlFor='wkit-pro-btn-label'>{__('Pro')}</label>
+                        <label className='wkit-check-wrapper' htmlFor='wkit-pro-btn-label'>{__('Pro', 'wdesignkit')}</label>
                     </div>
                 </div>
             </Fragment>
@@ -164,7 +164,7 @@ export const Wkit_Filter_widget = (props) => {
                 <div className='wkit-browse-search-inner'>
                     <input
                         className='wkit-browse-search'
-                        placeholder={__('Search Widgets')}
+                        placeholder={__('Search Widgets', 'wdesignkit')}
                         type="text"
                         value={searchQuery}
                         onChange={(e) => { handleFilterChecked(e, 'search') }}
@@ -209,28 +209,28 @@ export const Wkit_Filter_widget = (props) => {
     return (
         <div className="wkit-mobile-filter-main">
             <div className='wkit-mobile-filter-main-content'>
-                <div className="wkit-filter-main-heading">{__('Filter by')}</div>
+                <div className="wkit-filter-main-heading">{__('Filter by', 'wdesignkit')}</div>
                 <div className="close-icon">
                     <a className="close" onClick={() => Filter_mobile_close()}>
                         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.40091 15.2558C1.66182 15.5169 2.01481 15.6637 2.38274 15.6637C2.75067 15.6637 3.10366 15.5169 3.36456 15.2558L8.29499 10.2193L13.2254 15.2558C13.5884 15.6217 14.118 15.7645 14.6141 15.6306C15.1103 15.4967 15.4981 15.1062 15.6309 14.6064C15.7639 14.1067 15.6221 13.5733 15.2588 13.2076L10.2587 8.24141L15.2588 3.27521C15.5659 2.91424 15.6703 2.42082 15.5365 1.96497C15.4027 1.50913 15.0485 1.15236 14.5959 1.01757C14.1431 0.882762 13.6535 0.987976 13.2949 1.29727L8.29499 6.26348L3.36455 1.29727C3.00619 0.987976 2.51632 0.882762 2.06375 1.01757C1.61119 1.15237 1.257 1.50911 1.12317 1.96497C0.989339 2.42082 1.0938 2.91424 1.40087 3.27521L6.3313 8.24141L1.40087 13.2076C1.11968 13.4728 0.959961 13.8436 0.959961 14.2316C0.959961 14.6198 1.11968 14.9904 1.40087 15.2557L1.40091 15.2558Z" fill="black"></path></svg>
                     </a>
                 </div>
                 <div className="wkit-filter-by-page-builder">
-                    <div className="wkit-browse-filter-heading">{__('Search :')}</div>
+                    <div className="wkit-browse-filter-heading">{__('Search :', 'wdesignkit')}</div>
                     {SearchFilter()}
                 </div>
                 {props.BuilderArray.length > 1 &&
                     <div className="wkit-filter-by-page-builder">
-                        <div className="wkit-browse-filter-heading">{__('Page Builder :')}</div>
+                        <div className="wkit-browse-filter-heading">{__('Page Builder :', 'wdesignkit')}</div>
                         {BuilderFilter()}
                     </div>
                 }
                 <div className="wkit-filter-by-categorties">
-                    <div className="wkit-browse-filter-heading">{__('Free/Pro :')}</div>
+                    <div className="wkit-browse-filter-heading">{__('Free/Pro :', 'wdesignkit')}</div>
                     {FreeProFilter()}
                 </div>
                 <div className="wkit-filter-by-categorties">
-                    <div className="wkit-browse-filter-heading">{__('Categories :')}</div>
+                    <div className="wkit-browse-filter-heading">{__('Categories :', 'wdesignkit')}</div>
                     {CategoryFilter()}
                 </div>
             </div>
@@ -242,7 +242,7 @@ export const Wkit_Filter_widget = (props) => {
                 props.setsearch_check(searchQuery);
                 Filter_mobile_close()
             }}>
-                <span>{('Visit Site')}</span>
+                <span>{__('Visit Site', 'wdesignkit')}</span>
             </div>
         </div>
     );

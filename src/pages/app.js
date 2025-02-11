@@ -4,6 +4,7 @@ import './all_helpers'
 import './all_renders'
 
 import Wdesignkit_container from './redux/redux_container/wdesignkit_container';
+import Check_url from './router/check_url';
 
 class App extends React.Component {
     constructor(props) {
@@ -18,7 +19,10 @@ class App extends React.Component {
 
     render() {
         return (
-            <Wdesignkit_container />
+            <>
+                <Check_url />
+                <Wdesignkit_container />
+            </>
         );
     }
 }

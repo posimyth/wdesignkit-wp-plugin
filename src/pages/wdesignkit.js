@@ -1,157 +1,139 @@
-import React, { useState, useEffect } from 'react';
-
-import {
-    HashRouter,
-    Routes,
-    Route,
-    Navigate
-} from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { __ } from '@wordpress/i18n';
 
 import {
     Deactivate_account,
     Maintenance_mode,
     Wkit_mobile_header,
-    wkit_logout,
 } from '../helper/helper-function';
 
 import './all_helpers'
 import '../helper/helper-function.scss'
 import './all_renders'
 import Side_menu_container from './redux/redux_container/side_menu_container';
-import Setting_panel_container from './redux/redux_container/setting_panel_container';
-import Manage_Workspace_container from './redux/redux_container/manage_workspace_container';
-import Share_with_me_container from './redux/redux_container/share_with_me_container';
-import Single_workspace_container from './redux/redux_container/single_workspace_container';
-import Widget_browse_container from './redux/redux_container/browse_widget_container';
-import Browse_container from './redux/redux_container/browse_container';
-import Page_not_found from '../pages/reuable/Page_not_found';
-import Kit_page_container from './redux/redux_container/kit_page_container';
-import User_detail_container from './redux/redux_container/user_detail_container';
-import Login_container from './redux/redux_container/login_container';
-import Login_api_container from './redux/redux_container/login_api_container';
-import My_uploaded_container from './redux/redux_container/my_uploaded_container';
-import Save_template_container from './redux/redux_container/save_template_container';
 import Toast_container from './redux/redux_container/toast_container';
-import Activate_container from './redux/redux_container/activate_container';
 import Onboarding_container from './redux/redux_container/onboarding_container';
-
-const { Fragment } = wp.element
-const {
-    Side_menu,
-    MyUploaded,
-    Kit_Page,
-    Share_with_me,
-    Favorite,
-    Manage_Workspace,
-    Activate,
-    Workspace_single,
-    Save_template,
-    Main_js_container,
-    Widget_brows,
-    Loader_container,
-    Wdkit_Login,
-    Wdkit_Login_Api,
-    Browse
-} = wp.wkit_Pages
-
-const {
-    Wkit_user_details,
-    wkit_get_user_login,
-    form_data,
-    get_userinfo,
-} = wp.wkit_Helper
+import SupportToggle from './support/support';
+import { getAllRoutes } from './router/routes';
 
 const WDesignKit = (props) => {
 
+    var location = window.location,
+        img_path = wdkitData.WDKIT_URL,
+        loader_logo = wdkitData?.wdkit_white_label?.plugin_logo || img_path + "assets/images/jpg/wdkit_loader.gif";
+
+    const [loader, setloader] = useState(true);
+
     useEffect(() => {
-        Set_metaData();
-    }, [])
+        if (props?.wdkit_meta?.success != undefined) {
+            setloader(false);
+        }
+    }, [props?.wdkit_meta?.success])
 
-    const Set_metaData = async () => {
-
-        let login = await wkit_get_user_login();
-
-        if (login) {
-            let data = await get_userinfo();
-            if ( data?.data?.success != undefined ) {
-                if (data.data.login_status != "logout" && data?.data?.success) {
-                    props.wdkit_set_meta(data?.data);
-                } else {
-                    wkit_logout();
-                }
+    const Check_location = (type) => {
+        if ('external_popup' == type) {
+            if (!(location?.hash?.includes("#/theplus_popup") || location?.hash?.includes("#/download/widget"))) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if ('widget_builder' == type) {
+            if (!location?.hash?.includes("/builder")) {
+                return true;
+            } else {
+                return false;
             }
         } else {
-            let form_array = {
-                'type': 'wkit_meta_data',
-                'meta_type': 'all'
-            }
-
-            var res = await form_data(form_array).then((res) => { 
-                return res 
-            });
-
-            if (res?.data?.success == true) {
-                props.wdkit_set_meta(res?.data)
-            }
+            return false;
         }
     }
 
-    return (
-        <div className="wkit-main-menu-dashbord">
+    const Check_settingPanel = (s_data) => {
+        let setting_data = props.wdkit_meta?.Setting;
+        var wdk_templates = false;
+        var widget_builder = false;
 
-            {(1 != wdkitData.WDKIT_onbording_end) && (window.wdkit_editor == 'wdkit') &&
-                <Onboarding_container />
+        if (setting_data?.template) {
+            if (setting_data?.elementor_template || setting_data?.gutenberg_template) {
+                wdk_templates = true;
             }
+        }
 
-            <HashRouter>
+        if (setting_data?.builder) {
+            if (setting_data?.bricks_builder || setting_data?.gutenberg_builder || setting_data?.elementor_builder) {
+                widget_builder = true;
+            }
+        }
 
-                <Side_menu_container />
+        if (s_data) {
+            if (s_data?.includes('all')) {
+                return true;
+            } else if (s_data?.includes('template') && wdk_templates) {
+                return true;
+            } else if (s_data?.includes('builder') && widget_builder) {
+                return true;
+            }
+        }
 
-                <div className="wkit-right-side">
-                    <Wkit_mobile_header props={props} />
-                    {props?.wdkit_meta?.login_status == 'disabled' && props?.wdkit_meta?.credits?.type == 'pro' &&
-                        <Deactivate_account />
-                    }
-                    {props?.wdkit_meta?.maintenance_mode?.meta_value == '1' &&
-                        <Maintenance_mode />
-                    }
-                    {/* <User_detail_container /> */}
+        return false;
+    }
 
-                    <Routes>
-                        <Route path='/login' element={<Login_container />} />
-                        <Route path='/login-api' element={<Login_api_container />} />
-                        <Route path='/browse' element={<Browse_container />} />
-                        <Route path='/share_with_me' element={<Share_with_me_container />} />
-                        <Route path='/manage_workspace' element={<Manage_Workspace_container />} />
-                        <Route path='/manage_workspace/workspace_template/:id' element={<Single_workspace_container />} />
-                        <Route path='/my_uploaded' element={<My_uploaded_container />} />
-                        <Route path='/:kit_parent/kit/:kit_id' element={<Kit_page_container />} />
-                        <Route path='*' element={<Page_not_found />} />
-                        <Route path='/' element={<Browse />} />
-
-                        {window.wdkit_editor == 'wdkit' &&
-                            <Fragment>
-                                <Route path="/widget-listing" element={<Main_js_container />} />
-                                <Route path="/widget-listing/builder/:id" element={<Loader_container />} />
-                                <Route path="/widget-browse" element={<Widget_browse_container />} />
-                                <Route path='/activate' element={<Activate_container />} />
-                                <Route path="/settings" element={<Setting_panel_container />} />
-                            </Fragment>
+    return (
+        <>
+            <div className="wkit-main-menu-dashbord">
+                {loader ?
+                    <div className="wkit-loading-content" style={{ display: 'flex' }} draggable={false}>
+                        <div className='wkit-main-loader'>
+                            {!navigator.onLine ?
+                                <>
+                                    <img style={{ width: '150px', height: '150px' }} src={img_path + "assets/images/jpg/no-internet-connection.png"} draggable={false} />
+                                    <span>{__('Unable to connect to the Internet !', 'wdesignkit')}</span>
+                                </>
+                                :
+                                <img style={{ width: '150px', height: '150px' }} src={loader_logo} draggable={false} />
+                            }
+                        </div>
+                    </div>
+                    :
+                    <>
+                        {(1 != wdkitData.WDKIT_onbording_end) && (window.wdkit_editor == 'wdkit') && Check_location('external_popup') &&
+                            <Onboarding_container />
                         }
 
-                        {wdkitData.use_editor != 'wdkit' &&
-                            <Fragment>
-                                <Route path='/save_template' element={<Save_template_container />} />
-                                <Route path='/save_template/section' element={<Save_template_container type={'section'} />} />
-                            </Fragment>
-                        }
-                    </Routes>
-                </div>
-            </HashRouter>
+                        <HashRouter>
 
-            <Toast_container />
-        </div>
+                            <Side_menu_container />
 
+                            <div className="wkit-right-side">
+                                <Wkit_mobile_header props={props} />
+                                {props?.wdkit_meta?.login_status == 'disabled' && props?.wdkit_meta?.credits?.type == 'pro' && Check_location('Check_location') &&
+                                    <Deactivate_account />
+                                }
+                                {props?.wdkit_meta?.maintenance_mode?.meta_value == '1' &&
+                                    <Maintenance_mode />
+                                }
+                                {/* <User_detail_container /> */}
+
+                                <Routes>
+                                    {getAllRoutes.map((data, index) => {
+                                        if (data.condition && Check_settingPanel(data?.setting_panel)) {
+                                            return (
+                                                <Route path={data.path} element={data.element} key={index} />
+                                            )
+                                        }
+                                    })}
+                                </Routes>
+                            </div>
+                            {wdkitData.use_editor == 'wdkit' && Check_location('widget_builder') && !(wdkitData?.wdkit_white_label?.help_link) &&
+                                <SupportToggle />
+                            }
+                        </HashRouter>
+                    </>
+                }
+                <Toast_container />
+            </div>
+        </>
     );
 }
 

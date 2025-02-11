@@ -6,6 +6,8 @@ import Bricks_file_create from '../file-creation/bricks_file';
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from 'react';
 import { get_user_login, loadingIcon, wdKit_Form_data } from '../../helper/helper-function';
+import { __ } from '@wordpress/i18n';
+
 
 const Widget_header = (props) => {
 
@@ -30,6 +32,7 @@ const Widget_header = (props) => {
     var old_folder = old_name.id;
 
     var img_path = wdkitData.WDKIT_URL;
+
     const redux_data = useRef("");
 
     useEffect(() => {
@@ -86,20 +89,20 @@ const Widget_header = (props) => {
     }
 
     const Save_btn_content = () => {
-        var text = 'Save';
+        var text = __('Save', 'wdesignkit');
         var icon = '';
         var classType = '';
 
         if (WStatus == 'default') {
-            text = 'Save';
+            text = __('Save', 'wdesignkit');
             icon = '';
             classType = 'wdkit-disable';
         } else if (WStatus == 'change') {
-            text = 'Save';
+            text = __('Save', 'wdesignkit');
             icon = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" className='wkit-wb-save-icon'><path d="M15.8333 17.8125H4.16667C3.72464 17.8125 3.30072 17.6413 2.98816 17.3365C2.67559 17.0318 2.5 16.6185 2.5 16.1875V4.8125C2.5 4.38152 2.67559 3.9682 2.98816 3.66345C3.30072 3.3587 3.72464 3.1875 4.16667 3.1875H13.3333L17.5 7.25V16.1875C17.5 16.6185 17.3244 17.0318 17.0118 17.3365C16.6993 17.6413 16.2754 17.8125 15.8333 17.8125Z" stroke="white" strokeWidth="0.78125" strokeLinecap="round" strokeLinejoin="round" /><path d="M14.1673 17.8125V11.3125H5.83398V17.8125" stroke="white" strokeWidth="0.78125" strokeLinecap="round" strokeLinejoin="round" /><path d="M5.83398 3.1875V7.25H12.5007" stroke="white" strokeWidth="0.78125" strokeLinecap="round" strokeLinejoin="round" /></svg>;
             classType = '';
         } else if (WStatus == 'update') {
-            text = 'Saved';
+            text = __('Saved', 'wdesignkit');
             icon = '';
             classType = 'wdkit-saved';
         } else if (WStatus == 'loading') {
@@ -115,9 +118,9 @@ const Widget_header = (props) => {
                 onClick={() => {
                     Publish_widget(props.widgetdata, 'update').then((res) => {
                         if (res.api.success) {
-                            props.wdkit_set_toast(['Update Saved Successfully', 'Success! Update Saved', '', 'success']);
+                            props.wdkit_set_toast([__('Update Saved Successfully', 'wdesignkit'), __('Success! Update Saved', 'wdesignkit'), '', 'success']);
                         } else {
-                            props.wdkit_set_toast(['Fail to Save', 'Fail! Can not Saved', '', 'danger']);
+                            props.wdkit_set_toast([__('Fail to Save', 'wdesignkit'), __('Fail! Can not Saved', 'wdesignkit'), '', 'danger']);
                         }
                     })
                 }}
@@ -288,9 +291,9 @@ const Widget_header = (props) => {
             if (responses?.ajax?.data?.success == true) {
                 setopen('')
                 seterror_msg('')
-                props.wdkit_set_toast(['Widget synced', 'Widget synced', '', 'success']);
+                props.wdkit_set_toast([__('Widget synced', 'wdesignkit'), __('Widget synced', 'wdesignkit'), '', 'success']);
             } else {
-                props.wdkit_set_toast(['Operation fail', 'Something went wrong', '', 'danger']);
+                props.wdkit_set_toast([__('Operation fail', 'wdesignkit'), __('Something went wrong', 'wdesignkit'), '', 'danger']);
                 seterror_msg(responses?.ajax?.data?.message)
             }
         }
@@ -431,11 +434,11 @@ const Widget_header = (props) => {
                                 <div className='wkit-dropdown-outerContent'></div>
                                 <div className='wkit-dropdown-item' value="draft" name="Draft" onClick={() => { Change_publish_type('Draft') }}>
                                     <DraftIcon />
-                                    <span>Draft</span>
+                                    <span>{__('Draft', 'wdesignkit')}</span>
                                 </div>
                                 <div className='wkit-dropdown-item' value="publish" name="Publish" onClick={() => Change_publish_type('Publish')}>
                                     <PublishIcon />
-                                    <span>Publish</span>
+                                    <span>{__('Publish', 'wdesignkit')}</span>
                                 </div>
                             </div>
                         </div>
@@ -446,13 +449,13 @@ const Widget_header = (props) => {
                         {props.widgetdata?.WcardData?.widgetdata?.allow_push != false &&
                             <button className={`wkit-wb-sync-btn ${get_user_login() ? '' : 'wkit-block-btn'}`} onClick={() => { setopen('version_info') }} >
                                 <div className='wkit-wb-sync-btn-tooltip'>
-                                    <span>Push widget on Cloud and Sync it</span>
+                                    <span>{__('Push widget on Cloud and Sync it', 'wdesignkit')}</span>
                                     <div className='wkit-wb-sync-tooltip-icon'></div>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M14.6875 13.75H10.625V7.75898L12.6832 9.8168C12.8014 9.92906 12.9587 9.99072 13.1217 9.98863C13.2847 9.98655 13.4404 9.92088 13.5556 9.80563C13.6709 9.69038 13.7365 9.53466 13.7386 9.37169C13.7407 9.20871 13.6791 9.05137 13.5668 8.9332L10.4418 5.8082C10.3246 5.69108 10.1657 5.62529 10 5.62529C9.83431 5.62529 9.6754 5.69108 9.5582 5.8082L6.4332 8.9332C6.32094 9.05137 6.25928 9.20871 6.26137 9.37169C6.26345 9.53466 6.32912 9.69038 6.44437 9.80563C6.55962 9.92088 6.71534 9.98655 6.87831 9.98863C7.04129 9.99072 7.19863 9.92906 7.3168 9.8168L9.375 7.75898V13.75H5.3125C4.73253 13.7494 4.17649 13.5187 3.76639 13.1086C3.35629 12.6985 3.12562 12.1425 3.125 11.5625V3.4375C3.12562 2.85753 3.35629 2.30149 3.76639 1.89139C4.17649 1.48129 4.73253 1.25062 5.3125 1.25H14.6875C15.2675 1.25062 15.8235 1.48129 16.2336 1.89139C16.6437 2.30149 16.8744 2.85753 16.875 3.4375V11.5625C16.8744 12.1425 16.6437 12.6985 16.2336 13.1086C15.8235 13.5187 15.2675 13.7494 14.6875 13.75ZM10.625 18.125C10.625 18.2908 10.5592 18.4497 10.4419 18.5669C10.3247 18.6842 10.1658 18.75 10 18.75C9.83424 18.75 9.67527 18.6842 9.55806 18.5669C9.44085 18.4497 9.375 18.2908 9.375 18.125V13.75H10.625V18.125Z" fill="white" />
                                 </svg>
-                                <span>Push</span>
+                                <span>{__('Push', 'wdesignkit')}</span>
                             </button>
                         }
                         {Save_btn_content()}
@@ -470,7 +473,7 @@ const Widget_header = (props) => {
                         <div className='wkit-wb-version-popup'>
                             <div className="wb-version-detail">
                                 <div className="wb-version-header">
-                                    <label>Add Sync Details</label>
+                                    <label>{__('Add Sync Details', 'wdesignkit')}</label>
                                     <div className="wkit-popup-close-icon" onClick={(e) => { (e.target.closest('.overlay').click()) }} >
                                         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1.40091 15.2558C1.66182 15.5169 2.01481 15.6637 2.38274 15.6637C2.75067 15.6637 3.10366 15.5169 3.36456 15.2558L8.29499 10.2193L13.2254 15.2558C13.5884 15.6217 14.118 15.7645 14.6141 15.6306C15.1103 15.4967 15.4981 15.1062 15.6309 14.6064C15.7639 14.1067 15.6221 13.5733 15.2588 13.2076L10.2587 8.24141L15.2588 3.27521C15.5659 2.91424 15.6703 2.42082 15.5365 1.96497C15.4027 1.50913 15.0485 1.15236 14.5959 1.01757C14.1431 0.882762 13.6535 0.987976 13.2949 1.29727L8.29499 6.26348L3.36455 1.29727C3.00619 0.987976 2.51632 0.882762 2.06375 1.01757C1.61119 1.15237 1.257 1.50911 1.12317 1.96497C0.989339 2.42082 1.0938 2.91424 1.40087 3.27521L6.3313 8.24141L1.40087 13.2076C1.11968 13.4728 0.959961 13.8436 0.959961 14.2316C0.959961 14.6198 1.11968 14.9904 1.40087 15.2557L1.40091 15.2558Z" fill="black" />
@@ -480,11 +483,11 @@ const Widget_header = (props) => {
                                 <div className="wb-version-body">
                                     <div className='wb-version-wrap wb-widget-sync-details'>
                                         <div className="wb-version-number">
-                                            <span className='wb-version-label'>Current Version</span>
+                                            <span className='wb-version-label'>{__('Current Version', 'wdesignkit')}</span>
                                             <input style={{ 'cursor': 'not-allowed' }} className="wb-version-input" type="text" defaultValue={props?.widgetdata?.WcardData?.widgetdata?.widget_version ? props?.widgetdata?.WcardData?.widgetdata?.widget_version : '1.0.0'} disabled />
                                         </div>
                                         <div className="wb-version-detais">
-                                            <span className='wb-version-label'>Latest Version</span>
+                                            <span className='wb-version-label'>{__('Latest Version', 'wdesignkit')}</span>
                                             <input className="wb-version-input" type="text"
                                                 value={props?.widgetdata?.WcardData?.widgetdata?.widget_version ? w_version : '1.0.0'}
                                                 onChange={(e) => { handleVersionInputChange(e) }}
@@ -492,7 +495,7 @@ const Widget_header = (props) => {
                                             <p className="wb-error-message">{error_msg}</p>
                                         </div>
                                     </div>
-                                    <span className='wb-version-label wb-label-separate'>Changelog</span>
+                                    <span className='wb-version-label wb-label-separate'>{__('Changelog', 'wdesignkit')}</span>
                                     <div className="wb-version-changes">
                                         {version_details.map((val, index) => {
                                             return (
@@ -508,12 +511,12 @@ const Widget_header = (props) => {
                                         <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                                             <path fillRule="evenodd" clipRule="evenodd" d="M6.5 0.546875H5.5V6.04688H0V7.04688H5.5V12.5469H6.5V7.04688H12V6.04688H6.5V0.546875Z" />
                                         </svg>
-                                        <label>Add more</label>
+                                        <label>{__('Add more', 'wdesignkit')}</label>
                                     </button>
                                 </div>
                                 <div className="wb-quickedit-footer wb-add-widget-footer">
                                     <div className="wb-add-widget-cancelBtn">
-                                        <button onClick={(e) => { (e.target.closest('.overlay').click()) }} > Cancel </button>
+                                        <button onClick={(e) => { (e.target.closest('.overlay').click()) }} > {__('Cancel', 'wdesignkit')} </button>
                                     </div>
                                     <button
                                         className={`wb-version-popup-btn`}
@@ -526,7 +529,7 @@ const Widget_header = (props) => {
                                             </div>
                                         }
                                         {loader == false &&
-                                            <span>Update</span>
+                                            <span>{__('Update', 'wdesignkit')}</span>
                                         }
                                     </button>
                                 </div>

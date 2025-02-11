@@ -1,4 +1,4 @@
-@import '/src/style/variable.scss';
+@use '/src/style/variable';
 
 .wdkit-onboarding-main {
   position: fixed;
@@ -29,7 +29,7 @@
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 
       &:checked {
-        background-color: $Wdkit_pink_normal;
+        background-color: variable.$Wdkit_pink_normal;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -147,7 +147,7 @@
     width: 60%;
     height: 80%;
     margin-left: 160px;
-    background: $common_background;
+    background: variable.$common_background;
     padding: 15px;
     border-radius: 10px;
 
@@ -183,8 +183,8 @@
 
     .wdkit-onboarding-image {
       min-height: 200px;
-      background-color: $Wdkit_blue_normal;
-      border-radius: $radius_small;
+      background-color: variable.$Wdkit_blue_normal;
+      border-radius: variable.$radius_small;
 
       img {
         display: flex;
@@ -192,7 +192,7 @@
         object-fit: cover;
         object-position: center center;
         min-height: 200px;
-        border-radius: $radius_small;
+        border-radius: variable.$radius_small;
       }
     }
 
@@ -292,9 +292,9 @@
           padding: 5px 20px;
           margin: 0 10px;
           box-sizing: border-box;
-          border: 1px solid $common_border_color;
-          border-radius: $radius_small;
-          box-shadow: $common_boxshadow;
+          border: 1px solid variable.$common_border_color;
+          border-radius: variable.$radius_small;
+          box-shadow: variable.$common_boxshadow;
 
           .wdkit-select-pageBuilder-header {
             display: flex;
@@ -416,13 +416,13 @@
                 fill: transparent;
 
                 &:hover {
-                  border-color: $Wdkit_blue_normal;
+                  border-color: variable.$Wdkit_blue_normal;
                 }
               }
 
               input:checked+svg {
                 fill: #040483;
-                border-color: $Wdkit_blue_normal;
+                border-color: variable.$Wdkit_blue_normal;
               }
             }
           }
@@ -446,9 +446,9 @@
           background-color: #fff;
           padding: 10px;
           gap: 10px;
-          border: 1px solid $common_border_color;
-          border-radius: $radius_small;
-          box-shadow: $common_boxshadow;
+          border: 1px solid variable.$common_border_color;
+          border-radius: variable.$radius_small;
+          box-shadow: variable.$common_boxshadow;
         }
 
         .wdkit-onboarding-basic-content-header {
@@ -478,7 +478,7 @@
 
             span {
               position: relative;
-              color: $Wdkit_pink_normal;
+              color: variable.$Wdkit_pink_normal;
               font-size: 14px;
               font-weight: 600;
 
@@ -490,7 +490,7 @@
                 height: 2px;
                 bottom: -2px;
                 left: 0;
-                background-color: $Wdkit_pink_normal;
+                background-color: variable.$Wdkit_pink_normal;
                 transform-origin: bottom right;
                 transition: transform 0.25s ease-out;
               }
@@ -568,11 +568,11 @@
           display: flex;
           justify-content: center;
           background: #F9E9F1;
-          border: 1px solid $Wdkit_pink_normal;
+          border: 1px solid variable.$Wdkit_pink_normal;
           border-radius: 6px;
           padding: 7px 12px;
           gap: 5px;
-          color: $Wdkit_pink_normal;
+          color: variable.$Wdkit_pink_normal;
           flex-direction: row;
           align-items: center;
           cursor: pointer;
@@ -582,7 +582,7 @@
 
           .wkit-content-loader {
             .wb-contentLoader-circle {
-              border: 4px solid $Wdkit_pink_normal;
+              border: 4px solid variable.$Wdkit_pink_normal;
               border-top: 4px solid rgb(194 32 118 / 10%);
             }
           }
@@ -601,9 +601,9 @@
           display: flex;
           flex-direction: column;
           background-color: #fff;
-          border: 1px solid $common_border_color;
-          border-radius: $radius_small;
-          box-shadow: $common_boxshadow;
+          border: 1px solid variable.$common_border_color;
+          border-radius: variable.$radius_small;
+          box-shadow: variable.$common_boxshadow;
           gap: 5px;
           padding: 20px;
           width: 30%;
@@ -712,8 +712,8 @@
             justify-content: center;
             align-items: center;
             background-color: #fff;
-            border: 1px solid $common_border_color;
-            box-shadow: $common_boxshadow;
+            border: 1px solid variable.$common_border_color;
+            box-shadow: variable.$common_boxshadow;
             border-radius: 50%;
             height: 70px;
             width: 70px;
@@ -760,8 +760,8 @@
         padding: 12px 32px;
         text-align: center;
         margin: 4px 2px;
-        border: 1px solid $Wdkit_pink_normal;
-        color: $Wdkit_pink_normal;
+        border: 1px solid variable.$Wdkit_pink_normal;
+        color: variable.$Wdkit_pink_normal;
         cursor: pointer;
         transition: 0.3s linear;
 
@@ -826,9 +826,9 @@
       }
 
       .wdkit-onboarding-next-button {
-        background-color: $Wdkit_pink_normal;
+        background-color: variable.$Wdkit_pink_normal;
         border-radius: 6px;
-        border: 1px solid $Wdkit_pink_normal;
+        border: 1px solid variable.$Wdkit_pink_normal;
         color: #ffff;
         padding: 12px 32px;
         text-align: center;
@@ -844,7 +844,7 @@
         &:disabled {
           opacity: 0.7;
           cursor: not-allowed;
-          background-color: $Wdkit_pink_normal;
+          background-color: variable.$Wdkit_pink_normal;
         }
       }
     }

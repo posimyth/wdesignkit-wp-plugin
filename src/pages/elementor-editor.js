@@ -8,10 +8,6 @@ import rootReducer from '../widget-builder/redux-services/reducer/redux_index';
 
 const store = createStore(rootReducer);
 
-const {
-    __,
-} = wp.i18n;
-
 window.userData = []
 
 window.wdkit_editor = wdkitData.use_editor;

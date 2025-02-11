@@ -1,14 +1,17 @@
-const { __ } = wp.i18n;
 import '../style/block_edit.scss'
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { __ } from '@wordpress/i18n';
 
 const { Fragment } = wp.element;
 
 const Block_Edit = (props) => {
 
     let page_type = props?.widgetdata?.widgetdata?.type;
+    const component_index = useRef();
+    var img_path = wdkitData.WDKIT_URL;
 
     let disable_name = ['cpt', 'product_listing']
+    let ai_support = ['text', 'textarea', 'wysiwyg', 'code', 'media'];
 
     /**
      * Show label block option for selected controler in Gutenberg
@@ -43,9 +46,6 @@ const Block_Edit = (props) => {
             uid = Math.random().toString(36).substr(2, 6);
         return uid + year;
     }
-
-    const component_index = useRef();
-    var img_path = wdkitData.WDKIT_URL;
 
     if (props?.controller?.controller) {
         component_index.current = props.controller.controller;
@@ -115,7 +115,7 @@ const Block_Edit = (props) => {
             var array_data = old_array[0][component_index.current.array_type][component_index.current.sec_id].inner_sec[component_index.current.compo_id];
         }
 
-        if (type == "showLable" || type == "lableBlock" || type == "is_external" || type == "nofollow" || type == "url_options" || type == "prevent_empty" || type == "global" || type == "responsive" || type == "alpha" || type == "multiple" || type == "conditions" || type == "dynamic" || type == "dismissible" || type == "parent_class") {
+        if (type == "ai_support" || type == "showLable" || type == "lableBlock" || type == "is_external" || type == "nofollow" || type == "url_options" || type == "prevent_empty" || type == "global" || type == "responsive" || type == "alpha" || type == "multiple" || type == "conditions" || type == "dynamic" || type == "dismissible" || type == "parent_class") {
             array_data[type] = e.target.checked;
         } else if (type == "types") {
             if (e.target.checked == true) {
@@ -603,10 +603,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Label</span>
+                                        <span>{__('Label', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip wkit-bottom-toolTip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The label that appears above of the field.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The label that appears above of the field.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-text-inp' value={selected_controller.lable} type='text' onChange={(e) => {
@@ -622,10 +622,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Label</span>
+                                        <span>{__('Label', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The label that appears above of the field.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The label that appears above of the field.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <textarea className='wb-block-text-inp' value={selected_controller.lable} rows={3} onChange={(e) => {
@@ -641,10 +641,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Input Type</span>
+                                        <span>{__('Input Type', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The input field type. Available values are all HTML5 supported types.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The input field type. Available values are all HTML5 supported types.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
@@ -653,14 +653,14 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value='text' onClick={(e) => { Change_value(e, 'input_type') }}>Text</option>
-                                            <option value='number' onClick={(e) => { Change_value(e, 'input_type') }}>Number</option>
-                                            <option value='color' onClick={(e) => { Change_value(e, 'input_type') }}>Color</option>
-                                            <option value='date' onClick={(e) => { Change_value(e, 'input_type') }}>Date</option>
-                                            <option value='datetime-local' onClick={(e) => { Change_value(e, 'input_type') }}>Datetime-Local</option>
-                                            <option value='month' onClick={(e) => { Change_value(e, 'input_type') }}>Month</option>
-                                            <option value='time' onClick={(e) => { Change_value(e, 'input_type') }}>Time</option>
-                                            <option value='week' onClick={(e) => { Change_value(e, 'input_type') }}>Week</option>
+                                            <option value='text' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Text', 'wdesignkit')}</option>
+                                            <option value='number' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Number', 'wdesignkit')}</option>
+                                            <option value='color' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Color', 'wdesignkit')}</option>
+                                            <option value='date' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Date', 'wdesignkit')}</option>
+                                            <option value='datetime-local' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Datetime-Local', 'wdesignkit')}</option>
+                                            <option value='month' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Month', 'wdesignkit')}</option>
+                                            <option value='time' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Time', 'wdesignkit')} </option>
+                                            <option value='week' onClick={(e) => { Change_value(e, 'input_type') }}>{__('Week', 'wdesignkit')} </option>
                                         </div>
                                     </div>
                                 </div>
@@ -673,9 +673,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Name</span>
-                                        <div className='wkit-wb-tooltip'> <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The name must be unique and should only contain letters, numbers and underscore (_).')}</span>
+                                        <span>{__('Name', 'wdesignkit')}</span>
+                                        <div className='wkit-wb-tooltip'>
+                                            <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
+                                            <span className="wkit-wb-tooltiptext">{__('The name must be unique and should only contain letters, numbers and underscore (_).', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-text-inp' value={selected_controller.name} type='text' onChange={(e) => { Change_value(e, "name") }} disabled={disable_name.includes(selected_controller?.type) || props.controller.controller.cpt_controller} />
@@ -689,10 +690,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Repeater type</span>
+                                        <span>{__('Repeater type', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The name must be unique and should only contain letters, numbers and underscore (_).')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The name must be unique and should only contain letters, numbers and underscore (_).', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
@@ -701,8 +702,8 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value='Old' onClick={(e) => { Change_value(e, 'repeater_type') }}>Old</option>
-                                            <option value='New' onClick={(e) => { Change_value(e, 'repeater_type') }}>New</option>
+                                            <option value='Old' onClick={(e) => { Change_value(e, 'repeater_type') }}>{__('Old', 'wdesignkit')}</option>
+                                            <option value='New' onClick={(e) => { Change_value(e, 'repeater_type') }}>{__('New', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -715,10 +716,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wb-block-texarea'>
                                     <span className='wb-block-title'>
-                                        <span>Description</span>
+                                        <span>{__('Description', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The description that appears below the field.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The description that appears below the field.', 'wdesignkit')}</span>
                                         </div>
                                     </span>
                                     <textarea className='wb-block-text-inp' value={selected_controller.description} type='textarea' onChange={(e) => { Change_value(e, "description") }} />
@@ -732,10 +733,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Title field</span>
+                                        <span>{__('Title field', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Field that will be used as the repeater title in the fields list when the item is minimized.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Field that will be used as the repeater title in the fields list when the item is minimized.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-text-inp' value={selected_controller.title_field} type='text' onChange={(e) => { Change_value(e, "title_field") }} />
@@ -749,13 +750,12 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Placeholder</span>
+                                        <span>{__('Placeholder', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field placeholder that appears when the field has no values.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field placeholder that appears when the field has no values.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
-
                                     <input className='wb-block-text-inp' value={selected_controller.placeHolder} type='text' onChange={(e) => { Change_value(e, "placeHolder") }} />
                                 </div>
 
@@ -768,10 +768,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Value</span>
+                                        <span>{__('Default Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     {selected_controller && selected_controller.type != undefined && (selected_controller.type == "textarea" || selected_controller.type == "wysiwyg" || selected_controller.type == "rawhtml" || selected_controller.type == "code") ?
@@ -805,10 +805,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Alert Type</span>
+                                        <span>{__('Alert Type', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Select the type of Alert message.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Select the type of Alert message.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
@@ -817,10 +817,10 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value='warning' onClick={(e) => { Change_value(e, 'alert_type') }}>Warning</option>
-                                            <option value='info' onClick={(e) => { Change_value(e, 'alert_type') }}>info</option>
-                                            <option value='success' onClick={(e) => { Change_value(e, 'alert_type') }}>Success</option>
-                                            <option value='danger' onClick={(e) => { Change_value(e, 'alert_type') }}>Danger</option>
+                                            <option value='warning' onClick={(e) => { Change_value(e, 'alert_type') }}>{__('Warning', 'wdesignkit')}</option>
+                                            <option value='info' onClick={(e) => { Change_value(e, 'alert_type') }}>{__('info', 'wdesignkit')}</option>
+                                            <option value='success' onClick={(e) => { Change_value(e, 'alert_type') }}>{__('Success', 'wdesignkit')}</option>
+                                            <option value='danger' onClick={(e) => { Change_value(e, 'alert_type') }}>{__('Danger', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -833,10 +833,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>{__('Parent Class')}</span>
+                                        <span>{__('Parent Class', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to select the parent class.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to select the parent class.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -853,10 +853,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Notice Type</span>
+                                        <span>{__('Notice Type', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Select the type of Noitce message.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Select the type of Noitce message.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
@@ -865,10 +865,10 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value='warning' onClick={(e) => { Change_value(e, 'notice_type') }}>Warning</option>
-                                            <option value='info' onClick={(e) => { Change_value(e, 'notice_type') }}>info</option>
-                                            <option value='success' onClick={(e) => { Change_value(e, 'notice_type') }}>Success</option>
-                                            <option value='danger' onClick={(e) => { Change_value(e, 'notice_type') }}>Danger</option>
+                                            <option value='warning' onClick={(e) => { Change_value(e, 'notice_type') }}>{__('Warning', 'wdesignkit')}</option>
+                                            <option value='info' onClick={(e) => { Change_value(e, 'notice_type') }}>{__('info', 'wdesignkit')}</option>
+                                            <option value='success' onClick={(e) => { Change_value(e, 'notice_type') }}>{__('Success', 'wdesignkit')}</option>
+                                            <option value='danger' onClick={(e) => { Change_value(e, 'notice_type') }}>{__('Danger', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -881,10 +881,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Dismissible</span>
+                                        <span>{__('Dismissible', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to prevent deleting the first notice.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to prevent deleting the first notice.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -909,7 +909,7 @@ const Block_Edit = (props) => {
                                                             <span>{key}</span>
                                                             <div className='wkit-wb-tooltip'>
                                                                 <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" alt="info icon" />
-                                                                <span className="wkit-wb-tooltiptext">{__('Enter value for ' + key + '.')}</span>
+                                                                <span className="wkit-wb-tooltiptext">{__('Enter value for ' + key + '.', 'wdesignkit')}</span>
                                                             </div>
                                                         </div>
                                                         <input className='wb-block-text-inp' value={value} type='text' onChange={(e) => { Change_deprecatedNotice(e, 'deprecatedValue', index, key) }} />
@@ -928,10 +928,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Value</span>
+                                        <span>{__('Default Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wb-slider-default'>
@@ -973,19 +973,19 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Value</span>
+                                        <span>{__('Default Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown'>
                                         <div className='wkit-wb-custom-dropDown-header' onClick={(e) => { Drop_down_toggle(e) }}>
-                                            <label>Select Template</label>
+                                            <label>{__('Select Template', 'wdesignkit')}</label>
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option selected>Select Template</option>
+                                            <option selected>{__('Select Template', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -998,10 +998,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Value</span>
+                                        <span>{__('Default Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown'>
@@ -1031,10 +1031,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Value</span>
+                                        <span>{__('Default Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown'>
@@ -1043,12 +1043,12 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value="h1" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>H1</option>
-                                            <option value="h2" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>H2</option>
-                                            <option value="h3" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>H3</option>
-                                            <option value="h4" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>H4</option>
-                                            <option value="h5" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>H5</option>
-                                            <option value="h6" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>H6</option>
+                                            <option value="h1" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>{__('H1', 'wdesignkit')}</option>
+                                            <option value="h2" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>{__('H2', 'wdesignkit')}</option>
+                                            <option value="h3" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>{__('H3', 'wdesignkit')}</option>
+                                            <option value="h4" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>{__('H4', 'wdesignkit')}</option>
+                                            <option value="h5" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>{__('H5', 'wdesignkit')}</option>
+                                            <option value="h6" onClick={(e) => { Change_value(e, "hTags_defaultValue") }}>{__('H6', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -1061,10 +1061,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Value</span>
+                                        <span>{__('Default Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wb-icons'>
@@ -1103,10 +1103,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Value</span>
+                                        <span>{__('Default Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' style={{ width: '50%' }}>
@@ -1157,10 +1157,10 @@ const Block_Edit = (props) => {
                                     <div className='wb-dimension_defaultValue'>
                                         <div className='wb-dimension_defaultValue-part'>
                                             <div className='wb-dimension_defaultValue-lable'>
-                                                <span>Default Value</span>
+                                                <span>{__('Default Value', 'wdesignkit')}</span>
                                                 <div className='wkit-wb-tooltip'>
                                                     <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                                    <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                                    <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                                 </div>
                                             </div>
                                             <div className='wb-dimension_defaultValue-content'>
@@ -1176,9 +1176,9 @@ const Block_Edit = (props) => {
                                         <hr className='wb-controller-hr' />
                                         <div className='wb-dimension-default_unit'>
                                             <div className='wb-dimension_defaultValue-lable'>
-                                                <span>Select Default Unit</span>
+                                                <span>{__('Select Default Unit', 'wdesignkit')}</span>
                                                 <div className='wkit-wb-tooltip'> <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                                    <span className="wkit-wb-tooltiptext">{__('The field default value.')}</span>
+                                                    <span className="wkit-wb-tooltiptext">{__('The field default value.', 'wdesignkit')}</span>
                                                 </div>
                                             </div>
                                             <div className='wkit-wb-custom-dropDown' style={{ width: '20%' }} onClick={(e) => { Drop_down_toggle(e) }}>
@@ -1211,10 +1211,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Rows</span>
+                                        <span>{__('Rows', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Number of rows.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Number of rows.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-number-inp' min={0} value={selected_controller.rows} type='number' onChange={(e) => {
@@ -1230,10 +1230,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Default Count</span>
+                                        <span>{__('Default Count', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('default Count of Repeater item.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('default Count of Repeater item.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-number-inp' min={selected_controller.prevent_empty == true ? 1 : 0} value={selected_controller.defaultCount} type='number' onChange={(e) => {
@@ -1249,10 +1249,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <label className='wb-block-title'>
-                                        <span>Show Unit</span>
+                                        <span>{__('Show Unit', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('An array of available CSS units like px, em, rem, %, deg, vh or custom.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('An array of available CSS units like px, em, rem, %, deg, vh or custom.', 'wdesignkit')}</span>
                                         </div>
                                     </label>
                                     <label className="wb-switch">
@@ -1270,18 +1270,18 @@ const Block_Edit = (props) => {
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-number-setting'>
                                         <div className='wb-block-title'>
-                                            <span>Size Unit & Range</span>
+                                            <span>{__('Size Unit & Range', 'wdesignkit')}</span>
                                             <div className='wkit-wb-tooltip'>
                                                 <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                                <span className="wkit-wb-tooltiptext">{__('An array of ranges for each register size.')}</span>
+                                                <span className="wkit-wb-tooltiptext">{__('An array of ranges for each register size.', 'wdesignkit')}</span>
                                             </div>
                                         </div>
                                         <div className='wb-select-unit-label'>
                                             <label style={{ width: '20%' }}></label>
                                             <div className='wb-select-unit-content' >
-                                                <label>Min</label>
-                                                <label>Max</label>
-                                                <label>Step</label>
+                                                <label>{__('Min', 'wdesignkit')}</label>
+                                                <label>{__('Max', 'wdesignkit')}</label>
+                                                <label>{__('Step', 'wdesignkit')}</label>
                                             </div>
                                         </div>
                                         {selected_controller.size_units.map((units, index) => {
@@ -1317,10 +1317,10 @@ const Block_Edit = (props) => {
                         <>
                             <div className='wb-dimension-unit'>
                                 <div className='wb-block-title'>
-                                    <span>Size Unit</span>
+                                    <span>{__('Size Unit', 'wdesignkit')}</span>
                                     <div className='wkit-wb-tooltip'>
                                         <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                        <span className="wkit-wb-tooltiptext">{__('An array of available CSS units like px, em, rem, %, deg, vh or custom.')}</span>
+                                        <span className="wkit-wb-tooltiptext">{__('An array of available CSS units like px, em, rem, %, deg, vh or custom.', 'wdesignkit')}</span>
                                     </div>
                                 </div>
                                 <div className='wb-dimension-unit'>
@@ -1357,21 +1357,21 @@ const Block_Edit = (props) => {
                         <>
                             <div className='wb-block-name'>
                                 <div className='wb-block-title'>
-                                    <span>Switcher Label</span>
+                                    <span>{__('Switcher Label', 'wdesignkit')}</span>
                                     <div className='wkit-wb-tooltip'>
                                         <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                        <span className="wkit-wb-tooltiptext">{__('The label for the “unchecked” state and “checked” state.')}</span>
+                                        <span className="wkit-wb-tooltiptext">{__('The label for the “unchecked” state and “checked” state.', 'wdesignkit')}</span>
                                     </div>
                                 </div>
                                 <div className="wkit-wb-switcher">
                                     <div className='wb-switcher-lable'>
-                                        <div className='wb-block-swither-title'>Switch is on</div>
+                                        <div className='wb-block-swither-title'>{__('Switch is on', 'wdesignkit')}</div>
                                         <input className='wb-switcher-lable-inp' value={selected_controller.label_on} type='text' placeholder='Yes' onChange={(e) => {
                                             Change_value(e, "label_on");
                                         }} />
                                     </div>
                                     <div className='wb-switcher-lable'>
-                                        <div className='wb-block-swither-title'>Switch is off</div>
+                                        <div className='wb-block-swither-title'>{__('Switch is off', 'wdesignkit')}</div>
                                         <input className='wb-switcher-lable-inp' value={selected_controller.label_off} type='text' placeholder='No' onChange={(e) => {
                                             Change_value(e, "label_off");
                                         }} />
@@ -1386,10 +1386,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Options</span>
+                                        <span>{__('Options', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Turn on for url_options value.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Turn on for url_options value.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -1406,10 +1406,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Is External</span>
+                                        <span>{__('Is External', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to open the url in the same tab or in a new one.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to open the url in the same tab or in a new one.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -1426,10 +1426,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>No Follow</span>
+                                        <span>{__('No Follow', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to add nofollow attribute.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to add nofollow attribute.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -1446,10 +1446,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Attributes</span>
+                                        <span>{__('Attributes', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Custom attributes string that come as a string of comma-delimited key|value pairs.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Custom attributes string that come as a string of comma-delimited key|value pairs.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-text-inp' value={selected_controller.custom_attributes} type='text' onChange={(e) => {
@@ -1465,10 +1465,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Return Value</span>
+                                        <span>{__('Return Value', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The value returned when checked.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The value returned when checked.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-text-inp' value={selected_controller.return_value} type='text' onChange={(e) => {
@@ -1484,10 +1484,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Show Label</span>
+                                        <span>{__('Show Label', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the label.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the label.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -1504,10 +1504,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Label Block</span>
+                                        <span>{__('Label Block', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the label in a separate line.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the label in a separate line.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -1523,25 +1523,25 @@ const Block_Edit = (props) => {
                         <>
                             <div className='wb-block-name'>
                                 <div className='wb-block-title wkit-bottom-space'>
-                                    <span>Media Types</span>
+                                    <span>{__('Media Types', 'wdesignkit')}</span>
                                     <div className='wkit-wb-tooltip'>
                                         <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                        <span className="wkit-wb-tooltiptext">{__('Supported media types. Available values are image, video, and svg.')}</span>
+                                        <span className="wkit-wb-tooltiptext">{__('Supported media types. Available values are image, video, and svg.', 'wdesignkit')}</span>
                                     </div>
                                 </div>
                                 <div className='wb-option-select'>
                                     <div className='wb-select-component'>
                                         <input className='wb-select-component-inp' id='select-1' type='checkbox' checked={selected_controller.media_types.indexOf(`"image"`) !== -1 ? true : false} onChange={(e) => { Change_value(e, "media_types", "image") }} />
-                                        <label htmlFor='select-1'>{page_type == 'gutenberg' ? 'Image & Svg' : 'Image'}</label>
+                                        <label htmlFor='select-1'>{page_type == 'gutenberg' ? __('Image & Svg', 'wdesignkit') : __('Image', 'wdesignkit')}</label>
                                     </div>
                                     <div className='wb-select-component'>
                                         <input className='wb-select-component-inp' id='select-2' type='checkbox' checked={selected_controller.media_types.indexOf(`"video"`) !== -1 ? true : false} onChange={(e) => { Change_value(e, "media_types", "video") }} />
-                                        <label htmlFor='select-2'>Video</label>
+                                        <label htmlFor='select-2'>{__('Video', 'wdesignkit')}</label>
                                     </div>
                                     {page_type !== 'gutenberg' &&
                                         <div className='wb-select-component'>
                                             <input className='wb-select-component-inp' id='select-3' type='checkbox' checked={selected_controller.media_types.indexOf(`"svg"`) !== -1 ? true : false} onChange={(e) => { Change_value(e, "media_types", "svg") }} />
-                                            <label htmlFor='select-3'>Svg</label>
+                                            <label htmlFor='select-3'>{__('Svg', 'wdesignkit')}</label>
                                         </div>
 
                                     }
@@ -1555,10 +1555,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wb-skin-content'>
                                     <div className='wb-block-title'>
-                                        <span>Types</span>
+                                        <span>{__('Types', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Used to change the appearance of the control. There are two options: media or inline. The inline skin’s design is based on the Choose Control.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Used to change the appearance of the control. There are two options: media or inline. The inline skin\'s design is based on the Choose Control.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
@@ -1567,8 +1567,8 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value='media' onClick={(e) => { Change_value(e, 'skin') }} >Media</option>
-                                            <option value='inline' onClick={(e) => { Change_value(e, 'skin') }} >Inline</option>
+                                            <option value='media' onClick={(e) => { Change_value(e, 'skin') }} >{__('Media', 'wdesignkit')}</option>
+                                            <option value='inline' onClick={(e) => { Change_value(e, 'skin') }} >{__('Inline', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -1581,10 +1581,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wb-block-type'>
                                     <div className='wkit-wb-option'>
-                                        <span>Type</span>
+                                        <span>{__('Type', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the NHA type.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the NHA type.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wb-NHA-option-select'>
@@ -1647,28 +1647,28 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wb-block-type'>
                                     <div className='wkit-wb-option wkit-bottom-space'>
-                                        <span>Type</span>
+                                        <span>{__('Type', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('The specific background types to use. Available types are classic, gradient and video. Default is an empty array, including all the types.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('The specific background types to use. Available types are classic, gradient and video. Default is an empty array, including all the types.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wb-option-select'>
                                         {page_type == 'elementor' &&
                                             <div className='wb-select-component'>
                                                 <input className='wb-select-component-inp' id='select-1' type='checkbox' checked={selected_controller.types.indexOf(`"classic"`) !== -1 ? true : false} onChange={(e) => { Change_value(e, "types", "classic") }} />
-                                                <label htmlFor='select-1'>Classic</label>
+                                                <label htmlFor='select-1'>{__('Classic', 'wdesignkit')}</label>
                                             </div>
                                         }
                                         {page_type == 'gutenberg' &&
                                             <div className='wb-select-component'>
                                                 <input className='wb-select-component-inp' id='select-1' type='checkbox' checked={selected_controller.types.indexOf(`"classic"`) !== -1 ? true : false} onChange={(e) => { Change_value(e, "types", "classic") }} />
-                                                <label htmlFor='select-1'>Color & Image</label>
+                                                <label htmlFor='select-1'>{__('Color & Image', 'wdesignkit')}</label>
                                             </div>
                                         }
                                         <div className='wb-select-component'>
                                             <input className='wb-select-component-inp' id='select-2' type='checkbox' checked={selected_controller.types.indexOf(`"gradient"`) !== -1 ? true : false} onChange={(e) => { Change_value(e, "types", "gradient") }} />
-                                            <label htmlFor='select-2'>Gradient</label>
+                                            <label htmlFor='select-2'>{__('Gradient', 'wdesignkit')}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -1680,16 +1680,16 @@ const Block_Edit = (props) => {
                         <>
                             <div className='wb-options-main'>
                                 <div className='wkit-wb-option'>
-                                    <span>Drop Down Value</span>
+                                    <span>{__('Drop Down Value', 'wdesignkit')}</span>
                                     <div className='wkit-wb-tooltip'>
                                         <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                        <span className="wkit-wb-tooltiptext">{__('An array of key => value pairs: [ \'key\' => \'value\', ... ]')}</span>
+                                        <span className="wkit-wb-tooltiptext">{__('An array of key => value pairs: [ \'key\' => \'value\', ... ]', 'wdesignkit')}</span>
                                     </div>
                                 </div>
                                 <div className='wb-options-content'>
-                                    <label className="wb-options-lable">Value</label>
-                                    <label className="wb-options-lable">Options</label>
-                                    {selected_controller.type == 'styleimage' && <label className="wb-options-lable">Svg</label>}
+                                    <label className="wb-options-lable">{__('Value', 'wdesignkit')}</label>
+                                    <label className="wb-options-lable">{__('Options', 'wdesignkit')}</label>
+                                    {selected_controller.type == 'styleimage' && <label className="wb-options-lable">{__('Svg', 'wdesignkit')}</label>}
                                 </div>
                                 <div className='wb-option-feild'>
                                     {selected_controller.options.map((data, index) => {
@@ -1713,7 +1713,7 @@ const Block_Edit = (props) => {
                                         <svg className='wb-addOption-icon' width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
                                             <path fillRule="evenodd" clipRule="evenodd" d="M6.04167 1H6.95833V6.04167H12V6.95833H6.95833V12H6.04167V6.95833H1V6.04167H6.04167V1Z" />
                                         </svg>
-                                        <label className="wb-addOption-lable">Add</label>
+                                        <label className="wb-addOption-lable">{__('Add', 'wdesignkit')}</label>
                                     </div>
                                 </div>
                             </div>
@@ -1724,16 +1724,16 @@ const Block_Edit = (props) => {
                         <>
                             <div className='wb-options-main'>
                                 <div className='wkit-wb-option'>
-                                    <span>Options</span>
+                                    <span>{__('Options', 'wdesignkit')}</span>
                                     <div className='wkit-wb-tooltip'>
                                         <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                        <span className="wkit-wb-tooltiptext">{__('An array of key => value pairs: [ \'key\' => \'value\', ... ]')}</span>
+                                        <span className="wkit-wb-tooltiptext">{__('An array of key => value pairs: [ \'key\' => \'value\', ... ]', 'wdesignkit')}</span>
                                     </div>
                                 </div>
                                 <div className='wb-options-content'>
-                                    <label className="wb-options-lable" style={{ width: '25%' }}>Label</label>
-                                    <label className="wb-options-lable" style={{ width: '25%' }}>Value</label>
-                                    <label className="wb-options-lable" style={{ width: '45%' }}>Icon</label>
+                                    <label className="wb-options-lable" style={{ width: '25%' }}>{__('Label', 'wdesignkit')}</label>
+                                    <label className="wb-options-lable" style={{ width: '25%' }}>{__('Value', 'wdesignkit')}</label>
+                                    <label className="wb-options-lable" style={{ width: '45%' }}>{__('Icon', 'wdesignkit')}</label>
                                 </div>
                                 <div className='wb-option-feild'>
                                     {selected_controller.align_option.map((data, index) => {
@@ -1755,19 +1755,19 @@ const Block_Edit = (props) => {
                                                             <img className='wkit-wb-choose-img' src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                                         </div>
                                                         <div className='wkit-wb-custom-dropDown-content'>
-                                                            <option value='eicon-text-align-left' onClick={(e) => { Change_value(e, "align_icon", index) }}>Align-Left</option>
-                                                            <option value='eicon-text-align-right' onClick={(e) => { Change_value(e, "align_icon", index) }}>Align-Right</option>
-                                                            <option value='eicon-text-align-center' onClick={(e) => { Change_value(e, "align_icon", index) }}>Align-Center</option>
-                                                            <option value='eicon-text-align-justify' onClick={(e) => { Change_value(e, "align_icon", index) }}>Align-Justify</option>
-                                                            <option value='eicon-arrow-up' onClick={(e) => { Change_value(e, "align_icon", index) }}>Up-Arrow</option>
-                                                            <option value='eicon-arrow-down' onClick={(e) => { Change_value(e, "align_icon", index) }}>Down-Arrow</option>
-                                                            <option value='eicon-arrow-right' onClick={(e) => { Change_value(e, "align_icon", index) }}>Right-Arrow</option>
-                                                            <option value='eicon-arrow-left' onClick={(e) => { Change_value(e, "align_icon", index) }}>Left-Arrow</option>
-                                                            <option value='' onClick={(e) => { Change_value(e, "align_icon", index) }}>Custom Icon</option>
+                                                            <option value='eicon-text-align-left' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Align-Left', 'wdesignkit')}</option>
+                                                            <option value='eicon-text-align-right' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Align-Right', 'wdesignkit')}</option>
+                                                            <option value='eicon-text-align-center' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Align-Center', 'wdesignkit')}</option>
+                                                            <option value='eicon-text-align-justify' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Align-Justify', 'wdesignkit')}</option>
+                                                            <option value='eicon-arrow-up' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Up-Arrow', 'wdesignkit')}</option>
+                                                            <option value='eicon-arrow-down' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Down-Arrow', 'wdesignkit')}</option>
+                                                            <option value='eicon-arrow-right' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Right-Arrow', 'wdesignkit')}</option>
+                                                            <option value='eicon-arrow-left' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Left-Arrow', 'wdesignkit')}</option>
+                                                            <option value='' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Custom Icon', 'wdesignkit')}</option>
                                                             {page_type == "gutenberg" &&
                                                                 <Fragment>
-                                                                    <option value='align_title' onClick={(e) => { Change_value(e, "align_icon", index) }}>Custom Title</option>
-                                                                    <option value='align_svg' onClick={(e) => { Change_value(e, "align_icon", index) }}>Custom Svg</option>
+                                                                    <option value='align_title' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Custom Title', 'wdesignkit')}</option>
+                                                                    <option value='align_svg' onClick={(e) => { Change_value(e, "align_icon", index) }}>{__('Custom Svg', 'wdesignkit')}</option>
                                                                 </Fragment>
                                                             }
                                                         </div>
@@ -1782,7 +1782,7 @@ const Block_Edit = (props) => {
                                     }
                                     <div className='wb-add-option' onClick={() => { Add_option("align_option", selected_controller.align_option.length) }}>
                                         <svg className='wb-addOption-icon' width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M6.04167 1H6.95833V6.04167H12V6.95833H6.95833V12H6.04167V6.95833H1V6.04167H6.04167V1Z" /></svg>
-                                        <label className="wb-addOption-lable">Add</label>
+                                        <label className="wb-addOption-lable">{__('Add', 'wdesignkit')}</label>
                                     </div>
                                 </div>
                             </div>
@@ -1794,10 +1794,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Align Type</span>
+                                        <span>{__('Align Type', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Select the Align CSS property you want to use.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Select the Align CSS property you want to use.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
@@ -1806,10 +1806,10 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value='text-align' onClick={(e) => { Change_value(e, 'alignType') }}>text-align</option>
-                                            <option value='justify-content' onClick={(e) => { Change_value(e, 'alignType') }}>justify-content</option>
-                                            <option value='align-items' onClick={(e) => { Change_value(e, 'alignType') }}>align-items</option>
-                                            <option value='flex-direction' onClick={(e) => { Change_value(e, 'alignType') }}>flex-direction</option>
+                                            <option value='text-align' onClick={(e) => { Change_value(e, 'alignType') }}>{__('text-align', 'wdesignkit')}</option>
+                                            <option value='justify-content' onClick={(e) => { Change_value(e, 'alignType') }}>{__('justify-content', 'wdesignkit')}</option>
+                                            <option value='align-items' onClick={(e) => { Change_value(e, 'alignType') }}>{__('align-items', 'wdesignkit')}</option>
+                                            <option value='flex-direction' onClick={(e) => { Change_value(e, 'alignType') }}>{__('flex-direction', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -1825,30 +1825,30 @@ const Block_Edit = (props) => {
                                 <div className='wb-number-setting-content'>
                                     <div className='wb-num-feild'>
                                         <div className='wb-number-setting-title'>
-                                            <span>Min</span>
+                                            <span>{__('Min', 'wdesignkit')}</span>
                                             <div className='wkit-wb-tooltip'>
                                                 <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info-gray.svg'} width="13" />
-                                                <span className="wkit-wb-tooltiptext">{__('The minimum number ( only affects the spinners, the user can still type a lower value ).')}</span>
+                                                <span className="wkit-wb-tooltiptext">{__('The minimum number ( only affects the spinners, the user can still type a lower value ).', 'wdesignkit')}</span>
                                             </div>
                                         </div>
                                         <input className={`wb-num-inp ${selected_controller.name}`} id={selected_controller.name} name={selected_controller.name} min value={selected_controller.number_setting.min} type="number" onChange={(e) => { Change_value(e, "num-min") }} />
                                     </div>
                                     <div className='wb-num-feild'>
                                         <div className='wb-number-setting-title'>
-                                            <span>Max</span>
+                                            <span>{__('Max', 'wdesignkit')}</span>
                                             <div className='wkit-wb-tooltip'>
                                                 <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info-gray.svg'} width="13" />
-                                                <span className="wkit-wb-tooltiptext wkit-center-side-tooltip">The minimum and maximum number (only affects the spinners, the user can still type a lower value).</span>
+                                                <span className="wkit-wb-tooltiptext wkit-center-side-tooltip">{__('The minimum and maximum number (only affects the spinners, the user can still type a lower value).', 'wdesignkit')}</span>
                                             </div>
                                         </div>
                                         <input className='wb-num-inp max' value={selected_controller.number_setting.max} type="number" onChange={(e) => { Change_value(e, "num-max") }} />
                                     </div>
                                     <div className='wb-num-feild'>
                                         <div className='wb-number-setting-title'>
-                                            <span>Step</span>
+                                            <span>{__('Step', 'wdesignkit')}</span>
                                             <div className='wkit-wb-tooltip'>
                                                 <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info-gray.svg'} width="13" />
-                                                <span className="wkit-wb-tooltiptext wkit-right-side-tooltip">The intervals value that will be incremented or decremented when using the controls’ spinners. Default is empty, the value will be incremented by 1.</span>
+                                                <span className="wkit-wb-tooltiptext wkit-right-side-tooltip">{__('The intervals value that will be incremented or decremented when using the controls\' spinners. Default is empty, the value will be incremented by 1.', 'wdesignkit')}</span>
                                             </div>
                                         </div>
                                         <input className='wb-num-inp step' value={selected_controller.number_setting.step} type="number" onChange={(e) => { Change_value(e, "num-step") }} />
@@ -1863,10 +1863,10 @@ const Block_Edit = (props) => {
                             <div className='wb-language-setting'>
                                 <div className='wb-block-title'>
                                     <div className='wkit-wb-black-division'>
-                                        <span>Code</span>
+                                        <span>{__('Code', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the label.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to display the label.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1876,9 +1876,9 @@ const Block_Edit = (props) => {
                                         <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                     </div>
                                     <div className='wkit-wb-custom-dropDown-content'>
-                                        <option value="html" onClick={(e) => { Change_value(e, "language") }}>HTML</option>
-                                        <option value="css" onClick={(e) => { Change_value(e, "language") }}>CSS</option>
-                                        <option value="javascript" onClick={(e) => { Change_value(e, "language") }}>JAVASCRIPT</option>
+                                        <option value="html" onClick={(e) => { Change_value(e, "language") }}>{__('HTML', 'wdesignkit')}</option>
+                                        <option value="css" onClick={(e) => { Change_value(e, "language") }}>{__('CSS', 'wdesignkit')}</option>
+                                        <option value="javascript" onClick={(e) => { Change_value(e, "language") }}>{__('JAVASCRIPT', 'wdesignkit')}</option>
                                     </div>
                                 </div>
                             </div>
@@ -1890,16 +1890,16 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Exclude Inline Options</span>
+                                        <span>{__('Exclude Inline Options', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Used with the inline skin only, to hide an option (Icon Library/SVG) from the inline icon control’s buttons.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Used with the inline skin only, to hide an option (Icon Library/SVG) from the inline icon control\'s buttons.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <select className={`wb-category-option ${selected_controller.name}`} onChange={(e) => { Change_value(e, "exclude_inline_options") }}>
-                                        <option value='none' selected={selected_controller.exclude_inline_options === "none" ? true : false}>None</option>
-                                        <option value='icon' selected={selected_controller.exclude_inline_options === "icon" ? true : false}>Icon</option>
-                                        <option value='svg' selected={selected_controller.exclude_inline_options === "svg" ? true : false}>Svg</option>
+                                        <option value='none' selected={selected_controller.exclude_inline_options === "none" ? true : false}>{__('None', 'wdesignkit')}</option>
+                                        <option value='icon' selected={selected_controller.exclude_inline_options === "icon" ? true : false}>{__('Icon', 'wdesignkit')}</option>
+                                        <option value='svg' selected={selected_controller.exclude_inline_options === "svg" ? true : false}>{__('Svg', 'wdesignkit')}</option>
                                     </select>
                                 </div>
                             </div>
@@ -1911,10 +1911,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Separator</span>
+                                        <span>{__('Separator', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Set the position of the control separator. Available values are default, before and after. default will position the separator depending on the control type. before / after will position the separator before/after the control.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Set the position of the control separator. Available values are default, before and after. default will position the separator depending on the control type. before / after will position the separator before/after the control.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
@@ -1923,9 +1923,9 @@ const Block_Edit = (props) => {
                                             <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                         </div>
                                         <div className='wkit-wb-custom-dropDown-content'>
-                                            <option value='default' onClick={(e) => { Change_value(e, 'separator') }}>Default</option>
-                                            <option value='before' onClick={(e) => { Change_value(e, 'separator') }}>Before</option>
-                                            <option value='after' onClick={(e) => { Change_value(e, 'separator') }}>After</option>
+                                            <option value='default' onClick={(e) => { Change_value(e, 'separator') }}>{__('Default', 'wdesignkit')}</option>
+                                            <option value='before' onClick={(e) => { Change_value(e, 'separator') }}>{__('Before', 'wdesignkit')}</option>
+                                            <option value='after' onClick={(e) => { Change_value(e, 'separator') }}>{__('After', 'wdesignkit')}</option>
                                         </div>
                                     </div>
                                 </div>
@@ -1938,10 +1938,12 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Classes</span>
+                                        <span>{__('Classes', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Add custom classes to control wrapper in the panel.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Add custom classes to control wrapper in the panel. ', 'wdesignkit')}
+                                                <a href='https://learn.wdesignkit.com/docs/use-control-classes-to-style-ui-elements/' className='wkit-ct-doc-link' target="_blank" rel="noopener noreferrer">{__('Read More', 'wdesignkit')}</a>
+                                            </span>
                                         </div>
                                     </div>
                                     <input className='wb-block-text-inp' value={selected_controller.controlClass} type='text' onChange={(e) => { Change_value(e, "controlClass") }} />
@@ -1956,10 +1958,10 @@ const Block_Edit = (props) => {
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-selector-content wb-selector-value'>
                                         <div className='wb-block-title'>
-                                            <span>Selectors Value</span>
+                                            <span>{__('Selectors Value', 'wdesignkit')}</span>
                                             <div className='wkit-wb-tooltip'>
                                                 <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                                <span className="wkit-wb-tooltiptext">{__('Enter CSS properties (e.g., color, font-size, background-color) to apply to the selected class or ID.')}</span>
+                                                <span className="wkit-wb-tooltiptext">{__('Enter CSS properties (e.g., color, font-size, background-color) to apply to the selected class or ID.', 'wdesignkit')}</span>
                                             </div>
                                         </div>
                                         <input type='text' value={selected_controller.selector_value} className='wb-block-text-inp' onChange={(e) => { Change_value(e, "selector_value"); }} />
@@ -1971,9 +1973,9 @@ const Block_Edit = (props) => {
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-selector-content wb-selector-class'>
                                         <div className='wb-block-title'>
-                                            <span>Selectors</span>
+                                            <span>{__('Selectors', 'wdesignkit')}</span>
                                             <div className='wkit-wb-tooltip'> <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                                <span className="wkit-wb-tooltiptext">{__('Add a CSS class (e.g., .my-class) or ID (e.g., #my-id) to target and style elements.')}</span>
+                                                <span className="wkit-wb-tooltiptext">{__('Add a CSS class (e.g., .my-class) or ID (e.g., #my-id) to target and style elements.', 'wdesignkit')}</span>
                                             </div>
                                         </div>
                                         <input className='wb-block-text-inp' value={selected_controller.selectors} type='text' onChange={(e) => { Change_value(e, "selectors") }} />
@@ -1989,9 +1991,9 @@ const Block_Edit = (props) => {
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-selector-content wb-selector-class'>
                                         <div className='wb-block-title'>
-                                            <span>Selectors</span>
+                                            <span>{__('Selectors', 'wdesignkit')}</span>
                                             <div className='wkit-wb-tooltip'> <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                                <span className="wkit-wb-tooltiptext">{__('Add a CSS class (e.g., .my-class) or ID (e.g., #my-id) to target and style elements.')}</span>
+                                                <span className="wkit-wb-tooltiptext">{__('Add a CSS class (e.g., .my-class) or ID (e.g., #my-id) to target and style elements.', 'wdesignkit')}</span>
                                             </div>
                                         </div>
                                         <input className='wb-block-text-inp' value={selected_controller.selectors} type='text' onChange={(e) => { Change_value(e, "selectors") }} />
@@ -2006,10 +2008,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Selectors</span>
+                                        <span>{__('Selectors', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Add a CSS class (e.g., .my-class) or ID (e.g., #my-id) to target and style elements.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Add a CSS class (e.g., .my-class) or ID (e.g., #my-id) to target and style elements.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <input className='wb-block-text-inp' value={selected_controller.selector} type='text' onChange={(e) => { Change_value(e, "selector") }} />
@@ -2023,10 +2025,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Multiple</span>
+                                        <span>{__('Multiple', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to allow multiple value selection.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to allow multiple value selection.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -2043,10 +2045,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Alpha</span>
+                                        <span>{__('Alpha', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to allow alpha channel.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to allow alpha channel.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -2063,10 +2065,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Global Color</span>
+                                        <span>{__('Global Color', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Default color in RGB, RGBA, or HEX format.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Default color in RGB, RGBA, or HEX format.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -2083,10 +2085,10 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Prevent Empty</span>
+                                        <span>{__('Prevent Empty', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to prevent deleting the first repeater field. To keep at least one repeater field.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to prevent deleting the first repeater field. To keep at least one repeater field.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -2103,14 +2105,34 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <label className='wb-block-title'>
-                                        <span>Responsive</span>
+                                        <span>{__('Responsive', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'>
                                             <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Switch to Mobile, Laptop, Tablet mode')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Switch to Mobile, Laptop, Tablet mode', 'wdesignkit')}</span>
                                         </div>
                                     </label>
                                     <label className="wb-switch" style={(selected_controller?.type == 'slider' && page_type == 'gutenberg' && selected_controller?.show_unit == true) ? { opacity: '0.5' } : {}}>
                                         <input type="checkbox" checked={selected_controller.responsive} onChange={(e) => { Change_value(e, "responsive") }} disabled={(selected_controller?.type == 'slider' && page_type == 'gutenberg' && selected_controller?.show_unit == true) ? true : false} />
+                                        <span className="wb-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr className='wb-controller-hr' />
+                        </>
+                    }
+                    {ai_support.includes(selected_controller?.type) && 'elementor' == page_type &&
+                        <>
+                            <div className='wb-block-name'>
+                                <div className='wp-block-wrapper'>
+                                    <div className='wb-block-title'>
+                                        <span>{__('AI Support', 'wdesignkit')}</span>
+                                        <div className='wkit-wb-tooltip'>
+                                            <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
+                                            <span className="wkit-wb-tooltiptext">{__('Want AI Support or not.', 'wdesignkit')}</span>
+                                        </div>
+                                    </div>
+                                    <label className="wb-switch">
+                                        <input type="checkbox" checked={selected_controller.ai_support} onChange={(e) => { Change_value(e, "ai_support") }} />
                                         <span className="wb-slider"></span>
                                     </label>
                                 </div>
@@ -2123,9 +2145,9 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name'>
                                 <div className='wp-block-wrapper'>
                                     <label className='wb-block-title'>
-                                        <span>Dynamic</span>
+                                        <span>{__('Dynamic', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'> <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Turn on for dynamic value')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Turn on for dynamic value', 'wdesignkit')}</span>
                                         </div>
                                     </label>
                                     <label className="wb-switch">
@@ -2142,9 +2164,9 @@ const Block_Edit = (props) => {
                             <div className='wb-block-name' style={{ marginBottom: '2px' }}>
                                 <div className='wp-block-wrapper'>
                                     <div className='wb-block-title'>
-                                        <span>Conditions</span>
+                                        <span>{__('Conditions', 'wdesignkit')}</span>
                                         <div className='wkit-wb-tooltip'> <img className='wkit-wb-plus-icon wkit-screen-icon' src={img_path + 'assets/images/wb-svg/info.svg'} width="15" />
-                                            <span className="wkit-wb-tooltiptext">{__('Whether to apply the conditions.')}</span>
+                                            <span className="wkit-wb-tooltiptext">{__('Whether to apply the conditions.', 'wdesignkit')}</span>
                                         </div>
                                     </div>
                                     <label className="wb-switch">
@@ -2157,24 +2179,24 @@ const Block_Edit = (props) => {
                                 <>
                                     {page_type != 'bricks' &&
                                         <div className='wb-condition-relation'>
-                                            <label className='wb-relation-lable'>Relation of Condition</label>
+                                            <label className='wb-relation-lable'>{__('Relation of Condition', 'wdesignkit')}</label>
                                             <div className='wkit-wb-custom-dropDown' onClick={(e) => { Drop_down_toggle(e) }}>
                                                 <div className='wkit-wb-custom-dropDown-header'>
                                                     <label style={{ textTransform: 'uppercase' }}>{selected_controller.condition_value.relation}</label>
                                                     <img src={img_path + 'assets/images/wb-svg/controller-open.svg'} />
                                                 </div>
                                                 <div className='wkit-wb-custom-dropDown-content'>
-                                                    <option value="or" onClick={(e) => { Change_value(e, 'condition_relation') }}>OR</option>
-                                                    <option value="and" onClick={(e) => { Change_value(e, 'condition_relation') }}>AND</option>
+                                                    <option value="or" onClick={(e) => { Change_value(e, 'condition_relation') }}>{__('OR', 'wdesignkit')}</option>
+                                                    <option value="and" onClick={(e) => { Change_value(e, 'condition_relation') }}>{__('AND', 'wdesignkit')}</option>
                                                 </div>
                                             </div>
                                         </div>
                                     }
                                     <div className='wb-options-main'>
                                         <div className='wb-options-content'>
-                                            <label className="wb-options-lable">Name</label>
-                                            <label className="wb-options-lable">Operator</label>
-                                            <label className="wb-options-lable">Value</label>
+                                            <label className="wb-options-lable">{__('Name', 'wdesignkit')}</label>
+                                            <label className="wb-options-lable">{__('Operator', 'wdesignkit')}</label>
+                                            <label className="wb-options-lable">{__('Value', 'wdesignkit')}</label>
                                         </div>
                                         <div className='wb-option-feild'>
                                             {selected_controller.condition_value.values.map((data, index) => {
@@ -2211,7 +2233,7 @@ const Block_Edit = (props) => {
                                                 <svg className='wb-addOption-icon' xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" >
                                                     <path fillRule="evenodd" clipRule="evenodd" d="M6.04167 1H6.95833V6.04167H12V6.95833H6.95833V12H6.04167V6.95833H1V6.04167H6.04167V1Z" />
                                                 </svg>
-                                                <label className="wb-addOption-lable">Add</label>
+                                                <label className="wb-addOption-lable">{__('Add', 'wdesignkit')}</label>
                                             </div>
                                         </div>
                                     </div>

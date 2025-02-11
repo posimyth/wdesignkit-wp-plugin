@@ -1,5 +1,4 @@
-const { __ } = wp.i18n;
-
+import { __ } from '@wordpress/i18n';
 import { useState, useRef, useEffect } from 'react';
 import { layout_index } from "../section_data_json";
 import { component_array } from '../components-data/component_array';
@@ -16,7 +15,9 @@ const Wb_layout = (props) => {
         let year = date.getFullYear().toString().slice(-2);
         let number = Math.random();
         number.toString(36);
+
         let uid = number.toString(36).substr(2, 6);
+
         return uid + year;
     }
 
@@ -28,6 +29,32 @@ const Wb_layout = (props) => {
     const compo_drag_section_id = useRef(); /** section id of dragged component */
 
     const inp_default_val = useRef(); /**section name validation input value */
+    const [slideIndex, setSlideIndex] = useState(0);
+    const [WidgetVideo, setWidgetVideo] = useState('');
+
+    const slide_data = [
+        {
+            slide_img: 'https://i.ytimg.com/vi/Bw5IHPxr0Nc/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDlvdVCQFiMcg2IEXzlqqnb7SUSJg',
+            yt_link: 'https://www.youtube.com/watch?v=Bw5IHPxr0Nc'
+        },
+        // {
+        //     slide_img: 'https://i.ytimg.com/vi/JHGt0kc1Xs0/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLD57VQd3UDutjyZPgXiIAgwB6QjoA',
+        //     yt_link: 'https://www.youtube.com/watch?v=JHGt0kc1Xs0&t=47s'
+        // },
+        {
+            slide_img: 'https://i.ytimg.com/vi/tuzLhe8cuXM/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAhCZV4OP9MUiwrA_jLPPWlP1AcGQ',
+            yt_link: 'https://www.youtube.com/watch?v=tuzLhe8cuXM'
+        },
+        {
+            slide_img: 'https://i.ytimg.com/vi/4RhZwuyFd8k/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBdHd-boAdQdDe6N1SoY_npGiBagw',
+            yt_link: 'https://www.youtube.com/watch?v=4RhZwuyFd8k'
+        },
+        // {
+        //     slide_img: 'https://i.ytimg.com/vi/x-moyBAOyAE/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDZF5AMz3j2NmTW66mESzsQ8ecu8',
+        //     yt_link: 'https://www.youtube.com/watch?v=x-moyBAOyAE&t=1679s'
+        // },
+    ]
+
 
     /** Object for add new section */
     var builder_name = `builder-${component_index}`,
@@ -38,6 +65,16 @@ const Wb_layout = (props) => {
             "compo_index": component_index,
             "inner_sec": []
         }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSlideIndex((prevIndex) => (prevIndex + 1) % slide_data.length);
+        }, 10000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     useEffect(() => {
         /**Inline Drag and drop of components*/
@@ -74,7 +111,7 @@ const Wb_layout = (props) => {
                         let old_array = [...props.cardData];
 
                         if (event.target.nextSibling.dataset.editable) {
-                            props.wdkit_set_toast(['Not Valid', 'You Can Not put this controller here', '', 'danger']);
+                            props.wdkit_set_toast([__('Not Valid', 'wdesignkit'), __('You Can Not put this controller here', 'wdesignkit'), '', 'danger']);
                             event.target.classList.remove("wb_drag-over")
                             return false;
                         }
@@ -82,7 +119,7 @@ const Wb_layout = (props) => {
                         if (event.target.nextSibling.dataset.rnp) {
 
                             if ('repeater' == val || 'popover' == val || 'normalhover' == val || "cpt" == val || "product_listing" == val || "taxonomy" == val) {
-                                props.wdkit_set_toast(['Not Valid', 'You Can Not put this controller here', '', 'danger']);
+                                props.wdkit_set_toast([__('Not Valid', 'wdesignkit'), __('You Can Not put this controller here', 'wdesignkit'), '', 'danger']);
                             } else {
                                 let repeater_id = event.target.nextSibling.dataset.rnp;
                                 let data = old_array[0][props.array_type][sec_index].inner_sec[compo_index]
@@ -436,6 +473,25 @@ const Wb_layout = (props) => {
         }
     }
 
+    const Close_popup = (e) => {
+        if (e?.target && !(Object.values(e.target.classList)?.includes('wkit-wb-video'))) {
+            setWidgetVideo('');
+        }
+    }
+
+    const YouTube_popup = () => {
+        const transformToEmbedURL = (url) => {
+            const videoIDMatch = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            return videoIDMatch ? `https://www.youtube.com/embed/${videoIDMatch[1]}` : url;
+        };
+
+        return (
+            <div className='wkit-wb-yt-video'>
+                <iframe className="wkit-wb-video" src={transformToEmbedURL(WidgetVideo)} allowFullScreen ></iframe>
+            </div>
+        )
+    }
+
     return (
         <div className='wb-second-layout-container'>
             <div className='wb-second-layout-content'>
@@ -530,7 +586,7 @@ const Wb_layout = (props) => {
                                                 onDragLeave={(event) => { Controller_drop(event, 'remove') }}
                                                 onDrop={(event) => { event.preventDefault(), Component_drop(event, index), Controller_drop(event, 'remove') }}
                                                 onClick={(e) => { props.addToActiveController(""); }}>
-                                                Add More
+                                                {__('Add More', 'wdesignkit')}
                                             </div>
                                         </div>
                                     </div>
@@ -540,13 +596,45 @@ const Wb_layout = (props) => {
                     }
                 </div>
                 <div className='wb-add-section' onClick={() => { section_add() }} onDragOver={(e) => { e.preventDefault() }} onDrop={(e) => { section_add(e, props.array_type) }}>
-                    <a className='add-section-btn'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path fillRule="evenodd" clipRule="evenodd" d="M6.75 0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75V0Z" fill="black" />
-                        </svg>
-                        <span>{__('Add Section')}</span>
-                    </a>
+                    <span className='add-section-btn'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M6.75 0H5.25V5.25H0V6.75H5.25V12H6.75V6.75H12V5.25H6.75V0Z" fill="black" /></svg>
+                        <span>{__('Add Section', 'wdesignkit')}</span>
+                    </span>
                 </div>
+
+                {!(wdkitData?.wdkit_white_label?.plugin_news) &&
+                    <>
+                        <div className='wkit-yt-slider'>
+                            <div className='wkit-yt-image'>
+                                {slide_data.map((data, index) => {
+                                    if (index === slideIndex) {
+                                        return (
+                                            <>
+                                                <img className="wkit-yt-placeholder-img" src={img_path + 'assets/images/wkit-dummy-bg.png'} draggable={false} />
+                                                <img className='wkit-yt-content-img' key={index} src={data.slide_img} onClick={(e) => { setWidgetVideo(data.yt_link) }} />
+                                            </>
+                                        )
+                                    }
+                                })}
+                            </div>
+                            <div className='wkit-slider-dot'>
+                                {slide_data.map((slide, index) => (
+                                    <span
+                                        key={index}
+                                        className={`wkit-current-slide ${index === slideIndex ? 'wkit-active-slide' : ''}`}
+                                        onClick={(e) => { setSlideIndex(index) }}>
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        {WidgetVideo &&
+                            <div id="wkit-wb-popup-open" className="overlay" onClick={(e) => { Close_popup(e) }}>
+                                {YouTube_popup()}
+                            </div>
+                        }
+                    </>
+                }
+
             </div>
         </div>
     );

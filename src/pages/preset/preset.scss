@@ -1,0 +1,578 @@
+@use '../../style/variable';
+
+.wkit-preset-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wkit-preset-main {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 100%;
+
+    .wdkit-preset-inner-content {
+        width: 100%;
+        height: 100%;
+
+        .wkit-preset-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+    }
+
+    .wkit-preset-card {
+        background-color: #fff;
+        border-radius: variable.$radius_big;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+        .wkit-card-inner {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            border: 1px solid #f1f1f4;
+            border-radius: variable.$radius_big;
+            padding: 15px;
+            width: 100%;
+            position: relative;
+            background-color: #fff;
+            min-height: 250px;
+            gap: 15px;
+
+            .wkit-pr-card-top {
+                position: relative;
+                width: 100%;
+                background-color: #f9f9f9;
+                border-radius: variable.$radius_small;
+                height: 100%;
+
+                .wkit-preset-card-tag {
+                    position: absolute;
+                    padding: 0;
+                    top: 10px;
+                    right: 10px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 5px;
+                    justify-content: center;
+                    background-color: #fff;
+                    border-radius: 3px;
+                    box-shadow: 3px 4px 9px rgba(0, 0, 0, 0.15);
+                    font-size: 8px;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    width: max-content;
+                    padding: 2px 10px;
+                    z-index: 1;
+                }
+
+                .wkit-preset-feature-img {
+                    width: 100%;
+                    height: 100%;
+                    line-height: 0;
+                    background-color: #eaeaea;
+                    display: flex;
+                    justify-content: center;
+                    border-radius: variable.$radius_small;
+                    cursor: pointer;
+
+                    .wkit-widget-placeholder-img {
+                        height: 100%;
+                        width: 100%;
+                        border-radius: 0px;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: variable.$radius_small;
+                    }
+
+                    .wkit-temp-image-content {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+
+                    .wkit-preset-preview {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
+                        width: 100%;
+                        position: absolute;
+                        z-index: 1;
+                        top: 0px;
+                        border-radius: 6px;
+                        transition: 0.3s linear;
+
+                        .wkit-preset-demo-inner {
+                            opacity: 0;
+                            visibility: hidden;
+                        }
+
+                        .wkit-preview-items {
+
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            gap: 10px;
+
+                            img {
+                                width: 30%;
+                            }
+
+                            label {
+                                color: variable.$cr_white;
+                            }
+                        }
+
+                        &:hover {
+                            background-color: rgba(0, 0, 0, 0.7019607843);
+
+                            .wkit-preset-demo-inner {
+                                opacity: 1;
+                                visibility: visible;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            .wkit-preset-card-bottom {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .wkit-pr-card-title {
+                    font-weight: bold;
+                    color: #333;
+
+                }
+
+                .wkit-preset-download-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #fbfbfb;
+                    border-radius: 6px;
+                    padding: 6px;
+                    width: 30px;
+                    height: 30px;
+                    border: 1px solid #C5CBD9;
+                    cursor: pointer;
+
+                    &.wkit-disable-btn {
+                        cursor: not-allowed;
+                        opacity: 0.5;
+
+                        .wkit-preset-download-icon {
+                            cursor: unset;
+                        }
+
+                    }
+
+                    &.wkit-lock-btn {
+                        cursor: not-allowed;
+                    }
+
+                    &.wkit-loading-preset {
+                        cursor: not-allowed;
+                    }
+
+                    .preset-download-temp {
+                        font-size: 14px;
+                        color: #888;
+                        position: relative;
+                        margin-right: 0;
+                        display: flex;
+                        line-height: 0;
+                    }
+
+                    img.wkit-preset-download-icon {
+                        display: flex;
+                        transition: 0.3s linear;
+                        width: 28px;
+                        height: 28px;
+                        padding: 6px;
+                        cursor: pointer;
+                        background: #fbfbfb;
+                        border-radius: 6px;
+
+                        &:hover {
+                            background: rgb(3 4 131 / 3%);
+                        }
+                    }
+
+                    .wkit-publish-loader {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .wb-loader-circle {
+                            border-radius: 50%;
+                            border: 3px solid #666161;
+                            width: 18px;
+                            border-top: 4px solid rgba(255, 255, 255, 0.3490196078);
+                            height: 18px;
+                            animation: spin 1.5s linear infinite;
+                        }
+
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.wkit-preset-container {
+    &.wkit-skeleton {
+
+        .wkit-preset-main .wkit-preset-card .wkit-card-inner .wkit-pr-card-top .wkit-preset-feature-img,
+        .wkit-preset-main .wkit-preset-card .wkit-card-inner .wkit-preset-card-bottom .wkit-pr-card-title,
+        .wkit-preset-main .wkit-preset-card .wkit-card-inner .wkit-preset-card-bottom .wkit-preset-download-btn {
+            background: variable.$skeleton_bg;
+            animation: variable.$animation;
+            border-radius: variable.$radius_small;
+            color: transparent;
+            pointer-events: none;
+            user-select: none;
+            border: none;
+
+            img,
+            svg,
+            p,
+            span,
+            input[type=text] {
+                visibility: hidden;
+                border: none;
+                color: transparent;
+            }
+
+            &::placeholder {
+                color: transparent !important;
+            }
+        }
+    }
+
+    &.wkit-filter-skeleton {
+
+        .wkit-free-dropdown-mixed .wkit-preset-filter-content .wkit-free-pro-filter .wkit-preset-filter-list,
+        .wkit-free-dropdown-mixed .wkit-preset-filter-content .wkit-search-filter-content .wkit-browse-search-inner {
+            background: variable.$skeleton_bg;
+            animation: variable.$animation;
+            border-radius: variable.$radius_small;
+            color: transparent;
+            pointer-events: none;
+            user-select: none;
+            border: none;
+
+            img,
+            svg,
+            p,
+            span,
+            input[type=text] {
+                visibility: hidden;
+                border: none;
+                color: transparent;
+            }
+
+            &::placeholder {
+                color: transparent !important;
+            }
+        }
+    }
+
+}
+
+/**************************** Filter CSS ***********************************/
+.wkit-free-dropdown-mixed {
+
+    .wkit-preset-filter-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        .wkit-free-pro-filter {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+
+            .wkit-preset-filter-list {
+                align-self: center;
+                background: #fff;
+                padding: 8px 20px;
+                height: 36px;
+                border-radius: 6px;
+                border: 1px solid #dbdadb;
+                text-transform: capitalize;
+                cursor: pointer;
+
+                p {
+                    margin: 0;
+                    color: black;
+                }
+
+                &:hover {
+                    background-color: variable.$Wdkit_blue_hover;
+                    transition: variable.$transition;
+
+                    p {
+                        color: variable.$cr_white;
+                    }
+                }
+            }
+
+            .wkit-preset-filter-list.wdkit-active-filter {
+                background-color: variable.$Wdkit_blue_hover;
+
+                p {
+                    color: variable.$cr_white;
+                }
+            }
+        }
+
+        .wkit-search-filter-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+
+            .wkit-search-filter {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .wkit-browse-search-inner {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                padding: 5px;
+                border: 1px solid #DADAF0;
+                border-radius: 6px;
+
+                input[type=text].wkit-browse-search {
+                    padding: 0px;
+                    color: #212121;
+                    width: 100%;
+                    border: none;
+                    font-size: 12px;
+                    background: transparent;
+                    min-height: 30px;
+                }
+
+                span {
+                    display: flex;
+                    padding: 4px;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    cursor: pointer;
+                }
+
+                .wkit-dropdown-svg {
+                    line-height: 0;
+                    transition: variable.$transition;
+
+                    &.wb-rotate-icon {
+                        transform: rotate(-180deg);
+                    }
+                }
+
+            }
+
+            //code for Preset Search Template Bar
+            .wkit-preset-search-template {
+                .wkit-search-filter {
+                    .wkit-browse-search-inner {
+
+                        input[type=text].wkit-browse-search {
+                            width: 250px;
+                        }
+
+                    }
+                }
+
+            }
+
+            // Code for Sub menu Preset Name Starts
+            .wkit-widgets-list {
+
+
+                .wkit-submenu {
+                    position: absolute;
+                    right: -290px;
+                    top: 55px;
+                    visibility: hidden;
+                    width: max-content;
+                    background-color: white;
+                    color: black;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 8px 8px;
+                    z-index: 2;
+
+                    &.menu-active {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    .wkit-submenu-inner-content {
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr);
+                        padding: 10px;
+                        margin-top: 15px;
+                        background-color: #ffffff;
+                        border-radius: 10px;
+                        overflow: auto;
+
+                        .wkit-submenu-link {
+                            padding: 7px 8px;
+                            border-radius: variable.$radius_small;
+                            display: flex;
+                            align-items: center;
+                            gap: 6px;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: #f6f5fa;
+                            }
+
+                            &.link-active {
+                                opacity: 0.5;
+                                pointer-events: none;
+                                cursor: not-allowed;
+                            }
+
+                            .wkit-pr-widget-tag {
+
+                                .wkit-preset-dropdown-text {
+                                    font-size: 8px;
+                                    text-transform: uppercase;
+                                    padding: 1px 6px;
+                                    color: #fff;
+                                    border-radius: 2px;
+                                }
+
+                                .wkit-preset-dropdown-text.pro-color {
+                                    background-color: #ff5a6e;
+                                }
+
+                                .wkit-preset-dropdown-text.free-color {
+                                    background-color: #6560ee;
+                                }
+                            }
+                        }
+
+                        &::-webkit-scrollbar {
+                            width: 3px;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background: #c1c1c1a6;
+                            border-radius: 50px;
+                            overflow: hidden;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            border-radius: 0;
+                            background: transparent;
+                        }
+
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        bottom: 100%;
+                        left: 50%;
+                        margin-left: -5px;
+                        border-width: 8px;
+                        border-style: solid;
+                        border-color: transparent transparent white transparent;
+                    }
+
+                }
+            }
+
+
+
+        }
+    }
+}
+
+/***************************** MEDIA QUERY **********************************/
+
+@media(max-width : 1200px) {
+    .wkit-preset-main .wdkit-preset-inner-content .wkit-preset-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 991px) {
+    .wkit-free-dropdown-mixed .wkit-preset-filter-content {
+        flex-direction: column;
+
+        .wkit-search-filter-content {
+            .wkit-widgets-list .wkit-submenu {
+                right: unset;
+
+                &::after {
+                    left: 8%;
+                }
+
+                .wkit-submenu-inner-content {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .wkit-submenu-inner-content {
+                    max-height: 260px;
+                }
+            }
+
+
+        }
+
+    }
+
+}
+
+@media (max-width: 786px) {
+    .wkit-preset-main .wdkit-preset-inner-content .wkit-preset-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+
+    .wkit-preset-main .wdkit-preset-inner-content .wkit-preset-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .wkit-free-dropdown-mixed .wkit-preset-filter-content .wkit-search-filter-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

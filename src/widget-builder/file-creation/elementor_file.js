@@ -626,7 +626,7 @@ const Elementor_file_create = async (call, all_files, html, css, js, old_folder,
         } else if (compo.type == 'media') {
             if (data.search(compo.name) >= 1) {
                 if (repeater != undefined) {
-                    let r_html = `$${compo.name} = !empty($r_item['${compo.name}']['url']) ? $r_item['${compo.name}']['url'] : '';\n`
+                    let r_html = `$${compo.name} = !empty($r_item['${compo.name}']['url']) ? esc_url( $r_item['${compo.name}']['url'] ) : '';\n`
 
                     if (repeater_variable?.[repeater]) {
                         r_html = repeater_variable?.[repeater] + r_html;
@@ -634,7 +634,7 @@ const Elementor_file_create = async (call, all_files, html, css, js, old_folder,
                     repeater_variable = Object.assign({}, repeater_variable, { [repeater]: r_html })
 
                 } else {
-                    php_variable_validation += `$${compo.name} = !empty($settings['${compo.name}']['url']) ? $settings['${compo.name}']['url'] : '';\n`
+                    php_variable_validation += `$${compo.name} = !empty($settings['${compo.name}']['url']) ? esc_url( $settings['${compo.name}']['url'] ) : '';\n`
                 }
 
                 data = data.replaceAll(`{{${compo.name}}}`, `'.$${compo.name}.'`)
@@ -695,7 +695,7 @@ const Elementor_file_create = async (call, all_files, html, css, js, old_folder,
                 html.map((html_data, index) => {
                     let gallery_html = html_data;
                     if (gallery_html) {
-                        data = data.replaceAll("{{" + compo.name + "}}", "'.esc_attr( $image['url'] ).'")
+                        data = data.replaceAll("{{" + compo.name + "}}", "'.esc_url( $image['url'] ).'")
                     }
                 })
             }
@@ -719,7 +719,7 @@ const Elementor_file_create = async (call, all_files, html, css, js, old_folder,
 
             if (repeater != undefined) {
                 let r_html = `$${compo.name}_is_external = !empty($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['is_external']) ? '_blank' : '';\n`
-                r_html += `$${compo.name}_url = !empty($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['url'])? $r_item['${compo.name}']['url'] : '';\n`
+                r_html += `$${compo.name}_url = !empty($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['url'])? esc_url( $r_item['${compo.name}']['url'] ) : '';\n`
                 r_html += `$${compo.name}_nofollow = !empty($r_item['${compo.name}']) && !empty($r_item['${compo.name}']['nofollow'])? 'nofollow' : '';\n`
 
                 if (repeater_variable?.[repeater]) {
@@ -728,7 +728,7 @@ const Elementor_file_create = async (call, all_files, html, css, js, old_folder,
 
                 repeater_variable = Object.assign({}, repeater_variable, { [repeater]: r_html })
             } else {
-                php_variable_validation += `$${compo.name}_url = !empty($settings['${compo.name}']) && !empty($settings['${compo.name}']['url']) ? $settings['${compo.name}']['url'] : '';\n`
+                php_variable_validation += `$${compo.name}_url = !empty($settings['${compo.name}']) && !empty($settings['${compo.name}']['url']) ? esc_url( $settings['${compo.name}']['url'] ) : '';\n`
                 php_variable_validation += `$${compo.name}_is_external = !empty($settings['${compo.name}']) && !empty($settings['${compo.name}']['is_external']) ? '_blank' : '';\n`
                 php_variable_validation += `$${compo.name}_nofollow = !empty($settings['${compo.name}']) && !empty($settings['${compo.name}']['nofollow']) ? 'nofollow' : '';\n`
                 php_variable_validation += `$${compo.name}_custmAtr = !empty($settings['${compo.name}']) && !empty($settings['${compo.name}']['custom_attributes']) ? $settings['${compo.name}']['custom_attributes'] : '';
@@ -1345,7 +1345,7 @@ class Wdkit_${Name_validation("file").replaceAll("-", "_")} extends Widget_Base 
     };
 
     var formData = new FormData();
-    formData.append('action', 'wdkit_widget_ajax');
+    formData.append('action', 'get_wdesignkit');
     formData.append('kit_nonce', wdkitData.kit_nonce);
     formData.append('image', image_file);
     formData.append('type', 'wkit_create_widget');

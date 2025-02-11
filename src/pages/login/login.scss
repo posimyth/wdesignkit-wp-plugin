@@ -1,4 +1,4 @@
-@import '../../style/variable.scss';
+@use '../../style/variable';
 
 .wkit-login {
     display: flex;
@@ -14,13 +14,13 @@
         row-gap: 10px;
         width: 40%;
         background: #fff;
-        border-radius: $radius_big;
-        box-shadow: $common_boxshadow;
+        border-radius: variable.$radius_big;
+        box-shadow: variable.$common_boxshadow;
         height: 100%;
 
         .wkit-login-page-link {
             position: relative;
-            color: $Wdkit_pink_normal !important;
+            color: variable.$Wdkit_pink_normal !important;
 
             &:after {
                 content: '';
@@ -45,8 +45,8 @@
             display: flex;
             align-items: center;
             column-gap: 8px;
-            border: 1px solid $sivercr_normal;
-            border-radius: $radius_small;
+            border: 1px solid variable.$sivercr_normal;
+            border-radius: variable.$radius_small;
             padding: 8px 10px;
             justify-content: center;
             width: auto;
@@ -56,7 +56,7 @@
                 display: flex;
                 column-gap: 5px;
                 align-items: center;
-                color: $sivercr_normal;
+                color: variable.$sivercr_normal;
                 font-size: 12px;
 
                 img.wkit-logo {
@@ -70,13 +70,13 @@
             flex-direction: column;
             font-weight: 600;
             font-size: 30px;
-            color: $Wdkit_blue_normal;
+            color: variable.$Wdkit_blue_normal;
             margin-bottom: 10px;
 
             span {
                 display: flex;
                 line-height: 36px;
-                color: $Wdkit_blue_normal;
+                color: variable.$Wdkit_blue_normal;
             }
 
         }
@@ -84,7 +84,7 @@
         .wkit-login-desc {
             font-weight: 400;
             font-size: 15px;
-            color: $Wdkit_blue_normal;
+            color: variable.$Wdkit_blue_normal;
             margin: 15px 0px 0px 0px;
         }
 
@@ -95,7 +95,7 @@
             column-gap: 10px;
 
             .wkit-bottom-border {
-                border-top: 1px solid $sivercr_normal;
+                border-top: 1px solid variable.$sivercr_normal;
                 width: 80px;
             }
         }
@@ -110,7 +110,7 @@
             .wkit-login-label {
                 font-weight: 500;
                 font-size: 14px;
-                color: $font_cr_black;
+                color: variable.$font_cr_black;
             }
 
             .wkit-label {
@@ -127,7 +127,7 @@
                     flex-direction: row;
                     align-items: center;
                     border: 1px solid #e8f0fe;
-                    border-radius: $radius_small;
+                    border-radius: variable.$radius_small;
 
                     input {
                         width: 92%;
@@ -164,12 +164,11 @@
             border: 1px solid #e8f0fe;
 
             &:focus {
-                border: none;
                 box-shadow: none;
             }
 
             &::placeholder {
-                color: $sivercr_normal;
+                color: variable.$sivercr_normal;
             }
 
         }
@@ -183,7 +182,7 @@
             .wkit-styled-checkbox {
                 width: 18px;
                 height: 18px;
-                border-radius: $radius_small;
+                border-radius: variable.$radius_small;
                 margin-top: 1px;
                 margin-bottom: 1px;
 
@@ -193,7 +192,7 @@
                     flex-direction: row;
                     display: flex;
                     padding: 0;
-                    color: $font_cr_black;
+                    color: variable.$font_cr_black;
                     overflow-wrap: break-word;
                     word-wrap: break-word;
                     word-break: break-word;
@@ -208,7 +207,7 @@
         }
 
         .wkit-check-box:checked {
-            background-color: $Wdkit_blue_normal;
+            background-color: variable.$Wdkit_blue_normal;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -234,7 +233,7 @@
 
             .wkit-login-remember-text {
                 font-size: 14px;
-                color: $font_cr_black;
+                color: variable.$font_cr_black;
                 font-weight: 400;
                 color: #5e5873;
                 margin-left: 5px;
@@ -244,10 +243,10 @@
         .wkit-login-btn {
             display: flex;
             padding: 15px 10px;
-            background: $Wdkit_pink_normal;
+            background: variable.$Wdkit_pink_normal;
             border: none;
-            border-radius: $radius_small;
-            color: $cr_white;
+            border-radius: variable.$radius_small;
+            color: variable.$cr_white;
             margin-bottom: 10px;
             cursor: pointer;
             font-size: 16px;
@@ -260,14 +259,14 @@
             }
 
             &:hover {
-                background-color: $Wdkit_pink_hover;
+                background-color: variable.$Wdkit_pink_hover;
             }
         }
 
         .wkit-login-desc-text {
             font-weight: 400;
             font-size: 14px;
-            color: $font_cr_black;
+            color: variable.$font_cr_black;
             text-align: center;
 
             &::after {
@@ -278,7 +277,7 @@
         .wkit-check-box:active {
             background: #2A2A96;
             font-size: 12px;
-            color: $font_cr_black;
+            color: variable.$font_cr_black;
         }
     }
 
@@ -292,15 +291,15 @@
         display: flex;
         position: relative;
         padding: 25px 25px;
-        border-radius: $radius_big;
+        border-radius: variable.$radius_big;
         align-items: center;
-        background: $Wdkit_blue_normal;
+        background: variable.$Wdkit_blue_normal;
         flex: 1;
         width: 60%;
 
         .login-right-heading {
             font-size: 32px;
-            color: $cr_white;
+            color: variable.$cr_white;
             display: flex;
             line-height: 1.5em;
             font-weight: 600;
@@ -335,7 +334,7 @@
                 font-weight: 400;
                 align-items: center;
                 line-height: 21px;
-                color: $cr_white;
+                color: variable.$cr_white;
                 opacity: 80%;
                 width: 440px;
                 text-align: center;
@@ -358,12 +357,12 @@
             align-items: center;
             gap: 5px;
             width: 50%;
-            color: $font_cr_black !important;
+            color: variable.$font_cr_black !important;
             padding: 10px 15px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid $sivercr_normal;
-            border-radius: $radius_small;
-            transition: $transition;
+            border: 1px solid variable.$sivercr_normal;
+            border-radius: variable.$radius_small;
+            transition: variable.$transition;
             font-size: 14px;
 
             cursor: pointer;
@@ -399,11 +398,11 @@
             display: flex;
             flex-direction: row;
             gap: 5px;
-            color: $sivercr_normal;
+            color: variable.$sivercr_normal;
             padding: 10px 18px 10px 18px;
             background: rgba(255, 255, 255, 0.05);
-            border: 0.784615px solid $sivercr_normal;
-            border-radius: $radius_small;
+            border: 0.784615px solid variable.$sivercr_normal;
+            border-radius: variable.$radius_small;
             align-items: center;
             cursor: pointer;
             flex: 1;
@@ -432,7 +431,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        color: $sivercr_normal;
+        color: variable.$sivercr_normal;
         justify-content: center;
         padding: 20px 0px 10px 0px;
 
@@ -445,11 +444,11 @@
         }
 
         .wkit-wb-line-text {
-            color: $sivercr_normal;
+            color: variable.$sivercr_normal;
         }
 
         .wkit-wb-line {
-            color: $sivercr_normal;
+            color: variable.$sivercr_normal;
             width: 20%;
             border: 0;
             border-top: 1px solid #dcdcde;
@@ -474,7 +473,7 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $Wdkit_blue_normal;
+        background-color: variable.$Wdkit_blue_normal;
         animation: loaderAnimation 1.2s infinite ease-in-out;
     }
 
@@ -484,7 +483,7 @@
         }
 
         50% {
-            background-color: $Wdkit_blue_normal;
+            background-color: variable.$Wdkit_blue_normal;
             transform: scale(1);
         }
 
@@ -522,12 +521,12 @@
         }
 
         .wkit-lg-text-color {
-            color: $Wdkit_blue_normal;
+            color: variable.$Wdkit_blue_normal;
         }
 
         .wkit-lg-text-link {
             position: relative;
-            color: $Wdkit_blue_normal;
+            color: variable.$Wdkit_blue_normal;
             cursor: pointer;
 
             &:after {
@@ -538,7 +537,7 @@
                 height: 1px;
                 bottom: -2px;
                 left: 0;
-                background-color: $Wdkit_blue_normal;
+                background-color: variable.$Wdkit_blue_normal;
                 transform-origin: bottom right;
                 transition: transform 0.25s ease-out;
             }
@@ -554,7 +553,7 @@
             flex-direction: column;
             align-items: center;
             background: white;
-            border-radius: $radius_big;
+            border-radius: variable.$radius_big;
             width: 30%;
             padding: 20px;
             margin-left: 160px;
@@ -631,7 +630,7 @@
             gap: 5px;
             padding: 6px 15px;
             background: #F5F5FA;
-            border-radius: $radius_small;
+            border-radius: variable.$radius_small;
             max-width: max-content;
 
             .wkit-checkbox-inp {
@@ -718,11 +717,11 @@
                 white-space: nowrap;
                 padding: 12px;
                 font-size: 16px;
-                color: $Wdkit_blue_normal;
+                color: variable.$Wdkit_blue_normal;
                 width: 55%;
 
                 &:hover {
-                    color: $Wdkit_blue_normal;
+                    color: variable.$Wdkit_blue_normal;
                 }
             }
 
@@ -730,7 +729,7 @@
                 position: relative;
                 font-size: 16px;
                 font-weight: 400;
-                color: $Wdkit_blue_normal;
+                color: variable.$Wdkit_blue_normal;
                 cursor: pointer;
 
                 &:after {
@@ -741,7 +740,7 @@
                     height: 2px;
                     bottom: -4px;
                     left: 0;
-                    background-color: $Wdkit_blue_normal;
+                    background-color: variable.$Wdkit_blue_normal;
                     transform-origin: bottom right;
                     transition: transform 0.25s ease-out;
                 }
@@ -802,11 +801,11 @@
         display: flex;
         flex-direction: row;
         gap: 5px;
-        color: $sivercr_normal;
+        color: variable.$sivercr_normal;
         padding: 10px 7px 10px 7px;
         background: rgba(255, 255, 255, 0.05);
-        border: 0.784615px solid $sivercr_normal;
-        border-radius: $radius_small;
+        border: 0.784615px solid variable.$sivercr_normal;
+        border-radius: variable.$radius_small;
         align-items: center;
         cursor: pointer;
         font-size: 14px;
@@ -1109,10 +1108,10 @@
 // Login Api Screen css
 .wkit-login-back-btn {
     padding: 15px 10px;
-    background: $cr_white;
-    border: 1px solid $Wdkit_pink_normal;
-    border-radius: $radius_small;
-    color: $Wdkit_pink_normal;
+    background: variable.$cr_white;
+    border: 1px solid variable.$Wdkit_pink_normal;
+    border-radius: variable.$radius_small;
+    color: variable.$Wdkit_pink_normal;
     width: 100%;
     margin-bottom: 10px;
     align-items: center;
@@ -1128,7 +1127,7 @@
     }
 
     &:hover {
-        background-color: $btn_outer_red_hover;
+        background-color: variable.$btn_outer_red_hover;
     }
 }
 
@@ -1162,7 +1161,7 @@
         }
 
         .wkit-login-back-btn span {
-            color: $Wdkit_pink_normal;
+            color: variable.$Wdkit_pink_normal;
         }
 
     }
@@ -1177,5 +1176,5 @@
 }
 
 .wkit-gutenberg .wkit-login-back-btn span {
-    color: $Wdkit_pink_normal;
+    color: variable.$Wdkit_pink_normal;
 }

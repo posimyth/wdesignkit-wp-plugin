@@ -2,6 +2,7 @@ import { Elementor, Gutenberg, Bricks } from '../components_json';
 import { component_array } from '../components-data/component_array';
 import { useState } from 'react'
 import '../style/block_elements.scss';
+import { __ } from '@wordpress/i18n';
 const { Fragment } = wp.element;
 
 const Block_Element = (props) => {
@@ -66,7 +67,7 @@ const Block_Element = (props) => {
 
             if ("repeater" == value || "popover" == value || "normalhover" == value || "cpt" == value || "product_listing" == value || "taxonomy" == value) {
 
-                props.wdkit_set_toast(['Not Valid', 'You Can Not put this controller here', '', 'danger']);
+                props.wdkit_set_toast([__('Not Valid', 'wdesignkit'), __('You Can Not put this controller here', 'wdesignkit'), '', 'danger']);
 
             } else {
                 var val = component_array[value.toLowerCase()],

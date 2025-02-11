@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import Widget_builder_container from './redux-container/widget_builder_container';
 import { wdKit_Form_data, get_user_login } from '../helper/helper-function';
+import { __ } from '@wordpress/i18n';
 
 const Loader = (props) => {
 
@@ -69,15 +70,19 @@ const Loader = (props) => {
             let widget_detail = plugin_data[index];
             if (widget_detail?.is_activated != 'deactive') {
                 let file = widget_detail?.title ? widget_detail.title.replaceAll(" ", "_") + '_' + widget_detail.w_unique : '',
-                    folder = widget_detail?.title ? widget_detail.title.replaceAll(" ", "-") + '_' + widget_detail.w_unique : "",
-                    Json_URL = `${wdkitData.WDKIT_SERVER_PATH}/${widget_detail.builder}/${folder}/${file}.json?v=${generateUniqueID()}`;
+                    folder = widget_detail?.title ? widget_detail.title.replaceAll(" ", "-") + '_' + widget_detail.w_unique : "";
 
+                let widget_data = {
+                    'type': 'wkit_widget_json',
+                    'folder_name': folder,
+                    'file_name': file,
+                    'widget_type': widget_detail.builder
+                }
 
-                let form_arr = { 'type': 'wkit_widget_json', 'json_path': Json_URL }
-                var json_data = await wdKit_Form_data(form_arr).then((result) => {
+                var json_data = await wdKit_Form_data(widget_data).then((result) => {
 
                     if (result.success) {
-                        return JSON.parse(result.data);
+                        return result.data;
                     } else {
                         return [];
                     }
@@ -106,19 +111,21 @@ const Loader = (props) => {
 
                 setredux_data(redux_data)
             } else {
-                props.wdkit_set_toast(['Widget Deactivated', 'This Widget is Deactivated ', '', 'danger']);
+                props.wdkit_set_toast([__('Widget Deactivated', 'wdesignkit'), __('This Widget is Deactivated ', 'wdesignkit'), '', 'danger']);
                 navigation("/widget-listing");
             }
         } else {
-            props.wdkit_set_toast(['Widget Not Found', 'Widget not found try again later', '', 'danger']);
+            props.wdkit_set_toast([__('Widget Not Found', 'wdesignkit'), __('Widget not found try again later', 'wdesignkit'), '', 'danger']);
             navigation("/widget-listing");
         }
     }
 
     if (loader) {
+        let loader_logo = wdkitData?.wdkit_white_label?.plugin_logo || img_path + "assets/images/jpg/wdkit_loader.gif";
+
         return (
             <div className="wb-loader" style={{ display: 'flex' }} draggable={false}>
-                <img style={{ width: '150px', height: '150px', marginLeft: '-160px' }} src={img_path + "assets/images/jpg/wdkit_loader.gif"} draggable={false} />
+                <img style={{ width: '150px', height: '150px', marginLeft: '-160px' }} src={loader_logo} draggable={false} />
             </div>
         );
     } else {

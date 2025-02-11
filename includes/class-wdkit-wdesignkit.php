@@ -58,6 +58,7 @@ if ( ! class_exists( 'Wdkit_Wdesignkit' ) ) {
 			register_deactivation_hook( WDKIT_FILE, array( __CLASS__, 'wdkit_deactivation' ) );
 
 			add_action( 'plugins_loaded', array( $this, 'wdkit_plugin_loaded' ) );
+			add_action( 'init', array( $this, 'wdkit_string_taxdomian' ) );
 		}
 
 		/**
@@ -66,6 +67,7 @@ if ( ! class_exists( 'Wdkit_Wdesignkit' ) ) {
 		 * @since 1.0.0
 		 *
 		 * @param string $type check builder type.
+		 * @param mixed  $features_manager Optional. The features manager instance or additional settings. Default is an empty string.
 		 */
 		public static function wdkit_is_compatible( $type, $features_manager = '' ) {
 			$wkit_settings_panel = get_option( 'wkit_settings_panel', false );
@@ -77,7 +79,7 @@ if ( ! class_exists( 'Wdkit_Wdesignkit' ) ) {
 			}
 
 			$builder  = ! empty( $wkit_settings_panel['builder'] ) ? $wkit_settings_panel['builder'] : false;
-			$template  = ! empty( $wkit_settings_panel['template'] ) ? $wkit_settings_panel['template'] : false;
+			$template = ! empty( $wkit_settings_panel['template'] ) ? $wkit_settings_panel['template'] : false;
 			$b_d_type = false;
 			if ( 'elementor' === $type ) {
 				$b_d_type = ! empty( $wkit_settings_panel['elementor_builder'] ) ? $wkit_settings_panel['elementor_builder'] : false;
@@ -99,7 +101,7 @@ if ( ! class_exists( 'Wdkit_Wdesignkit' ) ) {
 
 			if ( 'widget' === $features_manager && empty( $builder ) || empty( $b_d_type ) ) {
 				return false;
-			}else if( 'template' === $features_manager && empty( $template ) || empty( $b_d_type ) ){
+			} elseif ( 'template' === $features_manager && empty( $template ) || empty( $b_d_type ) ) {
 				return false;
 			}
 
@@ -121,6 +123,11 @@ if ( ! class_exists( 'Wdkit_Wdesignkit' ) ) {
 		 * @return void
 		 */
 		public static function wdkit_deactivation() {
+			$get_white_label = get_option( 'wkit_white_label' );
+
+			if ( ! empty( $get_white_label ) ) {
+				delete_option( 'wkit_white_label' );
+			}
 		}
 
 		/**
@@ -154,15 +161,28 @@ if ( ! class_exists( 'Wdkit_Wdesignkit' ) ) {
 			/**
 			 * The class responsible for defining all actions that occur in the admin area.
 			 */
+			require_once WDKIT_INCLUDES . 'admin/white_label/class-wdkit-white-label.php';
+
 			require_once WDKIT_INCLUDES . 'admin/notices/class-wdkit-notice-main.php';
+
+			require_once WDKIT_INCLUDES . 'admin/hooks/class-wdkit-dashboard-main.php';
 
 			require_once WDKIT_INCLUDES . 'admin/class-wdkit-enqueue.php';
 			require_once WDKIT_INCLUDES . 'admin/class-wdesignkit-data-query.php';
 			require_once WDKIT_INCLUDES . 'admin/class-wdkit-depends-installer.php';
-			require_once WDKIT_INCLUDES . 'admin/class-wdkit-dashboard-main.php';
 
 			require_once WDKIT_INCLUDES . 'widget-load/widget-load-files.php';
 			require_once WDKIT_INCLUDES . 'widget-load/dynamic-listing/dynamic-listing.php';
+		}
+
+		/**
+		 * Check Setting Panal switch On off
+		 *
+		 * @since 1.1.14
+		 *
+		 */
+		public function wdkit_string_taxdomian() {
+			require_once WDKIT_INCLUDES . 'admin/notices/wdkit-string.php';
 		}
 
 	}
